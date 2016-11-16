@@ -1,1 +1,1 @@
-# digiteam
+# DigiTeam
