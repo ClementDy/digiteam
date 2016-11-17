@@ -20,7 +20,7 @@ public class Example {
     
     public String connect(){
         try{
-         String url="jdbc:mysql://172.28.2.17:3306/siteweb";
+         String url="jdbc:mysql://127.0.0.1:3306/siteweb";
          Connection conn = DriverManager.getConnection(url,"root","MYSECRET");
              Statement stmt = conn.createStatement();
             ResultSet rs;
