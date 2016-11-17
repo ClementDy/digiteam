@@ -34,6 +34,7 @@ public class Example {
         } catch (Exception e) {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
+            return e.getMessage();
         }
         return "erreur..";
     }
