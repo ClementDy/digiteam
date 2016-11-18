@@ -11,7 +11,7 @@ public class Example {
 
     @RequestMapping("/")
     String home() {
-        return "je suis un génie"+ connect();
+        return "Clem dy est  un génie"+ connect();
     }
 
     public static void main(String[] args) throws Exception {
