@@ -9,7 +9,7 @@ import java.sql.*;
 @EnableAutoConfiguration
 public class Example {
 
-    @RequestMapping("/")
+    @RequestMapping("/test")
     String home() {
         return "Clem dy est  un génie"+ connect();
     }
