@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body><form action="#" th:action="@{/seedstartermng}" th:object="${seedStarter}" method="post">
+
+    <ul>
+  <li>
+    <input id="features1" name="features" type="checkbox" value="SEEDSTARTER_SPECIFIC_SUBSTRATE" />
+    <input name="_features" type="hidden" value="on" />
+    <label for="features1">Seed starter-specific substrate</label>
+  </li>
+  <li>
+    <input id="features2" name="features" type="checkbox" value="FERTILIZER" />
+    <input name="_features" type="hidden" value="on" />
+    <label for="features2">Fertilizer used</label>
+  </li>
+  <li>
+    <input id="features3" name="features" type="checkbox" value="PH_CORRECTOR" />
+    <input name="_features" type="hidden" value="on" />
+    <label for="features3">PH Corrector used</label>
+  </li>
+</ul>
+</form>
+</body>
+</html>

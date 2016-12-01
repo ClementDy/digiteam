@@ -1,26 +1,35 @@
+package com.example;
+
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
-import org.springframework.stereotype.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.sql.*;
 
 
-@RestController
 @EnableAutoConfiguration
+@SpringBootApplication
+@Controller
 public class Example {
 
     @RequestMapping("/test")
     String home() {
-        return connect();
+        return "lol "//+connect()
+        		;
     }
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(Example.class, args);
     }
-    
+    @RequestMapping("/greeting")
+    public String greeting(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
+        model.addAttribute("name", name);
+        return "lol";
+    }
     public String connect(){
         try{
-         String url="jdbc:mysql://127.0.0.1:3306/siteweb";
+         String url="jdbc:mysql://172.28.2.10:3306/siteweb";
          Connection conn = DriverManager.getConnection(url,"root","MYSECRET");
              Statement stmt = conn.createStatement();
             ResultSet rs;
