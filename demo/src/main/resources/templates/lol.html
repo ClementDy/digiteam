@@ -1,28 +1,74 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-<body><form action="#" th:action="@{/seedstartermng}" th:object="${seedStarter}" method="post">
+<body>
 
-    <ul>
-  <li>
-    <input id="features1" name="features" type="checkbox" value="SEEDSTARTER_SPECIFIC_SUBSTRATE" />
-    <input name="_features" type="hidden" value="on" />
-    <label for="features1">Seed starter-specific substrate</label>
-  </li>
-  <li>
-    <input id="features2" name="features" type="checkbox" value="FERTILIZER" />
-    <input name="_features" type="hidden" value="on" />
-    <label for="features2">Fertilizer used</label>
-  </li>
-  <li>
-    <input id="features3" name="features" type="checkbox" value="PH_CORRECTOR" />
-    <input name="_features" type="hidden" value="on" />
-    <label for="features3">PH Corrector used</label>
-  </li>
-</ul>
+<h1> Formulaire </h1>
+
+<h2> Informations personnelles </h2>
+
+<form action="/enregistrer" method="post">
+	<div>
+		<label> Nom : </label>
+		<input type="text" id="nom"/>
+		<label> Prenom : </label>
+		<input type="text" id="prenom"/>
+	</div>
+
+	<div>
+		<label> Mail : </label>
+		<input type="email" id="email"/>
+		<label> T&eacute;l&eacute;phone : </label>
+		<input type="tel" id="telephone"/>
+	</div>
+
+	<div>
+		<label> Rue : </label>
+		<input type="text" id="rue"/>
+	</div>
+
+	<div>
+		<label> Voie : </label>
+		<input type="text" id="voie"/>
+	</div>
+
+	<div>
+		<label> Ville : </label>
+		<input type="text" id="ville"/>
+		<label> Code Postal : </label>
+		<input type="text" id="codepostal"/>
+	</div>
+
+	<div>
+		<label> Nationalit&eacute; : </label>
+		<select id="voie"/>
+			<option value="france">France</option>
+           	<option value="espagne">Espagne</option>
+           	<option value="italie">Italie</option>
+           	<option value="royaume-uni">Royaume-Uni</option>
+           	<option value="canada">Canada</option>
+           	<option value="etats-unis">&Eacute;tats-Unis</option>
+           	<option value="chine">Chine</option>
+           	<option value="japon">Japon</option>
+        </select>
+	</div>
+
+	<div>
+		<label> Titre de s&eacute;jour : </label>
+		<label> Oui </label>
+		<input type="radio" value="Oui" id="titresejouroui"/>
+		<label> Non </label>
+		<input type="radio" value="Non" id="titresejournon"/>
+		<input type="date" id="datesejour"/>
+	</div>
+	<button>Valider</button>
+
+
 </form>
+
+
 </body>
 </html>
