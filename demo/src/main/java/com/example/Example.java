@@ -15,18 +15,24 @@ public class Example {
 
     @RequestMapping("/test")
     String home() {
-        return "lol "//+connect()
-        		;
+        return "lol";
     }
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(Example.class, args);
     }
-    @RequestMapping("/greeting")
-    public String greeting(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
+    @RequestMapping("/form_info")
+    public String form_info(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
         model.addAttribute("name", name);
-        return "lol";
+        return "form_info";
     }
+    
+    @RequestMapping("/form_souhait")
+    public String form_souhait(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
+        model.addAttribute("name", name);
+        return "form_souhait";
+    }
+    
     public String connect(){
         try{
          String url="jdbc:mysql://172.28.2.10:3306/siteweb";
