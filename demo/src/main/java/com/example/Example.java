@@ -32,7 +32,7 @@ public class Example {
         model.addAttribute("name", name);
         return "form_souhait";
     }
-<<<<<<< HEAD
+
     
     
     @RequestMapping(value = "/result", method = RequestMethod.POST)
@@ -44,13 +44,13 @@ public class Example {
     
     
     
-=======
+
     @RequestMapping("/form_divers")
     public String form_divers(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
         model.addAttribute("name", name);
         return "form_divers";
     }
->>>>>>> b552bec861146fe362e7efe5cad580b68a0f48dc
+
     public String connect(){
         try{
          String url="jdbc:mysql://172.28.2.10:3306/siteweb";
