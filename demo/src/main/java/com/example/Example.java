@@ -13,12 +13,7 @@ import java.sql.*;
 @Controller
 public class Example {
 
-    @RequestMapping("/test")
-    String home() {
-        return "lol";
-    }
-
-    public static void main(String[] args) throws Exception {
+      public static void main(String[] args) throws Exception {
         SpringApplication.run(Example.class, args);
     }
     @RequestMapping("/form_info")
@@ -32,7 +27,11 @@ public class Example {
         model.addAttribute("name", name);
         return "form_souhait";
     }
-    
+    @RequestMapping("/form_divers")
+    public String form_divers(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
+        model.addAttribute("name", name);
+        return "form_divers";
+    }
     public String connect(){
         try{
          String url="jdbc:mysql://172.28.2.10:3306/siteweb";
