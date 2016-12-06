@@ -5,12 +5,13 @@
 <title>Vos souhaits</title>
 </head>
 <body>
-	<h2>Vos souhaits</h2>
-
+	<h2>Vos souhaits</h2><br>
+	
 	<form action="/enregistrer" method="post">
 		<div>
-			<label> Types de missons souhaités * : </label> 
-			<select name="mission" id="mission">
+			<label> Types de missons souhaités (4 max) : </label> 
+			<br><br>
+			<select name="mission" id="mission" required size="10" multiple="MULTIPLE">
 
 				<option value="secretariat">Secrétariat d'examens</option>
 
@@ -31,10 +32,14 @@
 				<option value="aideInsertion">Aide à l'insertion professionelle</option>
 				
 				<option value="enquetes">Enquêtes</option>
+				
 			</select>
+			
+		</div><br>
+
+		<div><label> Autre mission souhaitée (précisez) : </label>
+		<input type="text" name="autre" maxlength="50" />
 		</div>
-		<div>* Au plus 4 choix possibles</div>
-		
 		<button>Valider</button>
 
 
