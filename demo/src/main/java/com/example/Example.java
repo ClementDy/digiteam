@@ -4,8 +4,11 @@ import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import java.sql.*;
+
+import javax.validation.Valid;
 
 
 @EnableAutoConfiguration
@@ -21,10 +24,12 @@ public class Example {
     public static void main(String[] args) throws Exception {
         SpringApplication.run(Example.class, args);
     }
-    @RequestMapping("/form_info")
+   
+    @RequestMapping(value="/form_info",method = RequestMethod.GET)
     public String form_info(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
-        model.addAttribute("name", name);
-        return "form_info";
+        Etudiant etudiant=new Etudiant();
+    	model.addAttribute("etudiant", etudiant);
+    	return "form_info";
     }
     
     @RequestMapping("/form_souhait")
@@ -32,6 +37,16 @@ public class Example {
         model.addAttribute("name", name);
         return "form_souhait";
     }
+    
+    
+    @RequestMapping(value = "/result", method = RequestMethod.POST)
+	public String addEtudiant(@Valid Etudiant etudiant, BindingResult bindingResult, Model model) {
+		model.addAttribute("nom", etudiant.getNom());
+		model.addAttribute("prenom", etudiant.getPrenom());
+		return "result";
+	}
+    
+    
     
     public String connect(){
         try{

@@ -13,18 +13,18 @@
 
 	<h2>Informations personnelles</h2>
 
-	<form role="form">
+	<form class="form" th:action="@{/result}" th:object="${etudiant}" method="post">
 		<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
 					<label> Nom : </label> <input class="form-control input-sm"
-						type="text" id="nom" required />
+						type="text" th:field="*{nom}" id="nom" required />
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
 					<label> Prenom : </label><input class="form-control input-sm"
-						type="text" id="prenom" />
+						type="text" th:field="*{prenom}" id="prenom" />
 				</div>
 			</div>
 		</div>
