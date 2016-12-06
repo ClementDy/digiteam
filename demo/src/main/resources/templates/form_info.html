@@ -3,72 +3,136 @@
 <head>
 <title>Informations Personnelles</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
+	rel="stylesheet">
 </head>
 <body>
 
-<h1> Formulaire </h1>
+	<h1>Formulaire</h1>
 
-<h2> Informations personnelles </h2>
+	<h2>Informations personnelles</h2>
 
-<form action="/enregistrer" method="post">
-	<div>
-		<label> Nom : </label>
-		<input type="text" id="nom"/>
-		<label> Prenom : </label>
-		<input type="text" id="prenom"/>
-	</div>
-
-	<div>
-		<label> Mail : </label>
-		<input type="email" id="email"/>
-		<label> T&eacute;l&eacute;phone : </label>
-		<input type="tel" id="telephone"/>
-	</div>
-
-	<div>
-		<label> Rue : </label>
-		<input type="text" id="rue"/>
-	</div>
-
-	<div>
-		<label> Voie : </label>
-		<input type="text" id="voie"/>
-	</div>
-
-	<div>
-		<label> Ville : </label>
-		<input type="text" id="ville"/>
-		<label> Code Postal : </label>
-		<input type="text" id="codepostal"/>
-	</div>
-
-	<div>
-		<label> Nationalit&eacute; : </label>
-		<select id="voie"/>
-			<option value="france">France</option>
-           	<option value="espagne">Espagne</option>
-           	<option value="italie">Italie</option>
-           	<option value="royaume-uni">Royaume-Uni</option>
-           	<option value="canada">Canada</option>
-           	<option value="etats-unis">&Eacute;tats-Unis</option>
-           	<option value="chine">Chine</option>
-           	<option value="japon">Japon</option>
-        </select>
-	</div>
-
-	<div>
-		<label> Titre de s&eacute;jour : </label>
-		<label> Oui </label>
-		<input type="radio" value="Oui" id="titresejouroui"/>
-		<label> Non </label>
-		<input type="radio" value="Non" id="titresejournon"/>
-		<input type="date" id="datesejour"/>
-	</div>
-	<button>Valider</button>
+	<form role="form">
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label> Nom : </label> <input class="form-control input-sm"
+						type="text" id="nom" required />
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label> Prenom : </label><input class="form-control input-sm"
+						type="text" id="prenom" />
+				</div>
+			</div>
+		</div>
 
 
-</form>
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label> Mail : </label> <input class="form-control input-sm"
+						type="email" id="email" required />
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label> T&eacute;l&eacute;phone : </label><input
+						class="form-control input-sm" type="tel" id="telephone" />
+				</div>
+			</div>
+		</div>
 
+
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label> Rue : </label> <input class="form-control input-sm"
+						type="text" id="rue" required />
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label> Voie : </label> <input class="form-control input-sm"
+						type="text" id="voie" required />
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label> Code postal : </label> <input class="form-control input-sm"
+						type="text" id="codePostal" required />
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label> Ville : </label> <input class="form-control input-sm"
+						type="text" id="ville" required />
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-group">
+					<label class="control-label" for="selectbasic">Nationalité</label>
+					<div class="col-md-4">
+						<select id="selectbasic" name="selectbasic" class="form-control">
+							<option value="france">France</option>
+							<option value="espagne">Espagne</option>
+							<option value="italie">Italie</option>
+							<option value="royaume-Uni">Royaume-Uni</option>
+							<option value="canada">Canada</option>
+							<option value="etats-unis">Etats-Unis</option>
+							<option value="chine">Chine</option>
+							<option value="japon">Japon</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="radios">Titre de
+						séjour : </label>
+					<div class="col-md-4">
+						<label class="radio-inline" for="radios-0"> <input
+							type="radio" name="radios" id="radios-0"
+							value="titreSejourValide" checked="checked"> Oui
+						</label> <label class="radio-inline" for="radios-1"> <input
+							type="radio" name="radios" id="radios-1"
+							value="titreSejourInvalide"> Non
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label> Date de validit&eacute;e : </label><input
+			type="date" id="datesejour" />
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<input type="submit" value="Register" class="btn btn-info btn-block">
+			</div>
+		</div>
+	</form>
 
 </body>
 </html>
