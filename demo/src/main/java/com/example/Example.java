@@ -60,6 +60,18 @@ public class Example {
 		return "form_divers";
 	}
 
+	
+	@RequestMapping(value="/form_motivations", method=RequestMethod.GET)
+	public String form_motivations_GET(Model model) {
+		return "form_motivations";
+	}
+
+	@RequestMapping(value="/form_motivations", method=RequestMethod.POST)
+	public String form_motivations_POST(Model model) {
+		return "form_motivations";
+	}
+	
+	
 	public String connect(){
 		try{
 			String url="jdbc:mysql://172.28.2.10:3306/siteweb";
