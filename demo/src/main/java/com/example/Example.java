@@ -36,7 +36,11 @@ public class Example {
 		return "form_souhait";
 	}
 
-
+	@RequestMapping("/form_chargerCV")
+	public String form_chargerCV(@RequestParam(value="name", required = false, defaultValue="World") String name, Model model) {
+		model.addAttribute("name", name);
+		return "form_chargerCV";
+	}
 
 	
 	@RequestMapping(value = "/result", method = RequestMethod.POST)
