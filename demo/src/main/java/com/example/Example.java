@@ -22,9 +22,9 @@ import javax.validation.Valid;
 public class Example {
 	
 	
-	public static void main(String[] args) throws Exception {
+	/*public static void main(String[] args) throws Exception {
 		SpringApplication.run(Example.class, args);
-	}
+	}*/
 
 	@RequestMapping(value="/form_info",method = RequestMethod.GET)
 	public String form_info(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
