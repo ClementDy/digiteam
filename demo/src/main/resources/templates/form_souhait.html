@@ -1,46 +1,160 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
+	rel="stylesheet">
 <title>Vos souhaits</title>
 </head>
 <body>
-	<h2>Vos souhaits</h2><br>
-	
-	<form action="/enregistrer" method="post">
-		<div>
-			<label> Types de missons souhaités (4 max) : </label> 
-			<br><br>
-			<select name="mission" id="mission" required size="10" multiple="MULTIPLE">
+	<h1>Vos souhaits</h1>
+	<br>
 
+	<form action="/enregistrer" method="post">
+		<div class="form-group">
+			<label for="type_mission"> Types de missons souhaités : </label> 
+		</div>
+		<div class="form-group">
+			<label> Mission 1 : </label> 
+			<select name="mission" id="mission">
+
+				<option value=""></option>
+				
 				<option value="secretariat">Secrétariat d'examens</option>
 
-				<option value="animation">Animation culturelles scientifiques sportives et sociales</option>
+				<option value="animation">Animation culturelles
+					scientifiques sportives et sociales</option>
 
 				<option value="accueil">Accueil des étudiants</option>
 
-				<option value="assitance">Assistance et accompagnement des étudiants handicapés</option>
+				<option value="assitance">Assistance et accompagnement des
+					étudiants handicapés</option>
 
-				<option value="soutienInfo">Soutien informatique et aide à l'utilisation des nouvelles technologies</option>
+				<option value="soutienInfo">Soutien informatique et aide à
+					l'utilisation des nouvelles technologies</option>
 
 				<option value="promotion">Promotion de l'offre de formation</option>
 
 				<option value="tutorat">Tutorat</option>
 
-				<option value="serviceBiblio">Service d'appui aux personnels de bibliothèque</option>
-				
-				<option value="aideInsertion">Aide à l'insertion professionelle</option>
-				
-				<option value="enquetes">Enquêtes</option>
-				
-			</select>
-			
-		</div><br>
+				<option value="serviceBiblio">Service d'appui aux
+					personnels de bibliothèque</option>
 
-		<div><label> Autre mission souhaitée (précisez) : </label>
-		<input type="text" name="autre" maxlength="50" />
+				<option value="aideInsertion">Aide à l'insertion
+					professionelle</option>
+
+				<option value="enquetes">Enquêtes</option>
+
+			</select>
 		</div>
-		<button>Valider</button>
+		<div class="form-group">
+		<label> Mission 2 : </label> 
+		<select name="mission2" id="mission2">
+
+				<option value=""></option>
+				
+				<option value="secretariat">Secrétariat d'examens</option>
+
+				<option value="animation">Animation culturelles
+					scientifiques sportives et sociales</option>
+
+				<option value="accueil">Accueil des étudiants</option>
+
+				<option value="assitance">Assistance et accompagnement des
+					étudiants handicapés</option>
+
+				<option value="soutienInfo">Soutien informatique et aide à
+					l'utilisation des nouvelles technologies</option>
+
+				<option value="promotion">Promotion de l'offre de formation</option>
+
+				<option value="tutorat">Tutorat</option>
+
+				<option value="serviceBiblio">Service d'appui aux
+					personnels de bibliothèque</option>
+
+				<option value="aideInsertion">Aide à l'insertion
+					professionelle</option>
+
+				<option value="enquetes">Enquêtes</option>
+
+			</select>
+		</div>
+		<div class="form-group">
+		<label> Mission 3 : </label> 
+		<select name="mission3" id="mission3">
+		
+				<option value=""></option>
+
+				<option value="secretariat">Secrétariat d'examens</option>
+
+				<option value="animation">Animation culturelles
+					scientifiques sportives et sociales</option>
+
+				<option value="accueil">Accueil des étudiants</option>
+
+				<option value="assitance">Assistance et accompagnement des
+					étudiants handicapés</option>
+
+				<option value="soutienInfo">Soutien informatique et aide à
+					l'utilisation des nouvelles technologies</option>
+
+				<option value="promotion">Promotion de l'offre de formation</option>
+
+				<o<option value=""></option>ption value="tutorat">Tutorat</option>
+
+				<option value="serviceBiblio">Service d'appui aux
+					personnels de bibliothèque</option>
+
+				<option value="aideInsertion">Aide à l'insertion
+					professionelle</option>
+
+				<option value="enquetes">Enquêtes</option>
+
+			</select>
+		</div>
+		<div class="form-group">
+		<label> Mission 4 : </label> 
+		<select name="mission4" id="mission4">
+
+				<option value=""></option>
+				
+				<option value="secretariat">Secrétariat d'examens</option>
+
+				<option value="animation">Animation culturelles
+					scientifiques sportives et sociales</option>
+
+				<option value="accueil">Accueil des étudiants</option>
+
+				<option value="assitance">Assistance et accompagnement des
+					étudiants handicapés</option>
+
+				<option value="soutienInfo">Soutien informatique et aide à
+					l'utilisation des nouvelles technologies</option>
+
+				<option value="promotion">Promotion de l'offre de formation</option>
+
+				<option value="tutorat">Tutorat</option>
+
+				<option value="serviceBiblio">Service d'appui aux
+					personnels de bibliothèque</option>
+
+				<option value="aideInsertion">Aide à l'insertion
+					professionelle</option>
+
+				<option value="enquetes">Enquêtes</option>
+
+			</select>
+		</div>
+		<br>
+
+		<div class="form-group">
+			<label for="autre"> Autre mission souhaitée (précisez) : </label>
+			<textarea class="form-control" rows="5" id="comment"></textarea>
+		</div>
+		<button class="btn btn-info pull-right" type="submit">Valider</button>
 
 
 	</form>
