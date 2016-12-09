@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Informations Personnelles</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
+	rel="stylesheet">
+</head>
+<body>
+
+	<h1>Formulaire</h1>
+
+	<h2>Disponibilit&eacute;s</h2>
+
+	<form class="form" th:action="@{/result}" method="post">
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label> Jour de la semaine : </label> <input class="form-control input-sm" type="text" th:field="*{lastName}" id="lastName"  />
+						<span path="lastName" th:errors="*{lastName}"> Nom absent</span>  
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label> Prenom : </label><input class="form-control input-sm"
+						type="text" th:field="*{firstName}" id="firstName" />
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label> Mail : </label> <input class="form-control input-sm"
+						type="email" id="email" />
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label> T&eacute;l&eacute;phone : </label><input
+						class="form-control input-sm" type="telephone" id="telephone" />
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label> Rue : </label> <input class="form-control input-sm"
+						type="text" id="street" />
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label> Voie : </label> <input class="form-control input-sm"
+						type="text" id="complement" />
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label> Code postal : </label> <input class="form-control input-sm"
+						type="text" id="postalCode" />
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label> Ville : </label> <input class="form-control input-sm"
+						type="text" id="city" />
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-group">
+					<label class="control-label" for="selectbasic">Nationalité</label>
+					<div class="col-md-4">
+						<select id="selectbasic" name="selectbasic" class="form-control">
+							<option value="france">France</option>
+							<option value="spain">Espagne</option>
+							<option value="italy">Italie</option>
+							<option value="united-kingdom">Royaume-Uni</option>
+							<option value="canada">Canada</option>
+							<option value="united-states">Etats-Unis</option>
+							<option value="china">Chine</option>
+							<option value="japan">Japon</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="radios">Titre de
+						séjour : </label>
+					<div class="col-md-4">
+						<label class="radio-inline" for="radios-0"> <input
+							type="radio" name="radios" id="radios-0"
+							value="validVISA" checked="checked"> Oui
+						</label> <label class="radio-inline" for="radios-1"> <input
+							type="radio" name="radios" id="radios-1"
+							value="InvalidVISA"> Non
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label> Date de validit&eacute;e : </label><input
+			type="date" id="expiryDateVISA" />
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<input type="submit" value="Register" class="btn btn-info btn-block">
+			</div>
+		</div>
+	</form>
+
+</body>
+</html>
