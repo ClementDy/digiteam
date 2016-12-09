@@ -11,13 +11,13 @@
 
 	<h1>Formulaire</h1>
 
-	<h2>Informations personnelles</h2>
+	<h2>Disponibilit&eacute;s</h2>
 
-	<form class="form" th:action="@{/result}" th:object="${student}" method="post">
+	<form class="form" th:action="@{/result}" method="post">
 		<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
-					<label> Nom : </label> <input class="form-control input-sm" type="text" th:field="*{lastName}" id="lastName"  />
+					<label> Jour de la semaine : </label> <input class="form-control input-sm" type="text" th:field="*{lastName}" id="lastName"  />
 						<span path="lastName" th:errors="*{lastName}"> Nom absent</span>  
 				</div>
 			</div>
