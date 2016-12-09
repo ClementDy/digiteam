@@ -9,6 +9,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.*;
+
+import Entity.Student;
+
 import java.sql.*;
 
 import javax.validation.Valid;
@@ -24,14 +27,12 @@ public class Sousbod {
 	}
 
 
-
 	@RequestMapping(value="/body",method = RequestMethod.GET)
 	public String hello(@RequestParam(value="name", required=false, defaultValue="sousbody") String name, Model model) {
-		String sousBod = "sousbody";
-		model.addAttribute("nSousbody", sousBod);
+		Student student=new Student();
+		model.addAttribute("student",student);
 		return "body";
 	}
-
 	
 	@RequestMapping(value="/sbody",method = RequestMethod.GET)
 	public String sousBody(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {

@@ -20,7 +20,8 @@ import javax.validation.Valid;
 @SpringBootApplication
 @Controller
 public class Example {
-
+	
+	
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(Example.class, args);
 	}
@@ -33,6 +34,7 @@ public class Example {
 		return "form_info";
 	}
 
+	
 	@RequestMapping("/form_souhait")
 	public String form_souhait(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
 		model.addAttribute("name", name);
