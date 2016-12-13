@@ -1,5 +1,6 @@
 package com.example;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.stereotype.Controller;
@@ -21,18 +22,19 @@ import javax.validation.Valid;
 @Controller
 public class Example {
 	
+	@Autowired
+	private StudentRepository studentRepository;
 	
-	
-	/*public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception {
 		SpringApplication.run(Example.class, args);
-	}*/
+	}
 
-	@RequestMapping(value="/form_info",method = RequestMethod.GET)
+	@RequestMapping(value="/forminfos",method = RequestMethod.GET)
 	public String form_info(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
 		Student student=new Student();
 
 		model.addAttribute("student", student);
-		return "form_info";
+		return "forminfos";
 	}
 
 	
@@ -56,8 +58,11 @@ public class Example {
 		if(bindingResult.hasErrors()){
 			return "form_info";
 		}
+		System.out.println(student.toString());
+		System.out.println();
 		model.addAttribute("lastName", student.getLastName());
 		model.addAttribute("firstName", student.getFirstName());
+		//studentRepository.save(new Student(student.getLastName(),student.getFirstName()));
 		return "result";
 	}
 

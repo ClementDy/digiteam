@@ -22,6 +22,7 @@ public class Application {
 		SpringApplication.run(Application.class);
 	}
 
+	/*
 	@Bean
 	public CommandLineRunner test(StudentRepository repository) {
 		return (args) -> {
@@ -55,6 +56,6 @@ public class Application {
 			}
 			log.info("");
 		};
-	}
+	}*/
 
 }

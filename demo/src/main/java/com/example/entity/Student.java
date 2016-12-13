@@ -29,10 +29,6 @@ public class Student {
 
 	}
 
-	public Student(String string, String string2) {
-		this.lastName=string;
-		this.firstName=string;
-	}
 
 	public long getNip() {
 		return nip;
