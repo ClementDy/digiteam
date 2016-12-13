@@ -16,6 +16,7 @@ public class Student {
 	private String firstName;
 	private String lastName;
 	private int phone;
+	private String email;
 	//private Address address;
 	private String nationality;
 	private String motivation;
@@ -53,6 +54,8 @@ public class Student {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
+	
 
 	/*public Address getAddress() {
 		return address;
@@ -61,6 +64,16 @@ public class Student {
 	public void setAddress(Address address) {
 		this.address = address;
 	}*/
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 
 	public String getNationality() {
 		return nationality;
@@ -102,6 +115,8 @@ public class Student {
 		this.phone = phone;
 	}
 
+
+
 	/*public Wish getWish() {
 		return wish;
 	}
@@ -125,9 +140,13 @@ public class Student {
 	public void setMisc(Miscellaneous misc) {
 		this.misc = misc;
 	}*/
+	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return "student "+getNip()+" lastname : "+getLastName();
+		return "Student [nip=" + nip + ", firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone
+				+ ", nationality=" + nationality + ", motivation=" + motivation + ", visa=" + visa + ", dateVisa="
+				+ dateVisa + "]";
 	}
+	
+	
 }

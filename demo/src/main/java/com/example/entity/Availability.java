@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 
 public class Availability {
 
-	private Date startDay;
+	private Date startDate;
 	private Date endDate;
 	private List<AvailabilityDay> days = new ArrayList<AvailabilityDay>();
 	private Student student;
@@ -17,12 +17,12 @@ public class Availability {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Date getStartDay() {
-		return startDay;
+	public Date getStartDate() {
+		return startDate;
 	}
 
-	public void setStartDay(Date startDay) {
-		this.startDay = startDay;
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
 	}
 
 	public Date getEndDate() {

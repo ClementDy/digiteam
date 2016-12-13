@@ -8,12 +8,89 @@
 	rel="stylesheet">
 </head>
 <body>
-<div th:fragment="content">
-	<h1>Formulaire</h1>
+	<div th:fragment="content">
 
-	<h2>Disponibilit&eacute;s</h2>
+		<h2>Disponibilit&eacute;s</h2>
 
-	
+		<form class="form" >
 
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-6">
+					<div class="form-inline">
+						<label> Du : </label> <input class="form-control input-sm"
+							type="date"  id="startDate" />
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-6">
+					<div class="form-inline">
+						<label> au : </label><input class="form-control input-sm"
+							type="date"  id="endDate" />
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-6">
+					<div class="form-inline">
+						<label class="checkbox-inline"><input type="checkbox"
+							value="">Lundi : A partir de  </label><input class="form-control input-sm"
+							type="time"  id="startTimeMonday" />
+							<label> juqu'à </label><input class="form-control input-sm"
+							type="time"  id="endTimeMonday" />
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-6">
+					<div class="form-inline">
+						<label class="checkbox-inline"><input type="checkbox"
+							value="">Mardi : A partir de </label><input class="form-control input-sm"
+							type="time" id="startTimeTuesday" />
+							<label> jusqu'à </label><input class="form-control input-sm"
+							type="time" id="endTimeTuesday" />
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-6">
+					<div class="form-inline">
+						<label class="checkbox-inline"><input type="checkbox"
+							value="">Mercredi : A partir de </label><input class="form-control input-sm"
+							type="time" id="startTimeWednesday" />
+							<label> jusqu'à </label><input class="form-control input-sm"
+							type="time" id="endTimeWednesday" />
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-6">
+					<div class="form-inline">
+						<label class="checkbox-inline"><input type="checkbox"
+							value="">Jeudi : A partir de </label><input class="form-control input-sm"
+							type="time" id="startTimeThursday" />
+							<label> jusqu'à </label><input class="form-control input-sm"
+							type="time" id="endTimeThursday" />
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-6">
+					<div class="form-inline">
+						<label class="checkbox-inline"><input type="checkbox"
+							value="">Vendredi : A partir de </label><input class="form-control input-sm"
+							type="time" id="startTimeFriday" />
+							<label> jusqu'à </label><input class="form-control input-sm"
+							type="time" id="endTimeFriday" />
+					</div>
+				</div>
+			</div>
+
+			
+
+		</form>
 </body>
 </html>

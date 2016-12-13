@@ -21,7 +21,7 @@
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
-					<label> Prenom : </label><input class="form-control input-sm"
+					<label> Pr&eacute;nom : </label><input class="form-control input-sm"
 						type="text" th:field="*{firstName}" id="firstName" />
 				</div>
 			</div>
@@ -32,13 +32,13 @@
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
 					<label> Mail : </label> <input class="form-control input-sm"
-						type="email" id="email" />
+						th:field="*{email}" type="email" id="email" />
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
 					<label> T&eacute;l&eacute;phone : </label><input
-						class="form-control input-sm" type="telephone" id="telephone" />
+						class="form-control input-sm" th:field="*{telephone}" type="telephone" id="telephone" />
 				</div>
 			</div>
 		</div>
@@ -48,7 +48,7 @@
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
 					<label> Rue : </label> <input class="form-control input-sm"
-						type="text" id="street" />
+						 type="text" id="street" />
 				</div>
 			</div>
 		</div>
@@ -57,7 +57,7 @@
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
 					<label> Voie : </label> <input class="form-control input-sm"
-						type="text" id="complement" />
+						 type="text" id="complement" />
 				</div>
 			</div>
 		</div>
@@ -66,13 +66,13 @@
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
 					<label> Code postal : </label> <input class="form-control input-sm"
-						type="text" id="postalCode" />
+						 type="text" id="postalCode" />
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
 					<label> Ville : </label> <input class="form-control input-sm"
-						type="text" id="city" />
+						  type="text" id="city" />
 				</div>
 			</div>
 		</div>
@@ -82,7 +82,7 @@
 				<div class="form-group">
 					<label class="control-label" for="selectbasic">Nationalité</label>
 					<div class="col-md-4">
-						<select id="selectbasic" name="selectbasic" class="form-control">
+						<select  th:field="*{nationality}" id="selectbasic" name="selectbasic" class="form-control">
 							<option value="france">France</option>
 							<option value="spain">Espagne</option>
 							<option value="italy">Italie</option>
@@ -105,10 +105,10 @@
 						séjour : </label>
 					<div class="col-md-4">
 						<label class="radio-inline" for="radios-0"> <input
-							type="radio" name="radios" id="radios-0"
+							 type="radio" name="radios" id="radios-0"
 							value="validVISA" checked="checked"> Oui
 						</label> <label class="radio-inline" for="radios-1"> <input
-							type="radio" name="radios" id="radios-1"
+							 type="radio" name="radios" id="radios-1"
 							value="InvalidVISA"> Non
 						</label>
 					</div>
