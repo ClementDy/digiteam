@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 public class Student {
@@ -17,7 +19,10 @@ public class Student {
 	private String lastName;
 	private int phone;
 	private String email;
-	//private Address address;
+	
+	/*@OneToOne
+	@PrimaryKeyJoinColumn
+	private Address address;*/
 	private String nationality;
 	private String motivation;
 	private boolean visa;
@@ -28,6 +33,18 @@ public class Student {
 
 	public Student() {
 
+	}
+	
+	
+
+
+	public Student(String firstName, String lastName, int phone, String email, String nationality) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phone = phone;
+		this.email = email;
+		this.nationality = nationality;
 	}
 
 

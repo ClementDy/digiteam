@@ -23,12 +23,12 @@ public class HomeClement {
 	
 	@RequestMapping(value="/home",method = RequestMethod.GET)
 	public String hello(@RequestParam(value="name", required=false, defaultValue="sousbody") String name, Model model) {
-		Student student=new Student();
-		model.addAttribute("student",student);
+		FormulaireStudent student=new FormulaireStudent();
+		model.addAttribute("formulairestudent",student);
 		return "home";
 	}
 	
-
+	
 	@RequestMapping(value="/form_dispos", method = RequestMethod.GET)
 	public String form_souhait(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
 
@@ -36,19 +36,20 @@ public class HomeClement {
 	}
 	
 	
+	
 	@RequestMapping(value = "/result", method = RequestMethod.POST)
-	public String addEtudiant(@Valid Student student, BindingResult bindingResult, Model model, Errors e) {
+	public String addEtudiant(@Valid FormulaireStudent student, BindingResult bindingResult, Model model, Errors e) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(e,
 				"lastName", "lastName.empty", "Last Name is required");
 		if(bindingResult.hasErrors()){
-			return "form_info";
+			return "form_infos";
 		}
 		System.out.println(student.toString());
 		System.out.println();
 		model.addAttribute("lastName", student.getLastName());
 		model.addAttribute("firstName", student.getFirstName());
 		
-		serviceStudent.addStudent(student);
+		//serviceStudent.addStudent(student);
 		return "result";
 	}
 

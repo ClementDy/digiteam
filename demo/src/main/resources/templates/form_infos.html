@@ -11,7 +11,7 @@
 
 	<h2>Informations personnelles</h2>
 
-	<form class="form" th:action="@{/result}" th:object="${student}" method="post">
+	<form class="form" th:action="@{/result}" th:object="${formulairestudent}" method="post">
 		<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
@@ -38,7 +38,7 @@
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
 					<label> T&eacute;l&eacute;phone : </label><input
-						class="form-control input-sm" th:field="*{telephone}" type="telephone" id="telephone" />
+						class="form-control input-sm" th:field="*{phone}" type="text" id="phone" />
 				</div>
 			</div>
 		</div>
@@ -48,7 +48,7 @@
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
 					<label> Rue : </label> <input class="form-control input-sm"
-						 type="text" id="street" />
+						 th:field="*{street}"  type="text" id="street" />
 				</div>
 			</div>
 		</div>
@@ -56,8 +56,8 @@
 		<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
-					<label> Voie : </label> <input class="form-control input-sm"
-						 type="text" id="complement" />
+					<label> Complement : </label> <input class="form-control input-sm"
+						 th:field="*{complement}"  type="text" id="complement" />
 				</div>
 			</div>
 		</div>
@@ -66,13 +66,13 @@
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
 					<label> Code postal : </label> <input class="form-control input-sm"
-						 type="text" id="postalCode" />
+						th:field="*{postalCode}"  type="text" id="postalCode" />
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
 					<label> Ville : </label> <input class="form-control input-sm"
-						  type="text" id="city" />
+						 th:field="*{city}"  type="text" id="city" />
 				</div>
 			</div>
 		</div>
