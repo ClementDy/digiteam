@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+	<div th:include="header::header"></div>
+	<div class="container">
+		<h1>Formulaire de candidature</h1>
+	</div>
+	<div id="exTab1" class="container">
+		<ul class="nav nav-pills">
+			<li class="active"><a href="#1" data-toggle="tab">Introduction</a></li>
+			<li><a href="#2" data-toggle="tab">Informations personnelles</a></li>
+			<li><a href="#3" data-toggle="tab">Souhaits</a></li>
+			<li><a href="#4" data-toggle="tab">Disponibilit&eacute;s</a></li>
+			<li><a href="#5" data-toggle="tab">Motivations</a></li>
+			<li><a href="#6" data-toggle="tab">Divers</a></li>
+			<li><a href="#7" data-toggle="tab">Fin</a></li>
+		</ul>
+
+		<div class="tab-content clearfix">
+			<div class="tab-pane active" id="1">
+				<div th:include="sousbody::sousbod"></div>
+			</div>
+			<div class="tab-pane" id="2">
+				<div th:include="forminfos::content"></div>
+			</div>
+			<div class="tab-pane" id="3">
+				<div th:include="form_souhait::content"></div>
+			</div>
+			<div class="tab-pane" id="4">
+				<div th:include="form_dispos::content"></div>
+			</div>
+			<div class="tab-pane" id="5">
+				<div th:include="form_motivations::content"></div>
+			</div>
+			<div class="tab-pane" id="6">
+				<div th:include="form_divers::content"></div>
+			</div>
+			<div class="tab-pane" id="7">
+				<div th:include="form_chargerCV::content"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

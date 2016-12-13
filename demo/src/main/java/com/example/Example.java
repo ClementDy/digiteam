@@ -25,9 +25,9 @@ public class Example {
 	@Autowired
 	private StudentRepository studentRepository;
 	
-	public static void main(String[] args) throws Exception {
+	/*public static void main(String[] args) throws Exception {
 		SpringApplication.run(Example.class, args);
-	}
+	}*/
 
 	@RequestMapping(value="/forminfos",method = RequestMethod.GET)
 	public String form_info(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
