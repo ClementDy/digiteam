@@ -9,7 +9,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.*;
 
-import Entity.Student;
+import com.example.entity.Student;
 
 import java.sql.*;
 
@@ -20,6 +20,7 @@ import javax.validation.Valid;
 @SpringBootApplication
 @Controller
 public class Example {
+	
 	
 	
 	/*public static void main(String[] args) throws Exception {

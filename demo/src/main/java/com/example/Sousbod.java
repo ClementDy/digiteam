@@ -10,7 +10,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.*;
 
-import Entity.Student;
+import com.example.entity.Student;
 
 import java.sql.*;
 
@@ -22,9 +22,9 @@ import javax.validation.Valid;
 @Controller
 public class Sousbod {
 
-	public static void main(String[] args) throws Exception {
+	/*public static void main(String[] args) throws Exception {
 		SpringApplication.run(Example.class, args);
-	}
+	}*/
 
 
 	@RequestMapping(value="/body",method = RequestMethod.GET)

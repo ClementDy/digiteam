@@ -1,4 +1,4 @@
-package Entity;
+package com.example.entity;
 
 public class Miscellaneous {
 

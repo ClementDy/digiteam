@@ -1,31 +1,44 @@
-package Entity;
+package com.example.entity;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Student {
 
-	private int nip;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long nip;
 	private String firstName;
 	private String lastName;
 	private int phone;
-	private Address address;
+	//private Address address;
 	private String nationality;
 	private String motivation;
 	private boolean visa;
 	private Date dateVisa;
-	private Wish wish;
-	private Availability availabity;
-	private Miscellaneous misc;
+	//private Wish wish;
+	//private Availability availabity;
+	//private Miscellaneous misc;
 
 	public Student() {
 
 	}
 
-	public int getNip() {
+	public Student(String string, String string2) {
+		this.lastName=string;
+		this.firstName=string;
+	}
+
+	public long getNip() {
 		return nip;
 	}
 
-	public void setNip(int nip) {
+	public void setNip(long nip) {
 		this.nip = nip;
 	}
 
@@ -45,13 +58,13 @@ public class Student {
 		this.lastName = lastName;
 	}
 
-	public Address getAddress() {
+	/*public Address getAddress() {
 		return address;
 	}
 
 	public void setAddress(Address address) {
 		this.address = address;
-	}
+	}*/
 
 	public String getNationality() {
 		return nationality;
@@ -93,7 +106,7 @@ public class Student {
 		this.phone = phone;
 	}
 
-	public Wish getWish() {
+	/*public Wish getWish() {
 		return wish;
 	}
 
@@ -115,6 +128,10 @@ public class Student {
 
 	public void setMisc(Miscellaneous misc) {
 		this.misc = misc;
+	}*/
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "student "+getNip()+" lastname : "+getLastName();
 	}
-
 }
