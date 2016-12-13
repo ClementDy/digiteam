@@ -1,4 +1,4 @@
-package com.example;
+package com.example.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.*;
@@ -11,6 +11,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.entity.Student;
+import com.example.repository.StudentRepository;
 
 import java.sql.*;
 
@@ -25,9 +26,6 @@ public class Example {
 	@Autowired
 	private StudentRepository studentRepository;
 	
-	/*public static void main(String[] args) throws Exception {
-		SpringApplication.run(Example.class, args);
-	}*/
 
 	@RequestMapping(value="/forminfos",method = RequestMethod.GET)
 	public String form_info(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
