@@ -1,19 +1,25 @@
 package com.example.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
-//@Entity
+@Entity
 public class Address {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long id;
 	private String street;
 	private String complement;
 	private int postalCode;
-	private String City;
+	private String city;
 
-/*	@OneToOne(mappedBy="otherInfo")
-	@PrimaryKeyJoinColumn*/
+	@OneToOne(mappedBy="address")
+	@PrimaryKeyJoinColumn
 	private Student student;
 
 
@@ -23,13 +29,11 @@ public class Address {
 
 	
 	
-	public Address(java.lang.String street, java.lang.String complement, int postalCode, java.lang.String city,
-			Student student) {
-		super();
+	public Address(String street, String complement, int postalCode, String city, Student student) {
 		this.street = street;
-		complement = complement;
+		this.complement = complement;
 		this.postalCode = postalCode;
-		City = city;
+		this.city = city;
 		this.student = student;
 	}
 
@@ -54,10 +58,10 @@ public class Address {
 		this.postalCode = postalCode;
 	}
 	public String getCity() {
-		return City;
+		return city;
 	}
 	public void setCity(String city) {
-		City = city;
+		this.city = city;
 	}
 	public Student getStudent() {
 		return student;

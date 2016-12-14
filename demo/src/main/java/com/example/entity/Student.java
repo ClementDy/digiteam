@@ -20,9 +20,9 @@ public class Student {
 	private int phone;
 	private String email;
 	
-	/*@OneToOne
+	@OneToOne
 	@PrimaryKeyJoinColumn
-	private Address address;*/
+	private Address address;
 	private String nationality;
 	private String motivation;
 	private boolean visa;
@@ -32,7 +32,7 @@ public class Student {
 	//private Miscellaneous misc;
 
 	public Student() {
-
+		this.address = new Address();
 	}
 	
 	
@@ -74,13 +74,13 @@ public class Student {
 	
 	
 
-	/*public Address getAddress() {
+	public Address getAddress() {
 		return address;
 	}
 
 	public void setAddress(Address address) {
 		this.address = address;
-	}*/
+	}
 
 	public String getEmail() {
 		return email;
