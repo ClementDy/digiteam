@@ -1,13 +1,23 @@
 package com.example.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+
+@Entity
 public class Miscellaneous {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	long id;
 	private boolean association;
 	private String nameAssociation;
 	private String itKnowledge;
 	private String languages;
 	private String otherFormations;
-	private Student student;
+	
 	
 	public Miscellaneous() {
 		// TODO Auto-generated constructor stub
@@ -52,11 +62,6 @@ public class Miscellaneous {
 	public void setOtherFormations(String otherFormations) {
 		this.otherFormations = otherFormations;
 	}
-	public void setStudent(Student student) {
-		this.student = student;
-	}
-	public Student getStudent() {
-		return student;
-	}
+	
 	
 }

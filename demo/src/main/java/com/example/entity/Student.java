@@ -29,11 +29,14 @@ public class Student {
 	private Date dateVisa;
 	//private Wish wish;
 	//private Availability availabity;
-	//private Miscellaneous misc;
-
+	
+	@OneToOne
+	@PrimaryKeyJoinColumn
+	private Miscellaneous misc;
 	
 	public Student() {
 		this.address = new Address();
+		this.misc= new Miscellaneous();
 	}
 	
 	
@@ -65,14 +68,14 @@ public class Student {
 	public void setAvailabity(Availability availabity) {
 		this.availabity = availabity;
 	}
-
+*/
 	public Miscellaneous getMisc() {
 		return misc;
 	}
 
 	public void setMisc(Miscellaneous misc) {
 		this.misc = misc;
-	}*/
+	}
 	
 	public long getNip() {
 		return nip;

@@ -8,7 +8,7 @@ import com.example.controller.Home;
 @SpringBootApplication
 public class Main {
 
-	/*public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception {
 		SpringApplication.run(Home.class, args);
-	}*/
+	}
 }
