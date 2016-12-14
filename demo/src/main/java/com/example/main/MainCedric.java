@@ -8,7 +8,7 @@ import com.example.HomeCedric;
 @SpringBootApplication
 public class MainCedric {
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		SpringApplication.run(HomeCedric.class, args);
-	}
+	}*/
 }
