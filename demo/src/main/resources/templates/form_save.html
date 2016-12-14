@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Motivations</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
+	rel="stylesheet">
+</head>
+<body style="margin-left: 10px; margin-right: 10px;">
+	<div th:fragment="content">
+	
+	<br>
+		<h2>Finalisation de la candidature</h2>
+		<br>
+
+		<form accept-charset="UTF-8" th:action="@{/result}"
+			th:object="${student}" method="post">
+			<p>Vous pouvez finaliser votre candidature en cliquant sur le
+				bouton "Enregistrer" ci-dessous.</p>
+				
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				
+
+
+			<input type="submit" value="Enregistrer" class="btn btn-info btn-block">
+
+		</form>
+</body>
+
+</html>
