@@ -3,8 +3,8 @@ package com.example.main;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.example.Home;
 import com.example.HomeClement;
-import com.example.controller.Home;
 
 @SpringBootApplication
 public class MainClement {

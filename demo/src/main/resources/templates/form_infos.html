@@ -18,7 +18,7 @@
 					<div class="form-inline">
 						<label> Nom : </label> <input class="form-control input-sm"
 							type="text" th:field="${student.lastName}" id="lastName" /> <span
-							path="lastName" th:errors="*{lastName}"> Nom absent</span>
+							path="lastName" th:errors="${student.lastName}"> Nom absent</span>
 					</div>
 				</div>
 				<div class="col-xs-6 col-sm-6 col-md-6">
@@ -136,12 +136,7 @@
 			</div>
 			<br>
 
-			<div class="row">
-				<div class="col-xs-6 col-sm-6 col-md-6">
-					<input type="submit" value="Register"
-						class="btn btn-info btn-block">
-				</div>
-			</div>
+			<button class="btn btn-info pull-right" type="submit">Valider</button>
 			<br>
 		</form>
 </body>

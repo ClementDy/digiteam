@@ -16,38 +16,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.entity.Address;
 import com.example.entity.Student;
 import com.example.repository.AddressRepository;
+import com.example.repository.MiscellaneousRepository;
 import com.example.repository.StudentRepository;
-import com.example.services.ServiceAddress;
-import com.example.services.ServiceStudent;
 
 @EnableAutoConfiguration
 @Controller
-public class HomeClement {
-
+public class Home {
+	
 	@Autowired
 	AddressRepository repositoryAddress;
 	@Autowired
 	StudentRepository repositoryStudent;
+	@Autowired
+	MiscellaneousRepository miscrepository;
 	
-	
-	ServiceStudent serviceStudent=new ServiceStudent();
-	ServiceAddress serviceAddress=new ServiceAddress();
-
 	@RequestMapping(value="/home",method = RequestMethod.GET)
 	public String hello(@RequestParam(value="name", required=false, defaultValue="sousbody") String name, Model model) {
 		Student student=new Student();
 		model.addAttribute("student",student);
 		return "home";
 	}
-	
-	
-	@RequestMapping(value="/form_dispos", method = RequestMethod.GET)
-	public String form_souhait(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
-		
-		return "form_dispos";
-	}
-	
-	
 	
 	@RequestMapping(value = "/result", method = RequestMethod.POST)
 	public String addEtudiant(@Valid Student student, BindingResult bindingResult, Model model, Errors e) {
@@ -64,14 +52,37 @@ public class HomeClement {
 		
 		
 		
-	//	serviceAddress.addAddress(student.getAddress());
 		System.out.println(student.getAddress().toString());
 		System.out.println();
 		model.addAttribute("lastName", student.getLastName());
 		model.addAttribute("firstName", student.getFirstName());
+		model.addAttribute("mail", student.getEmail());
+		model.addAttribute("phone", student.getPhone());
+		model.addAttribute("street", student.getAddress().getStreet());
+		model.addAttribute("city", student.getAddress().getCity());
+		model.addAttribute("postalCode", student.getAddress().getPostalCode());
 		
-	//	serviceStudent.addStudent(student);
+		
 		return "result";
 	}
+	
+	@RequestMapping(value = "/resultAlex", method = RequestMethod.POST)
+	public String addEtudian(Student student, Model model) {
+		model.addAttribute("nameAssociation", student.getMisc().getNameAssociation());
+		model.addAttribute("itKnowledge", student.getMisc().getNameAssociation());
+		model.addAttribute("languages", student.getMisc().getLanguages());
+		model.addAttribute("otherFormations", student.getMisc().getOtherFormations());
 
+		miscrepository.save(student.getMisc());
+		return "resultAlex";
+	}
+	
+	@RequestMapping(value = "/resultCedric", method = RequestMethod.POST)
+	public String addEtudiant(Student student, Model model) {
+		model.addAttribute("lastName", student.getLastName());
+		model.addAttribute("firstName", student.getFirstName());
+		model.addAttribute("motivations", student.getMotivation());
+		repositoryStudent.save(new Student(student.getFirstName(), student.getLastName(), student.getPhone(), student.getEmail(), student.getNationality(),student.getMotivation()));
+		return "resultCedric";
+	}
 }

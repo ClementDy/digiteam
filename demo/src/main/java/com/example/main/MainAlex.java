@@ -2,8 +2,8 @@ package com.example.main;
 
 import org.springframework.boot.SpringApplication;
 
+import com.example.Home;
 import com.example.HomeAlex;
-import com.example.controller.Home;
 
 public class MainAlex {
 	

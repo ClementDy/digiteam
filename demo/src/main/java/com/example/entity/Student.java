@@ -42,13 +42,14 @@ public class Student {
 	
 
 
-	public Student(String firstName, String lastName, int phone, String email, String nationality) {
+	public Student(String firstName, String lastName, int phone, String email, String nationality,String motivation) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phone = phone;
 		this.email = email;
 		this.nationality = nationality;
+		this.motivation=motivation;
 	}
 
 	
