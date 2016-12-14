@@ -13,10 +13,7 @@ public class Wish {
 		// TODO Auto-generated constructor stub
 	}
 
-	public List<Mission> getMissions() {
-		return missions;
-	}
-
+	
 	public void setMissions(List<Mission> missions) {
 		this.missions = missions;
 	}
