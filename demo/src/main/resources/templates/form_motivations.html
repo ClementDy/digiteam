@@ -8,17 +8,17 @@
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
 		rel="stylesheet">
 </head>
-<body style="margin-left: 10px; margin-right: 10px;">
+<body style="margin-left: 10px; margin-right: 10px;" onload="countChars(document.getElementById('motivations').value)">
 	<div th:fragment="content">
-	<h2>Vos motivations :</h2>
+	<h2>Vos motivations</h2>
 	
 	<form accept-charset="UTF-8" th:action="@{/result}" th:object="${student}" method="post">
 		<div>
-			<textarea class="form-control" id="motivations" th:value="${student.motivation}" th:field="${student.motivation}" oninput="countChars(this.value)" autofocus maxlength="900" rows="10" style="resize: none;"></textarea>
+			<textarea class="form-control" id="motivations" th:value="${student.motivation}" th:field="${student.motivation}" oninput="countChars(this.value)" maxlength="900" rows="10" style="resize: none;"></textarea>
 		</div>
 		<div>
 			<h5><b><span id="checkCount" style="color:red">&#x2718;</span></b><i> Entre 450 et 900 caractères (<span id ="charsCount">0</span>)</i></h5>
-	        <button class="btn btn-info pull-right" type="submit">Enregistrer</button>
+	        <!-- <button class="btn btn-info pull-right" type="submit">Enregistrer</button> -->
 		</div>
 	</form>
 	
