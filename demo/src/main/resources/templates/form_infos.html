@@ -11,18 +11,18 @@
 
 	<h2>Informations personnelles</h2>
 
-	<form class="form" th:action="@{/result}" th:object="${formulairestudent}" method="post">
+	<form class="form" th:action="@{/result}" th:object="${student}" method="post">
 		<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
-					<label> Nom : </label> <input class="form-control input-sm" type="text" th:field="*{lastName}" id="lastName"  />
+					<label> Nom : </label> <input class="form-control input-sm" type="text" th:field="${student.lastName}" id="lastName"  />
 						<span path="lastName" th:errors="*{lastName}"> Nom absent</span>  
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
 					<label> Pr&eacute;nom : </label><input class="form-control input-sm"
-						type="text" th:field="*{firstName}" id="firstName" />
+						type="text" th:field="${student.firstName}" id="firstName" />
 				</div>
 			</div>
 		</div>
@@ -32,13 +32,13 @@
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
 					<label> Mail : </label> <input class="form-control input-sm"
-						th:field="*{email}" type="email" id="email" />
+						th:field="${student.email}" type="email" id="email" />
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
 					<label> T&eacute;l&eacute;phone : </label><input
-						class="form-control input-sm" th:field="*{phone}" type="text" id="phone" />
+						class="form-control input-sm" th:field="${student.phone}" type="text" id="phone" />
 				</div>
 			</div>
 		</div>
@@ -48,7 +48,7 @@
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
 					<label> Rue : </label> <input class="form-control input-sm"
-						 th:field="*{street}"  type="text" id="street" />
+						 th:field="${student.address.street}"  type="text" id="street" />
 				</div>
 			</div>
 		</div>
@@ -57,7 +57,7 @@
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
 					<label> Complement : </label> <input class="form-control input-sm"
-						 th:field="*{complement}"  type="text" id="complement" />
+						 th:field="${student.address.complement}"  type="text" id="complement" />
 				</div>
 			</div>
 		</div>
@@ -66,13 +66,13 @@
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
 					<label> Code postal : </label> <input class="form-control input-sm"
-						th:field="*{postalCode}"  type="text" id="postalCode" />
+						th:field="${student.address.postalCode}"  type="text" id="postalCode" />
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
 					<label> Ville : </label> <input class="form-control input-sm"
-						 th:field="*{city}"  type="text" id="city" />
+						 th:field="${student.address.city}"  type="text" id="city" />
 				</div>
 			</div>
 		</div>
@@ -82,7 +82,7 @@
 				<div class="form-group">
 					<label class="control-label" for="selectbasic">Nationalité</label>
 					<div class="col-md-4">
-						<select  th:field="*{nationality}" id="selectbasic" name="selectbasic" class="form-control">
+						<select  th:field="${student.nationality}" id="selectbasic" name="selectbasic" class="form-control">
 							<option value="france">France</option>
 							<option value="spain">Espagne</option>
 							<option value="italy">Italie</option>

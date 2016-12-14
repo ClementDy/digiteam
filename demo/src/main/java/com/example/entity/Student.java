@@ -31,6 +31,7 @@ public class Student {
 	//private Availability availabity;
 	//private Miscellaneous misc;
 
+	
 	public Student() {
 		this.address = new Address();
 	}
@@ -47,92 +48,7 @@ public class Student {
 		this.nationality = nationality;
 	}
 
-
-	public long getNip() {
-		return nip;
-	}
-
-	public void setNip(long nip) {
-		this.nip = nip;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
 	
-	
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-
-	public String getNationality() {
-		return nationality;
-	}
-
-	public void setNationality(String nationality) {
-		this.nationality = nationality;
-	}
-
-	public String getMotivation() {
-		return motivation;
-	}
-
-	public void setMotivation(String motivation) {
-		this.motivation = motivation;
-	}
-
-	public boolean isVisa() {
-		return visa;
-	}
-
-	public void setVisa(boolean visa) {
-		this.visa = visa;
-	}
-
-	public Date getDateVisa() {
-		return dateVisa;
-	}
-
-	public void setDateVisa(Date dateVisa) {
-		this.dateVisa = dateVisa;
-	}
-
-	public int getPhone() {
-		return phone;
-	}
-
-	public void setPhone(int phone) {
-		this.phone = phone;
-	}
-
-
 
 	/*public Wish getWish() {
 		return wish;
@@ -158,6 +74,146 @@ public class Student {
 		this.misc = misc;
 	}*/
 	
+	public long getNip() {
+		return nip;
+	}
+
+
+
+
+	public void setNip(long nip) {
+		this.nip = nip;
+	}
+
+
+
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+
+
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+
+
+
+	public String getLastName() {
+		return lastName;
+	}
+
+
+
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+
+
+
+	public int getPhone() {
+		return phone;
+	}
+
+
+
+
+	public void setPhone(int phone) {
+		this.phone = phone;
+	}
+
+
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+
+
+	public Address getAddress() {
+		return address;
+	}
+
+
+
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+
+
+
+	public String getNationality() {
+		return nationality;
+	}
+
+
+
+
+	public void setNationality(String nationality) {
+		this.nationality = nationality;
+	}
+
+
+
+
+	public String getMotivation() {
+		return motivation;
+	}
+
+
+
+
+	public void setMotivation(String motivation) {
+		this.motivation = motivation;
+	}
+
+
+
+
+	public boolean isVisa() {
+		return visa;
+	}
+
+
+
+
+	public void setVisa(boolean visa) {
+		this.visa = visa;
+	}
+
+
+
+
+	public Date getDateVisa() {
+		return dateVisa;
+	}
+
+
+
+
+	public void setDateVisa(Date dateVisa) {
+		this.dateVisa = dateVisa;
+	}
+
+
+
+
 	@Override
 	public String toString() {
 		return "Student [nip=" + nip + ", firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone

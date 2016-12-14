@@ -18,26 +18,38 @@ public class Address {
 	private int postalCode;
 	private String city;
 
-	@OneToOne(mappedBy="address")
-	@PrimaryKeyJoinColumn
-	private Student student;
 
 
 	public Address() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	
 	
-	public Address(String street, String complement, int postalCode, String city, Student student) {
+	public Address(String street, String complement, int postalCode, String city) {
 		this.street = street;
 		this.complement = complement;
 		this.postalCode = postalCode;
 		this.city = city;
-		this.student = student;
+	}
+	
+	
+
+	public long getId() {
+		return id;
 	}
 
+	public void setId(long id) {
+		this.id = id;
+	}
 
+	public String getComplement() {
+		return complement;
+	}
+
+	public void setComplement(String complement) {
+		this.complement = complement;
+	}
 
 	public String getStreet() {
 		return street;
@@ -63,11 +75,15 @@ public class Address {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	public Student getStudent() {
-		return student;
+
+
+
+	@Override
+	public String toString() {
+		return "Address [id=" + id + ", street=" + street + ", complement=" + complement + ", postalCode=" + postalCode
+				+ ", city=" + city + "]";
 	}
-	public void setStudent(Student student) {
-		this.student = student;
-	}
+	
+	
 
 }

@@ -9,7 +9,7 @@ import com.example.controller.Home;
 @SpringBootApplication
 public class MainClement {
 
-	/*public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception {
 		SpringApplication.run(HomeClement.class, args);
-	}*/
+	}
 }
