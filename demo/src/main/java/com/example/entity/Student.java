@@ -1,5 +1,7 @@
 package com.example.entity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -30,6 +32,7 @@ public class Student {
 	private String visa;
 	@DateTimeFormat
 	private java.util.Date dateVisa = new Date();
+
 	//private Wish wish;
 	//private Availability availabity;
 	

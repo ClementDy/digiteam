@@ -11,83 +11,51 @@
 		<h2>Vos informations personnelles</h2>
 		<br>
 
-		<div class="row">
-			<div class="col-xs-6 col-sm-6 col-md-6">
-				<div class="form-inline">
-					<label> Nom : </label> <input class="form-control input-sm"
-						type="text" th:field="${student.lastName}" id="lastName" /> <span
-						path="lastName" th:errors="${student.lastName}"> Nom absent</span>
-				</div>
-			</div>
-			<div class="col-xs-6 col-sm-6 col-md-6">
-				<div class="form-inline">
-					<label> Pr&eacute;nom : </label><input
-						class="form-control input-sm" type="text"
-						th:field="${student.firstName}" id="firstName" />
-				</div>
-			</div>
-		</div>
-		<br>
+		<table>
 
-		<div class="row">
-			<div class="col-xs-6 col-sm-6 col-md-6">
-				<div class="form-inline">
-					<label> Mail : </label> <input class="form-control input-sm"
-						th:field="${student.email}" type="email" id="email" />
-				</div>
-			</div>
-			<div class="col-xs-6 col-sm-6 col-md-6">
-				<div class="form-inline">
-					<label> T&eacute;l&eacute;phone : </label><input
-						class="form-control input-sm" th:field="${student.phone}"
-						type="text" id="phone" />
-				</div>
-			</div>
-		</div>
-		<br> <br>
+			<tr>
+				<td><label> Nom : </label></td>
+				<td><input class="form-control input-sm" type="text"
+					th:field="${student.lastName}" id="lastName" /></td>
+				<td><label> Pr&eacute;nom : </label></td>
+				<td><input class="form-control input-sm" type="text"
+					th:field="${student.firstName}" id="firstName" /></td>
+			</tr>
+			<tr>
+				<td><label> Mail : </label></td>
+				<td> <input class="form-control input-sm"
+					th:field="${student.email}" type="email" id="email" /></td>
+				<td> <label>
+					T&eacute;l&eacute;phone : </label></td>
+				<td><input class="form-control input-sm"
+					th:field="${student.phone}" type="text" id="phone" /></td>
+			</tr>
+			
+			<tr>
+				<td><label> Rue : </label></td>
+				<td> <input class="form-control input-sm"
+					th:field="${student.address.street}" type="text" id="street" /></td>
+				<td> <label>
+					Complement : </label></td>
+				<td><input class="form-control input-sm"
+					th:field="${student.address.complement}" type="text"
+					id="complement" /></td>
+			</tr>
 
-
-		<div class="row">
-			<div class="col-xs-6 col-sm-6 col-md-6">
-				<div class="form-inline">
-					<label> Rue : </label> <input class="form-control input-sm"
-						th:field="${student.address.street}" type="text" id="street" />
-				</div>
-			</div>
-
-			<div class="col-xs-6 col-sm-6 col-md-6">
-				<div class="form-inline">
-					<label> Complement : </label> <input class="form-control input-sm"
-						th:field="${student.address.complement}" type="text"
-						id="complement" />
-				</div>
-			</div>
-		</div>
-		<br>
-
-
-		<div class="row">
-			<div class="col-xs-6 col-sm-6 col-md-6">
-				<div class="form-inline">
-					<label> Ville : </label> <input class="form-control input-sm"
-						th:field="${student.address.city}" type="text" id="city" />
-				</div>
-			</div>
-			<div class="col-xs-6 col-sm-6 col-md-6">
-				<div class="form-inline">
-					<label> Code postal : </label> <input class="form-control input-sm"
-						th:field="${student.address.postalCode}" type="text"
-						id="postalCode" />
-				</div>
-			</div>
-		</div>
-		<br> <br>
-
-		<div class="row">
-			<div class="col-xs-6 col-sm-6 col-md-6">
-				<div class="form-inline">
-					<label class="control-label" for="selectbasic">Nationalité</label>
-					<select th:field="${student.nationality}" id="selectbasic"
+			<tr>
+				<td><label> Ville : </label></td>
+				<td><input class="form-control input-sm"
+					th:field="${student.address.city}" type="text" id="city" /></td>
+				<td><label>
+					Code postal : </label></td>
+				<td><input class="form-control input-sm"
+					th:field="${student.address.postalCode}" type="text"
+					id="postalCode" /></td>
+			</tr>
+			
+			<tr>
+				<td><label class="control-label" for="selectbasic">Nationalité</label></td>
+				<td><select th:field="${student.nationality}" id="selectbasic"
 						name="selectbasic" class="form-control">
 						<option value="france">France</option>
 						<option value="spain">Espagne</option>
@@ -97,34 +65,25 @@
 						<option value="united-states">Etats-Unis</option>
 						<option value="china">Chine</option>
 						<option value="japan">Japon</option>
-					</select>
-				</div>
-			</div>
-		</div>
-		<br>
-
-		<div class="row">
-			<div class="col-xs-6 col-sm-6 col-md-6">
-				<div class="form-inline">
-					<label class="control-label" for="radios">Titre de séjour :
-					</label>
-					<div>
-						<label>Oui</label> <input type="radio" name="radios"
+					</select></td>
+				<td></td>
+				<td></td>
+			</tr>
+			
+			<tr>
+				<td><label class="control-label" for="radios">Titre de séjour :
+					</label></td>
+				<td><label>Oui</label><input type="radio" name="radios"
 							id="validVISA" value="validVISA" onClick="test()"
-							checked="checked"> <label>Non</label>
-						<input type="radio" name="radios" id="InvalidVISA"
-							onClick="test()" value="InvalidVISA" checked="checked">
-					</div>
+							checked="checked"></td>
+				<td><label>Non</label> <input type="radio"
+							name="radios" id="InvalidVISA" onClick="test()"
+							value="InvalidVISA" checked="checked"></td>
+				<td id="divExpiryDateVISA"><label> Date de validit&eacute;e : </label><input th:type="text"
+								th:field="${student.dateVisa}" /></td>
+			</tr>
 
-					<div id="divExpiryDateVISA" style="display: none">
-						<div class="form-inline">
-							<label> Date de validit&eacute;e : </label><input th:type="text"
-								th:field="${student.dateVisa}" />
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		</table>
 
 
 

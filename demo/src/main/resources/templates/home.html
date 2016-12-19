@@ -24,7 +24,7 @@
 		<h1>Formulaire de candidature</h1>
 		<br>
 	</div>
-	<div style="text-align:center" id="exTab1" class="container">
+	<div style="text-align: center" id="exTab1" class="container">
 		<ul class="nav nav-pills">
 			<li id="ongletLille1" class="active"><a href="#1"
 				data-toggle="tab">Introduction</a></li>
@@ -44,7 +44,7 @@
 
 				<div class="tab-content clearfix">
 					<div class="tab-pane active" id="1">
-						<div>
+						<div class="contentPane">
 							<h2>Introduction</h2>
 							<br> <br>
 							<p>Afin d'enregistrer votre candidature, vous devez remplir
@@ -55,31 +55,38 @@
 						</div>
 					</div>
 					<div class="tab-pane" id="2">
-						<div th:include="forms_student/form_infos::content"></div>
+						<div class="contentPane"
+							th:include="forms_student/form_infos::content"></div>
 					</div>
 					<div class="tab-pane" id="3">
-						<div th:include="forms_student/form_souhait::content"></div>
+						<div class="contentPane"
+							th:include="forms_student/form_souhait::content"></div>
 					</div>
 					<div class="tab-pane" id="4">
-						<div th:include="forms_student/form_dispos::content"></div>
+						<div class="contentPane"
+							th:include="forms_student/form_dispos::content"></div>
 					</div>
 					<div class="tab-pane" id="5">
-						<div th:include="forms_student/form_motivations::content"></div>
+						<div class="contentPane"
+							th:include="forms_student/form_motivations::content"></div>
 					</div>
 					<div class="tab-pane" id="6">
-						<div th:include="forms_student/form_divers::content"></div>
+						<div class="contentPane"
+							th:include="forms_student/form_divers::content"></div>
 					</div>
 					<div class="tab-pane" id="7">
-						<div th:include="forms_student/form_chargerCV::content"></div>
+						<div class="contentPane"
+							th:include="forms_student/form_chargerCV::content"></div>
 					</div>
 					<div class="tab-pane" id="8">
-						<div th:include="forms_student/form_save::content"></div>
+						<div class="contentPane"
+							th:include="forms_student/form_save::content"></div>
 					</div>
 				</div>
 		</form>
 	</div>
-	
-	
+
+
 	<style>
 #ongletLille1 {
 	background-color: #ae2573;
@@ -88,19 +95,74 @@
 	margin-bottom: 4px;
 }
 
-.nav>nav-pills{
-text-align:center;
-padding-left: inherit;
-}
-
 .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover
 	{
-	background-color: #E8E8E8;
+	background-color: white;
+	color: #ae2573;
+	border: 1px solid #ae2573;
 }
 
+.container-fluid {
+	background-color: #ae2573;
+	color: #337ab7;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus,
+	.navbar-default .navbar-nav>.active>a:hover {
+	color: #ae2573;
+	background-color: white;
+}
+
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand
+	{
+	color: white;
+}
+
+.navbar-default .navbar-nav>li>a {
+	color: white;
+}
+
+.tab-pane {
+	border: 1px solid #ae2573;
+}
+
+.tab-pane .contentPane {
+	margin-left: 20px;
+	margin-right: 20px;
+}
 
 a {
 	color: white;
+}
+
+.left {
+	text-align: left;
+}
+
+.right {
+	text-align: right;
+}
+
+.btn-lille1 {
+	background-color: #ae2573;
+	color: white;
+	margin-bottom: 10px;
+}
+
+table {
+	text-align: center;
+}
+
+table #postalCode{
+max-width:30%;
+}
+
+table #phone{
+max-width:45%
+}
+
+table #email{
+width:200px;
 }
 </style>
 </body>
