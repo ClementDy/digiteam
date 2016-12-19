@@ -62,6 +62,7 @@ public class Home {
 		model.addAttribute("city", student.getAddress().getCity());
 		model.addAttribute("postalCode", student.getAddress().getPostalCode());
 		
+		System.out.println(student.getDateVisa());
 		
 		return "result";
 	}

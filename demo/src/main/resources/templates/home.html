@@ -20,11 +20,11 @@
 <body>
 
 	<div th:include="header::header"></div>
-	<div style="text-align:center" class="container">
+	<div style="text-align: center" class="container">
 		<h1>Formulaire de candidature</h1>
 		<br>
 	</div>
-	<div style="text-align:center" id="exTab1" class="container">
+	<div style="text-align: center" id="exTab1" class="container">
 		<ul class="nav nav-pills">
 			<li class="active"><a href="#1" data-toggle="tab">Introduction</a></li>
 			<li><a href="#2" data-toggle="tab">Informations personnelles</a></li>
@@ -36,41 +36,45 @@
 			<li><a href="#8" data-toggle="tab">Fin</a></li>
 		</ul>
 
-		<div class="tab-content clearfix">
-			<div class="tab-pane active" id="1">
-				<div>
-					<h2>Introduction</h2>
-					<br>
-					<br>
-					<p>Afin d'enregistrer votre candidature, vous devez remplir
-						tout les champs de chaque onglet.</p>
-					<p>Une fois cette étape réalisée, vous pouvez enregistrer votre
-						candidature en cliquand sur le bouton enregistrer dans l'onglet
-						"Fin".</p>
+		<form accept-charset="UTF-8" th:action="@{/result}"
+			th:object="${student}" method="post">
+			<div class="tab-content clearfix">
+
+				<div class="tab-content clearfix">
+					<div class="tab-pane active" id="1">
+						<div>
+							<h2>Introduction</h2>
+							<br> <br>
+							<p>Afin d'enregistrer votre candidature, vous devez remplir
+								tout les champs de chaque onglet.</p>
+							<p>Une fois cette étape réalisée, vous pouvez enregistrer
+								votre candidature en cliquand sur le bouton enregistrer dans
+								l'onglet "Fin".</p>
+						</div>
+					</div>
+					<div class="tab-pane" id="2">
+						<div th:include="forms_student/form_infos::content"></div>
+					</div>
+					<div class="tab-pane" id="3">
+						<div th:include="forms_student/form_souhait::content"></div>
+					</div>
+					<div class="tab-pane" id="4">
+						<div th:include="forms_student/form_dispos::content"></div>
+					</div>
+					<div class="tab-pane" id="5">
+						<div th:include="forms_student/form_motivations::content"></div>
+					</div>
+					<div class="tab-pane" id="6">
+						<div th:include="forms_student/form_divers::content"></div>
+					</div>
+					<div class="tab-pane" id="7">
+						<div th:include="forms_student/form_chargerCV::content"></div>
+					</div>
+					<div class="tab-pane" id="8">
+						<div th:include="forms_student/form_save::content"></div>
+					</div>
 				</div>
-			</div>
-			<div class="tab-pane" id="2">
-				<div th:include="form_infos::content"></div>
-			</div>
-			<div class="tab-pane" id="3">
-				<div th:include="form_souhait::content"></div>
-			</div>
-			<div class="tab-pane" id="4">
-				<div th:include="form_dispos::content"></div>
-			</div>
-			<div class="tab-pane" id="5">
-				<div th:include="form_motivations::content"></div>
-			</div>
-			<div class="tab-pane" id="6">
-				<div th:include="form_divers::content"></div>
-			</div>
-			<div class="tab-pane" id="7">
-				<div th:include="form_chargerCV::content"></div>
-			</div>
-			<div class="tab-pane" id="8">
-				<div th:include="form_save::content"></div>
-			</div>
-		</div>
+		</form>
 	</div>
 </body>
 </html>

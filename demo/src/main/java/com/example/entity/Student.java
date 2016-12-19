@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Student {
 
@@ -25,8 +27,9 @@ public class Student {
 	private Address address;
 	private String nationality;
 	private String motivation;
-	private boolean visa;
-	private Date dateVisa;
+	private String visa;
+	@DateTimeFormat
+	private java.util.Date dateVisa = new Date();
 	//private Wish wish;
 	//private Availability availabity;
 	
@@ -190,28 +193,28 @@ public class Student {
 
 
 
-	public boolean isVisa() {
+	public String getVisa() {
 		return visa;
 	}
 
 
 
 
-	public void setVisa(boolean visa) {
+	public void setVisa(String visa) {
 		this.visa = visa;
 	}
 
 
 
 
-	public Date getDateVisa() {
+	public java.util.Date getDateVisa() {
 		return dateVisa;
 	}
 
 
 
 
-	public void setDateVisa(Date dateVisa) {
+	public void setDateVisa(java.util.Date dateVisa) {
 		this.dateVisa = dateVisa;
 	}
 

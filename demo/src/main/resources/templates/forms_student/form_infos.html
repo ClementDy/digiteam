@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div th:fragment="content">
+
+		<h2>Vos informations personnelles</h2>
+		<br>
+
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label> Nom : </label> <input class="form-control input-sm"
+						type="text" th:field="${student.lastName}" id="lastName" /> <span
+						path="lastName" th:errors="${student.lastName}"> Nom absent</span>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label> Pr&eacute;nom : </label><input
+						class="form-control input-sm" type="text"
+						th:field="${student.firstName}" id="firstName" />
+				</div>
+			</div>
+		</div>
+		<br>
+
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label> Mail : </label> <input class="form-control input-sm"
+						th:field="${student.email}" type="email" id="email" />
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label> T&eacute;l&eacute;phone : </label><input
+						class="form-control input-sm" th:field="${student.phone}"
+						type="text" id="phone" />
+				</div>
+			</div>
+		</div>
+		<br> <br>
+
+
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label> Rue : </label> <input class="form-control input-sm"
+						th:field="${student.address.street}" type="text" id="street" />
+				</div>
+			</div>
+
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label> Complement : </label> <input class="form-control input-sm"
+						th:field="${student.address.complement}" type="text"
+						id="complement" />
+				</div>
+			</div>
+		</div>
+		<br>
+
+
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label> Ville : </label> <input class="form-control input-sm"
+						th:field="${student.address.city}" type="text" id="city" />
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label> Code postal : </label> <input class="form-control input-sm"
+						th:field="${student.address.postalCode}" type="text"
+						id="postalCode" />
+				</div>
+			</div>
+		</div>
+		<br> <br>
+
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label class="control-label" for="selectbasic">Nationalité</label>
+					<select th:field="${student.nationality}" id="selectbasic"
+						name="selectbasic" class="form-control">
+						<option value="france">France</option>
+						<option value="spain">Espagne</option>
+						<option value="italy">Italie</option>
+						<option value="united-kingdom">Royaume-Uni</option>
+						<option value="canada">Canada</option>
+						<option value="united-states">Etats-Unis</option>
+						<option value="china">Chine</option>
+						<option value="japan">Japon</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<br>
+
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-inline">
+					<label class="control-label" for="radios">Titre de séjour :
+					</label>
+					<div>
+						<label>Oui</label> <input type="radio" name="radios"
+							id="validVISA" value="validVISA" onClick="test()"
+							checked="checked"> <label>Non</label>
+						<input type="radio" name="radios" id="InvalidVISA"
+							onClick="test()" value="InvalidVISA" checked="checked">
+					</div>
+
+					<div id="divExpiryDateVISA" style="display: none">
+						<div class="form-inline">
+							<label> Date de validit&eacute;e : </label><input th:type="text"
+								th:field="${student.dateVisa}" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<script>
+			function test() {
+				if (eval(document.getElementById("validVISA").checked == true)) {
+					document.getElementById('divExpiryDateVISA').style.display = 'block';
+				}
+				if (eval(document.getElementById("InvalidVISA").checked == true)) {
+					document.getElementById('divExpiryDateVISA').style.display = 'none';
+				}
+			}
+		</script>
+</body>
+</html>

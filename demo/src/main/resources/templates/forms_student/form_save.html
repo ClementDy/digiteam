@@ -10,27 +10,14 @@
 </head>
 <body style="margin-left: 10px; margin-right: 10px;">
 	<div th:fragment="content">
-	
-	<br>
+
+		<br>
 		<h2>Finalisation de la candidature</h2>
 		<br>
 
-		<form accept-charset="UTF-8" th:action="@{/result}"
-			th:object="${student}" method="post">
-			<p>Vous pouvez finaliser votre candidature en cliquant sur le
-				bouton "Enregistrer" ci-dessous.</p>
-				
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				
-
-
-			<input type="submit" value="Enregistrer" class="btn btn-info btn-block">
-
-		</form>
+		<p>Vous pouvez finaliser votre candidature en cliquant sur le
+			bouton "Enregistrer" ci-dessous.</p>
+		<input type="submit" class="btn btn-info" value="Enregistrer">
 </body>
 
 </html>
