@@ -24,16 +24,18 @@
 		<h1>Formulaire de candidature</h1>
 		<br>
 	</div>
-	<div style="text-align: center" id="exTab1" class="container">
+	<div style="text-align:center" id="exTab1" class="container">
 		<ul class="nav nav-pills">
-			<li class="active"><a href="#1" data-toggle="tab">Introduction</a></li>
-			<li><a href="#2" data-toggle="tab">Informations personnelles</a></li>
-			<li><a href="#3" data-toggle="tab">Souhaits</a></li>
-			<li><a href="#4" data-toggle="tab">Disponibilit&eacute;s</a></li>
-			<li><a href="#5" data-toggle="tab">Motivations</a></li>
-			<li><a href="#6" data-toggle="tab">Divers</a></li>
-			<li><a href="#7" data-toggle="tab">CV</a></li>
-			<li><a href="#8" data-toggle="tab">Fin</a></li>
+			<li id="ongletLille1" class="active"><a href="#1"
+				data-toggle="tab">Introduction</a></li>
+			<li id="ongletLille1"><a href="#2" data-toggle="tab">Informations
+					personnelles</a></li>
+			<li id="ongletLille1"><a href="#3" data-toggle="tab">Souhaits</a></li>
+			<li id="ongletLille1"><a href="#4" data-toggle="tab">Disponibilit&eacute;s</a></li>
+			<li id="ongletLille1"><a href="#5" data-toggle="tab">Motivations</a></li>
+			<li id="ongletLille1"><a href="#6" data-toggle="tab">Divers</a></li>
+			<li id="ongletLille1"><a href="#7" data-toggle="tab">CV</a></li>
+			<li id="ongletLille1"><a href="#8" data-toggle="tab">Fin</a></li>
 		</ul>
 
 		<form accept-charset="UTF-8" th:action="@{/result}"
@@ -76,5 +78,30 @@
 				</div>
 		</form>
 	</div>
+	
+	
+	<style>
+#ongletLille1 {
+	background-color: #ae2573;
+	color: white;
+	border-radius: 4px;
+	margin-bottom: 4px;
+}
+
+.nav>nav-pills{
+text-align:center;
+padding-left: inherit;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover
+	{
+	background-color: #E8E8E8;
+}
+
+
+a {
+	color: white;
+}
+</style>
 </body>
 </html>
