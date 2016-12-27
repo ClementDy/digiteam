@@ -17,86 +17,48 @@
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
 					<label> Du : </label> <input th:type="date" id="startDate"
-								th:field="${student.availability.startDate}" />
+						th:field="${student.availability.startDate}" />
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
 					<label> au : </label><input class="form-control input-sm"
-						th:field="${student.availability.endDate}" th:type="date" id="endDate" />
+						th:field="${student.availability.endDate}" th:type="date"
+						id="endDate" />
 				</div>
 			</div>
 		</div>
 
 		<br>
+		<table>
 
-		<div class="row">
-			<div class="col-xs-6 col-sm-6 col-md-6">
-				<div class="form-inline">
-					<label class="checkbox-inline"><input type="checkbox"
-						value="">Lundi : A partir de </label><input
-						class="form-control input-sm" type="time" id="startTimeMonday" />
-					<label> juqu'à : </label><input class="form-control input-sm"
-						type="time" id="endTimeMonday" />
-				</div>
-			</div>
+			<tr>
+				<td class="dayAvailability" >Lundi</td>
+				<td class="dayAvailability">Mardi</td>
+				<td class="dayAvailability">Mercredi</td>
+				<td class="dayAvailability">Jeudi</td>
+				<td class="dayAvailability">Vendredi</td>
+			</tr>
+			<tr>
+				<td class="inputAvailability"><input type="text" th:field="${student.availability.startTimeMonday}"/>
+					à <input type="text" id="endTimeMonday" th:field="${student.availability.endTimeMonday}"/></td>
+				<td class="inputAvailability"><input type="text" id="startTimeTuesday" th:field="${student.availability.startTimeTuesday}"/>
+					à <input type="text" id="endTimeTuesday" th:field="${student.availability.endTimeTuesday}"/></td>
+				<td class="inputAvailability"><input type="text"
+					id="startTimeWednesday" /> à <input type="text"
+					id="endTimeWednesday" /></td>
+				<td class="inputAvailability"><input type="text"
+					id="startTimeThursday" /> à <input type="text"
+					id="endTimeThursday" /></td>
+				<td class="inputAvailability"><input type="text" id="startTimeFriday" />
+					à <input type="text" id="endTimeFriday" /></td>
+			</tr>
+		</table>
+		<div class="indications"><p>Veuillez entrez les créneaux entre lesquels vous êtes disponible.<br>
+		Exemple Lundi de 10 heures à 18 heures : Dans la colonne Lundi entrez 10 à 18.</p>
 		</div>
-
 		<br>
-
-		<div class="row">
-			<div class="col-xs-6 col-sm-6 col-md-6">
-				<div class="form-inline">
-					<label class="checkbox-inline"><input type="checkbox"
-						value="">Mardi : A partir de </label><input
-						class="form-control input-sm" type="time" id="startTimeTuesday" />
-					<label> jusqu'à : </label><input class="form-control input-sm"
-						type="time" id="endTimeTuesday" />
-				</div>
-			</div>
-		</div>
-
-		<br>
-
-		<div class="row">
-			<div class="col-xs-6 col-sm-6 col-md-6">
-				<div class="form-inline">
-					<label class="checkbox-inline"><input type="checkbox"
-						value="">Mercredi : A partir de </label><input
-						class="form-control input-sm" type="time" id="startTimeWednesday" />
-					<label> jusqu'à :</label><input class="form-control input-sm"
-						type="time" id="endTimeWednesday" />
-				</div>
-			</div>
-		</div>
-
-		<br>
-
-		<div class="row">
-			<div class="col-xs-6 col-sm-6 col-md-6">
-				<div class="form-inline">
-					<label class="checkbox-inline"><input type="checkbox"
-						value="">Jeudi : A partir de </label><input
-						class="form-control input-sm" type="time" id="startTimeThursday" />
-					<label> jusqu'à :</label><input class="form-control input-sm"
-						type="time" id="endTimeThursday" />
-				</div>
-			</div>
-		</div>
-
-		<br>
-
-
-		<div class="row">
-			<div class="col-xs-6 col-sm-6 col-md-6">
-				<div class="form-inline">
-					<label class="checkbox-inline"><input type="checkbox"
-						value="">Vendredi : A partir de </label><input
-						class="form-control input-sm" type="time" id="startTimeFriday" />
-					<label> jusqu'à :</label><input class="form-control input-sm"
-						type="time" id="endTimeFriday" />
-				</div>
-			</div>
-		</div>
+	</div>
+	
 </body>
 </html>

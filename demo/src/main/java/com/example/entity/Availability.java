@@ -27,6 +27,43 @@ public class Availability {
 	private Student student;
 	*/
 	
+	private int startTimeMonday;
+	private int endTimeMonday;
+	public int getStartTimeTuesday() {
+		return startTimeTuesday;
+	}
+
+	public void setStartTimeTuesday(int startTimeTuesday) {
+		this.startTimeTuesday = startTimeTuesday;
+	}
+
+	private int startTimeTuesday;
+	private int endTimeTuesday;
+	
+	public int getEndTimeTuesday() {
+		return endTimeTuesday;
+	}
+
+	public void setEndTimeTuesday(int endTimeTuesday) {
+		this.endTimeTuesday = endTimeTuesday;
+	}
+
+	public int getStartTimeMonday() {
+		return startTimeMonday;
+	}
+
+	public void setStartTimeMonday(int startTimeMonday) {
+		this.startTimeMonday = startTimeMonday;
+	}
+
+	public int getEndTimeMonday() {
+		return endTimeMonday;
+	}
+
+	public void setEndTimeMonday(int endTimeMonday) {
+		this.endTimeMonday = endTimeMonday;
+	}
+
 	@Override
 	public String toString() {
 		return "Availability [id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + "]";

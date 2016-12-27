@@ -71,7 +71,8 @@ public class Home {
 		model.addAttribute("date",student.getDateVisa());
 		model.addAttribute("startDate",student.getAvailability().getStartDate());
 		model.addAttribute("endDate",student.getAvailability().getEndDate());
-		
+		model.addAttribute("startTimeMonday",student.getAvailability().getStartTimeMonday());
+		model.addAttribute("endTimeMonday",student.getAvailability().getEndTimeMonday());
 		System.out.println(student.getDateVisa());
 		
 		return "result";
