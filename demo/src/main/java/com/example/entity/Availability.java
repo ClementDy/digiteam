@@ -5,53 +5,62 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+@Entity
 public class Availability {
 
-	private Date startDate;
-	private Date endDate;
-	private List<AvailabilityDay> days = new ArrayList<AvailabilityDay>();
-	private Student student;
 	
-	public Availability() {
-		// TODO Auto-generated constructor stub
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long id;
+	
+	@DateTimeFormat
+	private java.util.Date startDate = new Date();
+	@DateTimeFormat
+	private java.util.Date endDate = new Date();
+	/*private List<AvailabilityDay> days = new ArrayList<AvailabilityDay>();
+	private Student student;
+	*/
+	
+	@Override
+	public String toString() {
+		return "Availability [id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + "]";
 	}
 
-	public Date getStartDate() {
+	public Availability() {
+		
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public java.util.Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(java.util.Date startDate) {
 		this.startDate = startDate;
 	}
 
-	public Date getEndDate() {
+	public java.util.Date getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(java.util.Date endDate) {
 		this.endDate = endDate;
 	}
 
-	public List<AvailabilityDay> getDays() {
-		return days;
-	}
-
-	public void setDays(List<AvailabilityDay> days) {
-		this.days = days;
-	}
 	
-	public void addAvailabilityDay(AvailabilityDay day){
-		this.days.add(day);
-	}
 	
-	public void removeAvailabilityDay(AvailabilityDay day){
-		this.days.remove(day);
-	}
-	public Student getStudent() {
-		return student;
-	}
-	public void setStudent(Student student) {
-		this.student = student;
-	}
+	
 }

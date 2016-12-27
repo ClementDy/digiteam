@@ -16,14 +16,14 @@
 		<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
-					<label> Du : </label> <input class="form-control input-sm"
-						type="date" id="startDate" />
+					<label> Du : </label> <input th:type="date" id="startDate"
+								th:field="${student.availability.startDate}" />
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<div class="form-inline">
 					<label> au : </label><input class="form-control input-sm"
-						type="date" id="endDate" />
+						th:field="${student.availability.endDate}" th:type="date" id="endDate" />
 				</div>
 			</div>
 		</div>

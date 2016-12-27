@@ -34,7 +34,10 @@ public class Student {
 	private java.util.Date dateVisa = new Date();
 
 	//private Wish wish;
-	//private Availability availabity;
+	
+	@OneToOne
+	@PrimaryKeyJoinColumn
+	private Availability availability;
 	
 	@OneToOne
 	@PrimaryKeyJoinColumn
@@ -43,6 +46,7 @@ public class Student {
 	public Student() {
 		this.address = new Address();
 		this.misc= new Miscellaneous();
+		this.availability=new Availability();
 	}
 	
 	
@@ -66,19 +70,26 @@ public class Student {
 
 	public void setWish(Wish wish) {
 		this.wish = wish;
-	}
+	}*/
+	
 
-	public Availability getAvailabity() {
-		return availabity;
-	}
+	
 
-	public void setAvailabity(Availability availabity) {
-		this.availabity = availabity;
-	}
-*/
 	public Miscellaneous getMisc() {
 		return misc;
 	}
+
+	public Availability getAvailability() {
+		return availability;
+	}
+
+
+	public void setAvailability(Availability availability) {
+		this.availability = availability;
+	}
+
+
+
 
 	public void setMisc(Miscellaneous misc) {
 		this.misc = misc;

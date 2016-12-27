@@ -1,14 +1,21 @@
 package com.example;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -61,6 +68,9 @@ public class Home {
 		model.addAttribute("street", student.getAddress().getStreet());
 		model.addAttribute("city", student.getAddress().getCity());
 		model.addAttribute("postalCode", student.getAddress().getPostalCode());
+		model.addAttribute("date",student.getDateVisa());
+		model.addAttribute("startDate",student.getAvailability().getStartDate());
+		model.addAttribute("endDate",student.getAvailability().getEndDate());
 		
 		System.out.println(student.getDateVisa());
 		
@@ -77,6 +87,18 @@ public class Home {
 		miscrepository.save(student.getMisc());
 		return "resultAlex";
 	}
+	
+	@InitBinder
+	private void dateBinder(WebDataBinder binder) {
+	    //The date format to parse or output your dates
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	    //Create a new CustomDateEditor
+	    CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
+	    //Register it as custom editor for the Date type
+	    binder.registerCustomEditor(Date.class, editor);
+	}
+	
+	
 	
 	@RequestMapping(value = "/resultCedric", method = RequestMethod.POST)
 	public String addEtudiant(Student student, Model model) {
