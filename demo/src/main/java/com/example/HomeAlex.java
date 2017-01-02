@@ -29,6 +29,15 @@ public class HomeAlex {
 		return "form_divers";
 	}
 
+	@RequestMapping(value="/form_formations", method = RequestMethod.GET)
+	public String form_formations(Model model) {
+		Student student=new Student();
+		
+		model.addAttribute("student",student);
+		
+		return "form_formations";
+	}
+	
 	@RequestMapping(value = "/resultAlex", method = RequestMethod.POST)
 	public String addEtudiant(Student student, Model model) {
 		/*System.out.println(student.getMisc().isAssociation()+" "+ student.getMisc().getNameAssociation()+" "+student.getMisc().getItKnowledge()+" "+
