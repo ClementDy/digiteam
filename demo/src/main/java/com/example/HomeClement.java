@@ -60,7 +60,7 @@ public class HomeClement {
 		
 		
 		repositoryAddress.save(new Address(student.getAddress().getStreet(), student.getAddress().getComplement(), student.getAddress().getPostalCode(), student.getAddress().getCity()));
-		repositoryStudent.save(new Student(student.getFirstName(), student.getLastName(), student.getPhone(), student.getEmail(), student.getNationality(),student.getMotivation()));
+		repositoryStudent.save(new Student(student.getFirstName(), student.getLastName(), student.getPhone(), student.getEmail(), student.getNationality(),student.getMotivation(),null));
 		
 		
 		

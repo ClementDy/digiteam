@@ -25,10 +25,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.entity.Address;
 import com.example.entity.Mission;
 import com.example.entity.Student;
+import com.example.entity.Wish;
 import com.example.repository.AddressRepository;
 import com.example.repository.MiscellaneousRepository;
 import com.example.repository.MissionRepository;
 import com.example.repository.StudentRepository;
+import com.example.repository.WishRepository;
 
 @EnableAutoConfiguration
 @Controller
@@ -42,6 +44,8 @@ public class Home {
 	MiscellaneousRepository miscrepository;
 	@Autowired
 	MissionRepository missionRepository;
+	@Autowired
+	WishRepository wishRepository;
 	
 	@RequestMapping(value="/home",method = RequestMethod.GET)
 	public String hello(@RequestParam(value="name", required=false, defaultValue="sousbody") String name, Model model) {
@@ -73,7 +77,7 @@ public class Home {
 		
 		
 		repositoryAddress.save(new Address(student.getAddress().getStreet(), student.getAddress().getComplement(), student.getAddress().getPostalCode(), student.getAddress().getCity()));
-		repositoryStudent.save(new Student(student.getFirstName(), student.getLastName(), student.getPhone(), student.getEmail(), student.getNationality(),student.getMotivation()));
+		repositoryStudent.save(new Student(student.getFirstName(), student.getLastName(), student.getPhone(), student.getEmail(), student.getNationality(),student.getMotivation(),null));
 		
 		
 		
@@ -107,6 +111,16 @@ public class Home {
 		return "resultAlex";
 	}
 	
+	@RequestMapping(value = "/resultWilly", method = RequestMethod.POST)
+	public String addEtudia(Student student, Model model) {
+		model.addAttribute("lastName", student.getLastName());
+		model.addAttribute("firstName", student.getFirstName());
+		model.addAttribute("motivations", student.getMotivation());
+		model.addAttribute("other wish",student.getWish().getOtherWish());
+		repositoryStudent.save(new Student(student.getFirstName(), student.getLastName(), student.getPhone(), student.getEmail(), student.getNationality(),student.getMotivation(),null));
+		return "resultWilly";
+	}
+	
 	@InitBinder
 	private void dateBinder(WebDataBinder binder) {
 	    //The date format to parse or output your dates
@@ -124,7 +138,7 @@ public class Home {
 		model.addAttribute("lastName", student.getLastName());
 		model.addAttribute("firstName", student.getFirstName());
 		model.addAttribute("motivations", student.getMotivation());
-		repositoryStudent.save(new Student(student.getFirstName(), student.getLastName(), student.getPhone(), student.getEmail(), student.getNationality(),student.getMotivation()));
+		repositoryStudent.save(new Student(student.getFirstName(), student.getLastName(), student.getPhone(), student.getEmail(), student.getNationality(),student.getMotivation(),null));
 		return "resultCedric";
 	}
 }

@@ -33,7 +33,9 @@ public class Student {
 	@DateTimeFormat
 	private java.util.Date dateVisa = new Date();
 
-	//private Wish wish;
+	@OneToOne
+	@PrimaryKeyJoinColumn
+	private Wish wish;
 	
 	@OneToOne
 	@PrimaryKeyJoinColumn
@@ -47,12 +49,13 @@ public class Student {
 		this.address = new Address();
 		this.misc= new Miscellaneous();
 		this.availability=new Availability();
+		this.wish = new Wish();
 	}
 	
 	
 
 
-	public Student(String firstName, String lastName, int phone, String email, String nationality,String motivation) {
+	public Student(String firstName, String lastName, int phone, String email, String nationality,String motivation,Wish wish) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -60,19 +63,18 @@ public class Student {
 		this.email = email;
 		this.nationality = nationality;
 		this.motivation=motivation;
+		this.wish = wish;
 	}
 
 	
 
-	/*public Wish getWish() {
+	public Wish getWish() {
 		return wish;
 	}
 
 	public void setWish(Wish wish) {
 		this.wish = wish;
-	}*/
-	
-
+	}
 	
 
 	public Miscellaneous getMisc() {
