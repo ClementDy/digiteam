@@ -1,7 +1,9 @@
 package com.example;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -21,9 +23,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.entity.Address;
+import com.example.entity.Mission;
 import com.example.entity.Student;
 import com.example.repository.AddressRepository;
 import com.example.repository.MiscellaneousRepository;
+import com.example.repository.MissionRepository;
 import com.example.repository.StudentRepository;
 
 @EnableAutoConfiguration
@@ -36,11 +40,25 @@ public class Home {
 	StudentRepository repositoryStudent;
 	@Autowired
 	MiscellaneousRepository miscrepository;
+	@Autowired
+	MissionRepository missionRepository;
 	
 	@RequestMapping(value="/home",method = RequestMethod.GET)
 	public String hello(@RequestParam(value="name", required=false, defaultValue="sousbody") String name, Model model) {
 		Student student=new Student();
 		model.addAttribute("student",student);
+		missionRepository.save(new Mission("Secrétariat d'examens"));
+		missionRepository.save(new Mission("Animation culturelles scientifiques sportives et sociales"));
+		missionRepository.save(new Mission("Accueil des étudiants"));
+		missionRepository.save(new Mission("Assistance et accompagnement des étudiants handicapés"));
+		missionRepository.save(new Mission("Soutien informatique et aide à l'utilisation des nouvelles technologies"));
+		missionRepository.save(new Mission("Promotion de l'offre de formation"));
+		missionRepository.save(new Mission("Tutorat"));
+		missionRepository.save(new Mission("Service d'appui aux personnels de bibliothèque"));
+		missionRepository.save(new Mission("Aide à l'insertion professionelle"));
+		missionRepository.save(new Mission("Enquêtes"));
+		Iterable<Mission> missions = missionRepository.findAll();
+		model.addAttribute("listMission", missions);
 		return "home";
 	}
 	

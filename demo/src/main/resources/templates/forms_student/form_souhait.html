@@ -1,161 +1,57 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
-	rel="stylesheet">
+<meta charset="UTF-8">
 <title>Vos souhaits</title>
 </head>
-<body>
+<body style="margin-left: 10px; margin-right: 10px;"
+	onload="countChars(document.getElementById('motivations').value)">
 <div th:fragment="content">
-	<h1>Vos souhaits</h1>
+	<h2>Vos souhaits</h2>
 	<br>
-	<br>
-
-		<div class="form-group">
-			<label for="type_mission"> Types de missons souhaités : </label>
-		</div>
-		<div class="form-group">
-			<label> Mission 1 : </label> <select name="mission" id="mission"
-				class="form-control">
-
-				<option value=""></option>
-
-				<option value="secretariat">Secrétariat d'examens</option>
-
-				<option value="animation">Animation culturelles
-					scientifiques sportives et sociales</option>
-
-				<option value="accueil">Accueil des étudiants</option>
-
-				<option value="assitance">Assistance et accompagnement des
-					étudiants handicapés</option>
-
-				<option value="soutienInfo">Soutien informatique et aide à
-					l'utilisation des nouvelles technologies</option>
-
-				<option value="promotion">Promotion de l'offre de formation</option>
-
-				<option value="tutorat">Tutorat</option>
-
-				<option value="serviceBiblio">Service d'appui aux
-					personnels de bibliothèque</option>
-
-				<option value="aideInsertion">Aide à l'insertion
-					professionelle</option>
-
-				<option value="enquetes">Enquêtes</option>
-
-			</select>
-		</div>
-		<div class="form-group">
-			<label> Mission 2 : </label> <select name="mission2" id="mission2"
-				class="form-control">
-
-				<option value=""></option>
-
-				<option value="secretariat">Secrétariat d'examens</option>
-
-				<option value="animation">Animation culturelles
-					scientifiques sportives et sociales</option>
-
-				<option value="accueil">Accueil des étudiants</option>
-
-				<option value="assitance">Assistance et accompagnement des
-					étudiants handicapés</option>
-
-				<option value="soutienInfo">Soutien informatique et aide à
-					l'utilisation des nouvelles technologies</option>
-
-				<option value="promotion">Promotion de l'offre de formation</option>
-
-				<option value="tutorat">Tutorat</option>
-
-				<option value="serviceBiblio">Service d'appui aux
-					personnels de bibliothèque</option>
-
-				<option value="aideInsertion">Aide à l'insertion
-					professionelle</option>
-
-				<option value="enquetes">Enquêtes</option>
-
-			</select>
-		</div>
-		<div class="form-group">
-			<label> Mission 3 : </label> <select name="mission3" id="mission3"
-				class="form-control">
-
-				<option value=""></option>
-
-				<option value="secretariat">Secrétariat d'examens</option>
-
-				<option value="animation">Animation culturelles
-					scientifiques sportives et sociales</option>
-
-				<option value="accueil">Accueil des étudiants</option>
-
-				<option value="assitance">Assistance et accompagnement des
-					étudiants handicapés</option>
-
-				<option value="soutienInfo">Soutien informatique et aide à
-					l'utilisation des nouvelles technologies</option>
-
-				<option value="promotion">Promotion de l'offre de formation</option>
-
-				<option value="tutorat">Tutorat</option>
-
-				<option value="serviceBiblio">Service d'appui aux
-					personnels de bibliothèque</option>
-
-				<option value="aideInsertion">Aide à l'insertion
-					professionelle</option>
-
-				<option value="enquetes">Enquêtes</option>
-
-			</select>
-		</div>
-		<div class="form-group">
-			<label> Mission 4 : </label> <select name="mission4" id="mission4"
-				class="form-control">
-
-				<option value=""></option>
-
-				<option value="secretariat">Secrétariat d'examens</option>
-
-				<option value="animation">Animation culturelles
-					scientifiques sportives et sociales</option>
-
-				<option value="accueil">Accueil des étudiants</option>
-
-				<option value="assitance">Assistance et accompagnement des
-					étudiants handicapés</option>
-
-				<option value="soutienInfo">Soutien informatique et aide à
-					l'utilisation des nouvelles technologies</option>
-
-				<option value="promotion">Promotion de l'offre de formation</option>
-
-				<option value="tutorat">Tutorat</option>
-
-				<option value="serviceBiblio">Service d'appui aux
-					personnels de bibliothèque</option>
-
-				<option value="aideInsertion">Aide à l'insertion
-					professionelle</option>
-
-				<option value="enquetes">Enquêtes</option>
-
-			</select>
-		</div>
-		<br>
-
+		
+		<label> Types de missons souhaités : </label>
+	    <select class="form-control" multiple="multiple" >
+	 		<option th:each="mission : ${listMission}"
+	                th:value="${{mission.id}}"
+	                th:text="${mission.title}">                 
+	        </option>
+	    </select>  
+      <br>
 		<div class="form-group">
 			<label for="autre"> Autre mission souhaitée (précisez) : </label>
 			<textarea class="form-control" rows="5" id="comment"></textarea>
 		</div>
+		<h2>Vos motivations</h2>
 
+		<div>
+			<textarea class="form-control" id="motivations"
+				th:value="${student.motivation}" th:field="${student.motivation}"
+				oninput="countChars(this.value)" maxlength="900" rows="10"
+				style="resize: none;"></textarea>
+		</div>
+		<div class="indications">
+			<h5>
+				<b><span id="checkCount" style="color: red">&#x2718;</span></b><i>
+					Entre 450 et 900 caractères (<span id="charsCount">0</span>)
+				</i>
+			</h5>
+		</div>
 
+		<script>
+			function countChars(val) {
+				document.getElementById("charsCount").innerHTML = val.length;
+
+				var checkCount = document.getElementById("checkCount");
+				if (val.length >= 450) {
+					checkCount.innerHTML = "&#x2714;";
+					checkCount.style.color = "green";
+				} else {
+					checkCount.innerHTML = "&#x2718;";
+					checkCount.style.color = "red";
+				}
+			}
+		</script>
+</div>
 </body>
 </html>
