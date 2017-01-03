@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,7 +34,8 @@ public class Student {
 	@DateTimeFormat
 	private java.util.Date dateVisa = new Date();
 
-	@OneToOne
+
+	@OneToOne(cascade = {CascadeType.ALL})
 	@PrimaryKeyJoinColumn
 	private Wish wish;
 	

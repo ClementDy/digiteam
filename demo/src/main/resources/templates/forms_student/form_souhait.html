@@ -10,9 +10,9 @@
 		<h2>Vos souhaits</h2>
 		
 		<br> <label> Types de missons souhaités : </label> 
-		<select class="form-control" multiple="multiple">
+		<select class="form-control" th:field="*{wish.missions}" multiple="multiple">
 			<option th:each="mission : ${listMission}" th:value="${{mission.id}}"
-				th:text="${mission.title}" >
+				th:text="${mission.title}" th:field="*{wish.missions}">
 			</option>
 				
 		</select> 

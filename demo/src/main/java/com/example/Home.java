@@ -116,8 +116,9 @@ public class Home {
 		model.addAttribute("lastName", student.getLastName());
 		model.addAttribute("firstName", student.getFirstName());
 		model.addAttribute("motivations", student.getMotivation());
-		model.addAttribute("other wish",student.getWish().getOtherWish());
-		repositoryStudent.save(new Student(student.getFirstName(), student.getLastName(), student.getPhone(), student.getEmail(), student.getNationality(),student.getMotivation(),null));
+		model.addAttribute("otherWish",student.getWish().getOtherWish());
+		model.addAttribute("wish",student.getWish().getMissions());
+		repositoryStudent.save(new Student(student.getFirstName(), student.getLastName(), student.getPhone(), student.getEmail(), student.getNationality(),student.getMotivation(),new Wish(student.getWish().getMissions(),student.getWish().getOtherWish())));
 		return "resultWilly";
 	}
 	
