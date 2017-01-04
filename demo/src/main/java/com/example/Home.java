@@ -1,15 +1,13 @@
 package com.example;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,35 +15,32 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.entity.Address;
 import com.example.entity.Mission;
 import com.example.entity.Student;
 import com.example.entity.Wish;
-import com.example.repository.AddressRepository;
 import com.example.repository.MiscellaneousRepository;
 import com.example.repository.MissionRepository;
 import com.example.repository.StudentRepository;
-import com.example.repository.WishRepository;
+import com.example.services.StudentService;
 
 @EnableAutoConfiguration
 @Controller
+@ComponentScan(basePackages="com.example.services")
 public class Home {
 	
 	@Autowired
-	AddressRepository repositoryAddress;
+	StudentService studentService;
+	
 	@Autowired
 	StudentRepository repositoryStudent;
 	@Autowired
 	MiscellaneousRepository miscrepository;
 	@Autowired
 	MissionRepository missionRepository;
-	@Autowired
-	WishRepository wishRepository;
 	
 	@RequestMapping(value="/home",method = RequestMethod.GET)
 	public String hello(@RequestParam(value="name", required=false, defaultValue="sousbody") String name, Model model) {
@@ -75,10 +70,8 @@ public class Home {
 		}
 		System.out.println(student.toString());
 		
-		
-		repositoryAddress.save(new Address(student.getAddress().getStreet(), student.getAddress().getComplement(), student.getAddress().getPostalCode(), student.getAddress().getCity()));
-		repositoryStudent.save(new Student(student.getFirstName(), student.getLastName(), student.getPhone(), student.getEmail(), student.getNationality(),student.getMotivation(),null));
-		
+
+		studentService.saveStudentProfile(student);
 		
 		
 		System.out.println(student.getAddress().toString());
@@ -111,6 +104,15 @@ public class Home {
 		return "resultAlex";
 	}
 	
+	@RequestMapping(value = "/resultCedric", method = RequestMethod.POST)
+	public String addEtudiant(Student student, Model model) {
+		model.addAttribute("lastName", student.getLastName());
+		model.addAttribute("firstName", student.getFirstName());
+		model.addAttribute("motivations", student.getMotivation());
+		repositoryStudent.save(new Student(student.getFirstName(), student.getLastName(), student.getPhone(), student.getEmail(), student.getNationality(),student.getMotivation(),null));
+		return "resultCedric";
+	}
+	
 	@RequestMapping(value = "/resultWilly", method = RequestMethod.POST)
 	public String addEtudia(Student student, Model model) {
 		model.addAttribute("lastName", student.getLastName());
@@ -130,16 +132,5 @@ public class Home {
 	    CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
 	    //Register it as custom editor for the Date type
 	    binder.registerCustomEditor(Date.class, editor);
-	}
-	
-	
-	
-	@RequestMapping(value = "/resultCedric", method = RequestMethod.POST)
-	public String addEtudiant(Student student, Model model) {
-		model.addAttribute("lastName", student.getLastName());
-		model.addAttribute("firstName", student.getFirstName());
-		model.addAttribute("motivations", student.getMotivation());
-		repositoryStudent.save(new Student(student.getFirstName(), student.getLastName(), student.getPhone(), student.getEmail(), student.getNationality(),student.getMotivation(),null));
-		return "resultCedric";
 	}
 }

@@ -5,7 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 public class Address {
@@ -13,26 +12,23 @@ public class Address {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
+	
+	@OneToOne
+	private Student student;
+	
 	private String street;
 	private String complement;
 	private int postalCode;
 	private String city;
 
 
-
 	public Address() {
 		
 	}
 
-	
-	
-	public Address(String street, String complement, int postalCode, String city) {
-		this.street = street;
-		this.complement = complement;
-		this.postalCode = postalCode;
-		this.city = city;
+	public Address(Student student) {
+		this.student = student;
 	}
-	
 	
 
 	public long getId() {
@@ -43,6 +39,24 @@ public class Address {
 		this.id = id;
 	}
 
+	
+	public Student getStudent() {
+		return student;
+	}
+	
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+	
+
+	public String getStreet() {
+		return street;
+	}
+	
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
 	public String getComplement() {
 		return complement;
 	}
@@ -51,31 +65,21 @@ public class Address {
 		this.complement = complement;
 	}
 
-	public String getStreet() {
-		return street;
-	}
-	public void setStreet(String street) {
-		this.street = street;
-	}
-	public String getString() {
-		return complement;
-	}
-	public void setString(String string) {
-		complement = string;
-	}
 	public int getPostalCode() {
 		return postalCode;
 	}
+	
 	public void setPostalCode(int postalCode) {
 		this.postalCode = postalCode;
 	}
+	
 	public String getCity() {
 		return city;
 	}
+	
 	public void setCity(String city) {
 		this.city = city;
 	}
-
 
 
 	@Override
@@ -83,7 +87,4 @@ public class Address {
 		return "Address [id=" + id + ", street=" + street + ", complement=" + complement + ", postalCode=" + postalCode
 				+ ", city=" + city + "]";
 	}
-	
-	
-
 }

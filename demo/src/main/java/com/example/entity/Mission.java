@@ -14,7 +14,7 @@ public class Mission {
 	private String title;
 	
 	public Mission() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public Mission(String title) {
@@ -37,5 +37,4 @@ public class Mission {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
 }

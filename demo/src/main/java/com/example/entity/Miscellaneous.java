@@ -4,14 +4,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.OneToOne;
 
 @Entity
 public class Miscellaneous {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	long id;
+	private long id;
+
+	@OneToOne
+	private Student student;
+	
 	private boolean association;
 	private String nameAssociation;
 	private String itKnowledge;
@@ -20,8 +24,31 @@ public class Miscellaneous {
 	
 	
 	public Miscellaneous() {
-		// TODO Auto-generated constructor stub
+		
 	}
+	
+	public Miscellaneous(Student student) {
+		this.student = student;
+	}
+
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	
+	public Student getStudent() {
+		return student;
+	}
+	
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+	
 
 	public boolean isAssociation() {
 		return association;
@@ -62,6 +89,4 @@ public class Miscellaneous {
 	public void setOtherFormations(String otherFormations) {
 		this.otherFormations = otherFormations;
 	}
-	
-	
 }

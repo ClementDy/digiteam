@@ -13,12 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.entity.Address;
 import com.example.entity.Student;
 import com.example.repository.AddressRepository;
 import com.example.repository.StudentRepository;
-import com.example.services.ServiceAddress;
-import com.example.services.ServiceStudent;
+import com.example.services.AddressService;
+import com.example.services.StudentService;
 
 @EnableAutoConfiguration
 @Controller
@@ -30,8 +29,8 @@ public class HomeClement {
 	StudentRepository repositoryStudent;
 	
 	
-	ServiceStudent serviceStudent=new ServiceStudent();
-	ServiceAddress serviceAddress=new ServiceAddress();
+	StudentService serviceStudent=new StudentService();
+	AddressService serviceAddress=new AddressService();
 
 	@RequestMapping(value="/home",method = RequestMethod.GET)
 	public String hello(@RequestParam(value="name", required=false, defaultValue="sousbody") String name, Model model) {
@@ -59,7 +58,7 @@ public class HomeClement {
 		System.out.println(student.toString());
 		
 		
-		repositoryAddress.save(new Address(student.getAddress().getStreet(), student.getAddress().getComplement(), student.getAddress().getPostalCode(), student.getAddress().getCity()));
+		//repositoryAddress.save(new Address(student.getAddress().getStreet(), student.getAddress().getComplement(), student.getAddress().getPostalCode(), student.getAddress().getCity()));
 		repositoryStudent.save(new Student(student.getFirstName(), student.getLastName(), student.getPhone(), student.getEmail(), student.getNationality(),student.getMotivation(),null));
 		
 		

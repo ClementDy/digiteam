@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.entity.Miscellaneous;
 import com.example.entity.Student;import com.example.repository.MiscellaneousRepository;
-import com.example.services.ServiceStudent;
+import com.example.services.StudentService;
 
 @EnableAutoConfiguration
 @Controller
 public class HomeAlex {
 	
 	
-	ServiceStudent serviceStudent=new ServiceStudent();
+	StudentService serviceStudent=new StudentService();
 	@Autowired
 	MiscellaneousRepository miscrepository;
 	
