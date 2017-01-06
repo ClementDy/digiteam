@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import java.awt.PageAttributes.MediaType;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,6 +35,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.FileUploadController;
+import com.example.StudentLDAP;
 import com.example.entity.Mission;
 import com.example.entity.Student;
 import com.example.entity.Wish;
@@ -43,13 +45,18 @@ import com.example.repository.StudentRepository;
 import com.example.services.StudentService;
 import com.example.uploadFile.StorageFileNotFoundException;
 import com.example.uploadFile.StorageService;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 @EnableAutoConfiguration
 @Controller
 @ComponentScan(basePackages="com.example.services")
 public class Home {
 
-
+	WebResource service;
+	
+	
 	@Autowired
 	StudentService studentService;
 	@Autowired
@@ -59,8 +66,18 @@ public class Home {
 	@Autowired
 	MissionRepository missionRepository;
 
+
 	@RequestMapping(value="/home",method = RequestMethod.GET)
 	public String hello(@RequestParam(value="name", required=false, defaultValue="sousbody") String name, Model model) {
+		
+		
+		Client client = Client.create(new DefaultClientConfig());
+		this.service = client.resource("http://adminieea.fil.univ-lille1.fr:8080/verlaine/rest/etudiant/11202572");
+	
+		//service.path("/etudiant");
+		StudentLDAP s=new StudentLDAP();
+		s=service.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE).get(StudentLDAP.class);
+		System.out.println(s.toString());
 		Student student=new Student();
 		model.addAttribute("student",student);
 		missionRepository.save(new Mission("Secrétariat d'examens"));
@@ -103,6 +120,7 @@ public class Home {
 		model.addAttribute("date",student.getDateVisa());
 		model.addAttribute("startDate",student.getAvailability().getStartDate());
 		model.addAttribute("endDate",student.getAvailability().getEndDate());
+		System.out.println(student.getAvailability().getStartTimeMonday());
 		model.addAttribute("startTimeMonday",student.getAvailability().getStartTimeMonday());
 		model.addAttribute("endTimeMonday",student.getAvailability().getEndTimeMonday());
 		System.out.println(student.getDateVisa());

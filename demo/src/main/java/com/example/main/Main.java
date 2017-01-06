@@ -14,7 +14,7 @@ import com.example.uploadFile.StorageService;
 @SpringBootApplication
 @EnableConfigurationProperties(StorageProperties.class)
 public class Main {
-
+/*
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(Main.class, args);
 	}
@@ -25,5 +25,5 @@ public class Main {
 			storageService.deleteAll();
 			storageService.init();
 		};
-	}
+	}*/
 }

@@ -25,7 +25,9 @@ public class Availability {
 	private Date endDate = new Date();
 	//private List<AvailabilityDay> days = new ArrayList<AvailabilityDay>();
 	
+	@DateTimeFormat (pattern="HH:mm")
 	private int startTimeMonday;
+	@DateTimeFormat (pattern="HH:mm")
 	private int endTimeMonday;
 	
 
