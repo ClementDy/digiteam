@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.entity.Student;
 
-@EnableAutoConfiguration
-@Controller
+
 public class HomeCedric {
 
 	@RequestMapping(value="/homeCedric",method = RequestMethod.GET)

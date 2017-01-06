@@ -33,8 +33,7 @@
 			<li id="ongletLille1"><a href="#3" data-toggle="tab">Souhaits</a></li>
 			<li id="ongletLille1"><a href="#4" data-toggle="tab">Disponibilit&eacute;s</a></li>
 			<li id="ongletLille1"><a href="#5" data-toggle="tab">Divers</a></li>
-			<li id="ongletLille1"><a href="#6" data-toggle="tab">CV</a></li>
-			<li id="ongletLille1"><a href="#7" data-toggle="tab">Fin</a></li>
+			<li id="ongletLille1"><a href="#6" data-toggle="tab">Fin</a></li>
 		</ul>
 
 		<form accept-charset="UTF-8" th:action="@{/result}"
@@ -53,31 +52,33 @@
 								l'onglet "Fin".</p>
 						</div>
 					</div>
+					
 					<div class="tab-pane" id="2">
 						<div class="contentPane"
 							th:include="forms_student/form_infos::content"></div>
 					</div>
+					
 					<div class="tab-pane" id="3">
 						<div class="contentPane"
 							th:include="forms_student/form_souhait::content"></div>
 					</div>
+					
 					<div class="tab-pane" id="4">
 						<div class="contentPane"
 							th:include="forms_student/form_dispos::content"></div>
 					</div>
+					
 					<div class="tab-pane" id="5">
 						<div class="contentPane"
 							th:include="forms_student/form_divers::content"></div>
 					</div>
+					
 					<div class="tab-pane" id="6">
-						<div class="contentPane"
-							th:include="forms_student/form_chargerCV::content"></div>
-					</div>
-					<div class="tab-pane" id="7">
 						<div class="contentPane"
 							th:include="forms_student/form_save::content"></div>
 					</div>
 				</div>
+			</div>
 		</form>
 	</div>
 
@@ -148,33 +149,34 @@ table {
 	text-align: center;
 }
 
-table #postalCode{
-max-width:30%;
+table #postalCode {
+	max-width: 30%;
 }
 
-table #phone{
-max-width:45%
+table #phone {
+	max-width: 45%
 }
 
-table #email{
-width:200px;
+table #email {
+	width: 200px;
 }
 
-.indications{
-	text-align:left;
+.indications {
+	text-align: left;
 }
 
-.dayAvailability{
-	border: 1px solid #ae2573;
-}
-.inputAvailability{
+.dayAvailability {
 	border: 1px solid #ae2573;
 }
 
-.inputAvailability input{
-	margin-top:3px;
-	width:10%;
-	margin-bottom:3px;
+.inputAvailability {
+	border: 1px solid #ae2573;
+}
+
+.inputAvailability input {
+	margin-top: 3px;
+	width: 10%;
+	margin-bottom: 3px;
 }
 </style>
 </body>
