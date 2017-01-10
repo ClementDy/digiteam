@@ -71,7 +71,7 @@ public class Home {
 		Student student = new Student();
 		model.addAttribute("firstName",s.getEtu_prenom());
 		model.addAttribute("lastName",s.getEtu_nom());
-		model.addAttribute("firstName",s.getEtu_prenom());
+		model.addAttribute("email",s.getEtu_email());
 		model.addAttribute("student", student);
 		missionRepository.save(new Mission("Secrétariat d'examens"));
 		missionRepository.save(new Mission("Animation culturelles scientifiques sportives et sociales"));

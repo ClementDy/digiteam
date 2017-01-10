@@ -11,6 +11,7 @@ public class StudentLDAP {
 	String etu_prenom;
 	String etu_maritale;
 	String etu_codenationalite;
+	String etu_libnationalite;
 	String etu_email;
 
 	public StudentLDAP(){
@@ -31,6 +32,16 @@ public class StudentLDAP {
 
 	public void setEtu_civilite(int etu_civilite) {
 		this.etu_civilite = etu_civilite;
+	}
+	
+	
+
+	public String getEtu_libnationalite() {
+		return etu_libnationalite;
+	}
+
+	public void setEtu_libnationalite(String etu_libnationalite) {
+		this.etu_libnationalite = etu_libnationalite;
 	}
 
 	public String getEtu_nom() {

@@ -21,8 +21,7 @@
 			</tr>
 			<tr>
 				<td><label> Mail : </label></td>
-				<td><input class="form-control input-sm"
-					th:field="${student.email}" type="email" id="email" /></td>
+				<td th:text="${email}" id="email" /></td>
 				<td><label> T&eacute;l&eacute;phone : </label></td>
 				<td><input class="form-control input-sm"
 					th:field="${student.phone}" type="text" id="phone" /></td>
@@ -49,18 +48,8 @@
 			</tr>
 
 			<tr>
-				<td><label class="control-label" for="selectbasic">Nationalité</label></td>
-				<td><select th:field="${student.nationality}" id="selectbasic"
-					name="selectbasic" class="form-control">
-						<option value="france">France</option>
-						<option value="spain">Espagne</option>
-						<option value="italy">Italie</option>
-						<option value="united-kingdom">Royaume-Uni</option>
-						<option value="canada">Canada</option>
-						<option value="united-states">Etats-Unis</option>
-						<option value="china">Chine</option>
-						<option value="japan">Japon</option>
-				</select></td>
+				<td><label class="control-label" for="selectbasic">Nationalité : </label></td>
+				<td th:text="${nationality}" th:field="${student.nationality}"></td>
 				<td></td>
 				<td></td>
 			</tr>

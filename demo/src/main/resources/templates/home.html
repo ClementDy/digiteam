@@ -52,27 +52,27 @@
 								l'onglet "Fin".</p>
 						</div>
 					</div>
-					
+
 					<div class="tab-pane" id="2">
 						<div class="contentPane"
 							th:include="forms_student/form_infos::content"></div>
 					</div>
-					
+
 					<div class="tab-pane" id="3">
 						<div class="contentPane"
 							th:include="forms_student/form_souhait::content"></div>
 					</div>
-					
+
 					<div class="tab-pane" id="4">
 						<div class="contentPane"
 							th:include="forms_student/form_dispos::content"></div>
 					</div>
-					
+
 					<div class="tab-pane" id="5">
 						<div class="contentPane"
 							th:include="forms_student/form_divers::content"></div>
 					</div>
-					
+
 					<div class="tab-pane" id="6">
 						<div class="contentPane"
 							th:include="forms_student/form_save::content"></div>
@@ -177,6 +177,14 @@ table #email {
 	margin-top: 3px;
 	width: 10%;
 	margin-bottom: 3px;
+}
+
+
+@-moz-document url-prefix()
+{
+    .availabilityTab input{ 
+		max-width:55px;
+	}
 }
 </style>
 </body>
