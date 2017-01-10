@@ -91,7 +91,6 @@ public class Home {
 		System.out.println(formationLDAP);
 		
 		
-		Student student=new Student();
 		model.addAttribute("student",student);
 
 		missionRepository.save(new Mission("Secrétariat d'examens"));
