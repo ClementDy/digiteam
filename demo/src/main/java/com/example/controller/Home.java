@@ -29,6 +29,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.StudentLDAP;
+import com.example.TrainingLDAP;
 import com.example.entity.Mission;
 import com.example.entity.Student;
 import com.example.repository.MiscellaneousRepository;
@@ -47,6 +48,9 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 public class Home {
 
 	WebResource service;
+
+	WebResource serviceFormation;
+	
 
 	@Autowired
 	StudentService studentService;
@@ -68,6 +72,7 @@ public class Home {
 		StudentLDAP s = new StudentLDAP();
 		s = service.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE).get(StudentLDAP.class);
 		System.out.println(s.toString());
+
 		Student student = new Student();
 		model.addAttribute("firstName",s.getEtu_prenom());
 		model.addAttribute("lastName",s.getEtu_nom());
@@ -77,6 +82,18 @@ public class Home {
 		student.setLastName(s.getEtu_nom());
 		student.setNationality(s.getEtu_libnationalite());
 		student.setEmail(s.getEtu_email());
+
+		
+		Client clientformation = Client.create(new DefaultClientConfig());
+		this.serviceFormation = clientformation.resource("http://adminieea.fil.univ-lille1.fr:8080/verlaine/rest/etudiant/2017/11202572");
+		TrainingLDAP formationLDAP = new TrainingLDAP();
+		formationLDAP=serviceFormation.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE).get(TrainingLDAP.class);
+		System.out.println(formationLDAP);
+		
+		
+		Student student=new Student();
+		model.addAttribute("student",student);
+
 		missionRepository.save(new Mission("Secrétariat d'examens"));
 		missionRepository.save(new Mission("Animation culturelles scientifiques sportives et sociales"));
 		missionRepository.save(new Mission("Accueil des étudiants"));
@@ -126,7 +143,7 @@ public class Home {
 		return "result";
 	}
 
-	@RequestMapping(value = "/resultAlex", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/resultAlex", method = RequestMethod.POST)
 	public String addEtudian(Student student, Model model) {
 		model.addAttribute("nameAssociation", student.getMisc().getNameAssociation());
 		model.addAttribute("itKnowledge", student.getMisc().getNameAssociation());
@@ -135,7 +152,7 @@ public class Home {
 
 		miscrepository.save(student.getMisc());
 		return "resultAlex";
-	}
+	}*/
 
 	@RequestMapping(value = "/resultCedric", method = RequestMethod.POST)
 	public String addEtudiant(Student student, Model model) {
