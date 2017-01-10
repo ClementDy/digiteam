@@ -13,32 +13,30 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Availability {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
 	@OneToOne
 	private Student student;
-	
-	@DateTimeFormat
+
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date startDate = new Date();
-	@DateTimeFormat
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date endDate = new Date();
-	//private List<AvailabilityDay> days = new ArrayList<AvailabilityDay>();
-	
-	@DateTimeFormat (pattern="HH:mm")
-	private int startTimeMonday;
-	@DateTimeFormat (pattern="HH:mm")
-	private int endTimeMonday;
-	
+	// private List<AvailabilityDay> days = new ArrayList<AvailabilityDay>();
+
+	@DateTimeFormat(pattern = "HH:mm")
+	private Date startTimeMonday;
+	@DateTimeFormat(pattern = "HH:mm")
+	private Date endTimeMonday;
 
 	public Availability() {
-		
+
 	}
-	
+
 	public Availability(Student student) {
 		this.student = student;
 	}
-
 
 	public long getId() {
 		return id;
@@ -48,15 +46,13 @@ public class Availability {
 		this.id = id;
 	}
 
-	
 	public Student getStudent() {
 		return student;
 	}
-	
+
 	public void setStudent(Student student) {
 		this.student = student;
 	}
-	
 
 	public int getStartTimeTuesday() {
 		return startTimeTuesday;
@@ -68,7 +64,7 @@ public class Availability {
 
 	private int startTimeTuesday;
 	private int endTimeTuesday;
-	
+
 	public int getEndTimeTuesday() {
 		return endTimeTuesday;
 	}
@@ -77,19 +73,20 @@ public class Availability {
 		this.endTimeTuesday = endTimeTuesday;
 	}
 
-	public int getStartTimeMonday() {
+	
+	public Date getStartTimeMonday() {
 		return startTimeMonday;
 	}
 
-	public void setStartTimeMonday(int startTimeMonday) {
+	public void setStartTimeMonday(Date startTimeMonday) {
 		this.startTimeMonday = startTimeMonday;
 	}
 
-	public int getEndTimeMonday() {
+	public Date getEndTimeMonday() {
 		return endTimeMonday;
 	}
 
-	public void setEndTimeMonday(int endTimeMonday) {
+	public void setEndTimeMonday(Date endTimeMonday) {
 		this.endTimeMonday = endTimeMonday;
 	}
 

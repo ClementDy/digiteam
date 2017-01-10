@@ -15,11 +15,9 @@
 
 			<tr>
 				<td><label> Nom : </label></td>
-				<td><input class="form-control input-sm" type="text"
-					th:field="${student.lastName}" id="lastName" /></td>
+				<td th:text="${lastName}" th:field="${student.lastName}" id="lastName" /></td>
 				<td><label> Pr&eacute;nom : </label></td>
-				<td><input class="form-control input-sm" type="text"
-					th:field="${student.firstName}" id="firstName" /></td>
+				<td th:text="${firstName}" th:field="${student.firstName}" id="firstName" /></td>
 			</tr>
 			<tr>
 				<td><label> Mail : </label></td>

@@ -1,15 +1,11 @@
 package com.example.controller;
 
-import java.awt.PageAttributes.MediaType;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.io.Resource;
@@ -20,10 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,11 +28,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.FileUploadController;
 import com.example.StudentLDAP;
 import com.example.entity.Mission;
 import com.example.entity.Student;
-import com.example.entity.Wish;
 import com.example.repository.MiscellaneousRepository;
 import com.example.repository.MissionRepository;
 import com.example.repository.StudentRepository;
@@ -51,12 +43,11 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 @EnableAutoConfiguration
 @Controller
-@ComponentScan(basePackages="com.example.services")
+@ComponentScan(basePackages = "com.example.services")
 public class Home {
 
 	WebResource service;
-	
-	
+
 	@Autowired
 	StudentService studentService;
 	@Autowired
@@ -66,20 +57,22 @@ public class Home {
 	@Autowired
 	MissionRepository missionRepository;
 
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public String hello(@RequestParam(value = "name", required = false, defaultValue = "sousbody") String name,
+			Model model) {
 
-	@RequestMapping(value="/home",method = RequestMethod.GET)
-	public String hello(@RequestParam(value="name", required=false, defaultValue="sousbody") String name, Model model) {
-		
-		
 		Client client = Client.create(new DefaultClientConfig());
 		this.service = client.resource("http://adminieea.fil.univ-lille1.fr:8080/verlaine/rest/etudiant/11202572");
-	
-		//service.path("/etudiant");
-		StudentLDAP s=new StudentLDAP();
-		s=service.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE).get(StudentLDAP.class);
+
+		// service.path("/etudiant");
+		StudentLDAP s = new StudentLDAP();
+		s = service.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE).get(StudentLDAP.class);
 		System.out.println(s.toString());
-		Student student=new Student();
-		model.addAttribute("student",student);
+		Student student = new Student();
+		model.addAttribute("firstName",s.getEtu_prenom());
+		model.addAttribute("lastName",s.getEtu_nom());
+		model.addAttribute("firstName",s.getEtu_prenom());
+		model.addAttribute("student", student);
 		missionRepository.save(new Mission("Secrétariat d'examens"));
 		missionRepository.save(new Mission("Animation culturelles scientifiques sportives et sociales"));
 		missionRepository.save(new Mission("Accueil des étudiants"));
@@ -97,16 +90,17 @@ public class Home {
 
 	@RequestMapping(value = "/result", method = RequestMethod.POST)
 	public String addEtudiant(@Valid Student student, BindingResult bindingResult, Model model, Errors e) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(e,
-				"lastName", "lastName.empty", "Last Name is required");
-		if(bindingResult.hasErrors()){
-			return "form_infos";
-		}
+		
+		/*ValidationUtils.rejectIfEmptyOrWhitespace(e, "lastName", "lastName.empty", "Last Name is required");
+		
+		if (bindingResult.hasErrors()) {
+			System.out.println("erreur");
+			return "forms_student/form_infos";
+		}*/
+		
 		System.out.println(student.toString());
 
-
 		studentService.saveStudentProfile(student);
-
 
 		System.out.println(student.getAddress().toString());
 		System.out.println();
@@ -117,12 +111,12 @@ public class Home {
 		model.addAttribute("street", student.getAddress().getStreet());
 		model.addAttribute("city", student.getAddress().getCity());
 		model.addAttribute("postalCode", student.getAddress().getPostalCode());
-		model.addAttribute("date",student.getDateVisa());
-		model.addAttribute("startDate",student.getAvailability().getStartDate());
-		model.addAttribute("endDate",student.getAvailability().getEndDate());
+		model.addAttribute("date", student.getDateVisa());
+		model.addAttribute("startDate", student.getAvailability().getStartDate());
+		model.addAttribute("endDate", student.getAvailability().getEndDate());
 		System.out.println(student.getAvailability().getStartTimeMonday());
-		model.addAttribute("startTimeMonday",student.getAvailability().getStartTimeMonday());
-		model.addAttribute("endTimeMonday",student.getAvailability().getEndTimeMonday());
+		model.addAttribute("startTimeMonday", student.getAvailability().getStartTimeMonday());
+		model.addAttribute("endTimeMonday", student.getAvailability().getEndTimeMonday());
 		System.out.println(student.getDateVisa());
 
 		return "result";
@@ -144,25 +138,21 @@ public class Home {
 		model.addAttribute("lastName", student.getLastName());
 		model.addAttribute("firstName", student.getFirstName());
 		model.addAttribute("motivations", student.getMotivation());
-		repositoryStudent.save(new Student(student.getFirstName(), student.getLastName(), student.getPhone(), student.getEmail(), student.getNationality(),student.getMotivation(),null));
+		repositoryStudent.save(new Student(student.getFirstName(), student.getLastName(), student.getPhone(),
+				student.getEmail(), student.getNationality(), student.getMotivation(), null));
 		return "resultCedric";
 	}
 
+	/*
+	 * @InitBinder private void dateBinder(WebDataBinder binder) { //The date
+	 * format to parse or output your dates SimpleDateFormat dateFormat = new
+	 * SimpleDateFormat("dd/MM/yyyy"); //Create a new CustomDateEditor
+	 * CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
+	 * //Register it as custom editor for the Date type
+	 * binder.registerCustomEditor(Date.class, editor); }
+	 */
 
-
-	@InitBinder
-	private void dateBinder(WebDataBinder binder) {
-		//The date format to parse or output your dates
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		//Create a new CustomDateEditor
-		CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
-		//Register it as custom editor for the Date type
-		binder.registerCustomEditor(Date.class, editor);
-	}
-
-
-
-	// CV 
+	// CV
 	private final StorageService storageService;
 
 	@Autowired
@@ -173,13 +163,12 @@ public class Home {
 	@GetMapping("/")
 	public String listUploadedFiles(Model model) throws IOException {
 
-		model.addAttribute("files", storageService
-				.loadAll()
-				.map(path ->
-				MvcUriComponentsBuilder
-				.fromMethodName(FileUploadController.class, "serveFile", path.getFileName().toString())
-				.build().toString())
-				.collect(Collectors.toList()));
+		model.addAttribute("files",
+				storageService.loadAll()
+						.map(path -> MvcUriComponentsBuilder
+								.fromMethodName(FileUploadController.class, "serveFile", path.getFileName().toString())
+								.build().toString())
+						.collect(Collectors.toList()));
 
 		return "CVMaggle";
 	}
@@ -189,15 +178,13 @@ public class Home {
 	public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
 
 		Resource file = storageService.loadAsResource(filename);
-		return ResponseEntity
-				.ok()
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+file.getFilename()+"\"")
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
 				.body(file);
 	}
 
 	@PostMapping("/CV")
-	public String handleFileUpload(@RequestParam("file") MultipartFile file,
-			RedirectAttributes redirectAttributes) {
+	public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 
 		storageService.store(file);
 		redirectAttributes.addFlashAttribute("message",

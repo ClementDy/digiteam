@@ -23,7 +23,7 @@ public class Student {
 	private String nationality;
 	private String motivation;
 	private String visa;
-	@DateTimeFormat
+	@DateTimeFormat (pattern="dd/MM/yyyy")
 	private Date dateVisa = new Date();
 	
 	@OneToOne(mappedBy="student", cascade=CascadeType.ALL)
