@@ -29,6 +29,26 @@ public class Availability {
 	private Date startTimeMonday;
 	@DateTimeFormat(pattern = "HH:mm")
 	private Date endTimeMonday;
+	
+	@DateTimeFormat(pattern = "HH:mm")
+	private Date startTimeTuesday;
+	@DateTimeFormat(pattern = "HH:mm")
+	private Date endTimeTuesday;
+	
+	@DateTimeFormat(pattern = "HH:mm")
+	private Date startTimeWednesday;
+	@DateTimeFormat(pattern = "HH:mm")
+	private Date endTimeWednesday;
+	
+	@DateTimeFormat(pattern = "HH:mm")
+	private Date startTimeThursday;
+	@DateTimeFormat(pattern = "HH:mm")
+	private Date endTimeThursday;
+	
+	@DateTimeFormat(pattern = "HH:mm")
+	private Date startTimeFriday;
+	@DateTimeFormat(pattern = "HH:mm")
+	private Date endTimeFriday;
 
 	public Availability() {
 
@@ -54,25 +74,6 @@ public class Availability {
 		this.student = student;
 	}
 
-	public int getStartTimeTuesday() {
-		return startTimeTuesday;
-	}
-
-	public void setStartTimeTuesday(int startTimeTuesday) {
-		this.startTimeTuesday = startTimeTuesday;
-	}
-
-	private int startTimeTuesday;
-	private int endTimeTuesday;
-
-	public int getEndTimeTuesday() {
-		return endTimeTuesday;
-	}
-
-	public void setEndTimeTuesday(int endTimeTuesday) {
-		this.endTimeTuesday = endTimeTuesday;
-	}
-
 	
 	public Date getStartTimeMonday() {
 		return startTimeMonday;
@@ -88,6 +89,73 @@ public class Availability {
 
 	public void setEndTimeMonday(Date endTimeMonday) {
 		this.endTimeMonday = endTimeMonday;
+	}
+
+	
+	
+	
+	public Date getStartTimeTuesday() {
+		return startTimeTuesday;
+	}
+
+	public void setStartTimeTuesday(Date startTimeTuesday) {
+		this.startTimeTuesday = startTimeTuesday;
+	}
+
+	public Date getEndTimeTuesday() {
+		return endTimeTuesday;
+	}
+
+	public void setEndTimeTuesday(Date endTimeTuesday) {
+		this.endTimeTuesday = endTimeTuesday;
+	}
+
+	public Date getStartTimeWednesday() {
+		return startTimeWednesday;
+	}
+
+	public void setStartTimeWednesday(Date startTimeWednesday) {
+		this.startTimeWednesday = startTimeWednesday;
+	}
+
+	public Date getEndTimeWednesday() {
+		return endTimeWednesday;
+	}
+
+	public void setEndTimeWednesday(Date endTimeWednesday) {
+		this.endTimeWednesday = endTimeWednesday;
+	}
+
+	public Date getStartTimeThursday() {
+		return startTimeThursday;
+	}
+
+	public void setStartTimeThursday(Date startTimeThursday) {
+		this.startTimeThursday = startTimeThursday;
+	}
+
+	public Date getEndTimeThursday() {
+		return endTimeThursday;
+	}
+
+	public void setEndTimeThursday(Date endTimeThursday) {
+		this.endTimeThursday = endTimeThursday;
+	}
+
+	public Date getStartTimeFriday() {
+		return startTimeFriday;
+	}
+
+	public void setStartTimeFriday(Date startTimeFriday) {
+		this.startTimeFriday = startTimeFriday;
+	}
+
+	public Date getEndTimeFriday() {
+		return endTimeFriday;
+	}
+
+	public void setEndTimeFriday(Date endTimeFriday) {
+		this.endTimeFriday = endTimeFriday;
 	}
 
 	public java.util.Date getStartDate() {
@@ -108,6 +176,14 @@ public class Availability {
 
 	@Override
 	public String toString() {
-		return "Availability [id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + "]";
+		return "Availability [id=" + id + ", student=" + student + ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", startTimeMonday=" + startTimeMonday + ", endTimeMonday=" + endTimeMonday + ", startTimeTuesday="
+				+ startTimeTuesday + ", endTimeTuesday=" + endTimeTuesday + ", startTimeWednesday=" + startTimeWednesday
+				+ ", endTimeWednesday=" + endTimeWednesday + ", startTimeThursday=" + startTimeThursday
+				+ ", endTimeThursday=" + endTimeThursday + ", startTimeFriday=" + startTimeFriday + ", endTimeFriday="
+				+ endTimeFriday + "]";
 	}
+
+
+	
 }

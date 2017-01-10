@@ -57,6 +57,7 @@ public class Home {
 	@Autowired
 	MissionRepository missionRepository;
 
+	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String hello(@RequestParam(value = "name", required = false, defaultValue = "sousbody") String name,
 			Model model) {
@@ -64,7 +65,6 @@ public class Home {
 		Client client = Client.create(new DefaultClientConfig());
 		this.service = client.resource("http://adminieea.fil.univ-lille1.fr:8080/verlaine/rest/etudiant/11202572");
 
-		// service.path("/etudiant");
 		StudentLDAP s = new StudentLDAP();
 		s = service.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE).get(StudentLDAP.class);
 		System.out.println(s.toString());
@@ -73,6 +73,10 @@ public class Home {
 		model.addAttribute("lastName",s.getEtu_nom());
 		model.addAttribute("email",s.getEtu_email());
 		model.addAttribute("student", student);
+		student.setFirstName(s.getEtu_prenom());
+		student.setLastName(s.getEtu_nom());
+		student.setNationality(s.getEtu_libnationalite());
+		student.setEmail(s.getEtu_email());
 		missionRepository.save(new Mission("Secrétariat d'examens"));
 		missionRepository.save(new Mission("Animation culturelles scientifiques sportives et sociales"));
 		missionRepository.save(new Mission("Accueil des étudiants"));

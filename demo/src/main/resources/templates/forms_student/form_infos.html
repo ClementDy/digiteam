@@ -15,7 +15,7 @@
 
 			<tr>
 				<td><label> Nom : </label></td>
-				<td th:text="${lastName}" th:field="${student.lastName}" id="lastName" /></td>
+				<td th:text="*{lastName}" th:field="${student.lastName}" id="lastName" /></td>
 				<td><label> Pr&eacute;nom : </label></td>
 				<td th:text="${firstName}" th:field="${student.firstName}" id="firstName" /></td>
 			</tr>
