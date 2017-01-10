@@ -70,7 +70,6 @@ public class Home {
 		System.out.println(s.toString());
 		Student student = new Student();
 		model.addAttribute("firstName",s.getEtu_prenom());
-		System.out.println("Bonjour Clement Dilly");
 		model.addAttribute("lastName",s.getEtu_nom());
 		model.addAttribute("firstName",s.getEtu_prenom());
 		model.addAttribute("student", student);
