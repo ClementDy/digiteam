@@ -49,7 +49,7 @@ public class Home {
 
 	WebResource service;
 
-	WebResource serviceFormation;
+	//WebResource serviceFormation;
 	
 
 	@Autowired
@@ -66,29 +66,29 @@ public class Home {
 	public String hello(@RequestParam(value = "name", required = false, defaultValue = "sousbody") String name,
 			Model model) {
 
-		Client client = Client.create(new DefaultClientConfig());
+	/*	Client client = Client.create(new DefaultClientConfig());
 		this.service = client.resource("http://adminieea.fil.univ-lille1.fr:8080/verlaine/rest/etudiant/11202572");
 
 		StudentLDAP s = new StudentLDAP();
 		s = service.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE).get(StudentLDAP.class);
 		System.out.println(s.toString());
-
+*/
 		Student student = new Student();
-		model.addAttribute("firstName",s.getEtu_prenom());
+	/*	model.addAttribute("firstName",s.getEtu_prenom());
 		model.addAttribute("lastName",s.getEtu_nom());
-		model.addAttribute("email",s.getEtu_email());
+		model.addAttribute("email",s.getEtu_email());*/
 		model.addAttribute("student", student);
-		student.setFirstName(s.getEtu_prenom());
+	/*	student.setFirstName(s.getEtu_prenom());
 		student.setLastName(s.getEtu_nom());
 		student.setNationality(s.getEtu_libnationalite());
-		student.setEmail(s.getEtu_email());
+		student.setEmail(s.getEtu_email());*/
 
 		
-		Client clientformation = Client.create(new DefaultClientConfig());
+/*		Client clientformation = Client.create(new DefaultClientConfig());
 		this.serviceFormation = clientformation.resource("http://adminieea.fil.univ-lille1.fr:8080/verlaine/rest/etudiant/2017/11202572");
 		TrainingLDAP formationLDAP = new TrainingLDAP();
 		formationLDAP=serviceFormation.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE).get(TrainingLDAP.class);
-		System.out.println(formationLDAP);
+		System.out.println(formationLDAP);*/
 		
 		
 		model.addAttribute("student",student);
