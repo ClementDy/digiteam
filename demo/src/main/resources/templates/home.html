@@ -89,6 +89,8 @@
 			</div>
 		</form>
 	</div>
+	<br>
+	<br>
 
 
 	<style>
@@ -154,15 +156,49 @@ a {
 }
 
 table {
-	text-align: center;
+	margin:auto;
+	text-align:left;
 }
 
 table #postalCode {
 	max-width: 30%;
 }
 
+.labelInfos{
+	border-bottom:solid 1px black;
+	margin-bottom:20px;
+	font-size : medium;
+	margin-top : 20px;
+	text-align:center;
+	
+}
+
+label {
+	margin-top:10px;
+	margin-left:10px;
+	margin-right:10px;
+}
+
+
 table #phone {
 	max-width: 45%
+}
+
+.divExpiryDateVISA{
+
+display:inherit;
+}
+
+#address, #complement{
+	min-width:250px;
+}
+
+#city{
+	max-width:150px;
+}
+
+#postalCode{
+	min-width:80px;
 }
 
 table #email {
@@ -194,6 +230,16 @@ table #email {
 .availabilityTab{
 	margin:auto;
 }
+
+#phone{
+	min-width: 150px;
+}
+
+
+.availabilityTab tr{
+	text-align:center;
+}
+
 
 @-moz-document url-prefix()
 {

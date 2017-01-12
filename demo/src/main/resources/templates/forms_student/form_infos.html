@@ -11,8 +11,14 @@
 		<h2>Vos informations personnelles</h2>
 		<br>
 
+
+		<h4 class="labelInfos">Vos informations :</h4>
+		
 		<table>
 
+			<tr>
+				
+			</tr>
 			<tr>
 				<td><label> Nom : </label></td>
 				<td th:text="*{lastName}" th:field="${student.lastName}" id="lastName" /></td>
@@ -26,11 +32,20 @@
 				<td><input class="form-control input-sm"
 					th:field="${student.phone}" type="text" id="phone" /></td>
 			</tr>
-
+		</table>
+		
+		
+		<h4 class="labelInfos">Adresse : </h4>
+		
+		<table>
 			<tr>
+				
 				<td><label> Rue : </label></td>
 				<td><input class="form-control input-sm"
 					th:field="${student.address.street}" type="text" id="street" /></td>
+			</tr>
+			
+			<tr>
 				<td><label> Complement : </label></td>
 				<td><input class="form-control input-sm"
 					th:field="${student.address.complement}" type="text"
@@ -58,12 +73,13 @@
 				<td><label class="control-label" for="radios">Titre de
 						séjour : </label></td>
 				<td><label>Oui</label><input type="radio" name="radios"
-					id="validVISA" value="validVISA" onClick="test()" checked="checked"></td>
-				<td><label>Non</label> <input type="radio" name="radios"
+					id="validVISA" value="validVISA" onClick="test()" checked="checked">
+				<label>Non</label> <input type="radio" name="radios"
 					id="InvalidVISA" onClick="test()" value="InvalidVISA"
 					checked="checked"></td>
-				<td id="divExpiryDateVISA"><label> Date de
-						validit&eacute;e : </label><input th:type="date"
+				<td style="display:none" class="divExpiryDateVISA"><label> Date de
+						validit&eacute;e : </label></td>
+				<td style="display:none" class="divExpiryDateVISA"><input th:type="date"
 					th:field="${student.dateVisa}" /></td>
 			</tr>
 
@@ -96,16 +112,21 @@
 			</tr>-->
 
 		</table>
-
+	
 
 
 		<script>
 			function test() {
+				var x = document.getElementsByClassName("divExpiryDateVISA");
+			  
 				if (eval(document.getElementById("validVISA").checked == true)) {
-					document.getElementById('divExpiryDateVISA').style.display = 'block';
+					  x[0].style.display = "block";
+					  x[1].style.display = "block";
+					
 				}
 				if (eval(document.getElementById("InvalidVISA").checked == true)) {
-					document.getElementById('divExpiryDateVISA').style.display = 'none';
+					x[0].style.display = "none";
+					x[1].style.display = "none";
 				}
 			}
 		</script>

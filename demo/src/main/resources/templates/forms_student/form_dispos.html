@@ -13,20 +13,20 @@
 		<h2>Disponibilit&eacute;s</h2>
 		<br>
 
-		<div class="row">
-			<div class="form-inline">
-				<div class="form-inline">
-					<label> Du : </label> <input th:type="date" id="startDate"
-						th:field="${student.availability.startDate}" />
-				</div>
-			</div>
-			<div>
-				<div class="form-inline">
-					<label> au : </label><input th:field="${student.availability.endDate}" th:type="date"
-						id="endDate" />
-				</div>
-			</div>
-		</div>
+		<table>
+			<tr>
+				<td><label> Du : </label></td>
+				<td><input th:type="date" id="startDate"
+						th:field="${student.availability.startDate}" /></td>
+				<td><label> au : </label></td>
+				<td><input th:field="${student.availability.endDate}" th:type="date"
+						id="endDate" /></td>
+			
+			</tr>
+		
+		</table>
+					 
+			
 
 		<br>
 		<table class="availabilityTab">
@@ -60,6 +60,8 @@
 				</td>
 			</tr>
 		</table>
+		<br>
+		<br>
 		<div class="indications">
 			<p>
 				Veuillez entrez les créneaux entre lesquels vous êtes disponible.<br>
