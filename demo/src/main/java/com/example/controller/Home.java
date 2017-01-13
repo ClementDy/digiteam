@@ -56,8 +56,8 @@ public class Home {
 	StudentService studentService;
 	@Autowired
 	StudentRepository repositoryStudent;
-	@Autowired
-	MiscellaneousRepository miscrepository;
+	/*@Autowired
+	MiscellaneousRepository miscrepository;*/
 	@Autowired
 	MissionRepository missionRepository;
 
@@ -139,6 +139,8 @@ public class Home {
 		model.addAttribute("date", student.getDateVisa());
 		model.addAttribute("startDate", student.getAvailability().getStartDate());
 		model.addAttribute("endDate", student.getAvailability().getEndDate());
+		//model.addAttribute("formation", student.getTraining());
+		System.out.println(student.getTraining().getName());
 		System.out.println(student.getAvailability().getStartTimeMonday());
 		model.addAttribute("startTimeMonday", student.getAvailability().getStartTimeMonday());
 		model.addAttribute("endTimeMonday", student.getAvailability().getEndTimeMonday());
@@ -146,11 +148,11 @@ public class Home {
 
 		
 	//CCCCCCCVVVVVVVVVVVVvvv
-		
+		if(!file.isEmpty()){
 		storageService.store(file);
 		redirectAttributes.addFlashAttribute("message",
 				"You successfully uploaded " + file.getOriginalFilename() + "!");
-
+		}
 		
 		return "result";
 	}

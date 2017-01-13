@@ -1,9 +1,12 @@
 package com.example.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Training {
@@ -15,6 +18,11 @@ public class Training {
 	private String date;
 	private String place;
 	private String name; 
+	
+	@OneToOne(cascade = CascadeType.PERSIST)
+	private Student student;
+	
+	
 	public Training(){
 		
 	}
@@ -48,6 +56,14 @@ public class Training {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 	
 	

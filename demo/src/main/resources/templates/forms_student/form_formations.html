@@ -20,14 +20,14 @@
 						<tr>
 							<th>Ann&eacute;e</th>
 							<th>Nom de la formation</th>
-							<th>Lieu</th>
+							<!--  <th>Lieu</th>-->
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td >2016/2017</td>
-							<td><input type="text" class="form-control"  name="nomformact" ></td>
-							<td> <input type="text" class="form-control"  name="lieuformact" ></td>
+							<td><input type="text" class="form-control"  name="nomformact" th:field="${student.training.name}"></td>
+							
 
 						</tr>
 					</tbody>
@@ -38,7 +38,8 @@
 
 
 
-	<h3>Formations précédentes</h3>
+	<!-- 
+	 <h3>Formations précédentes</h3>
 	<div class="table-responsive">
 		<table class="table table-striped table-bordered table-hover">
 			<thead>
@@ -83,10 +84,10 @@
 		</table>
 	</div>
 	</div>
-
+-->
 
 		
-	
+	</div>
 
 	</body>
 	</html>

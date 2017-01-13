@@ -1,12 +1,15 @@
 package com.example.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -38,6 +41,8 @@ public class Student {
 	@OneToOne(mappedBy="student", cascade=CascadeType.ALL)
 	private Wish wish;
 	
+	@OneToOne(mappedBy="student",cascade = CascadeType.ALL)
+	Training training = new Training();
 	
 	public Student() {
 		this.address = new Address(this);
@@ -163,6 +168,16 @@ public class Student {
 		this.dateVisa = dateVisa;
 	}
 
+
+	
+
+	public Training getTraining() {
+		return training;
+	}
+
+	public void setTraining(Training training) {
+		this.training = training;
+	}
 
 	@Override
 	public String toString() {
