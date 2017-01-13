@@ -1,0 +1,13 @@
+@CHARSET "ISO-8859-1";
+
+.flex-center {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 250px;
+}
+
+.flex-center p {
+	margin: 0;
+	padding: 20px;
+}

@@ -55,91 +55,84 @@ public class Home {
 	WebResource service;
 
 	WebResource serviceFormation;
-	
+
 	StudentLDAP s;
 
 	@Autowired
 	StudentService studentService;
 	@Autowired
 	StudentRepository repositoryStudent;
-	/*@Autowired
-	MiscellaneousRepository miscrepository;*/
+	/*
+	 * @Autowired MiscellaneousRepository miscrepository;
+	 */
 	@Autowired
 	MissionRepository missionRepository;
 
-	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String hello(@RequestParam(value = "name", required = false, defaultValue = "sousbody") String name,
 			Model model) {
 
-	Client client = Client.create(new DefaultClientConfig());
+		Client client = Client.create(new DefaultClientConfig());
 		this.service = client.resource("http://adminieea.fil.univ-lille1.fr:8080/verlaine/rest/etudiant/11202572");
 
 		s = new StudentLDAP();
 		s = service.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE).get(StudentLDAP.class);
 		System.out.println(s.toString());
-		
-		
+
 		Client clientformation = Client.create(new DefaultClientConfig());
-		this.serviceFormation = clientformation.resource("http://adminieea.fil.univ-lille1.fr:8080/verlaine/rest/etudiant/2017/11202572");
+		this.serviceFormation = clientformation
+				.resource("http://adminieea.fil.univ-lille1.fr:8080/verlaine/rest/etudiant/2017/11202572");
 		TrainingLDAP formationLDAP = new TrainingLDAP();
-		formationLDAP=serviceFormation.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE).get(TrainingLDAP.class);
-		
-		
-		
+		formationLDAP = serviceFormation.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE)
+				.get(TrainingLDAP.class);
+
 		Student student = new Student();
-		model.addAttribute("firstName",s.getEtu_prenom());
-		model.addAttribute("lastName",s.getEtu_nom());
-		model.addAttribute("email",s.getEtu_email());
+		model.addAttribute("firstName", s.getEtu_prenom());
+		model.addAttribute("lastName", s.getEtu_nom());
+		model.addAttribute("email", s.getEtu_email());
 		model.addAttribute("student", student);
-		model.addAttribute("nationality",s.getEtu_libnationalite());
+		model.addAttribute("nationality", s.getEtu_libnationalite());
 		model.addAttribute("training", formationLDAP.getIns_LIBPARCOURS());
-		
 
-		
-		
 		System.out.println(formationLDAP);
-		
-		
-		model.addAttribute("student",student);
 
-		missionRepository.save(new Mission("Secrétariat d'examens"));
-		missionRepository.save(new Mission("Animation culturelles scientifiques sportives et sociales"));
+		model.addAttribute("student", student);
+
 		missionRepository.save(new Mission("Accueil des étudiants"));
-		missionRepository.save(new Mission("Assistance et accompagnement des étudiants handicapés"));
-		missionRepository.save(new Mission("Soutien informatique et aide à l'utilisation des nouvelles technologies"));
-		missionRepository.save(new Mission("Promotion de l'offre de formation"));
-		missionRepository.save(new Mission("Tutorat"));
-		missionRepository.save(new Mission("Service d'appui aux personnels de bibliothèque"));
 		missionRepository.save(new Mission("Aide à l'insertion professionelle"));
+		missionRepository.save(new Mission("Animation culturelles scientifiques sportives et sociales"));
+		missionRepository.save(new Mission("Assistance et accompagnement des étudiants handicapés"));
 		missionRepository.save(new Mission("Enquêtes"));
+		missionRepository.save(new Mission("Promotion de l'offre de formation"));
+		missionRepository.save(new Mission("Secrétariat d'examens"));
+		missionRepository.save(new Mission("Service d'appui aux personnels de bibliothèque"));
+		missionRepository.save(new Mission("Soutien informatique et aide à l'utilisation des nouvelles technologies"));
+		missionRepository.save(new Mission("Tutorat"));
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
-		
-		
-	
-		
-		
+
 		return "home";
 	}
 
 	@RequestMapping(value = "/result", method = RequestMethod.POST)
-	public String addEtudiant(@Valid Student student,@RequestParam("file") MultipartFile file, BindingResult bindingResult,RedirectAttributes redirectAttributes, Model model, Errors e) {
-		
-		/*ValidationUtils.rejectIfEmptyOrWhitespace(e, "lastName", "lastName.empty", "Last Name is required");
-		
-		if (bindingResult.hasErrors()) {
-			System.out.println("erreur");
-			return "forms_student/form_infos";
-		}*/
-		
+	public String addEtudiant(@Valid Student student, @RequestParam("file") MultipartFile file,
+			BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model, Errors e) {
+
+		/*
+		 * ValidationUtils.rejectIfEmptyOrWhitespace(e, "lastName",
+		 * "lastName.empty", "Last Name is required");
+		 * 
+		 * if (bindingResult.hasErrors()) { System.out.println("erreur"); return
+		 * "forms_student/form_infos"; }
+		 */
+
 		System.out.println(student.toString());
-		
+
 		student.setFirstName(s.getEtu_prenom());
 		student.setLastName(s.getEtu_nom());
 		student.setNationality(s.getEtu_libnationalite());
 		student.setEmail(s.getEtu_email());
-		
+
 		studentService.saveStudentProfile(student);
 
 		System.out.println(student.getAddress().toString());
@@ -161,17 +154,15 @@ public class Home {
 		model.addAttribute("endTimeMonday", student.getAvailability().getEndTimeMonday());
 		System.out.println(student.getDateVisa());
 
-		
-		//CCCCCCCVVVVVVVVVVVVvvv
-		if(!file.isEmpty()){
-		storageService.store(file);
-		redirectAttributes.addFlashAttribute("message",
-				"You successfully uploaded " + file.getOriginalFilename() + "!");
+		// CCCCCCCVVVVVVVVVVVVvvv
+		if (!file.isEmpty()) {
+			storageService.store(file);
+			redirectAttributes.addFlashAttribute("message",
+					"You successfully uploaded " + file.getOriginalFilename() + "!");
 		}
-		
+
 		return "home";
 	}
-
 
 	@RequestMapping(value = "/resultCedric", method = RequestMethod.POST)
 	public String addEtudiant(Student student, Model model) {
@@ -183,20 +174,19 @@ public class Home {
 		return "resultCedric";
 	}
 
-	
-	/* @InitBinder 
-	 private void dateBinder(WebDataBinder binder) { 
-	 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); //Create a new CustomDateEditor
-	 CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
-	 binder.registerCustomEditor(Date.class, editor); }
-	
-	
-	@InitBinder
-	public void initBinder(final WebDataBinder binder){
-	  final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); 
-	  binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-	}
-*/
+	/*
+	 * @InitBinder private void dateBinder(WebDataBinder binder) {
+	 * SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	 * //Create a new CustomDateEditor CustomDateEditor editor = new
+	 * CustomDateEditor(dateFormat, true);
+	 * binder.registerCustomEditor(Date.class, editor); }
+	 * 
+	 * 
+	 * @InitBinder public void initBinder(final WebDataBinder binder){ final
+	 * SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	 * binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat,
+	 * true)); }
+	 */
 	// CV
 	private final StorageService storageService;
 
