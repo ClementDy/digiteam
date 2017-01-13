@@ -8,20 +8,34 @@
 	onload="countChars(document.getElementById('motivations').value)">
 	<div th:fragment="content">
 		<h2>Vos souhaits</h2>
-
-		<br> <label> Types de missons souhaités : </label> 
-		<select class="form-control" th:field="${student.wish.missions}" multiple="multiple">
+		<div class="row">
+		<div class="col-md-4">
+		<br> <label> Missions : </label> 
+		<select size="10" class="form-control" id="allMissions">
 			<option th:each="mission : ${listMission}" th:value="${{mission.id}}"
-				th:text="${mission.title}" th:field="${student.wish.missions}">
+				th:text="${mission.title}">
 			</option>		
 		</select> 
-		
+		</div>
+		<div class="col-md-4">
+		<button type="button" class="btn btn-success" onclick="addMission()"">Ajouter</button>
+		<br>
+		<button type="button" class="btn btn-danger" onclick="removeMission()">Supprimer</button>
+		</div>
+		<div class="col-md-4">
+			<br> <label> Missions selectionnées : </label> 
+		<select size="10" class="form-control" th:field="${student.wish.missions}" multiple="multiple">
+		</select> 
+		</div>
+		</div>
+		<div class="row">
 		<label for="autre"> Autre mission souhaitée
 			(précisez) : </label>
 		<textarea class="form-control" id="autre" th:value="${student.wish.otherWish}"
 			th:field="${student.wish.otherWish}" maxlength="150" rows="5"
 			style="resize: none;"></textarea>
-		
+		</div>
+		<div class="row">
 		<h2>Vos motivations</h2>
 
 		<div>
@@ -38,7 +52,7 @@
 				</i>
 			</h5>
 		</div>
-
+		</div>
 		<script>
 			function countChars(val) {
 				document.getElementById("charsCount").innerHTML = val.length;
@@ -51,6 +65,25 @@
 					checkCount.innerHTML = "&#x2718;";
 					checkCount.style.color = "red";
 				}
+			}
+			
+			function addMission() {
+				selected = document.getElementById("wish.missions");
+				if(selected.length < 4){
+					selectMission = document.getElementById("allMissions");
+					
+					var option = selectMission.options[selectMission.selectedIndex];
+					
+					selected.add(option);
+				}
+			}
+			function removeMission() {
+					selected = document.getElementById("wish.missions");
+					selectMission = document.getElementById("allMissions");
+					
+					var option = selected.options[selected.selectedIndex];
+					
+					selectMission.add(option);
 			}
 		</script>
 	</div>
