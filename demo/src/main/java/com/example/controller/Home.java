@@ -162,7 +162,7 @@ public class Home {
 		System.out.println(student.getDateVisa());
 
 		
-	//CCCCCCCVVVVVVVVVVVVvvv
+		//CCCCCCCVVVVVVVVVVVVvvv
 		if(!file.isEmpty()){
 		storageService.store(file);
 		redirectAttributes.addFlashAttribute("message",
@@ -172,16 +172,6 @@ public class Home {
 		return "result";
 	}
 
-	/*@RequestMapping(value = "/resultAlex", method = RequestMethod.POST)
-	public String addEtudian(Student student, Model model) {
-		model.addAttribute("nameAssociation", student.getMisc().getNameAssociation());
-		model.addAttribute("itKnowledge", student.getMisc().getNameAssociation());
-		model.addAttribute("languages", student.getMisc().getLanguages());
-		model.addAttribute("otherFormations", student.getMisc().getOtherFormations());
-
-		miscrepository.save(student.getMisc());
-		return "resultAlex";
-	}*/
 
 	@RequestMapping(value = "/resultCedric", method = RequestMethod.POST)
 	public String addEtudiant(Student student, Model model) {
@@ -193,8 +183,20 @@ public class Home {
 		return "resultCedric";
 	}
 
-
-
+	
+	/* @InitBinder 
+	 private void dateBinder(WebDataBinder binder) { 
+	 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); //Create a new CustomDateEditor
+	 CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
+	 binder.registerCustomEditor(Date.class, editor); }
+	
+	
+	@InitBinder
+	public void initBinder(final WebDataBinder binder){
+	  final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); 
+	  binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+	}
+*/
 	// CV
 	private final StorageService storageService;
 

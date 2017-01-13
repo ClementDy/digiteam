@@ -16,10 +16,10 @@
 		<table>
 			<tr>
 				<td><label> Du : </label></td>
-				<td><input th:type="date" id="startDate"
+				<td><input th:type="text" id="startDate"
 						th:field="${student.availability.startDate}" /></td>
 				<td><label> au : </label></td>
-				<td><input th:field="${student.availability.endDate}" th:type="date"
+				<td><input th:field="${student.availability.endDate}" th:type="text"
 						id="endDate" /></td>
 			
 			</tr>
@@ -40,23 +40,23 @@
 			</tr>
 			<tr>
 				<td class="dayAvailability">
-					<input type="time" th:field="${student.availability.startTimeMonday}" /> à 
-					<input type="time" th:field="${student.availability.endTimeMonday}" />
+					<input type="text" th:field="${student.availability.startTimeMonday}" /> à 
+					<input type="text" th:field="${student.availability.endTimeMonday}" />
 				</td>
 				<td class="dayAvailability">
-					<input type="time"  th:field="${student.availability.startTimeTuesday}" /> à 
-					<input type="time"  th:field="${student.availability.endTimeTuesday}" />
+					<input type="text"  th:field="${student.availability.startTimeTuesday}" /> à 
+					<input type="text"  th:field="${student.availability.endTimeTuesday}" />
 				</td>
 				<td class="dayAvailability">
-					<input type="time" th:field="${student.availability.startTimeWednesday}" /> à 
-					<input type="time" th:field="${student.availability.endTimeWednesday}" /></td>
+					<input type="text" th:field="${student.availability.startTimeWednesday}" /> à 
+					<input type="text" th:field="${student.availability.endTimeWednesday}" /></td>
 				<td class="dayAvailability">
-					<input type="time" th:field="${student.availability.startTimeThursday}" /> à 
-					<input type="time" th:field="${student.availability.endTimeThursday}" />
+					<input type="text" th:field="${student.availability.startTimeThursday}" /> à 
+					<input type="text" th:field="${student.availability.endTimeThursday}" />
 				</td>
 				<td class="dayAvailability">
-					<input type="time" th:field="${student.availability.startTimeFriday}" /> à 
-					<input type="time" th:field="${student.availability.endTimeFriday}" />
+					<input type="text" th:field="${student.availability.startTimeFriday}" /> à 
+					<input type="text" th:field="${student.availability.endTimeFriday}" />
 				</td>
 			</tr>
 		</table>
