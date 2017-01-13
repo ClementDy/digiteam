@@ -107,14 +107,14 @@ public class Home {
 		model.addAttribute("listMission", missions);
 		
 		
-		
+	
 		
 		
 		return "home";
 	}
 
 	@RequestMapping(value = "/result", method = RequestMethod.POST)
-	public String addEtudiant(@Valid Student student, BindingResult bindingResult, Model model, Errors e) {
+	public String addEtudiant(@Valid Student student,@RequestParam("file") MultipartFile file, BindingResult bindingResult,RedirectAttributes redirectAttributes, Model model, Errors e) {
 		
 		/*ValidationUtils.rejectIfEmptyOrWhitespace(e, "lastName", "lastName.empty", "Last Name is required");
 		
@@ -144,6 +144,14 @@ public class Home {
 		model.addAttribute("endTimeMonday", student.getAvailability().getEndTimeMonday());
 		System.out.println(student.getDateVisa());
 
+		
+	//CCCCCCCVVVVVVVVVVVVvvv
+		
+		storageService.store(file);
+		redirectAttributes.addFlashAttribute("message",
+				"You successfully uploaded " + file.getOriginalFilename() + "!");
+
+		
 		return "result";
 	}
 
