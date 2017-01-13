@@ -1,11 +1,14 @@
 package com.example.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.io.Resource;
@@ -16,8 +19,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,8 +54,9 @@ public class Home {
 
 	WebResource service;
 
-	//WebResource serviceFormation;
+	WebResource serviceFormation;
 	
+	StudentLDAP s;
 
 	@Autowired
 	StudentService studentService;
@@ -66,29 +72,33 @@ public class Home {
 	public String hello(@RequestParam(value = "name", required = false, defaultValue = "sousbody") String name,
 			Model model) {
 
-	/*	Client client = Client.create(new DefaultClientConfig());
+	Client client = Client.create(new DefaultClientConfig());
 		this.service = client.resource("http://adminieea.fil.univ-lille1.fr:8080/verlaine/rest/etudiant/11202572");
 
-		StudentLDAP s = new StudentLDAP();
+		s = new StudentLDAP();
 		s = service.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE).get(StudentLDAP.class);
 		System.out.println(s.toString());
-*/
-		Student student = new Student();
-	/*	model.addAttribute("firstName",s.getEtu_prenom());
-		model.addAttribute("lastName",s.getEtu_nom());
-		model.addAttribute("email",s.getEtu_email());*/
-		model.addAttribute("student", student);
-	/*	student.setFirstName(s.getEtu_prenom());
-		student.setLastName(s.getEtu_nom());
-		student.setNationality(s.getEtu_libnationalite());
-		student.setEmail(s.getEtu_email());*/
-
 		
-/*		Client clientformation = Client.create(new DefaultClientConfig());
+		
+		Client clientformation = Client.create(new DefaultClientConfig());
 		this.serviceFormation = clientformation.resource("http://adminieea.fil.univ-lille1.fr:8080/verlaine/rest/etudiant/2017/11202572");
 		TrainingLDAP formationLDAP = new TrainingLDAP();
 		formationLDAP=serviceFormation.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE).get(TrainingLDAP.class);
-		System.out.println(formationLDAP);*/
+		
+		
+		
+		Student student = new Student();
+		model.addAttribute("firstName",s.getEtu_prenom());
+		model.addAttribute("lastName",s.getEtu_nom());
+		model.addAttribute("email",s.getEtu_email());
+		model.addAttribute("student", student);
+		model.addAttribute("nationality",s.getEtu_libnationalite());
+		model.addAttribute("training", formationLDAP.getIns_LIBPARCOURS());
+		
+
+		
+		
+		System.out.println(formationLDAP);
 		
 		
 		model.addAttribute("student",student);
@@ -124,7 +134,12 @@ public class Home {
 		}*/
 		
 		System.out.println(student.toString());
-
+		
+		student.setFirstName(s.getEtu_prenom());
+		student.setLastName(s.getEtu_nom());
+		student.setNationality(s.getEtu_libnationalite());
+		student.setEmail(s.getEtu_email());
+		
 		studentService.saveStudentProfile(student);
 
 		System.out.println(student.getAddress().toString());
@@ -139,7 +154,7 @@ public class Home {
 		model.addAttribute("date", student.getDateVisa());
 		model.addAttribute("startDate", student.getAvailability().getStartDate());
 		model.addAttribute("endDate", student.getAvailability().getEndDate());
-		//model.addAttribute("formation", student.getTraining());
+		model.addAttribute("formation", student.getTraining().getName());
 		System.out.println(student.getTraining().getName());
 		System.out.println(student.getAvailability().getStartTimeMonday());
 		model.addAttribute("startTimeMonday", student.getAvailability().getStartTimeMonday());
@@ -178,14 +193,7 @@ public class Home {
 		return "resultCedric";
 	}
 
-	/*
-	 * @InitBinder private void dateBinder(WebDataBinder binder) { //The date
-	 * format to parse or output your dates SimpleDateFormat dateFormat = new
-	 * SimpleDateFormat("dd/MM/yyyy"); //Create a new CustomDateEditor
-	 * CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
-	 * //Register it as custom editor for the Date type
-	 * binder.registerCustomEditor(Date.class, editor); }
-	 */
+
 
 	// CV
 	private final StorageService storageService;

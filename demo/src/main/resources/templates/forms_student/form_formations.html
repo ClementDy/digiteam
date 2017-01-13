@@ -26,8 +26,8 @@
 					<tbody>
 						<tr>
 							<td >2016/2017</td>
-							<td><input type="text" class="form-control"  name="nomformact" th:field="${student.training.name}"></td>
-							
+							<!--  <td><input type="text" class="form-control"  name="nomformact" th:field="${student.training.name}"></td>-->
+							<td th:text="${training}" th:value="${student.training.name}"  /></td>
 
 						</tr>
 					</tbody>
