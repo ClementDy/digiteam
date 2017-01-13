@@ -12,7 +12,11 @@ public class StudentService {
 	@Autowired
 	StudentRepository studentRepository;
 	
-	public void saveStudentProfile(Student student){
-		studentRepository.save(student);
+	public Student saveStudentProfile(Student student){
+		return studentRepository.save(student);
+	}
+	
+	public Student getStudentByNip(long nip) {
+		return studentRepository.findByNip(nip);
 	}
 }

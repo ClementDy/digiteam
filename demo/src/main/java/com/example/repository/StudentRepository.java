@@ -9,5 +9,7 @@ import com.example.entity.Student;
 
 public interface StudentRepository extends CrudRepository<Student, Long> {
 
+    Student findByNip(long nip);
+    
     List<Student> findByLastName(String lastName);
 }
