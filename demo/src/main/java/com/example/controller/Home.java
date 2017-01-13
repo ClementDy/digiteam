@@ -169,7 +169,7 @@ public class Home {
 				"You successfully uploaded " + file.getOriginalFilename() + "!");
 		}
 		
-		return "result";
+		return "home";
 	}
 
 
