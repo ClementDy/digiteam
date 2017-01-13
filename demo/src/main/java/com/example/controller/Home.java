@@ -105,6 +105,11 @@ public class Home {
 		missionRepository.save(new Mission("Enquêtes"));
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
+		
+		
+		
+		
+		
 		return "home";
 	}
 
@@ -180,7 +185,7 @@ public class Home {
 		this.storageService = storageService;
 	}
 
-	@GetMapping("/")
+	@GetMapping("/lol")
 	public String listUploadedFiles(Model model) throws IOException {
 
 		model.addAttribute("files",
@@ -210,7 +215,7 @@ public class Home {
 		redirectAttributes.addFlashAttribute("message",
 				"You successfully uploaded " + file.getOriginalFilename() + "!");
 
-		return "redirect:/";
+		return "CVMaggle";
 	}
 
 	@ExceptionHandler(StorageFileNotFoundException.class)
