@@ -24,12 +24,12 @@
 					<br>
 					<p>
 						<button type="button" class="btn btn-danger"
-							onclick="removeMission()">Supprimer</button>
+							onclick="removeMission()">Retirer</button>
 					</p>
 				</div>
 			</div>
 			<div class="col-md-4">
-				<br> <label> Missions selectionnées : </label> <select
+				<br> <label> Missions choisis : (4 max)</label> <select
 					size="10" class="form-control" th:field="${student.wish.missions}"
 					multiple="multiple">
 				</select>
@@ -43,7 +43,7 @@
 				style="resize: none;"></textarea>
 		</div>
 		<div class="row">
-			<h2>Vos motivations</h2>
+			<label>Vos motivations </label>
 
 			<div>
 				<textarea class="form-control" id="motivations"
