@@ -8,11 +8,10 @@
 
 	<div th:fragment="content">
 
-		<h3 class="titreOnglet">Vos informations personnelles...</h3>
+
 		<br>
-
-
-		<h4 class="labelInfos">Vos informations :</h4>
+		<br>
+		<h4 class="titreFormulaire">Vos informations</h4>
 		
 		<table>
 
@@ -56,20 +55,12 @@
 			</tr>
 			
 			
-			<tr>
-
-				<td><label>Déposez votre CV : </label></td>
-				<td><input type="file" name="file" /></td>
-				<td th:each="file : ${files}"><a th:href="${file}"
-							th:text="${file}" /></td>
-				
-
-			</tr>
+			
 			
 		</table>
 		
 		
-		<h4 class="labelInfos">Votre adresse : </h4>
+		<h4 class="titreFormulaire">Votre adresse</h4>
 		
 		<table>
 			<tr>
@@ -99,9 +90,25 @@
 			
 
 			
-
+		
 			
 
+		</table>
+		
+		<h4 class="titreFormulaire">Votre curriculum vitae</h4>
+		
+		<table>
+		
+		<tr>
+
+				<td><label>Déposez votre CV : </label></td>
+				<td><input type="file" name="file" /></td>
+				<td th:each="file : ${files}"><a th:href="${file}"
+							th:text="${file}" /></td>
+				
+
+			</tr>
+		
 		</table>
 	
 		<br>
