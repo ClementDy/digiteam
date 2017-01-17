@@ -33,68 +33,55 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.StudentLDAP;
-import com.example.TrainingLDAP;
 import com.example.entity.Mission;
 import com.example.entity.Student;
-import com.example.repository.MiscellaneousRepository;
+import com.example.ldap.StudentLDAP;
+import com.example.ldap.StudentLDAPService;
+import com.example.ldap.TrainingLDAP;
+import com.example.ldap.TrainingLDAPService;
 import com.example.repository.MissionRepository;
 import com.example.repository.StudentRepository;
 import com.example.services.StudentService;
 import com.example.uploadFile.StorageFileNotFoundException;
 import com.example.uploadFile.StorageService;
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 @EnableAutoConfiguration
 @Controller
 @ComponentScan(basePackages = "com.example.services")
 public class Home {
 
-	WebResource service;
-
-	WebResource serviceFormation;
-
-	StudentLDAP s;
+	private StudentLDAP studentLDAP;
+	
+	@Autowired 
+	private StudentLDAPService studentLDAPService;
+	@Autowired
+	private TrainingLDAPService trainingLDAPService;
 
 	@Autowired
-	StudentService studentService;
+	private StudentService studentService;
+	
 	@Autowired
-	StudentRepository repositoryStudent;
-	/*
-	 * @Autowired MiscellaneousRepository miscrepository;
-	 */
+	private StudentRepository studentRepository;
 	@Autowired
-	MissionRepository missionRepository;
+	private MissionRepository missionRepository;
 
+	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String hello(@RequestParam(value = "name", required = false, defaultValue = "sousbody") String name,
-			Model model) {
+	public String hello(Model model) {
 
-		Client client = Client.create(new DefaultClientConfig());
-		this.service = client.resource("http://adminieea.fil.univ-lille1.fr:8080/verlaine/rest/etudiant/11202572");
-
-		s = new StudentLDAP();
-		s = service.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE).get(StudentLDAP.class);
-		System.out.println(s.toString());
-
-		Client clientformation = Client.create(new DefaultClientConfig());
-		this.serviceFormation = clientformation
-				.resource("http://adminieea.fil.univ-lille1.fr:8080/verlaine/rest/etudiant/2017/11202572");
-		TrainingLDAP formationLDAP = new TrainingLDAP();
-		formationLDAP = serviceFormation.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE)
-				.get(TrainingLDAP.class);
-
+		studentLDAP = studentLDAPService.getStudentLDAP(11202572);
+		System.out.println(studentLDAP);
+		
+		TrainingLDAP trainingLDAP = trainingLDAPService.getTrainingLDAP(2017, 11202572);
+		System.out.println(trainingLDAP);
+		
 		Student student = new Student();
-		model.addAttribute("firstName", s.getEtu_prenom());
-		model.addAttribute("lastName", s.getEtu_nom());
-		model.addAttribute("email", s.getEtu_email());
+		model.addAttribute("firstName", studentLDAP.getEtu_prenom());
+		model.addAttribute("lastName", studentLDAP.getEtu_nom());
+		model.addAttribute("email", studentLDAP.getEtu_email());
 		model.addAttribute("student", student);
-		model.addAttribute("nationality", s.getEtu_libnationalite());
-		model.addAttribute("training", formationLDAP.getIns_LIBPARCOURS());
-
-		System.out.println(formationLDAP);
+		model.addAttribute("nationality", studentLDAP.getEtu_libnationalite());
+		model.addAttribute("training", trainingLDAP.getIns_LIBPARCOURS());
 
 		model.addAttribute("student", student);
 
@@ -128,10 +115,10 @@ public class Home {
 
 		System.out.println(student.toString());
 
-		student.setFirstName(s.getEtu_prenom());
-		student.setLastName(s.getEtu_nom());
-		student.setNationality(s.getEtu_libnationalite());
-		student.setEmail(s.getEtu_email());
+		student.setFirstName(studentLDAP.getEtu_prenom());
+		student.setLastName(studentLDAP.getEtu_nom());
+		student.setNationality(studentLDAP.getEtu_libnationalite());
+		student.setEmail(studentLDAP.getEtu_email());
 
 		studentService.saveStudentProfile(student);
 
@@ -169,7 +156,7 @@ public class Home {
 		model.addAttribute("lastName", student.getLastName());
 		model.addAttribute("firstName", student.getFirstName());
 		model.addAttribute("motivations", student.getMotivation());
-		repositoryStudent.save(new Student(student.getFirstName(), student.getLastName(), student.getPhone(),
+		studentRepository.save(new Student(student.getFirstName(), student.getLastName(), student.getPhone(),
 				student.getEmail(), student.getNationality(), student.getMotivation(), null));
 		return "resultCedric";
 	}

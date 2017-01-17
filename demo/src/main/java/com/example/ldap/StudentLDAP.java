@@ -1,18 +1,18 @@
-package com.example;
+package com.example.ldap;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class StudentLDAP {
 
-	int etu_NIP;
-	int etu_civilite;
-	String etu_nom;
-	String etu_prenom;
-	String etu_maritale;
-	String etu_codenationalite;
-	String etu_libnationalite;
-	String etu_email;
+	private int etu_NIP;
+	private int etu_civilite;
+	private String etu_nom;
+	private String etu_prenom;
+	private String etu_marital;
+	private String etu_codenationalite;
+	private String etu_libnationalite;
+	private String etu_email;
 
 	public StudentLDAP(){
 		
@@ -33,16 +33,6 @@ public class StudentLDAP {
 	public void setEtu_civilite(int etu_civilite) {
 		this.etu_civilite = etu_civilite;
 	}
-	
-	
-
-	public String getEtu_libnationalite() {
-		return etu_libnationalite;
-	}
-
-	public void setEtu_libnationalite(String etu_libnationalite) {
-		this.etu_libnationalite = etu_libnationalite;
-	}
 
 	public String getEtu_nom() {
 		return etu_nom;
@@ -60,12 +50,12 @@ public class StudentLDAP {
 		this.etu_prenom = etu_prenom;
 	}
 
-	public String getEtu_maritale() {
-		return etu_maritale;
+	public String getEtu_marital() {
+		return etu_marital;
 	}
 
-	public void setEtu_maritale(String etu_maritale) {
-		this.etu_maritale = etu_maritale;
+	public void setEtu_marital(String etu_marital) {
+		this.etu_marital = etu_marital;
 	}
 
 	public String getEtu_codenationalite() {
@@ -74,6 +64,14 @@ public class StudentLDAP {
 
 	public void setEtu_codenationalite(String etu_codenationalite) {
 		this.etu_codenationalite = etu_codenationalite;
+	}
+
+	public String getEtu_libnationalite() {
+		return etu_libnationalite;
+	}
+
+	public void setEtu_libnationalite(String etu_libnationalite) {
+		this.etu_libnationalite = etu_libnationalite;
 	}
 
 	public String getEtu_email() {
@@ -87,10 +85,7 @@ public class StudentLDAP {
 	@Override
 	public String toString() {
 		return "StudentLDAP [etu_NIP=" + etu_NIP + ", etu_civilite=" + etu_civilite + ", etu_nom=" + etu_nom
-				+ ", etu_prenom=" + etu_prenom + ", etu_maritale=" + etu_maritale + ", etu_codenationalite="
+				+ ", etu_prenom=" + etu_prenom + ", etu_marital=" + etu_marital + ", etu_codenationalite="
 				+ etu_codenationalite + ", etu_email=" + etu_email + "]";
 	}
-
-	
-	
 }
