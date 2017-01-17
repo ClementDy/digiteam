@@ -23,6 +23,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -102,16 +103,13 @@ public class Home {
 	}
 
 	@RequestMapping(value = "/result", method = RequestMethod.POST)
-	public String addEtudiant(@Valid Student student, @RequestParam("file") MultipartFile file,
-			BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model, Errors e) {
+	public String addEtudiant(@Valid @ModelAttribute Student student,BindingResult bindingResult, @RequestParam("file") MultipartFile file,
+	RedirectAttributes redirectAttributes, Model model, Errors e) {
 
-		/*
-		 * ValidationUtils.rejectIfEmptyOrWhitespace(e, "lastName",
-		 * "lastName.empty", "Last Name is required");
-		 * 
-		 * if (bindingResult.hasErrors()) { System.out.println("erreur"); return
-		 * "forms_student/form_infos"; }
-		 */
+		if(bindingResult.hasErrors()){
+			return "home";
+		}
+ 
 
 		System.out.println(student.toString());
 

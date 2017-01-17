@@ -10,7 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.Valid;
+
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.sun.istack.NotNull;
 
 @Entity
 public class Student {
@@ -23,12 +28,16 @@ public class Student {
 	private int phone;
 	private String email;
 	private String nationality;
+	
 	private String motivation;
+	
 	private String visa;
+	
 	@DateTimeFormat (pattern="dd/MM/yyyy")
 	private Date dateVisa = new Date();
 	
 	@OneToOne(mappedBy="student", cascade=CascadeType.ALL)
+	@Valid
 	private Address address;
 
 	@OneToOne(mappedBy="student", cascade=CascadeType.ALL)
