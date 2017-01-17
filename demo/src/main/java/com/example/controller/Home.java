@@ -146,7 +146,7 @@ public class Home {
 					"You successfully uploaded " + file.getOriginalFilename() + "!");
 		}
 
-		return "home";
+		return "result";
 	}
 
 	@RequestMapping(value = "/resultCedric", method = RequestMethod.POST)
