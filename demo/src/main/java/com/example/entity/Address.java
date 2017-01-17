@@ -6,6 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.sun.istack.NotNull;
+
 @Entity
 public class Address {
 
@@ -16,9 +20,18 @@ public class Address {
 	@OneToOne
 	private Student student;
 	
+	@NotNull
+	@NotEmpty
 	private String street;
+	
+	@NotNull
+	@NotEmpty
 	private String complement;
+	
 	private int postalCode;
+	
+	@NotNull
+	@NotEmpty
 	private String city;
 
 

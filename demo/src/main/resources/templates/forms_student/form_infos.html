@@ -9,20 +9,27 @@
 	<div th:fragment="content">
 
 
+<<<<<<< HEAD
 		<br>
 		<br>
 		<h4 class="titreFormulaire">Vos informations</h4>
 		
+=======
+		<h4 class="labelInfos">Vos informations :</h4>
+
+>>>>>>> origin/master
 		<table>
 
 			<tr>
-				
+
 			</tr>
 			<tr>
 				<td><label> Nom : </label></td>
-				<td th:text="${lastName}" th:field="${student.lastName}" id="lastName" /></td>
+				<td th:text="${lastName}" th:field="${student.lastName}"
+					id="lastName" /></td>
 				<td><label> Pr&eacute;nom : </label></td>
-				<td th:text="${firstName}" th:field="${student.firstName}" id="firstName" /></td>
+				<td th:text="${firstName}" th:field="${student.firstName}"
+					id="firstName" /></td>
 			</tr>
 			<tr>
 				<td><label> Mail : </label></td>
@@ -31,28 +38,29 @@
 				<td><input class="form-control input-sm"
 					th:field="${student.phone}" type="text" id="phone" /></td>
 			</tr>
-			
-			
+
+
 			<tr>
-				<td><label class="control-label" for="selectbasic">Nationalité : </label></td>
+				<td><label class="control-label" for="selectbasic">Nationalité
+						: </label></td>
 				<td th:text="${nationality}" th:field="${student.nationality}"></td>
 				<td></td>
 				<td></td>
 			</tr>
-			
+
 			<tr>
 				<td><label class="control-label" for="radios">Titre de
 						séjour : </label></td>
 				<td><label>Oui</label><input type="radio" name="radios"
-					id="validVISA" value="validVISA" onClick="test()">
-				<label>Non</label> <input checked type="radio" name="radios"
-					id="InvalidVISA" onClick="test()" value="InvalidVISA"
-					></td>
-				<td style="display:none" class="divExpiryDateVISA"><label> Date de
-						validit&eacute;e : </label></td>
-				<td style="display:none" class="divExpiryDateVISA"><input th:type="text"
-					th:field="${student.dateVisa}" /></td>
+					id="validVISA" value="validVISA" onClick="test()"> <label>Non</label>
+					<input checked type="radio" name="radios" id="InvalidVISA"
+					onClick="test()" value="InvalidVISA"></td>
+				<td style="display: none" class="divExpiryDateVISA"><label>
+						Date de validit&eacute;e : </label></td>
+				<td style="display: none" class="divExpiryDateVISA"><input
+					th:type="text" th:field="${student.dateVisa}" /></td>
 			</tr>
+<<<<<<< HEAD
 			
 			
 			
@@ -62,14 +70,35 @@
 		
 		<h4 class="titreFormulaire">Votre adresse</h4>
 		
+=======
+
+
+			<tr>
+
+				<td><label>Déposez votre CV : </label></td>
+				<td><input type="file" name="file" /></td>
+				<td th:each="file : ${files}"><a th:href="${file}"
+					th:text="${file}" /></td>
+
+
+			</tr>
+
+		</table>
+
+
+		<h4 class="labelInfos">Votre adresse :</h4>
+
+>>>>>>> origin/master
 		<table>
 			<tr>
-				
+
 				<td><label> Rue : </label></td>
 				<td><input class="form-control input-sm"
-					th:field="${student.address.street}" type="text" id="street" /></td>
+					th:field="${student.address.street}" type="text" /></td>
+				<p th:errors="${student.address.street}"> </p>
+				
 			</tr>
-			
+
 			<tr>
 				<td><label> Complement : </label></td>
 				<td><input class="form-control input-sm"
@@ -87,8 +116,8 @@
 					id="postalCode" /></td>
 			</tr>
 
-			
 
+<<<<<<< HEAD
 			
 		
 			
@@ -113,15 +142,25 @@
 	
 		<br>
 		<br>
+=======
+
+
+
+
+
+		</table>
+
+		<br> <br>
+>>>>>>> origin/master
 
 		<script>
 			function test() {
 				var x = document.getElementsByClassName("divExpiryDateVISA");
-			  
+
 				if (eval(document.getElementById("validVISA").checked == true)) {
-					  x[0].style.display = "inline";
-					  x[1].style.display = "inline";
-					
+					x[0].style.display = "inline";
+					x[1].style.display = "inline";
+
 				}
 				if (eval(document.getElementById("InvalidVISA").checked == true)) {
 					x[0].style.display = "none";
@@ -129,5 +168,6 @@
 				}
 			}
 		</script>
+
 </body>
 </html>
