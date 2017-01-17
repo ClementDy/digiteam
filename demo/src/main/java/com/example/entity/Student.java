@@ -37,7 +37,6 @@ public class Student {
 	private Date dateVisa = new Date();
 	
 	@OneToOne(mappedBy="student", cascade=CascadeType.ALL)
-	@Valid
 	private Address address;
 
 	@OneToOne(mappedBy="student", cascade=CascadeType.ALL)

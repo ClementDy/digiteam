@@ -20,18 +20,12 @@ public class Address {
 	@OneToOne
 	private Student student;
 	
-	@NotNull
-	@NotEmpty
 	private String street;
 	
-	@NotNull
-	@NotEmpty
 	private String complement;
 	
 	private int postalCode;
-	
-	@NotNull
-	@NotEmpty
+
 	private String city;
 
 
