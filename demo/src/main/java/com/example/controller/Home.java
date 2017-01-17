@@ -102,7 +102,7 @@ public class Home {
 		return "home";
 	}
 
-	@RequestMapping(value = "/result", method = RequestMethod.POST)
+	@RequestMapping(value = "/home", method = RequestMethod.POST)
 	public String addEtudiant(@Valid @ModelAttribute Student student,BindingResult bindingResult, @RequestParam("file") MultipartFile file,
 	RedirectAttributes redirectAttributes, Model model, Errors e) {
 
