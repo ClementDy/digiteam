@@ -15,33 +15,41 @@
 		<br>
 		<br>
 		<h4 class="titreFormulaire"> Informations diverses</h4>
-		
-		<div class="row">
-
-			<div class="label-wrapper">
-				
-					<label  for="radios">Faites-vous
-							partie d'une association : 
-					</label>
-					<label class="radio-inline" for="radios-0"> <input
-							type="radio" name="radios" id="radios-0" value="${true}">
-							Oui
-					</label>
-					<label class="radio-inline" for="radios-1"> <input
-							type="radio" name="radios" id="radios-1" value="${false}">
-							Non
-					</label>
-				
-			</div>
-
+		<div style="display: ruby-text-container;">
+		<label class="control-label" for="radios">Faites-vous partie d'une association : </label>
+		<input type="radio" name="data" onclick="uoui()" id="toui"> Oui <br/>
+		<input checked type="radio" name="data" onclick="unon()" id="tnon" > Non <br/>
+ 		</div>
+ 		
+		<div id="association" style="display:none">
+		<label>Précisez le nom de l'association, sa mission et votre rôle : </label>
+    		<textarea class="form-control" rows="2" id="nameAssociation"
+				style="resize: none" th:field="${student.misc.nameAssociation}"></textarea>
 		</div>
+    
+    
+		<!--  <tr>
+				<td><label class="control-label" for="radios">Faites-vous partie d'une association : </label></td>
+				<td><label>Oui</label>
+					<input type="radio" name="radios"
+					id="AssociationOui" value="oui" onClick="test()"> 
+					
+					<label>Non</label>
+					<input checked type="radio" name="radios" id="Associationnon"
+					onClick="test()" value="non">
+				</td>
+				<td style="display: none" class="divAssociation"><label>
+						Précisez le nom de l'association, sa mission et votre rôle : </label></td>
+				<td style="display: none" class="divAssociation"><input
+					th:type="text" th:field="${student.misc.nameAssociation}" /></td>
+			</tr>-->
 
-		<div class="form-group">
+		<!-- <div class="form-group">
 			<label for="Association">Si oui, précisez le nom de
 				l'association, sa mission, votre rôle:</label>
 			<textarea class="form-control" rows="5" id="nameAssociation"
 				style="resize: none" th:field="${student.misc.nameAssociation}"></textarea>
-		</div>
+		</div>-->
 
 		<div class="form-group">
 			<label for="ConnaissancesInfos">Précisez vos connaissances
@@ -53,17 +61,19 @@
 		<div class="form-group">
 			<label for="ConnaissancesInfos">Maîtrisez-vous d’autres
 				langues que le français ? (précisez lesquelles et le niveau)</label>
-			<textarea class="form-control" rows="5" id="languages"
+			<textarea class="form-control" rows="2" id="languages"
 				style="resize: none" th:field="${student.misc.languages}"></textarea>
 		</div>
 
 		<div class="form-group">
 			<label for="ConnaissancesInfos">Avez-vous suivi d’autres
 				formations (BAFA, secouriste, …)</label>
-			<textarea class="form-control" rows="5" id="otherFormations"
+			<textarea class="form-control" rows="2" id="otherFormations"
 				style="resize: none" th:field="${student.misc.otherFormations}"></textarea>
 		</div>
 
 	</div>
+	
 </body>
+
 </html>
