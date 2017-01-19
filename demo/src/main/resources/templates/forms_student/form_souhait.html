@@ -13,14 +13,14 @@
 		<h4 class="titreFormulaire"> Vos formations souhaitées</h4>
 		
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-5">
 				<br> <label> Missions : </label> <select size="10"
 					class="form-control" id="allMissions">
 					<option th:each="mission : ${listMission}"
 						th:value="${{mission.id}}" th:text="${mission.title}"></option>
 				</select>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<div class="flex-center">
 					<p>
 						<button type="button" class="btn btn-success"
@@ -33,33 +33,33 @@
 					</p>
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-5">
 				<br> <label> Missions choisis : (4 max)</label> <select
 					size="10" class="form-control" th:field="${student.wish.missions}"
 					multiple="multiple">
 				</select>
 			</div>
 		</div>
+		<br><br>
 		<div class="row">
+			<div class="col-md-6">
 			<label for="autre"> Autre mission souhaitée (précisez) : </label>
 			<textarea class="form-control" id="autre"
 				th:value="${student.wish.otherWish}"
-				th:field="${student.wish.otherWish}" maxlength="150" rows="5"
-				style="resize: none;"></textarea>
+				th:field="${student.wish.otherWish}" maxlength="100" rows="3"
+				style="resize: none"></textarea>
+				</div>
 		</div>
 		
 		
-		<h4 class="titreFormulaire"> Vos motivations</h4>
 		
-		<div class="row">
-			<label>Vos motivations </label>
-
-			<div>
-				<textarea class="form-control" id="motivations"
+		<h4 class="titreFormulaire"> Vos motivations</h4>
+			<div class="row">
+				<textarea class="form-control " id="motivations"
 					th:value="${student.motivation}" th:field="${student.motivation}"
 					oninput="countChars(this.value)" maxlength="900" rows="10"
 					style="resize: none;"></textarea>
-			</div>
+			</div>			
 
 			<div class="indications">
 				<h5>
@@ -68,7 +68,7 @@
 					</i>
 				</h5>
 			</div>
-		</div>
+		
 
 	</div>
 </body>

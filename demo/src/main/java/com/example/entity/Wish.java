@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -20,7 +21,7 @@ public class Wish {
 	@OneToOne
 	private Student student;
 	
-	@OneToMany
+	@ManyToMany
 	private List<Mission> missions = new ArrayList<Mission>();
 	private String otherWish;
 	
