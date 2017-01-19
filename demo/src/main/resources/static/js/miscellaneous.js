@@ -1,6 +1,6 @@
-function udatabase() {
-    document.getElementById('ifCSV').style.display = "none";
+function unon() {
+    document.getElementById('association').style.display = "none";
 }
-function ucsv() {
-    document.getElementById('ifCSV').style.display = "block";
+function uoui() {
+    document.getElementById('association').style.display = "block";
 }
