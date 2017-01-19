@@ -8,136 +8,149 @@
 
 	<div th:fragment="content">
 
-
-
-		<br>
-		<br>
-		<h4 class="titreFormulaire">Vos informations</h4>
-		
-		<h4 class="labelInfos">Vos informations :</h4>
-
-
-		<table>
-
-			<tr>
-
-			</tr>
-			<tr>
-				<td><label> Nom : </label></td>
-				<td th:text="${lastName}" th:field="${student.lastName}"
-					id="lastName" /></td>
-				<td><label> Pr&eacute;nom : </label></td>
-				<td th:text="${firstName}" th:field="${student.firstName}"
-					id="firstName" /></td>
-			</tr>
-			<tr>
-				<td><label> Mail : </label></td>
-				<td th:text="${email}" id="email" /></td>
-				<td><label> T&eacute;l&eacute;phone : </label></td>
-				<td><input class="form-control input-sm"
-					th:field="${student.phone}" type="text" id="phone" /></td>
-			</tr>
-
-
-			<tr>
-				<td><label class="control-label" for="selectbasic">Nationalité
-						: </label></td>
-				<td th:text="${nationality}" th:field="${student.nationality}"></td>
-				<td></td>
-				<td></td>
-			</tr>
-
-			<tr>
-				<td><label class="control-label" for="radios">Titre de
-						séjour : </label></td>
-				<td><label>Oui</label><input type="radio" name="radios"
-					id="validVISA" value="validVISA" onClick="test()"> <label>Non</label>
-					<input checked type="radio" name="radios" id="InvalidVISA"
-					onClick="test()" value="InvalidVISA"></td>
-				<td style="display: none" class="divExpiryDateVISA"><label>
-						Date de validit&eacute;e : </label></td>
-				<td style="display: none" class="divExpiryDateVISA"><input
-					th:type="text" th:field="${student.dateVisa}" /></td>
-			</tr>
-
-		</table>
-		
-		
-		<h4 class="titreFormulaire">Votre adresse</h4>
-		
-
-
-
-		<h4 class="labelInfos">Votre adresse :</h4>
-
-		<table>
-			<tr>
-
-				<td><label> Rue : </label></td>
-				<td><input class="form-control input-sm"
-					th:field="${student.address.street}" type="text" /></td>
-				
-			</tr>
-
-			<tr>
-				<td><label> Complement : </label></td>
-				<td><input class="form-control input-sm"
-					th:field="${student.address.complement}" type="text"
-					id="complement" /></td>
-			</tr>
-
-			<tr>
-				<td><label> Ville : </label></td>
-				<td><input class="form-control input-sm"
-					th:field="${student.address.city}" type="text" id="city" /></td>
-				<td><label> Code postal : </label></td>
-				<td><input class="form-control input-sm"
-					th:field="${student.address.postalCode}" type="text"
-					id="postalCode" /></td>
-			</tr>
-
-
-			
-		
-			
-
-		</table>
-		
-		<h4 class="titreFormulaire">Votre curriculum vitae</h4>
-		
-		<table>
-		
-		<tr>
-
-				<td><label>Déposez votre CV : </label></td>
-				<td><input type="file" name="file" /></td>
-				<td th:each="file : ${files}"><a th:href="${file}"
-							th:text="${file}" /></td>
-				
-
-			</tr>
-		
-		</table>
-	
-		<br>
-		<br>
-
-
-
-
-
-
-		</table>
-
 		<br> <br>
+	<div class="row">
+		<h4 class="titreFormulaire">Vos informations</h4>
+			<div class="col-md-6 col-xs-6">
+				<div class="row">
+				<div class="col-md-6">
+					<label> Nom : </label>
+				</div> 
+				<div class="col-md-6">
+				<div class="form-control" th:text="${lastName}" th:field="${student.lastName}" id="lastName" disabled></div>
+				</div>
+				</div>
+				<br>
+				<div class="row">
+				<div class="col-md-6">
+					<label> Mail : </label> 
+					</div>
+					<div class="col-md-6">
+					<input class="form-control"  th:value="${email}" id="email">
+					</div>
+				</div>
+				<br>
+				<div class="row">
+				<div class="col-md-6">
+					<label for="selectbasic">Nationalité </label>
+				</div> 
+				<div class="col-md-6">
+				<div class="form-control" th:text="${nationality}" th:field="${student.nationality}" disabled></div>
+				</div>
+				</div>
+				<br>
+			<div class="row">
+					<div class="col-md-6">
+					<label for="radios">Titre de séjour : </label>
+					</div> 
+					<div class="col-md-6">
+					<label>Oui</label>
+					<input type="radio" name="radios" id="validVISA" value="validVISA" onClick="test()"> <label>Non</label>
+					<input checked type="radio" name="radios" id="InvalidVISA" onClick="test()" value="InvalidVISA">
+				</div>
+				<br>
+			</div>
+			</div>
+				<div class="col-md-6 col-xs-6">
+					<div class="row">
+					<div class="col-md-6">
+					<label> Pr&eacute;nom : </label>
+					</div> 
+					<div class="col-md-6">
+					<div class="form-control" th:text="${firstName}" th:field="${student.firstName}" id="firstName" disabled></div>
+				</div>
+			</div>
+				<br>
+					<div class="row">
+				<div class="col-md-6">
+				<label> T&eacute;l&eacute;phone : </label>
+				</div>
+				<div class="col-md-6">
+				<input class="form-control" th:field="${student.phone}" type="text" id="phone">
+				</div>
+				</div>
+				<br>
+				<div class="row">
+				<div class="col-md-6" >
+				<label class="divExpiryDateVISA" style="display: none">
+						Date de validit&eacute;e : </label>
+				</div>
+				<div class="col-md-6">
+				<input  style="display: none" class="form-control divExpiryDateVISA" th:type="text" th:field="${student.dateVisa}" />
+				</div>
+				</div>
+				</div>
+				<br>
+			</div>
 
-		<script>
+		<h4 class="titreFormulaire">Votre adresse</h4>
+<div class="row">
+			<div class="col-md-6 col-xs-6">
+				<div class="row">
+				<div class="col-md-6">
+					<label>  Rue : </label>
+				</div> 
+				<div class="col-md-6">
+				<input class="form-control input-sm" th:field="${student.address.street}" type="text">
+				</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-md-6">
+					<label> Complement : </label>
+					</div> 
+					<div class="col-md-6">
+					<input class="form-control input-sm" th:field="${student.address.complement}" type="text" id="complement">
+				</div>
+				</div>
+				<br>
+			</div>
+			
+				<div class="col-md-6 col-xs-6">
+				<div class="row">
+				<div class="col-md-6">
+					<label>Ville :</label>
+				</div> 
+				<div class="col-md-6">
+				<input class="form-control input-sm"
+					th:field="${student.address.city}" type="text" id="city">
+				</div>
+				</div>
+				<br>
+				<div class="row">
+				<div class="col-md-6">
+					<label> Code postal : </label> 
+					</div>
+					<div class="col-md-6">
+					<input class="form-control input-sm"
+					th:field="${student.address.postalCode}" type="text" id="postalCode">
+					</div>
+				</div>
+				<br>
+			</div>
+			</div>
+			
+
+
+
+
+
+		<div class="row">
+		<h4 class="titreFormulaire">Votre curriculum vitae</h4>
+			<div class="col-md-12">
+					<label class="left">Déposez votre CV : </label>
+					<input type="file" name="file" /><div th:each="file : ${files}"><a th:href="${file}"	th:text="${file}" /></div>				
+						
+		</div>
+		</div>
+		<br> <br>
+				<script>
 			function test() {
 				var x = document.getElementsByClassName("divExpiryDateVISA");
 
 				if (eval(document.getElementById("validVISA").checked == true)) {
-					x[0].style.display = "inline";
-					x[1].style.display = "inline";
+					x[0].style.display = "block";
+					x[1].style.display = "block";
 
 				}
 				if (eval(document.getElementById("InvalidVISA").checked == true)) {
@@ -146,6 +159,9 @@
 				}
 			}
 		</script>
+		</div>
+		
+
 
 </body>
 </html>
