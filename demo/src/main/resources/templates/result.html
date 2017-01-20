@@ -7,24 +7,22 @@
 <body>
 <h3>Student</h3>
 	<h4>Nom:</h4>
-	<p th:text="${lastName}" />
+	<p th:text="${student.lastName}" />
 	<h4>Prenom:</h4>
-	<p th:text="${firstName}" />
+	<p th:text="${student.firstName}" />
 	<h4>Mail:</h4>
-	<p th:text="${mail}" />
+	<p th:text="${student.email}" />
 	<h4>Tel:</h4>
-	<p th:text="${phone}" />
+	<p th:text="${student.phone}" />
 	<h4>Rue:</h4>
-	<p th:text="${street}" />
+	<p th:text="${student.address.street}" />
 	<h4>Ville:</h4>
-	<p th:text="${city}" />
+	<p th:text="${student.address.city}" />
 	<h4>Code Postal:</h4>
-	<p th:text="${postalCode}" />
+	<p th:text="${student.address.postalCode}" />
 	<h4>Date : </h4>
-	<p th:text="${date}"/>
-	<h4>Formation:</h4>
-	<p th:text="${formation}" />
+	<p th:text="${student.dateVisa}"/>
 	<h4>Availability</h4>
-	<p th:text="${startDate}"/> <p th:text="${startTimeMonday}"/> <p th:text="${endDate}"/>
+	<p th:text="${student.availability.startDate}"/> <p th:text="${student.availability.startTimeMonday}"/> <p th:text="${student.availability.endDate}"/>
 </body>
 </html>

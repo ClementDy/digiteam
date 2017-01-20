@@ -17,7 +17,7 @@
 					<label> Nom : </label>
 				</div> 
 				<div class="col-md-6">
-				<div class="form-control" th:text="${lastName}" th:field="${student.lastName}" id="lastName" disabled></div>
+				<input class="form-control" th:value="${student.lastName}" th:field="${student.lastName}" id="lastName" readonly>
 				</div>
 				</div>
 				<br>
@@ -26,7 +26,7 @@
 					<label> Mail : </label> 
 					</div>
 					<div class="col-md-6">
-					<input class="form-control"  th:value="${email}" id="email">
+					<input class="form-control" th:value="${student.email}" th:field="${student.email}" id="email">
 					</div>
 				</div>
 				<br>
@@ -35,7 +35,7 @@
 					<label for="selectbasic">Nationalité </label>
 				</div> 
 				<div class="col-md-6">
-				<div class="form-control" th:text="${nationality}" th:field="${student.nationality}" disabled></div>
+				<input class="form-control" th:value="${student.nationality}" th:field="${student.nationality}" readonly>
 				</div>
 				</div>
 				<br>
@@ -57,7 +57,7 @@
 					<label> Pr&eacute;nom : </label>
 					</div> 
 					<div class="col-md-6">
-					<div class="form-control" th:text="${firstName}" th:field="${student.firstName}" id="firstName" disabled></div>
+					<input class="form-control" th:value="${student.firstName}" th:field="${student.firstName}" id="firstName" readonly>
 				</div>
 			</div>
 				<br>
@@ -66,7 +66,7 @@
 				<label> T&eacute;l&eacute;phone : </label>
 				</div>
 				<div class="col-md-6">
-				<input class="form-control" th:field="${student.phone}" type="text" id="phone">
+				<input class="form-control" th:value="${student.phone}" th:field="${student.phone}" type="text" id="phone">
 				</div>
 				</div>
 				<br>
@@ -91,7 +91,7 @@
 					<label>  Rue : </label>
 				</div> 
 				<div class="col-md-6">
-				<input class="form-control input-sm" th:field="${student.address.street}" type="text">
+				<input class="form-control input-sm" th:value="${student.address.street}" th:field="${student.address.street}" type="text">
 				</div>
 				</div>
 				<br>
@@ -100,7 +100,7 @@
 					<label> Complement : </label>
 					</div> 
 					<div class="col-md-6">
-					<input class="form-control input-sm" th:field="${student.address.complement}" type="text" id="complement">
+					<input class="form-control input-sm" th:value="${student.address.complement}" th:field="${student.address.complement}" type="text" id="complement">
 				</div>
 				</div>
 				<br>
@@ -112,7 +112,7 @@
 					<label>Ville :</label>
 				</div> 
 				<div class="col-md-6">
-				<input class="form-control input-sm"
+				<input class="form-control input-sm" th:value="${student.address.city}"
 					th:field="${student.address.city}" type="text" id="city">
 				</div>
 				</div>
@@ -122,7 +122,7 @@
 					<label> Code postal : </label> 
 					</div>
 					<div class="col-md-6">
-					<input class="form-control input-sm"
+					<input class="form-control input-sm" th:value="${student.address.postalCode}"
 					th:field="${student.address.postalCode}" type="text" id="postalCode">
 					</div>
 				</div>
