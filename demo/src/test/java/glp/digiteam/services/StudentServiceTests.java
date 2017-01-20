@@ -1,4 +1,4 @@
-package com.example.services;
+package glp.digiteam.services;
 
 import org.junit.Assert;
 import org.junit.Test;
