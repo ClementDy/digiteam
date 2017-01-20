@@ -32,7 +32,7 @@ public class Student {
 	
 	private String visa;
 	
-	@DateTimeFormat (pattern="dd/MM/yyyy")
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date dateVisa = new Date();
 	
 	@OneToOne(mappedBy="student", cascade=CascadeType.ALL)
@@ -40,7 +40,10 @@ public class Student {
 
 	@OneToOne(mappedBy="student", cascade=CascadeType.ALL)
 	private Availability availability;
-
+	
+	@OneToMany(mappedBy="student", cascade=CascadeType.ALL)
+	private List<ExternalContract> externalContracts = new ArrayList<>();
+	
 	@OneToOne(mappedBy="student", cascade=CascadeType.ALL)
 	private Miscellaneous misc;
 	
@@ -55,6 +58,10 @@ public class Student {
 		this.availability = new Availability(this);
 		this.misc = new Miscellaneous(this);
 		this.wish = new Wish(this);
+		
+		for (int i = 0; i < 5; i++) {
+			externalContracts.add(new ExternalContract(this));
+		}
 	}
 	
 	public Student(String firstName, String lastName, int phone, String email, String nationality, String motivation, Wish wish) {
@@ -83,7 +90,15 @@ public class Student {
 	public void setAvailability(Availability availability) {
 		this.availability = availability;
 	}
-
+	
+	public List<ExternalContract> getExternalContracts() {
+		return externalContracts;
+	}
+	
+	public void setExternalContracts(List<ExternalContract> externalContracts) {
+		this.externalContracts = externalContracts;
+	}
+	
 	public Miscellaneous getMisc() {
 		return misc;
 	}
