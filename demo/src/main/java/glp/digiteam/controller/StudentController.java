@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import glp.digiteam.entity.Mission;
 import glp.digiteam.entity.Student;
+import glp.digiteam.entity.Training;
 import glp.digiteam.ldap.StudentLDAP;
 import glp.digiteam.ldap.StudentLDAPService;
 import glp.digiteam.ldap.TrainingLDAP;
@@ -66,7 +67,15 @@ public class StudentController {
 		student.setLastName(studentLDAP.getEtu_nom());
 		student.setNationality(studentLDAP.getEtu_libnationalite());
 		student.setEmail(studentLDAP.getEtu_email());
-		student.getTraining().setName(trainingLDAP.getIns_LIBPARCOURS());
+		//student.getTrainings().get(0).setName(trainingLDAP.getIns_LIBPARCOURS());
+		
+		student.getTrainings().add(new Training());
+		student.getTrainings().add(new Training());
+
+		student.getTrainings().add(new Training());
+
+		student.getTrainings().add(new Training());
+		student.getTrainings().get(0).setName(trainingLDAP.getIns_LIBPARCOURS());
 
 		model.addAttribute("student", student);
 

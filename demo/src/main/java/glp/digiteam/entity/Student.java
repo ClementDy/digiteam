@@ -9,13 +9,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.validation.Valid;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.sun.istack.NotNull;
 
 @Entity
 public class Student {
@@ -48,8 +47,8 @@ public class Student {
 	@OneToOne(mappedBy="student", cascade=CascadeType.ALL)
 	private Wish wish;
 	
-	@OneToOne(mappedBy="student",cascade = CascadeType.ALL)
-	Training training = new Training();
+	@OneToMany(mappedBy="student",cascade = CascadeType.ALL)
+	List<Training> trainings = new ArrayList<Training>();
 	
 	public Student() {
 		this.address = new Address(this);
@@ -178,12 +177,13 @@ public class Student {
 
 	
 
-	public Training getTraining() {
-		return training;
+
+	public List<Training> getTrainings() {
+		return trainings;
 	}
 
-	public void setTraining(Training training) {
-		this.training = training;
+	public void setTrainings(List<Training> trainings) {
+		this.trainings = trainings;
 	}
 
 	@Override
