@@ -55,6 +55,13 @@ public class StudentController {
 	private MissionRepository missionRepository;
 
 	
+	@RequestMapping(value = "/home2", method = RequestMethod.GET)
+	public String hello2(Model model) {
+		return "/refound/home";
+	}
+	
+		
+	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String hello(Model model) {
 
