@@ -44,7 +44,9 @@ import glp.digiteam.uploadFile.StorageService;
 public class StudentController {
 
 	private final StorageService storageService;
-
+	
+	Student student;
+	
 	@Autowired 
 	private StudentLDAPService studentLDAPService;
 	@Autowired
@@ -71,14 +73,13 @@ public class StudentController {
 			return new ModelAndView("redirect:authentication");
 		}
 		
-		Student student=(Student) session.getAttribute("student") ;
+		student=(Student) session.getAttribute("student") ;
 		
 		
 		StudentLDAP studentLDAP = studentLDAPService.getStudentLDAP(student.getNip());
 		
 		TrainingLDAP trainingLDAP = trainingLDAPService.getTrainingLDAP(2017, student.getNip());
 		
-		student.setNip(studentLDAP.getEtu_NIP());
 		student.setFirstName(studentLDAP.getEtu_prenom());
 		student.setLastName(studentLDAP.getEtu_nom());
 		student.setNationality(studentLDAP.getEtu_libnationalite());
@@ -87,7 +88,7 @@ public class StudentController {
 		student.getTrainings().get(0).setName(trainingLDAP.getIns_LIBPARCOURS());
 
 		model.addAttribute("student", student);
-
+		System.out.println("NNNNNNN-"+student.getNip());
 		missionRepository.save(new Mission("Accueil des étudiants"));
 		missionRepository.save(new Mission("Aide à l'insertion professionelle"));
 		missionRepository.save(new Mission("Animation culturelles scientifiques sportives et sociales"));
@@ -105,8 +106,8 @@ public class StudentController {
 	}
 
 	@RequestMapping(value = "/home", method = RequestMethod.POST)
-	public String addEtudiant(@Valid @ModelAttribute Student student,BindingResult bindingResult, @RequestParam("file") MultipartFile file,
-	RedirectAttributes redirectAttributes, Model model, Errors e) {
+	public String addEtudiant(@ModelAttribute Student student,BindingResult bindingResult, @RequestParam("file") MultipartFile file,
+	RedirectAttributes redirectAttributes, Model model, Errors e, HttpSession session) {
 
 		if(bindingResult.hasErrors()){
 			for (ObjectError error : bindingResult.getAllErrors()) {
@@ -114,11 +115,11 @@ public class StudentController {
 			}
 			return "home";
 		}
- 
-		System.out.println(student.getNip());
+		
+		student.setNip(this.student.getNip());
 		studentService.saveStudentProfile(student);
-
 		model.addAttribute("student", student);
+		System.out.println(student);
 
 		if (!file.isEmpty()) {
 			storageService.store(file);
@@ -143,6 +144,7 @@ public class StudentController {
 	 * true)); }
 	 */
 	// CV
+	
 	@Autowired
 	public StudentController(StorageService storageService) {
 		this.storageService = storageService;
