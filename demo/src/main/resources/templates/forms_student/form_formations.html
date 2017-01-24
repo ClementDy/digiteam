@@ -1,45 +1,72 @@
-	<!DOCTYPE html>
-	<html xmlns:th="http://www.thymeleaf.org">
 
-	<head>
-		<title>Formations</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<link
-		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
-		rel="stylesheet">
-	</head>
-	<body>
-		<div th:fragment="content">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 
-			<br>
-			<br>
-			<h4 class="titreFormulaire">Formation actuelle</h4> 
-			<div class="table-responsive">
-				<table class="table table-striped table-bordered table-hover"  align="center">
-					<thead>
-					
-						<tr>
-							<th>Ann&eacute;e</th>
-							<th>Nom de la formation</th>
-							<!--  <th>Lieu</th>-->
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td >2016/2017</td>
-							<!--  <td><input type="text" class="form-control"  name="nomformact" th:field="${student.training.name}"></td>-->
-							<td><input th:field="${student.training.name}" th:value="${student.training.name}" readonly></td>
+<head>
+<title>Formations</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
+	rel="stylesheet">
+</head>
+<body>
+	<div th:fragment="content">
 
-						</tr>
-					</tbody>
-				</table>
-			</div>
+		<br> <br>
+		<h4 class="titreFormulaire">Formation actuelle</h4>
+		<div class="table-responsive">
+			<table class="table table-striped table-bordered table-hover"
+				align="center">
+				<thead>
+
+					<tr>
+						<th>Ann&eacute;e</th>
+						<th>Nom de la formation</th>
+						<!--  <th>Lieu</th>-->
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>2016/2017</td>
+						<!--  <td><input type="text" class="form-control"  name="nomformact" th:field="${student.training.name}"></td>-->
+						<td>
+							 <input style="width:100%;text-align:center;"  th:field="${student.trainings[__${0}__].name}"
+							th:value="${student.trainings[__${0}__].name}" readonly> 
+						</td>
+
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<br> <br>
+		<h4 class="titreFormulaire">Formations précédentes</h4>
+		<div class="table-responsive">
+			<table class="table table-striped table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>Ann&eacute;e</th>
+						<th>Nom de la formation</th>
+						<th>Lieu</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="training, stat : ${student.trainings}" th:if="${stat.index}>0">
+						<td><input type="text" class="form-control"
+							th:value="${student.trainings[__${stat.index}__].date}"
+							th:field="${student.trainings[__${stat.index}__].date}"></td>
+						<td><input type="text" class="form-control"
+							th:value="${student.trainings[__${stat.index}__].name}"
+							th:field="${student.trainings[__${stat.index}__].name}"></td>
+						<td><input type="text" class="form-control"
+							th:value="${student.trainings[__${stat.index}__].place}"
+							th:field="${student.trainings[__${stat.index}__].place}"></td>
+					</tr>
+				</tbody>
+			</table>
 
 
-
-
-
-	<!-- 
+		</div>
+		<!-- 
 	 <h3>Formations précédentes</h3>
 	<div class="table-responsive">
 		<table class="table table-striped table-bordered table-hover">
@@ -87,8 +114,8 @@
 	</div>
 -->
 
-		
+
 	</div>
 
-	</body>
-	</html>
+</body>
+</html>

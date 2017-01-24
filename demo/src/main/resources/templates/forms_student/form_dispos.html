@@ -10,69 +10,69 @@
 <body>
 	<div th:fragment="content">
 
+		<br> <br>
+		<h4 class="titreFormulaire">Vos disponibilit&eacute;s</h4>
 		<br>
-		<br>
-		<h4 class="titreFormulaire"> Vos disponibilit&eacute;s</h4>
-		<br>
+		<div class="container">
+			<div class="row">
+				<article class="col-md-3">
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon" id="sizing-addon3">Du</span> <input
+							th:type="text" class="form-control" id="startDate"
+							placeholder="jj/mm/yyyy" aria-describedby="sizing-addon3"
+							th:field="${student.availability.startDate}" />
+					</div>
+				</article>
+				<article class="col-md-3">
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon" id="sizing-addon3">Au</span> <input
+							class="form-control" th:field="${student.availability.endDate}"
+							placeholder="jj/mm/yyyy" th:type="text"
+							aria-describedby="sizing-addon3" />
+					</div>
+				</article>
+			</div>
 
-		<table>
-			<tr>
-				<td><label> Du : </label></td>
-				<td><input th:type="text" id="startDate"
-						th:field="${student.availability.startDate}" /></td>
-				<td><label> au : </label></td>
-				<td><input th:field="${student.availability.endDate}" th:type="text"
-						id="endDate" /></td>
-			
-			</tr>
+
+
 		
-		</table>
-					 
-			
+			<br>
+			<table class="availabilityTab">
 
-		<br>
-		<table class="availabilityTab">
-
-			<tr>
-				<td class="dayAvailability">Lundi</td>
-				<td class="dayAvailability">Mardi</td>
-				<td class="dayAvailability">Mercredi</td>
-				<td class="dayAvailability">Jeudi</td>
-				<td class="dayAvailability">Vendredi</td>
-			</tr>
-			<tr>
-				<td class="dayAvailability">
-					<input type="text" th:field="${student.availability.startTimeMonday}" /> à 
-					<input type="text" th:field="${student.availability.endTimeMonday}" />
-				</td>
-				<td class="dayAvailability">
-					<input type="text"  th:field="${student.availability.startTimeTuesday}" /> à 
-					<input type="text"  th:field="${student.availability.endTimeTuesday}" />
-				</td>
-				<td class="dayAvailability">
-					<input type="text" th:field="${student.availability.startTimeWednesday}" /> à 
-					<input type="text" th:field="${student.availability.endTimeWednesday}" /></td>
-				<td class="dayAvailability">
-					<input type="text" th:field="${student.availability.startTimeThursday}" /> à 
-					<input type="text" th:field="${student.availability.endTimeThursday}" />
-				</td>
-				<td class="dayAvailability">
-					<input type="text" th:field="${student.availability.startTimeFriday}" /> à 
-					<input type="text" th:field="${student.availability.endTimeFriday}" />
-				</td>
-			</tr>
-		</table>
-		<br>
-		<br>
-		<div class="indications">
-			<p>
-				Veuillez entrez les créneaux entre lesquels vous êtes disponible.<br>
-				Exemple Lundi de 10 heures à 18 heures : Dans la colonne Lundi
-				entrez 10 à 18.
-			</p>
-		</div>
-		<br>
-	</div>
-
+				<tr>
+					<td class="dayAvailability">Lundi</td>
+					<td class="dayAvailability">Mardi</td>
+					<td class="dayAvailability">Mercredi</td>
+					<td class="dayAvailability">Jeudi</td>
+					<td class="dayAvailability">Vendredi</td>
+				</tr>
+				<tr>
+					<td class="dayAvailability"><input type="text"
+						th:field="${student.availability.startTimeMonday}" /> à <input
+						type="text" th:field="${student.availability.endTimeMonday}" /></td>
+					<td class="dayAvailability"><input type="text"
+						th:field="${student.availability.startTimeTuesday}" /> à <input
+						type="text" th:field="${student.availability.endTimeTuesday}" /></td>
+					<td class="dayAvailability"><input type="text"
+						th:field="${student.availability.startTimeWednesday}" /> à <input
+						type="text" th:field="${student.availability.endTimeWednesday}" /></td>
+					<td class="dayAvailability"><input type="text"
+						th:field="${student.availability.startTimeThursday}" /> à <input
+						type="text" th:field="${student.availability.endTimeThursday}" />
+					</td>
+					<td class="dayAvailability"><input type="text"
+						th:field="${student.availability.startTimeFriday}" /> à <input
+						type="text" th:field="${student.availability.endTimeFriday}" /></td>
+				</tr>
+			</table>
+			<br> <br>
+			<div class="indications">
+				<p>
+					Veuillez entrez les créneaux entre lesquels vous êtes disponible.<br>
+					Exemple Lundi de 10 heures à 18 heures : Dans la colonne Lundi
+					entrez 10 à 18.
+				</p>
+			</div>
+			<br>
 </body>
 </html>

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import glp.digiteam.entity.Mission;
 import glp.digiteam.entity.Student;
+import glp.digiteam.entity.Training;
 import glp.digiteam.ldap.StudentLDAP;
 import glp.digiteam.ldap.StudentLDAPService;
 import glp.digiteam.ldap.TrainingLDAP;
@@ -53,6 +55,13 @@ public class StudentController {
 	private MissionRepository missionRepository;
 	//11202572
 	
+	@RequestMapping(value = "/home2", method = RequestMethod.GET)
+	public String hello2(Model model) {
+		return "/refound/home";
+	}
+	
+		
+	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String hello(Model model,Student student) {
 
@@ -68,7 +77,15 @@ public class StudentController {
 		student.setLastName(studentLDAP.getEtu_nom());
 		student.setNationality(studentLDAP.getEtu_libnationalite());
 		student.setEmail(studentLDAP.getEtu_email());
-		student.getTraining().setName(trainingLDAP.getIns_LIBPARCOURS());
+		//student.getTrainings().get(0).setName(trainingLDAP.getIns_LIBPARCOURS());
+		
+		student.getTrainings().add(new Training());
+		student.getTrainings().add(new Training());
+
+		student.getTrainings().add(new Training());
+
+		student.getTrainings().add(new Training());
+		student.getTrainings().get(0).setName(trainingLDAP.getIns_LIBPARCOURS());
 
 		model.addAttribute("student", student);
 
@@ -93,6 +110,9 @@ public class StudentController {
 	RedirectAttributes redirectAttributes, Model model, Errors e) {
 
 		if(bindingResult.hasErrors()){
+			for (ObjectError error : bindingResult.getAllErrors()) {
+				System.out.println(error);
+			}
 			return "home";
 		}
  

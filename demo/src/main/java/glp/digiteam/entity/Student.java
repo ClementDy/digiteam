@@ -9,13 +9,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.validation.Valid;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.sun.istack.NotNull;
 
 @Entity
 public class Student {
@@ -32,7 +31,7 @@ public class Student {
 	
 	private String visa;
 	
-	@DateTimeFormat (pattern="dd/MM/yyyy")
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date dateVisa = new Date();
 	
 	@OneToOne(mappedBy="student", cascade=CascadeType.ALL)
@@ -40,21 +39,28 @@ public class Student {
 
 	@OneToOne(mappedBy="student", cascade=CascadeType.ALL)
 	private Availability availability;
-
+	
+	@OneToMany(mappedBy="student", cascade=CascadeType.ALL)
+	private List<ExternalContract> externalContracts = new ArrayList<>();
+	
 	@OneToOne(mappedBy="student", cascade=CascadeType.ALL)
 	private Miscellaneous misc;
 	
 	@OneToOne(mappedBy="student", cascade=CascadeType.ALL)
 	private Wish wish;
 	
-	@OneToOne(mappedBy="student",cascade = CascadeType.ALL)
-	Training training = new Training();
+	@OneToMany(mappedBy="student",cascade = CascadeType.ALL)
+	List<Training> trainings = new ArrayList<Training>();
 	
 	public Student() {
 		this.address = new Address(this);
 		this.availability = new Availability(this);
 		this.misc = new Miscellaneous(this);
 		this.wish = new Wish(this);
+		
+		for (int i = 0; i < 5; i++) {
+			externalContracts.add(new ExternalContract(this));
+		}
 	}
 	
 	public Student(String firstName, String lastName, int phone, String email, String nationality, String motivation, Wish wish) {
@@ -83,7 +89,15 @@ public class Student {
 	public void setAvailability(Availability availability) {
 		this.availability = availability;
 	}
-
+	
+	public List<ExternalContract> getExternalContracts() {
+		return externalContracts;
+	}
+	
+	public void setExternalContracts(List<ExternalContract> externalContracts) {
+		this.externalContracts = externalContracts;
+	}
+	
 	public Miscellaneous getMisc() {
 		return misc;
 	}
@@ -177,12 +191,13 @@ public class Student {
 
 	
 
-	public Training getTraining() {
-		return training;
+
+	public List<Training> getTrainings() {
+		return trainings;
 	}
 
-	public void setTraining(Training training) {
-		this.training = training;
+	public void setTrainings(List<Training> trainings) {
+		this.trainings = trainings;
 	}
 
 	@Override

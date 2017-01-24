@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Training {
@@ -17,9 +16,9 @@ public class Training {
 	
 	private String date;
 	private String place;
-	private String name; 
+	private String name;
 	
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Student student;
 	
 	
@@ -65,6 +64,8 @@ public class Training {
 	public void setStudent(Student student) {
 		this.student = student;
 	}
+
+	
 	
 	
 	
