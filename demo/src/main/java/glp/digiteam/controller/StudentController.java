@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import glp.digiteam.entity.Mission;
@@ -64,10 +65,15 @@ public class StudentController {
 		
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String hello(Model model,HttpSession session) {
+	public ModelAndView hello(Model model,HttpSession session) {
+		
+		if(session.getAttribute("student")==null){
+			return new ModelAndView("redirect:authentication");
+		}
+		
 		Student student=(Student) session.getAttribute("student") ;
-		System.out.println("s"+student.getNip());
-
+		
+		
 		StudentLDAP studentLDAP = studentLDAPService.getStudentLDAP(student.getNip());
 		
 		TrainingLDAP trainingLDAP = trainingLDAPService.getTrainingLDAP(2017, student.getNip());
@@ -95,7 +101,7 @@ public class StudentController {
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
 
-		return "home";
+		return new ModelAndView("home");
 	}
 
 	@RequestMapping(value = "/home", method = RequestMethod.POST)
