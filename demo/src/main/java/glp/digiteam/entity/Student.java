@@ -21,7 +21,6 @@ import com.sun.istack.NotNull;
 public class Student {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long nip;
 	private String firstName;
 	private String lastName;

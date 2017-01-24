@@ -51,16 +51,18 @@ public class StudentController {
 	
 	@Autowired
 	private MissionRepository missionRepository;
-
+	//11202572
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String hello(Model model) {
+	public String hello(Model model,Student student) {
 
-		StudentLDAP studentLDAP = studentLDAPService.getStudentLDAP(11202572);
+		//System.out.println(nip);
+		System.out.println(student.getNip());
+
+		StudentLDAP studentLDAP = studentLDAPService.getStudentLDAP(student.getNip());
 		
-		TrainingLDAP trainingLDAP = trainingLDAPService.getTrainingLDAP(2017, 11202572);
+		TrainingLDAP trainingLDAP = trainingLDAPService.getTrainingLDAP(2017, student.getNip());
 		
-		Student student = new Student();
 		student.setNip(studentLDAP.getEtu_NIP());
 		student.setFirstName(studentLDAP.getEtu_prenom());
 		student.setLastName(studentLDAP.getEtu_nom());
@@ -94,6 +96,7 @@ public class StudentController {
 			return "home";
 		}
  
+		System.out.println(student.getNip());
 		studentService.saveStudentProfile(student);
 
 		model.addAttribute("student", student);
