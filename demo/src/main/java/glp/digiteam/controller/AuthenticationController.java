@@ -1,5 +1,7 @@
 package glp.digiteam.controller;
 
+import javax.persistence.metamodel.SetAttribute;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -10,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import glp.digiteam.entity.Student;
 
@@ -18,6 +21,7 @@ import glp.digiteam.entity.Student;
 @ComponentScan(basePackages = "glp.digiteam.services")
 
 public class AuthenticationController {
+	
 	@RequestMapping(value = "/authentication", method = RequestMethod.GET)
 	public String authenfication(Model model) {
 		Student student = new Student(); 
@@ -26,11 +30,11 @@ public class AuthenticationController {
 	}
 	
 	@RequestMapping(value ="/authentication", method = RequestMethod.POST)
-	public String getStudent(@Valid @ModelAttribute Student student,BindingResult bindingresult, Model model) {
-		System.out.println("lol");
-		System.out.println(student.getNip());
+	public ModelAndView getStudent(@Valid @ModelAttribute Student student,BindingResult bindingresult, Model model, HttpSession session) {
+		System.out.println("snip"+student.getNip());
+		session.setAttribute("student", student);
 		model.addAttribute("student",student);
-		return "home";
+		return new ModelAndView("redirect:/home");
 		
 	}
 }

@@ -34,36 +34,60 @@
 			</div>
 
 
-
-		
+			<br>
+			
+			<div class="table">
+					<body>
+					<tr>
+						<td>Lundi</td>
+						<td><span class="input-group-addon" id="sizing-addon3">De</span></td> 
+						<td><input type="text"	th:field="${student.availability.startTimeMonday}" /></td>
+						<td><span class="input-group-addon" id="sizing-addon3">à</span></td>
+						<td><input type="text" th:field="${student.availability.endTimeMonday}" /></td> 
+					</tr>
+				</tbody>
+			</div>
+					
+					
+							
 			<br>
 			<table class="availabilityTab">
-
+			<div class="table-responsive">
 				<tr>
 					<td class="dayAvailability">Lundi</td>
-					<td class="dayAvailability">Mardi</td>
-					<td class="dayAvailability">Mercredi</td>
-					<td class="dayAvailability">Jeudi</td>
-					<td class="dayAvailability">Vendredi</td>
-				</tr>
-				<tr>
 					<td class="dayAvailability"><input type="text"
 						th:field="${student.availability.startTimeMonday}" /> à <input
 						type="text" th:field="${student.availability.endTimeMonday}" /></td>
+				</tr>
+				<tr>
+					<td class="dayAvailability">Mardi</td>
 					<td class="dayAvailability"><input type="text"
 						th:field="${student.availability.startTimeTuesday}" /> à <input
 						type="text" th:field="${student.availability.endTimeTuesday}" /></td>
+				</tr>
+				<tr>
+					<td class="dayAvailability">Mercredi</td>
 					<td class="dayAvailability"><input type="text"
 						th:field="${student.availability.startTimeWednesday}" /> à <input
 						type="text" th:field="${student.availability.endTimeWednesday}" /></td>
+				</tr>
+				<tr>
+					<td class="dayAvailability">Jeudi</td>
 					<td class="dayAvailability"><input type="text"
 						th:field="${student.availability.startTimeThursday}" /> à <input
 						type="text" th:field="${student.availability.endTimeThursday}" />
 					</td>
+				</tr>
+				<tr>
+					<td class="dayAvailability">Vendredi</td>
 					<td class="dayAvailability"><input type="text"
 						th:field="${student.availability.startTimeFriday}" /> à <input
 						type="text" th:field="${student.availability.endTimeFriday}" /></td>
 				</tr>
+			</div>
+					
+					
+					
 			</table>
 			<br> <br>
 			<div class="indications">

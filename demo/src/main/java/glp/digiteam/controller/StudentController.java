@@ -1,5 +1,6 @@
 package glp.digiteam.controller;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,10 +64,9 @@ public class StudentController {
 		
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String hello(Model model,Student student) {
-
-		//System.out.println(nip);
-		System.out.println(student.getNip());
+	public String hello(Model model,HttpSession session) {
+		Student student=(Student) session.getAttribute("student") ;
+		System.out.println("s"+student.getNip());
 
 		StudentLDAP studentLDAP = studentLDAPService.getStudentLDAP(student.getNip());
 		
