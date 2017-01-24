@@ -61,6 +61,9 @@ public class Student {
 		for (int i = 0; i < 5; i++) {
 			externalContracts.add(new ExternalContract(this));
 		}
+		for (int i = 0; i < 4; i++) {
+			trainings.add(new Training());
+		}
 	}
 	
 	public Student(String firstName, String lastName, int phone, String email, String nationality, String motivation, Wish wish) {
