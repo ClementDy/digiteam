@@ -57,12 +57,11 @@ public class Student {
 		this.availability = new Availability(this);
 		this.misc = new Miscellaneous(this);
 		this.wish = new Wish(this);
-		
 		for (int i = 0; i < 5; i++) {
 			externalContracts.add(new ExternalContract(this));
 		}
-		for (int i = 0; i < 4; i++) {
-			trainings.add(new Training());
+		for (int i = 0; i < 2; i++) {
+			trainings.add(new Training(this));
 		}
 	}
 	

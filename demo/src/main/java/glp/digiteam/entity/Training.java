@@ -14,7 +14,7 @@ public class Training {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	private String date;
+	private int date;
 	private String place;
 	private String name;
 	
@@ -25,7 +25,9 @@ public class Training {
 	public Training(){
 		
 	}
-	
+	public Training(Student student){
+		this.student=student;
+	}
 	public long getId() {
 		return id;
 	}
@@ -33,11 +35,11 @@ public class Training {
 		this.id = id;
 	}
 
-	public String getDate() {
+	public int getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(int date) {
 		this.date = date;
 	}
 

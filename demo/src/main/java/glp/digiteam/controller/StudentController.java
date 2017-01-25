@@ -84,11 +84,12 @@ public class StudentController {
 		student.setLastName(studentLDAP.getEtu_nom());
 		student.setNationality(studentLDAP.getEtu_libnationalite());
 		student.setEmail(studentLDAP.getEtu_email());
-	
+		student.getTrainings().get(0).setDate(trainingLDAP.getIns_ANNEE());
 		student.getTrainings().get(0).setName(trainingLDAP.getIns_LIBPARCOURS());
-
+		student.getTrainings().get(0).setPlace("Lille");
+		
 		model.addAttribute("student", student);
-		System.out.println("NNNNNNN-"+student.getNip());
+		
 		missionRepository.save(new Mission("Accueil des étudiants"));
 		missionRepository.save(new Mission("Aide à l'insertion professionelle"));
 		missionRepository.save(new Mission("Animation culturelles scientifiques sportives et sociales"));
