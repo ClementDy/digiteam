@@ -13,8 +13,10 @@
 		<br> <br>
 		<h4 class="titreFormulaire">Vos disponibilit&eacute;s</h4>
 		<br>
-		<div class="container">
+		<div class="container dispos">
+		
 			<div class="row">
+				<article class="col-md-3"></article>
 				<article class="col-md-3">
 					<div class="input-group input-group-sm">
 						<span class="input-group-addon" id="sizing-addon3">Du</span> <input
@@ -32,63 +34,85 @@
 					</div>
 				</article>
 			</div>
-
+			
 
 			<br>
 			
-			<div class="table">
-					<body>
-					<tr>
-						<td>Lundi</td>
-						<td><span class="input-group-addon" id="sizing-addon3">De</span></td> 
-						<td><input type="text"	th:field="${student.availability.startTimeMonday}" /></td>
-						<td><span class="input-group-addon" id="sizing-addon3">à</span></td>
-						<td><input type="text" th:field="${student.availability.endTimeMonday}" /></td> 
-					</tr>
-				</tbody>
-			</div>
+			
+			<div>
+				
+				<div class="row">
+					<article class="col-md-4"></article>
+					<article class="col-md-4">
+						<div class="input-group input-group-sm">
+							<span class="input-group-addon addonDay" id="sizing-addon3">Lundi</span>
+							<input type="text" placeholder="hh:mm" class="form-control" 
+							th:field="${student.availability.startTimeMonday}" />
+							<span class="input-group-addon" id="sizing-addon3">à</span>
+							<input
+							type="text" class="form-control" placeholder="hh:mm" th:field="${student.availability.endTimeMonday}" />
+						</div>
+					</article>
+				</div>
+				<div class="row">
+					<article class="col-md-4"></article>
+					<article class="col-md-4">
+						<div class="input-group input-group-sm">
+							<span class="input-group-addon addonDay" id="sizing-addon3">Mardi</span>
+							<input type="text" class="form-control" placeholder="hh:mm"
+							th:field="${student.availability.startTimeTuesday}" />
+							<span class="input-group-addon" id="sizing-addon3">à</span>
+							<input
+							type="text" class="form-control" placeholder="hh:mm" th:field="${student.availability.endTimeTuesday}" />
+						</div>
+					</article>
+				</div>
+				<div class="row">
+					<article class="col-md-4"></article>
+					<article class="col-md-4">
+						<div class="input-group input-group-sm">
+							<span class="input-group-addon addonDay" id="sizing-addon3">Mercredi</span>
+							<input type="text" class="form-control" placeholder="hh:mm"
+								th:field="${student.availability.startTimeWednesday}" />
+							<span class="input-group-addon" id="sizing-addon3">à</span>
+							<input
+								type="text" class="form-control" placeholder="hh:mm" th:field="${student.availability.endTimeWednesday}" />
+						</div>
+					</article>
+				</div>
+			
+				<div class="row">
+					<article class="col-md-4"></article>
+					<article class="col-md-4">
+						<div class="input-group input-group-sm">
+							<span class="input-group-addon addonDay" id="sizing-addon3">Jeudi</span>
+							<input type="text" class="form-control" placeholder="hh:mm" 
+								th:field="${student.availability.startTimeThursday}" />
+							<span class="input-group-addon" id="sizing-addon3">à</span>
+							<input
+							type="text" class="form-control" placeholder="hh:mm"  th:field="${student.availability.endTimeThursday}" />
+						</div>
+					</article>
+				</div>
+				
+				<div class="row">
+					<article class="col-md-4"></article>
+					<article class="col-md-4">
+						<div class="input-group input-group-sm">
+							<span class="input-group-addon addonDay" id="sizing-addon3">Vendredi</span>
+							<input type="text" class="form-control" placeholder="hh:mm"
+								th:field="${student.availability.startTimeFriday}" />
+							<span class="input-group-addon" id="sizing-addon3">à</span>
+							<input
+								type="text" class="form-control" placeholder="hh:mm"  th:field="${student.availability.endTimeFriday}" />
+						</div>
+					</article>
+				</div>
 					
+			</div>		
 					
 							
-			<br>
-			<table class="availabilityTab">
-			<div class="table-responsive">
-				<tr>
-					<td class="dayAvailability">Lundi</td>
-					<td class="dayAvailability"><input type="text"
-						th:field="${student.availability.startTimeMonday}" /> à <input
-						type="text" th:field="${student.availability.endTimeMonday}" /></td>
-				</tr>
-				<tr>
-					<td class="dayAvailability">Mardi</td>
-					<td class="dayAvailability"><input type="text"
-						th:field="${student.availability.startTimeTuesday}" /> à <input
-						type="text" th:field="${student.availability.endTimeTuesday}" /></td>
-				</tr>
-				<tr>
-					<td class="dayAvailability">Mercredi</td>
-					<td class="dayAvailability"><input type="text"
-						th:field="${student.availability.startTimeWednesday}" /> à <input
-						type="text" th:field="${student.availability.endTimeWednesday}" /></td>
-				</tr>
-				<tr>
-					<td class="dayAvailability">Jeudi</td>
-					<td class="dayAvailability"><input type="text"
-						th:field="${student.availability.startTimeThursday}" /> à <input
-						type="text" th:field="${student.availability.endTimeThursday}" />
-					</td>
-				</tr>
-				<tr>
-					<td class="dayAvailability">Vendredi</td>
-					<td class="dayAvailability"><input type="text"
-						th:field="${student.availability.startTimeFriday}" /> à <input
-						type="text" th:field="${student.availability.endTimeFriday}" /></td>
-				</tr>
-			</div>
-					
-					
-					
-			</table>
+			
 			<br> <br>
 			<div class="indications">
 				<p>

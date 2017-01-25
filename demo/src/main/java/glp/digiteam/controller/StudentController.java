@@ -73,8 +73,11 @@ public class StudentController {
 			return new ModelAndView("redirect:authentication");
 		}
 		
-		student=(Student) session.getAttribute("student") ;
+		student=(Student) session.getAttribute("student");
 		
+		//student=studentService.getStudentByNip(student.getNip());
+		
+		System.out.println("YY----"+student.toString());
 		
 		StudentLDAP studentLDAP = studentLDAPService.getStudentLDAP(student.getNip());
 		
