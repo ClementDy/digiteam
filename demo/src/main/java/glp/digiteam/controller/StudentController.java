@@ -75,21 +75,26 @@ public class StudentController {
 		
 		student=(Student) session.getAttribute("student");
 		
-		//student=studentService.getStudentByNip(student.getNip());
+		if (studentService.getStudentByNip(student.getNip())==null){
+			StudentLDAP studentLDAP = studentLDAPService.getStudentLDAP(student.getNip());
+			
+			TrainingLDAP trainingLDAP = trainingLDAPService.getTrainingLDAP(2017, student.getNip());
+			
+			student.setFirstName(studentLDAP.getEtu_prenom());
+			student.setLastName(studentLDAP.getEtu_nom());
+			student.setNationality(studentLDAP.getEtu_libnationalite());
+			student.setEmail(studentLDAP.getEtu_email());
+			student.getTrainings().get(0).setDate(trainingLDAP.getIns_ANNEE());
+			student.getTrainings().get(0).setName(trainingLDAP.getIns_LIBPARCOURS());
+			student.getTrainings().get(0).setPlace("Lille");	
+		}
+		else {
+			student=studentService.getStudentByNip(student.getNip());
+		}
 		
 		System.out.println("YY----"+student.toString());
 		
-		StudentLDAP studentLDAP = studentLDAPService.getStudentLDAP(student.getNip());
-		
-		TrainingLDAP trainingLDAP = trainingLDAPService.getTrainingLDAP(2017, student.getNip());
-		
-		student.setFirstName(studentLDAP.getEtu_prenom());
-		student.setLastName(studentLDAP.getEtu_nom());
-		student.setNationality(studentLDAP.getEtu_libnationalite());
-		student.setEmail(studentLDAP.getEtu_email());
-		student.getTrainings().get(0).setDate(trainingLDAP.getIns_ANNEE());
-		student.getTrainings().get(0).setName(trainingLDAP.getIns_LIBPARCOURS());
-		student.getTrainings().get(0).setPlace("Lille");
+	
 		
 		model.addAttribute("student", student);
 		
@@ -110,7 +115,7 @@ public class StudentController {
 	}
 
 	@RequestMapping(value = "/home", method = RequestMethod.POST)
-	public String addEtudiant(@ModelAttribute Student student,BindingResult bindingResult, @RequestParam("file") MultipartFile file,
+	public String addEtudiant(@ModelAttribute Student std,BindingResult bindingResult, @RequestParam("file") MultipartFile file,
 	RedirectAttributes redirectAttributes, Model model, Errors e, HttpSession session) {
 
 		if(bindingResult.hasErrors()){
@@ -120,11 +125,32 @@ public class StudentController {
 			return "home";
 		}
 		
-		student.setNip(this.student.getNip());
-		studentService.saveStudentProfile(student);
-		model.addAttribute("student", student);
-		System.out.println(student);
-
+		Student  realStudent;
+		
+		if( studentService.getStudentByNip(this.student.getNip())!=null){
+	
+	    realStudent = studentService.getStudentByNip(this.student.getNip());
+	    
+		std.getAddress().setId(realStudent.getAddress().getId());
+		std.getAddress().setStudent(realStudent);
+		
+		std.getWish().setId(realStudent.getWish().getId());
+		std.getWish().setStudent(realStudent);
+		
+		std.getAvailability().setId(realStudent.getAvailability().getId());
+		std.getAvailability().setStudent(realStudent);
+		
+		std.getMisc().setId(realStudent.getMisc().getId());
+		std.getMisc().setStudent(realStudent);
+		
+		}
+		
+		std.setNip(this.student.getNip());
+		
+	
+		model.addAttribute("student", std);
+		studentService.saveStudentProfile(std);
+		
 		if (!file.isEmpty()) {
 			storageService.store(file);
 			redirectAttributes.addFlashAttribute("message",
