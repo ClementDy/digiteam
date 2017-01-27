@@ -55,7 +55,7 @@
 						<th>Lieu</th>
 					</tr>
 				</thead>
-				<tbody id ='listView1' >
+				<tbody >
 					
 					<tr th:each="training, stat : ${student.trainings}"
 						th:if="${stat.index}>0" >
@@ -72,8 +72,7 @@
 
 				</tbody>
 			</table>
-			<input type="button" onclick="addListItem()" value="+" />
-			<input type="button" onclick="removeListItem()" value="-" />
+			
 		</div>
 		<!-- 
 	<!DOCTYPE html>
