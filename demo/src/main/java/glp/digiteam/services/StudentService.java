@@ -16,7 +16,7 @@ public class StudentService {
 		return studentRepository.save(student);
 	}
 	
-	public Student getStudentByNip(long nip) {
+	public Student getStudentByNip(Integer nip) {
 		if(studentRepository.findByNip(nip)!=null){
 		return studentRepository.findByNip(nip);
 		}

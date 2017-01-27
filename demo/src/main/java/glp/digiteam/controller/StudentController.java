@@ -127,7 +127,7 @@ public class StudentController {
 		
 		Student  realStudent;
 		
-		if( studentService.getStudentByNip(this.student.getNip())!=null){
+		if(studentService.getStudentByNip(this.student.getNip())!=null){
 	
 	    realStudent = studentService.getStudentByNip(this.student.getNip());
 	    

@@ -9,7 +9,7 @@ import glp.digiteam.entity.Student;
 
 public interface StudentRepository extends CrudRepository<Student, Long> {
 
-    Student findByNip(long nip);
+    Student findByNip(Integer nip);
     
     List<Student> findByLastName(String lastName);
 }

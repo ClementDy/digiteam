@@ -20,7 +20,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Student {
 
 	@Id
-	private long nip;
+	private Integer nip;
 	private String firstName;
 	private String lastName;
 	private int phone;
@@ -117,11 +117,11 @@ public class Student {
 	}
 	
 
-	public long getNip() {
+	public Integer getNip() {
 		return nip;
 	}
 
-	public void setNip(long nip) {
+	public void setNip(Integer nip) {
 		this.nip = nip;
 	}
 
