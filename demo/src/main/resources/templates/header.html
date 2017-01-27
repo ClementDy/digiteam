@@ -27,20 +27,20 @@
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li><a href="home">Formulaire<span
-								class="home">(current)</span></a></li>
-						<li><a href="contracts">Contrats</a></li>
+						<li id="candidatures"><a th:href="@{/home}">Candidatures<span
+								class="home"></span></a></li>
+						<li id="offers"><a th:href="@{/contracts}" >Offres</a></li>
 						<li><a href="#">Link</a></li>
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown" role="button" aria-haspopup="true"
-							aria-expanded="false">Mon compte<span class="caret"></span></a>
+							aria-expanded="false"><span th:text="${student.lastName}"></span><span> </span><span  th:text="${student.firstName}"></span><span> </span><span class="glyphicon glyphicon-user"></span></a>
 							<ul class="dropdown-menu">
 								<li><a href="#">Param&egrave;tres</a></li>
 								<li role="separator" class="divider"></li>
-								<li><a href="#">D&eacute;connexion</a></li>
+								<li><a th:href="@{/authentication}">D&eacute;connexion</a></li>
 							</ul></li>
 					</ul>
 				</div>
@@ -65,5 +65,6 @@
 	border: 1px solid #E8E8E8;
 }
 </style>
+
 </body>
 </html>
