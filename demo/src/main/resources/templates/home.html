@@ -40,7 +40,7 @@
 			<li id="ongletLille1"><a href="#5" data-toggle="tab">Souhaits</a></li>
 			<li id="ongletLille1"><a href="#6" data-toggle="tab">Disponibilit&eacute;s</a></li>
 			<li id="ongletLille1"><a href="#7" data-toggle="tab">Divers</a></li>
-			<li id="ongletLille1"><a href="#8" data-toggle="tab">Fin</a></li>
+			<li id="ongletLille1"><a href="#8" data-toggle="tab">Publication</a></li>
 		</ul>
 
 		<form accept-charset="UTF-8" th:action="@{/home}"
@@ -52,11 +52,9 @@
 						<div class="contentPane">
 							<h2>Introduction</h2>
 							<br> <br>
-							<p>Afin d'enregistrer votre candidature, vous devez remplir
-								tous les champs de chaque onglet.</p>
-							<p>Une fois cette étape réalisée, vous pouvez enregistrer
-								votre candidature en cliquant sur le bouton enregistrer dans
-								l'onglet "Fin".</p>
+							<p>Afin de publier votre candidature, vous devez remplir
+								tous les champs obligatoires de chaque onglet.</p>
+							<p> Vous pouvez enregistrer vos modifications en cliquant sur le bouton enregistrer en bas de chaque formulaire.</p>
 						</div>
 					</div>
 
@@ -96,6 +94,15 @@
 					</div>
 				</div>
 			</div>
+			
+			<br>
+			
+			<div class="row">
+				<article class="col-md-12 col-sm-12">
+					<input type="submit" class="btn btn-lille1" value="Enregistrer" onclick="selectMission()">
+				</article>
+			</div>
+		
 		</form>
 	</div>
 	<br>

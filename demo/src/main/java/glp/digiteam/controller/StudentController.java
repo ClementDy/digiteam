@@ -92,8 +92,6 @@ public class StudentController {
 			student=studentService.getStudentByNip(student.getNip());
 		}
 		
-		System.out.println("YY----"+student.toString());
-		
 	
 		
 		model.addAttribute("student", student);
@@ -115,14 +113,14 @@ public class StudentController {
 	}
 
 	@RequestMapping(value = "/home", method = RequestMethod.POST)
-	public String addEtudiant(@ModelAttribute Student std,BindingResult bindingResult, @RequestParam("file") MultipartFile file,
+	public ModelAndView addEtudiant(@ModelAttribute Student std,BindingResult bindingResult, @RequestParam("file") MultipartFile file,
 	RedirectAttributes redirectAttributes, Model model, Errors e, HttpSession session) {
 
 		if(bindingResult.hasErrors()){
 			for (ObjectError error : bindingResult.getAllErrors()) {
 				System.out.println(error);
 			}
-			return "home";
+			return new ModelAndView("home");
 		}
 		
 		Student  realStudent;
@@ -157,7 +155,7 @@ public class StudentController {
 					"You successfully uploaded " + file.getOriginalFilename() + "!");
 		}
 
-		return "result";
+		return new ModelAndView("home");
 	}
 
 	/*
