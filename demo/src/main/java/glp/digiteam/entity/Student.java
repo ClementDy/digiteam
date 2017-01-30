@@ -60,8 +60,10 @@ public class Student {
 		for (int i = 0; i < 5; i++) {
 			externalContracts.add(new ExternalContract(this));
 		}
+		if(trainings.size()!=6){
 		for (int i = 0; i < 6; i++) {
 			trainings.add(new Training(this));
+		}
 		}
 	}
 	

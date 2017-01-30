@@ -87,6 +87,7 @@ public class StudentController {
 			student.getTrainings().get(0).setDate(trainingLDAP.getIns_ANNEE());
 			student.getTrainings().get(0).setName(trainingLDAP.getIns_LIBPARCOURS());
 			student.getTrainings().get(0).setPlace("Lille");	
+			
 		}
 		else {
 			student=studentService.getStudentByNip(student.getNip());
@@ -140,6 +141,15 @@ public class StudentController {
 		
 		std.getMisc().setId(realStudent.getMisc().getId());
 		std.getMisc().setStudent(realStudent);
+		
+		for (int i = 0; i < std.getTrainings().size(); i++) {
+			std.getTrainings().get(i).setId(realStudent.getTrainings().get(i).getId());
+			std.getTrainings().get(i).setStudent(realStudent);
+		}
+		for (int i = 0; i < std.getExternalContracts().size(); i++) {
+			std.getExternalContracts().get(i).setId(realStudent.getExternalContracts().get(i).getId());
+			std.getExternalContracts().get(i).setStudent(realStudent);
+		}
 		
 		}
 		
