@@ -23,6 +23,6 @@ public class OfferController {
 		
 		student=(Student) session.getAttribute("student");
 		model.addAttribute("student", student);
-		return "contractsHome";
+		return "offers/offersHome";
 	}
 }
