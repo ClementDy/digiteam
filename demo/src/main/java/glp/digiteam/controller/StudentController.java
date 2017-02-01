@@ -68,18 +68,20 @@ public class StudentController {
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public ModelAndView hello(Model model,HttpSession session) {
-		
+		System.out.println("debut de home GET");
 		if(session.getAttribute("student")==null){
 			return new ModelAndView("redirect:authentication");
 		}
 		
 		student=(Student) session.getAttribute("student");
 		
+		System.out.println("Home GET Avant le premier if");
 		if (studentService.getStudentByNip(student.getNip())==null){
+			System.out.println("Home GET Dans le premier if");
 			StudentLDAP studentLDAP = studentLDAPService.getStudentLDAP(student.getNip());
 			
 			TrainingLDAP trainingLDAP = trainingLDAPService.getTrainingLDAP(2017, student.getNip());
-			
+			System.out.println("Home GET Apres la recup LDAP");
 			student.setFirstName(studentLDAP.getEtu_prenom());
 			student.setLastName(studentLDAP.getEtu_nom());
 			student.setNationality(studentLDAP.getEtu_libnationalite());
@@ -87,16 +89,17 @@ public class StudentController {
 			student.getTrainings().get(0).setDate(trainingLDAP.getIns_ANNEE());
 			student.getTrainings().get(0).setName(trainingLDAP.getIns_LIBPARCOURS());
 			student.getTrainings().get(0).setPlace("Lille");	
-			
+			System.out.println("Home GET fin du if");
 		}
 		else {
+			System.out.println("dans le else");
 			student=studentService.getStudentByNip(student.getNip());
 		}
 		
 	
 		
 		model.addAttribute("student", student);
-		
+		System.out.println("Home GET avant les saves");
 		missionRepository.save(new Mission("Accueil des étudiants"));
 		missionRepository.save(new Mission("Aide à l'insertion professionelle"));
 		missionRepository.save(new Mission("Animation culturelles scientifiques sportives et sociales"));
@@ -109,7 +112,7 @@ public class StudentController {
 		missionRepository.save(new Mission("Tutorat"));
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
-
+		System.out.println("Juste avant la fin");
 		return new ModelAndView("home");
 	}
 

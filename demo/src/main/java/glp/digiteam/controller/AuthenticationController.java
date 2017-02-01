@@ -31,7 +31,9 @@ public class AuthenticationController {
 	
 	@RequestMapping(value ="/authentication", method = RequestMethod.POST)
 	public ModelAndView getStudent(@Valid @ModelAttribute Student student,BindingResult bindingresult, Model model, HttpSession session) {
+		System.out.println("Authentication methode POST");
 		session.setAttribute("student", student);
+		System.out.println("Authentication methode POST:apres set Attribute");
 		return new ModelAndView("redirect:/home");
 		
 	}
