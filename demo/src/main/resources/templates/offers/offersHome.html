@@ -25,114 +25,125 @@
 <body onload="activeNav('offers')">
 
 	<div th:include="header::header"></div>
-	<div style="text-align: center" class="container">
-		<br>
-	</div>
 
 	<div class="container">
+		<br>
 
-		<div class="titreOffre">
-			<h3>Mes offres en cours</h3>
+		<button type="button" class="btn btn-lille1" data-toggle="modal" data-target="#myModal">Cr&eacute;er une nouvelle
+			offre</button>
+		
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Cr&eacute;ation d'une nouvelle offre.</h4>
+					</div>
+					<div class="modal-body">
+						<button class="btn btn-lille1">Offre générique</button>
+						<button class="btn btn-lille1">Offre standard</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<br>
+		<div class="panel-group" id="accordion" role="tablist"
+			aria-multiselectable="true">
+			<div class="panel panel-default">
+				<div class="panel-heading titreOffre" role="tab" id="headingOne">
+					<h4 class="panel-title">
+						<a role="button" data-toggle="collapse" data-parent="#accordion"
+							href="#collapseOne" aria-expanded="true"
+							aria-controls="collapseOne"> Mes offres en cours <span
+							class="caret"></span></a>
+					</h4>
+				</div>
+				<div id="collapseOne" class="panel-collapse collapse in"
+					role="tabpanel" aria-labelledby="headingOne">
+					<div class="panel-body">
+						<table class="table table-responsive">
+
+							<thead>
+								<tr>
+									<td><strong>N° de l'offre</strong></td>
+									<td><strong>Libell&eacute;</strong></td>
+									<td><strong>Responsable</strong></td>
+									<td><strong>Date</strong></td>
+									<td></td>
+								</tr>
+
+							</thead>
+							<tr>
+								<td>Offre n°1</td>
+								<td>Surveillant d'examen d'Anglais</td>
+								<td>Monsieur Duchemin</td>
+								<td>26/01/2016</td>
+								<td>
+									<button type="button" class="btn btn-success"
+										aria-label="Left Align">
+										<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+									</button>
+									<button type="button" class="btn btn-primary"
+										aria-label="Left Align">
+										<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+									</button>
+									<button class="btn btn-warning">Dépublier</button>
+								</td>
+							</tr>
+
+
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading  titreOffre" role="tab" id="headingTwo">
+					<h4 class="panel-title">
+						<a class="collapsed" role="button" data-toggle="collapse"
+							data-parent="#accordion" href="#collapseTwo"
+							aria-expanded="false" aria-controls="collapseTwo"> Mes offres
+							en attente de validation <span class="caret"></span>
+						</a>
+					</h4>
+				</div>
+				<div id="collapseTwo" class="panel-collapse collapse"
+					role="tabpanel" aria-labelledby="headingTwo">
+					<div class="panel-body"></div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading  titreOffre" role="tab" id="headingThree">
+					<h4 class="panel-title">
+						<a class="collapsed" role="button" data-toggle="collapse"
+							data-parent="#accordion" href="#collapseThree"
+							aria-expanded="false" aria-controls="collapseThree"> Mes
+							offres passées <span class="caret"></span>
+						</a>
+					</h4>
+				</div>
+				<div id="collapseThree" class="panel-collapse collapse"
+					role="tabpanel" aria-labelledby="headingThree">
+					<div class="panel-body"></div>
+				</div>
+			</div>
 		</div>
 
-		<table class="table table-responsive">
-
-			<thead>
-				<tr>
-					<td>N° de l'offre</td>
-					<td>Libell&eacute;</td>
-					<td>Responsable</td>
-					<td>Date</td>
-					<td></td>
-				</tr>
-
-			</thead>
-			<tr>
-				<td>Offre n°1</td>
-				<td>Surveillant d'examen d'Anglais</td>
-				<td>Monsieur Duchemin</td>
-				<td>2601/2016</td>
-				<td>
-					<button type="button" class="btn btn-success"
-						aria-label="Left Align">
-						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-					</button>
-					<button type="button" class="btn btn-danger"
-						aria-label="Left Align">
-						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-					</button>
-				</td>
-			</tr>
-			<tr>
-				<td>Offre n°1</td>
-				<td>Surveillant d'examen d'Anglais</td>
-				<td>Monsieur Duchem3in</td>
-				<td>2601/2016</td>
-				<td>
-					<button type="button" class="btn btn-success"
-						aria-label="Left Align">
-						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-					</button>
-					<button type="button" class="btn btn-danger"
-						aria-label="Left Align">
-						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-					</button>
-				</td>
-			</tr>
-			<tr>
-				<td>Offre n°1</td>
-				<td>Surveillant d'examen d'Anglais</td>
-				<td>Monsieur Duchemin</td>
-				<td>2601/2016</td>
-				<td>
-					<button type="button" class="btn btn-success"
-						aria-label="Left Align">
-						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-					</button>
-					<button type="button" class="btn btn-danger"
-						aria-label="Left Align">
-						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-					</button>
-				</td>
-			</tr>
-		</table>
-
-		<div class="titreOffre">
-			<h3>Mes offres pass&eacute;es</h3>
-		</div>
-
-		<table class="table table-responsive">
-			<tr>
-				<td>Offre n°1</td>
-				<td>Surveillant d'examen d'Anglais</td>
-				<td>Monsieur Duchemin</td>
-				<td>2601/2016</td>
-				<td>
-					<button type="button" class="btn btn-success"
-						aria-label="Left Align">
-						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-					</button>
-					<button type="button" class="btn btn-danger"
-						aria-label="Left Align">
-						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-					</button>
-				</td>
-			</tr>
-		</table>
 
 
-		<div class="boutonPlus">
-			<button class="boutonRond">+</button>
-		</div>
 	</div>
 </body>
 
 <style>
+
+.fade{
+	text-align:center;
+}
 .container {
 	border: solid 1px #ae2573;
 }
 
-.titreOffre {
+.titreOffre, .panel-default>.panel-heading {
 	background-color: #ae2573;
 	color: white;
 	text-align: center;
@@ -146,6 +157,12 @@
 	border-radius: 50%;
 	border: none;
 	color: white;
+}
+
+.btn-lille1 {
+	background-color: #ae2573;
+	color: white;
+	margin-bottom: 10px;
 }
 
 .boutonPlus {
@@ -179,7 +196,13 @@
 	background-color: #ae2573;
 	color: #337ab7;
 }
-
-
 </style>
+
+<script>
+	function newOffer() {
+		alert("lol");
+	}
+</script>
+
+
 </html>
