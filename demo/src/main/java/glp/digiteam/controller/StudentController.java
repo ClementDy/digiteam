@@ -99,17 +99,6 @@ public class StudentController {
 	
 		
 		model.addAttribute("student", student);
-		System.out.println("Home GET avant les saves");
-		missionRepository.save(new Mission("Accueil des étudiants"));
-		missionRepository.save(new Mission("Aide à l'insertion professionelle"));
-		missionRepository.save(new Mission("Animation culturelles scientifiques sportives et sociales"));
-		missionRepository.save(new Mission("Assistance et accompagnement des étudiants handicapés"));
-		missionRepository.save(new Mission("Enquêtes"));
-		missionRepository.save(new Mission("Promotion de l'offre de formation"));
-		missionRepository.save(new Mission("Secrétariat d'examens"));
-		missionRepository.save(new Mission("Service d'appui aux personnels de bibliothèque"));
-		missionRepository.save(new Mission("Soutien informatique et aide à l'utilisation des nouvelles technologies"));
-		missionRepository.save(new Mission("Tutorat"));
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
 		System.out.println("Juste avant la fin");
