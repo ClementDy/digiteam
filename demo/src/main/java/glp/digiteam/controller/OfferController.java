@@ -25,4 +25,13 @@ public class OfferController {
 		model.addAttribute("student", student);
 		return "offers/offersHome";
 	}
+	
+	@RequestMapping(value = "/newGeneriqueOffer", method = RequestMethod.GET)
+	public String newGeneriqueOffer(Model model,HttpSession session) {
+		
+		System.out.println("okkkkk");
+		student=(Student) session.getAttribute("student");
+		model.addAttribute("student", student);
+		return "offers/newGeneriqueOffer";
+	}
 }
