@@ -1,7 +1,6 @@
 package glp.digiteam.controller;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -28,7 +27,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import glp.digiteam.entity.Mission;
 import glp.digiteam.entity.Student;
-import glp.digiteam.entity.Training;
 import glp.digiteam.ldap.StudentLDAP;
 import glp.digiteam.ldap.StudentLDAPService;
 import glp.digiteam.ldap.TrainingLDAP;
@@ -64,7 +62,12 @@ public class StudentController {
 		return "/refound/home";
 	}
 	
-		
+	@RequestMapping(value = "/monprofil", method = RequestMethod.GET)
+	public String monprofil(Model model,HttpSession session) {
+		student=(Student) session.getAttribute("student");
+		model.addAttribute("student", student);
+		return "monprofil";
+	}
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public ModelAndView hello(Model model,HttpSession session) {

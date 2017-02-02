@@ -1,6 +1,5 @@
 package glp.digiteam.controller;
 
-import javax.persistence.metamodel.SetAttribute;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 

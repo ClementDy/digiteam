@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -39,6 +39,8 @@
 							aria-expanded="false"><span th:text="${student.lastName}"></span><span> </span><span  th:text="${student.firstName}"></span><span> </span><span class="glyphicon glyphicon-user"></span></a>
 							<ul class="dropdown-menu">
 								<li><a href="#">Param&egrave;tres</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a th:href="@{/monprofil}">Mon Profil</a></li>
 								<li role="separator" class="divider"></li>
 								<li><a th:href="@{/authentication}">D&eacute;connexion</a></li>
 							</ul></li>
