@@ -2,6 +2,7 @@ package glp.digiteam.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.util.modeler.modules.ModelerSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -97,6 +98,12 @@ public class StudentController {
 		else {
 			System.out.println("dans le else");
 			student=studentService.getStudentByNip(student.getNip());
+			try{
+			Resource cvStudent = storageService.loadAsResource(student.getNip().toString());
+			model.addAttribute("file",cvStudent);}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 	
@@ -116,7 +123,7 @@ public class StudentController {
 			for (ObjectError error : bindingResult.getAllErrors()) {
 				System.out.println(error);
 			}
-			return new ModelAndView("home");
+			return new ModelAndView("redirect:home");
 		}
 		
 		Student  realStudent;
@@ -155,12 +162,12 @@ public class StudentController {
 		studentService.saveStudentProfile(std);
 		
 		if (!file.isEmpty()) {
-			storageService.store(file);
+			storageService.store(file,student.getNip());
 			redirectAttributes.addFlashAttribute("message",
 					"You successfully uploaded " + file.getOriginalFilename() + "!");
 		}
 
-		return new ModelAndView("home");
+		return new ModelAndView("redirect:home");
 	}
 
 	/*
