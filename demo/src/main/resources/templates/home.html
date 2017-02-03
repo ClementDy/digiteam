@@ -21,7 +21,7 @@
 
 </head>
 
-<body onload="activeNav('candidatures')">
+<body onload="activeNav('candidatures');initializeMyMission();countChars(document.getElementById('motivations').value);">
 
 	<div th:include="header::header"></div>
 	<div style="text-align: center" class="container">

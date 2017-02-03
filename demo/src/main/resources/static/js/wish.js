@@ -11,29 +11,43 @@ function countChars(val) {
 	}
 }
 
+function initializeMyMission(){
+	MyMissions = document.getElementById("myMissions");
+    AllMissions = document.getElementById("allMissions");
+	if (MyMissions.length > 0) {
+		for(var i = 0; i< MyMissions.options.length-1 ; i++ ){
+			for(var j = 0; j < AllMissions.options.length-1 ; j++ ){
+				if(MyMissions.options[i].text == AllMissions.options[j].text){
+					AllMissions.remove(AllMissions.options[j]);
+				}
+			}
+		}
+		sortlist("allMissions");
+	}
+}
+
 function addMission() {
-	selected = document.getElementById("wish.missions");
+	selected = document.getElementById("myMissions");
     selectMission = document.getElementById("allMissions");
 	if (selected.length < 4 && selectMission.selectedIndex!=-1) {
 		var option = selectMission.options[selectMission.selectedIndex];
 		selected.add(option);
-		sortlist("wish.missions");
+		sortlist("myMissions");
 	}
 }
 
 function removeMission() {
-	selected = document.getElementById("wish.missions");
+	selected = document.getElementById("myMissions");
 	selectMission = document.getElementById("allMissions");
 	if (selected.selectedIndex!=-1) {
 	var option = selected.options[selected.selectedIndex];
-
 	selectMission.add(option);
 	sortlist("allMissions");
 	}
 }
 
 function selectMission(){
-	selected = document.getElementById("wish.missions");
+	selected = document.getElementById("myMissions");
 	for (var i=0; i<selected.options.length; i++) {
 		selected.options[i].selected = true;
 	}

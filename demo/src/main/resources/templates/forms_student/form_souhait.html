@@ -34,9 +34,10 @@
 				</div>
 			</div>
 			<div class="col-md-5">
-				<br> <label> Missions choisis : (4 max)</label> <select
-					size="10" class="form-control" th:field="${student.wish.missions}"
-					multiple="multiple">
+				<br> <label> Missions choisis : (4 max)</label> 
+				<select size="10" class="form-control" id="myMissions"  th:field="${student.wish.missions}"  multiple="multiple">
+					<option th:each="mission : ${student.wish.missions}"
+						th:value="${mission.id}" th:text="${mission.title}"></option>
 				</select>
 			</div>
 		</div>

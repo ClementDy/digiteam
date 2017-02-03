@@ -1,8 +1,8 @@
 package glp.digiteam.controller;
 
+
 import javax.servlet.http.HttpSession;
 
-import org.apache.tomcat.util.modeler.modules.ModelerSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -100,16 +100,19 @@ public class StudentController {
 			student.getTrainings().get(0).setName(trainingLDAP.getIns_LIBPARCOURS());
 			student.getTrainings().get(0).setPlace("Lille");	
 			System.out.println("Home GET fin du if");
+			
 		}
 		else {
 			System.out.println("dans le else");
 			student=studentService.getStudentByNip(student.getNip());
-			/*try{
+			
+			try{
 			Resource cvStudent = storageService.loadAsResource(student.getNip().toString());
 			model.addAttribute("file",cvStudent);}
 			catch (Exception e) {
-				e.printStackTrace();
-			}*/
+			System.out.println("pas de cv trouvé");
+			}
+			
 		}
 		
 	
