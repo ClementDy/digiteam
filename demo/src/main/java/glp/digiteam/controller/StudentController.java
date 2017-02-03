@@ -26,8 +26,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import glp.digiteam.entity.Mission;
-import glp.digiteam.entity.Student;
+import glp.digiteam.entity.student.Mission;
+import glp.digiteam.entity.student.Student;
 import glp.digiteam.ldap.StudentLDAP;
 import glp.digiteam.ldap.StudentLDAPService;
 import glp.digiteam.ldap.TrainingLDAP;

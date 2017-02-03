@@ -1,4 +1,4 @@
-package glp.digiteam.entity;
+package glp.digiteam.entity.student;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import glp.digiteam.entity.Student;
+import glp.digiteam.entity.student.Student;
 import glp.digiteam.services.StudentService;
 
 @RunWith(SpringRunner.class)

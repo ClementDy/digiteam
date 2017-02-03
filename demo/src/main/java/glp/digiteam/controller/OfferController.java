@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import glp.digiteam.entity.Student;
+import glp.digiteam.entity.student.Student;
 
 @EnableAutoConfiguration
 @Controller
@@ -28,9 +28,7 @@ public class OfferController {
 	
 	@RequestMapping(value = "/newGeneriqueOffer", method = RequestMethod.GET)
 	public String newGeneriqueOffer(Model model,HttpSession session) {
-		
-		System.out.println("okkkkk");
-		student=(Student) session.getAttribute("student");
+
 		model.addAttribute("student", student);
 		return "offers/newGeneriqueOffer";
 	}

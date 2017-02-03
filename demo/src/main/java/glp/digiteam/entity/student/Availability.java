@@ -1,4 +1,4 @@
-package glp.digiteam.entity;
+package glp.digiteam.entity.student;
 
 import java.util.Date;
 import javax.persistence.Entity;

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import glp.digiteam.entity.Address;
+import glp.digiteam.entity.student.Address;
 
 public interface AddressRepository extends CrudRepository<Address, Long> {
 

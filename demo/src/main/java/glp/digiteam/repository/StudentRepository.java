@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import glp.digiteam.entity.Student;
+import glp.digiteam.entity.student.Student;
 
 public interface StudentRepository extends CrudRepository<Student, Integer> {
 

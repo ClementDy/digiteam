@@ -1,4 +1,4 @@
-package glp.digiteam.entity;
+package glp.digiteam.entity.offer;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;

@@ -1,4 +1,4 @@
-package glp.digiteam.entity;
+package glp.digiteam.entity.offer;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

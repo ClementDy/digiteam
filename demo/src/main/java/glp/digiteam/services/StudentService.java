@@ -3,7 +3,7 @@ package glp.digiteam.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import glp.digiteam.entity.Student;
+import glp.digiteam.entity.student.Student;
 import glp.digiteam.repository.StudentRepository;
 
 @Service
