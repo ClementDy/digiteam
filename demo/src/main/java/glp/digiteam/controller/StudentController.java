@@ -63,11 +63,17 @@ public class StudentController {
 		return "/refound/home";
 	}
 	
-	@RequestMapping(value = "/monprofil", method = RequestMethod.GET)
-	public String monprofil(Model model,HttpSession session) {
-		student=(Student) session.getAttribute("student");
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+	public String profile(Model model,HttpSession session) {
+		
 		model.addAttribute("student", student);
-		return "monprofil";
+		return "profile";
+	}
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public ModelAndView redirectslash(Model model,HttpSession session) {
+		
+		return new ModelAndView("redirect:authentication");
 	}
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
@@ -98,12 +104,12 @@ public class StudentController {
 		else {
 			System.out.println("dans le else");
 			student=studentService.getStudentByNip(student.getNip());
-			try{
+			/*try{
 			Resource cvStudent = storageService.loadAsResource(student.getNip().toString());
 			model.addAttribute("file",cvStudent);}
 			catch (Exception e) {
 				e.printStackTrace();
-			}
+			}*/
 		}
 		
 	
