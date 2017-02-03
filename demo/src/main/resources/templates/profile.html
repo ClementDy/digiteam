@@ -53,18 +53,18 @@
 	<br>
 	<label th:text="${student.address.complement}" id="complement"></label>
 	<br>
-<label>Ville</label>
-<br>
+	<label>Ville</label>
+	<br>
 	<label th:text="${student.address.city}" id="city"></label>
 	<br>
-<label>Code Postal</label>
-<br>
+	<label>Code Postal</label>
+	<br>
 	<label th:text="${student.address.postalCode}" id="postalCode"></label>
 	<br>
 
 
 
-
+	<h1>Formations</h1>
 	<div class="table-responsive">
 		<table class="table table-striped table-bordered table-hover">
 			<thead>
@@ -76,7 +76,8 @@
 			</thead>
 			<tbody>
 
-				<tr th:each="training, stat : ${student.trainings}">
+				<tr th:each="training, stat : ${student.trainings}"
+					th:if="${student.trainings[__${stat.index}__].date}!=''">
 					<td><label
 						th:text="${student.trainings[__${stat.index}__].date}"></label></td>
 					<td><label
@@ -89,8 +90,183 @@
 		</table>
 
 	</div>
+	<h1>Contrats</h1>
+	<div class="table-responsive">
+		<table class="table table-striped table-bordered table-hover"
+			align="center">
+			<thead>
+				<tr>
+					<th>Employeur</th>
+					<th>Date de d&eacute;but</th>
+					<th>Date de fin</th>
+					<th>Nombre d'heures total</th>
+					<th>Missions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="externalContract, stat : ${student.externalContracts}"
+					th:if="${student.externalContracts[__${stat.index}__].employer}!=''">
+					<td><input type="text" class="form-control"
+						th:value="${student.externalContracts[__${stat.index}__].employer}"
+						th:field="${student.externalContracts[__${stat.index}__].employer}"></td>
+					<td><input type="text" class="form-control"
+						th:value="${student.externalContracts[__${stat.index}__].startDate}"
+						th:field="${student.externalContracts[__${stat.index}__].startDate}"></td>
+					<td><input type="text" class="form-control"
+						th:value="${student.externalContracts[__${stat.index}__].endDate}"
+						th:field="${student.externalContracts[__${stat.index}__].endDate}"></td>
+					<td><input type="text" class="form-control"
+						th:value="${student.externalContracts[__${stat.index}__].hours}"
+						th:field="${student.externalContracts[__${stat.index}__].hours}"></td>
+					<td><input type="text" class="form-control"
+						th:value="${student.externalContracts[__${stat.index}__].missions}"
+						th:field="${student.externalContracts[__${stat.index}__].missions}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<h1>Souhaits</h1>
+	<div class="table-responsive">
+		<table class="table table-striped table-bordered table-hover"
+			align="center">
+			<thead>
+				<tr>
+
+					<th>Missions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="missions, stat : ${student.wish.missions}">
+					<td><label
+						th:text="${student.wish.missions[__${stat.index}__].title}"></label></td>
+			</tbody>
+		</table>
+	</div>
+	<label>Autres missions</label>
+	<br>
+	<label th:text="${student.wish.otherWish}" id="otherWish"></label>
+	<br>
+	<label>Motivations</label>
+	<br>
+	<label th:text="${student.motivation}" id="motivation"></label>
+	<br>
+	<h1>Disponibilités</h1>
+
+	<div class="row">
+		<article class="col-md-3"></article>
+		<article class="col-md-3">
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon" id="sizing-addon3">Du</span> <input
+					th:type="text" class="form-control" id="startDate"
+					placeholder="jj/mm/yyyy" aria-describedby="sizing-addon3"
+					th:field="${student.availability.startDate}" />
+			</div>
+		</article>
+		<article class="col-md-3">
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon" id="sizing-addon3">Au</span> <input
+					class="form-control" th:field="${student.availability.endDate}"
+					placeholder="jj/mm/yyyy" th:type="text"
+					aria-describedby="sizing-addon3" />
+			</div>
+		</article>
+	</div>
 
 
+	<br>
+
+
+	<div>
+
+		<div class="row">
+			<article class="col-md-4"></article>
+			<article class="col-md-4">
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon addonDay" id="sizing-addon3">Lundi</span>
+					<label class="form-control"
+						th:text="${student.availability.startTimeMonday}"
+						placeholder="hh:mm" /></label> <span class="input-group-addon"
+						id="sizing-addon3">à</span> <label class="form-control" dataformatstring="{0:hh:mm tt}" 
+						placeholder="hh:mm"
+						th:text="${student.availability.endTimeMonday}" /></label>
+				</div>
+			</article>
+		</div>
+		<div class="row"
+			th:style="${student.availability.startTimeTuesday}!='' ? 'display:block' : 'display:none'">
+			<article class="col-md-4"></article>
+			<article class="col-md-4">
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon addonDay" id="sizing-addon3">Mardi</span>
+					<label class="form-control"
+						th:text="${student.availability.startTimeTuesday}" /></label> <span
+						class="input-group-addon" id="sizing-addon3">à</span> <label
+						class="form-control" placeholder="hh:mm"
+						th:text="${student.availability.endTimeTuesday}" /></label>
+				</div>
+			</article>
+		</div>
+		<div class="row">
+			<article class="col-md-4"></article>
+			<article class="col-md-4">
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon addonDay" id="sizing-addon3">Mercredi</span>
+					<label class="form-control"
+						th:text="${student.availability.startTimeWednesday}" /></label> <span
+						class="input-group-addon" id="sizing-addon3">à</span> <label
+						class="form-control" placeholder="hh:mm"
+						th:text="${student.availability.endTimeWednesday}" /></label>
+				</div>
+			</article>
+		</div>
+
+		<div class="row">
+			<article class="col-md-4"></article>
+			<article class="col-md-4">
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon addonDay" id="sizing-addon3">Jeudi</span>
+					<label class="form-control"
+						th:text="${student.availability.startTimeThursday}" /></label> <span
+						class="input-group-addon" id="sizing-addon3">à</span> <label
+						class="form-control" placeholder="hh:mm"
+						th:text="${student.availability.endTimeThursday}" /></label>
+				</div>
+			</article>
+		</div>
+
+		<div class="row">
+			<article class="col-md-4"></article>
+			<article class="col-md-4">
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon addonDay" id="sizing-addon3">Vendredi</span>
+					<label class="form-control"
+						th:text="${student.availability.startTimeFriday}" /></label> 
+						<span class="input-group-addon" id="sizing-addon3">à</span> 
+						<label	class="form-control" placeholder="hh:mm" dataformatstring="{0:hh:mm tt}" 
+						th:text="${student.availability.endTimeFriday}" /></label>
+				</div>
+			</article>
+		</div>
+
+	</div>
+	<h1>Divers</h1>
+	<label>nomAsso</label>
+	<br>
+	<label th:if="${student.misc.nameAssociation}!=''" th:text="${student.misc.nameAssociation}" id="nameAssociation"></label>
+	<br>
+	<label>Connaissances Informatiques</label>
+	<br>
+	<label th:text="${student.misc.itKnowledge}" id="conaissancesInfos"></label>
+	<br>
+	<label>Connaissances Informatiques</label>
+	<br>
+	<label th:text="${student.misc.languages}" id="langues"></label>
+	<br>
+	<label>Connaissances Informatiques</label>
+	<br>
+	<label th:text="${student.misc.otherFormations}" id="autresformations"></label>
+	<br>
 </body>
 
 <style>
