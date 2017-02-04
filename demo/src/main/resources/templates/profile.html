@@ -13,11 +13,11 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Profil</title>
 </head>
 <body onload="activeNav('candidatures')">
 	<div th:include="header::header"></div>
-	<h1>Infos</h1>
+	<h4 class="titreFormulaire">Infos perso</h4>
 	<label>Nom</label>
 	<br>
 
@@ -42,8 +42,8 @@
 
 	<label th:text="${student.phone}" id="phone"></label>
 	<br>
-
-	<h1>Adresse</h1>
+	<h4 class="titreFormulaire">CV</h4>
+	<h4 class="titreFormulaire">Adresse</h4>
 	<label>Rue</label>
 	<br>
 
@@ -64,7 +64,7 @@
 
 
 
-	<h1>Formations</h1>
+	<h4 class="titreFormulaire">Formations</h4>
 	<div class="table-responsive">
 		<table class="table table-striped table-bordered table-hover">
 			<thead>
@@ -90,7 +90,7 @@
 		</table>
 
 	</div>
-	<h1>Contrats</h1>
+	<h4 class="titreFormulaire">Contrats</h4>
 	<div class="table-responsive">
 		<table class="table table-striped table-bordered table-hover"
 			align="center">
@@ -126,7 +126,7 @@
 		</table>
 	</div>
 
-	<h1>Souhaits</h1>
+	<h4 class="titreFormulaire">Souhaits</h4>
 	<div class="table-responsive">
 		<table class="table table-striped table-bordered table-hover"
 			align="center">
@@ -151,7 +151,7 @@
 	<br>
 	<label th:text="${student.motivation}" id="motivation"></label>
 	<br>
-	<h1>Disponibilités</h1>
+	<h4 class="titreFormulaire">Disponibilités</h4>
 
 	<div class="row">
 		<article class="col-md-3"></article>
@@ -187,8 +187,8 @@
 					<label class="form-control"
 						th:text="${student.availability.startTimeMonday}"
 						placeholder="hh:mm" /></label> <span class="input-group-addon"
-						id="sizing-addon3">à</span> <label class="form-control" dataformatstring="{0:hh:mm tt}" 
-						placeholder="hh:mm"
+						id="sizing-addon3">à</span> <label class="form-control"
+						dataformatstring="{0:hh:mm tt}" placeholder="hh:mm"
 						th:text="${student.availability.endTimeMonday}" /></label>
 				</div>
 			</article>
@@ -241,19 +241,21 @@
 				<div class="input-group input-group-sm">
 					<span class="input-group-addon addonDay" id="sizing-addon3">Vendredi</span>
 					<label class="form-control"
-						th:text="${student.availability.startTimeFriday}" /></label> 
-						<span class="input-group-addon" id="sizing-addon3">à</span> 
-						<label	class="form-control" placeholder="hh:mm" dataformatstring="{0:hh:mm tt}" 
+						th:text="${student.availability.startTimeFriday}" /></label> <span
+						class="input-group-addon" id="sizing-addon3">à</span> <label
+						class="form-control" placeholder="hh:mm"
+						dataformatstring="{0:hh:mm tt}"
 						th:text="${student.availability.endTimeFriday}" /></label>
 				</div>
 			</article>
 		</div>
 
 	</div>
-	<h1>Divers</h1>
+	<h4 class="titreFormulaire">Divers</h4>
 	<label>nomAsso</label>
 	<br>
-	<label th:if="${student.misc.nameAssociation}!=''" th:text="${student.misc.nameAssociation}" id="nameAssociation"></label>
+	<label th:if="${student.misc.nameAssociation}!=''"
+		th:text="${student.misc.nameAssociation}" id="nameAssociation"></label>
 	<br>
 	<label>Connaissances Informatiques</label>
 	<br>
@@ -314,6 +316,13 @@
 .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand
 	{
 	color: white;
+}
+
+.titreFormulaire {
+	background-color: #ae2573;
+	color: white;
+	margin-bottom: 40px;
+	text-align: center;
 }
 
 .navbar-default .navbar-nav>li>a {

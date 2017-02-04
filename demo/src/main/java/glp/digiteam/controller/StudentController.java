@@ -28,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import glp.digiteam.entity.student.Mission;
 import glp.digiteam.entity.student.Student;
+import glp.digiteam.entity.student.Training;
 import glp.digiteam.ldap.StudentLDAP;
 import glp.digiteam.ldap.StudentLDAPService;
 import glp.digiteam.ldap.TrainingLDAP;
