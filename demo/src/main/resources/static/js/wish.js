@@ -15,8 +15,8 @@ function initializeMyMission(){
 	MyMissions = document.getElementById("myMissions");
     AllMissions = document.getElementById("allMissions");
 	if (MyMissions.length > 0) {
-		for(var i = 0; i< MyMissions.options.length-1 ; i++ ){
-			for(var j = 0; j < AllMissions.options.length-1 ; j++ ){
+		for(var i = 0; i< MyMissions.options.length; i++ ){
+			for(var j = 0; j < AllMissions.options.length; j++ ){
 				if(MyMissions.options[i].text == AllMissions.options[j].text){
 					AllMissions.remove(j);
 				}
@@ -38,11 +38,11 @@ function addMission() {
 
 function removeMission() {
 	selected = document.getElementById("myMissions");
-	selectMission = document.getElementById("allMissions");
-	if (selected.selectedIndex!=-1) {
-	var option = selected.options[selected.selectedIndex];
-	selectMission.add(option);
-	sortlist("allMissions");
+    selectMission = document.getElementById("allMissions");
+	if (selected.length > 0 && selected.selectedIndex!=-1) {
+		var option = selected.options[selected.selectedIndex];
+		selectMission.add(option);
+		sortlist("allMissions");
 	}
 }
 
