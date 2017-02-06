@@ -18,7 +18,7 @@ function initializeMyMission(){
 		for(var i = 0; i< MyMissions.options.length-1 ; i++ ){
 			for(var j = 0; j < AllMissions.options.length-1 ; j++ ){
 				if(MyMissions.options[i].text == AllMissions.options[j].text){
-					AllMissions.remove(AllMissions.options[j]);
+					AllMissions.remove(j);
 				}
 			}
 		}
