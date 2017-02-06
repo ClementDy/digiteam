@@ -64,6 +64,11 @@ public class StudentController {
 		return "/refound/home";
 	}
 	
+	@RequestMapping(value = "/date", method = RequestMethod.GET)
+	public String date(Model model) {
+		return "date";
+	}
+	
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public String profile(Model model,HttpSession session) {
 		
@@ -89,9 +94,9 @@ public class StudentController {
 		System.out.println("Home GET Avant le premier if");
 		if (studentService.getStudentByNip(student.getNip())==null){
 			System.out.println("Home GET Dans le premier if");
-			StudentLDAP studentLDAP = studentLDAPService.getStudentLDAP(student.getNip());
+			StudentLDAP studentLDAP = /* new StudentLDAP(); */ studentLDAPService.getStudentLDAP(student.getNip());
 			
-			TrainingLDAP trainingLDAP = trainingLDAPService.getTrainingLDAP(2017, student.getNip());
+			TrainingLDAP trainingLDAP = /*new TrainingLDAP();*/ trainingLDAPService.getTrainingLDAP(2017, student.getNip());
 			System.out.println("Home GET Apres la recup LDAP");
 			student.setFirstName(studentLDAP.getEtu_prenom());
 			student.setLastName(studentLDAP.getEtu_nom());
