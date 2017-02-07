@@ -2,6 +2,7 @@ package glp.digiteam.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
@@ -13,13 +14,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import glp.digiteam.entity.offer.GenericOffer;
 import glp.digiteam.entity.offer.Offer;
+import glp.digiteam.entity.student.Mission;
 import glp.digiteam.entity.student.Student;
+import glp.digiteam.repository.MissionRepository;
 
 @EnableAutoConfiguration
 @Controller
 @ComponentScan(basePackages = "glp.digiteam.services")
 public class OfferController {
 
+	@Autowired
+	private MissionRepository missionRepository;
+	
 	Student student;
 	
 	@RequestMapping(value = "/contracts", method = RequestMethod.GET)
@@ -35,6 +41,9 @@ public class OfferController {
 		System.out.println("GET offer");
 		Offer offer=new GenericOffer();
 		model.addAttribute("offer", offer);
+		
+		Iterable<Mission> missions = missionRepository.findAll();
+		model.addAttribute("listMission", missions);
 		model.addAttribute("student", student);
 		return "offers/newGeneriqueOffer";
 	}

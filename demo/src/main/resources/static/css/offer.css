@@ -3,3 +3,32 @@
 	color: white;
 	margin-bottom: 10px;
 }
+
+
+h3{
+text-align:center;
+}
+
+
+
+.container {
+	border: solid 1px #ae2573;
+}
+
+.titreOffre {
+	background-color: #ae2573;
+	color: white;
+	text-align: center;
+}
+
+.rowForm {
+	margin-bottom: 10px;
+}
+
+.save{
+	text-align:center;
+}
+
+.service{
+	text-align:right;
+}

@@ -17,6 +17,8 @@ public class GenericOffer implements Offer{
 	private double remuneration;
 	private String remunerationInfo;
 
+	@OneToOne(mappedBy="offer", cascade=CascadeType.ALL)
+	private Service service;
 
 	private String title;
 	private String mission;
@@ -96,6 +98,14 @@ public class GenericOffer implements Offer{
 
 	public void setSkills(String skills) {
 		this.skills = skills;
+	}
+
+	public Service getService() {
+		return service;
+	}
+
+	public void setService(Service service) {
+		this.service = service;
 	}
 	
 	

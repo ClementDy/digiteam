@@ -49,9 +49,9 @@
 
 			<br>
 
-			<div class="row">
+			<div class="row service">
 				<div class="form-group">
-					<p class="control-label col-md-3"> Cette offre est proposée par </p>
+					<p class="control-label"> Cette offre est proposée par </p><!--<label th:value="${offer.service.name}"></label>-->
 				</div>
 			</div>
 			
@@ -66,9 +66,22 @@
 					</div>
 				</div>
 			</div>
+			
+			<br>
+			
+			<div class="row">
+				<div class="form-group col-md-5">
+				<label class="">Type de la mission :</label>
+					<select size="1"
+					class="form-control" id="allMissions">
+					<option th:each="mission : ${listMission}"
+						th:value="${mission.id}" th:text="${mission.title}"></option>
+				</select>
+				</div>
+			</div>
 			<div class="row">
 				<div class="form-group col-md-12">
-					<label>Mission :</label>
+					<label>D&eacute;tails de la mission : </label>
 					<textarea th:field="${offer.mission}" class="form-control" rows="5"></textarea>
 				</div>
 			</div>
@@ -142,9 +155,10 @@
 			</div>
 
 			
-			
-			<div class="row">
-				<article class="col-md-6 col-sm-6"><input type="submit" class="btn btn-lille1" value="Enregistrer"></article>
+			<br>
+			<br>
+			<div class="row save">
+				<article class="col-md-12 col-sm-12"><input type="submit" class="btn btn-lille1" value="Enregistrer"></article>
 			</div>
 
 
@@ -159,32 +173,14 @@
 
 </body>
 
-
 <style>
-
-h3{
-text-align:center;
-}
-
 .row {
 
 margin-left : 10%;
 margin-right:10%;
 }
-.container {
-	border: solid 1px #ae2573;
-}
-
-.titreOffre {
-	background-color: #ae2573;
-	color: white;
-	text-align: center;
-}
-
-.rowForm {
-	margin-bottom: 10px;
-}
 </style>
+
 
 
 </html>
