@@ -14,5 +14,22 @@
 <body>
 <div th:include="header::header"></div>
 </body>
+<div th:fragment="content">
 
+	<div class="container">
+        <div th:if="${student.published}==false" class="jumbotron">
+            <h2>Candidature</h2>
+            <p>Vous n'avez pas de candidature publiée</p>
+            <p>Cliquez créer une candidature ou continuer la saisie d'une candidature</p>
+            <p><a class="btn btn-lille1" th:href="@{/candidature}">START</a></p>        
+        </div>
+         <div th:if="${student.published}==true" class="jumbotron">
+            <h2>Candidature publiée</h2>
+            <p> Vous avez une candidature publiée</p>
+            <a class="btn btn-lille1" href="@{/profile}">Consulter</a>
+            <a class="btn btn-lille1" th:href="@{/candidature}">Modifier</a>
+            <a class="btn btn-lille1" th:href="@{/home(action='unpublish')}">Dépublier</a> 
+        </div>
+    </div>
+</div>
 </html>

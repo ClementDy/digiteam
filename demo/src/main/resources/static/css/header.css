@@ -26,3 +26,30 @@
 	background-color: #ae2573;
 	color: #337ab7;
 }
+
+
+#ongletLille1 {
+	background-color: #ae2573;
+	color: white;
+	border-radius: 4px;
+	margin-bottom: 4px;
+}
+
+
+a {
+	color: white;
+}
+
+.left {
+	text-align: left;
+}
+
+.right {
+	text-align: right;
+}
+
+.btn-lille1 {
+	background-color: #ae2573;
+	color: white;
+	margin-bottom: 10px;
+}

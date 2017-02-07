@@ -82,7 +82,7 @@ public class StudentController {
 	}
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public ModelAndView homeStudent(Model model,HttpSession session) {
+	public ModelAndView homeStudent(Model model,HttpSession session,@RequestParam(value="action", required=false) String action) {
 		
 		if(session.getAttribute("student")==null){
 			return new ModelAndView("redirect:authentication");
@@ -91,38 +91,26 @@ public class StudentController {
 		student=(Student) session.getAttribute("student");
 		
 		if (studentService.getStudentByNip(student.getNip())==null){
-			System.out.println("Home GET Dans le premier if");
 			StudentLDAP studentLDAP = /* new StudentLDAP(); */ studentLDAPService.getStudentLDAP(student.getNip());
-			
 			TrainingLDAP trainingLDAP = /*new TrainingLDAP();*/ trainingLDAPService.getTrainingLDAP(2017, student.getNip());
 			System.out.println("Home GET Apres la recup LDAP");
 			student.setFirstName(studentLDAP.getEtu_prenom());
 			student.setLastName(studentLDAP.getEtu_nom());
-			student.setNationality(studentLDAP.getEtu_libnationalite());
-			student.setEmail(studentLDAP.getEtu_email());
-			student.getTrainings().get(0).setDate(trainingLDAP.getIns_ANNEE());
-			student.getTrainings().get(0).setName(trainingLDAP.getIns_LIBDIPLOME());
-			student.getTrainings().get(0).setPlace("Lille");	
-			System.out.println("Home GET fin du if");
-			
 		}
 		else {
-			System.out.println("dans le else");
 			student=studentService.getStudentByNip(student.getNip());
-			
 			try{
-			Resource cvStudent = storageService.loadAsResource(student.getNip().toString());
-			model.addAttribute("file",cvStudent);}
-			catch (Exception e) {
-			System.out.println("pas de cv trouvé");
+				if(action.equals("unpublish")){
+					studentService.unpublishProfil(student);
+				}
 			}
-			
+			catch(Exception e){
+				
+			}
 		}
 		
 		model.addAttribute("student", student);
-		Iterable<Mission> missions = missionRepository.findAll();
-		model.addAttribute("listMission", missions);
-		
+	
 		return new ModelAndView("homeStudent");
 	}
 	
@@ -175,7 +163,7 @@ public class StudentController {
 	public ModelAndView addEtudiant(@ModelAttribute Student std,BindingResult bindingResult, @RequestParam("file") MultipartFile file,
 		@RequestParam(value="action", required=true) String action, RedirectAttributes redirectAttributes, Model model, Errors e, HttpSession session) {
 		
-		if(action.equals("publish")|| action.equals("save")){
+		if(action.equals("Publier")|| action.equals("Enregistrer")){
 
 		if(bindingResult.hasErrors()){
 			for (ObjectError error : bindingResult.getAllErrors()) {
@@ -215,11 +203,11 @@ public class StudentController {
 		
 		std.setNip(this.student.getNip());
 		
-	    if(action.equals("publish")){
+	    if(action.equals("Publier")){
 		
 	    std.setPublished(true);
 			
-		}else if(action.equals("save")){
+		}else if(action.equals("Enregistrer")){
 	    
 		std.setPublished(false);
 		

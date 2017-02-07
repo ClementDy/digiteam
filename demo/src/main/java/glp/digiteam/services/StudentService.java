@@ -22,4 +22,9 @@ public class StudentService {
 		}
 		return null;
 	}
+	
+	public void unpublishProfil(Student student){
+		student.setPublished(false);
+		studentRepository.save(student);
+	}
 }
