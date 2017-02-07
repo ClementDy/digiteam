@@ -1,127 +1,117 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<title>Informations Personnelles</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
-	rel="stylesheet">
+	<title>Disponibilités</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 </head>
 <body>
 	<div th:fragment="content">
-		<br> <br>
+	
+		<br>
+		<br>
 		<h4 class="titreFormulaire">Vos disponibilit&eacute;s</h4>
 		<br>
-		<div class="container dispos">
 		
-			<div class="row">
-				<article class="col-md-3"></article>
-				 <div class="input-daterange" id="datepicker" >
+		<div class="row">
+			<article class="col-md-3"></article>
+			<div class="input-daterange" id="datepicker" >
 				<article class="col-md-3">
-					<div class="input-group input-group-sm">
-						<span class="input-group-addon" id="sizing-addon3">Du</span>   <input type="text" class="form-control" placeholder="jj/mm/yyyy" name="start" th:field="${student.availability.startDate}" />
+					<div class="input-group">
+						<span class="input-group-addon" id="sizing-addon3">Du</span>
+						<input type="text" class="form-control" placeholder="jj/mm/aaaa" name="start" th:field="${student.availability.startDate}" />
 					</div>
 				</article>
 				<article class="col-md-3">
-					<div class="input-group input-group-sm">
+					<div class="input-group">
 						<span class="input-group-addon" id="sizing-addon3">Au</span> 
-						<input type="text" class="form-control" placeholder="jj/mm/yyyy" name="end" th:field="${student.availability.endDate}" />
+						<input type="text" class="form-control" placeholder="jj/mm/aaaa" name="end" th:field="${student.availability.endDate}" />
 					</div>
 				</article>
 			</div>
-			
-			
-                  
-                    
-                </div>
-
-			<br>
-			
-			
-			<div>
-				
-				<div class="row">
-					<article class="col-md-4"></article>
-					<article class="col-md-4">
-						<div class="input-group input-group-sm">
-							<span class="input-group-addon addonDay" id="sizing-addon3">Lundi</span>
-							<input type="text" placeholder="hh:mm" class="form-control" 
-							th:field="${student.availability.startTimeMonday}" />
-							<span class="input-group-addon" id="sizing-addon3">à</span>
-							<input
-							type="text" class="form-control" placeholder="hh:mm" th:field="${student.availability.endTimeMonday}" />
-						</div>
-					</article>
+		</div>
+		
+		<br>
+		<br>
+		
+		<div class="row">
+			<article class="col-md-4"></article>
+			<article class="col-md-4">
+				<div class="input-group">
+					<span class="input-group-addon addonDay" id="sizing-addon3">Lundi</span>
+					<input type="text" placeholder="hh:mm" class="form-control" 
+					th:field="${student.availability.startTimeMonday}" />
+					<span class="input-group-addon" id="sizing-addon3">à</span>
+					<input type="text" class="form-control" placeholder="hh:mm" th:field="${student.availability.endTimeMonday}" />
 				</div>
-				<div class="row">
-					<article class="col-md-4"></article>
-					<article class="col-md-4">
-						<div class="input-group input-group-sm">
-							<span class="input-group-addon addonDay" id="sizing-addon3">Mardi</span>
-							<input type="text" class="form-control" placeholder="hh:mm"
-							th:field="${student.availability.startTimeTuesday}" />
-							<span class="input-group-addon" id="sizing-addon3">à</span>
-							<input
-							type="text" class="form-control" placeholder="hh:mm" th:field="${student.availability.endTimeTuesday}" />
-						</div>
-					</article>
+			</article>
+		</div>
+		<div class="row">
+			<article class="col-md-4"></article>
+			<article class="col-md-4">
+				<div class="input-group">
+					<span class="input-group-addon addonDay" id="sizing-addon3">Mardi</span>
+					<input type="text" class="form-control" placeholder="hh:mm"
+					th:field="${student.availability.startTimeTuesday}" />
+					<span class="input-group-addon" id="sizing-addon3">à</span>
+					<input
+					type="text" class="form-control" placeholder="hh:mm" th:field="${student.availability.endTimeTuesday}" />
 				</div>
-				<div class="row">
-					<article class="col-md-4"></article>
-					<article class="col-md-4">
-						<div class="input-group input-group-sm">
-							<span class="input-group-addon addonDay" id="sizing-addon3">Mercredi</span>
-							<input type="text" class="form-control" placeholder="hh:mm"
-								th:field="${student.availability.startTimeWednesday}" />
-							<span class="input-group-addon" id="sizing-addon3">à</span>
-							<input
-								type="text" class="form-control" placeholder="hh:mm" th:field="${student.availability.endTimeWednesday}" />
-						</div>
-					</article>
+			</article>
+		</div>
+		<div class="row">
+			<article class="col-md-4"></article>
+			<article class="col-md-4">
+				<div class="input-group">
+					<span class="input-group-addon addonDay" id="sizing-addon3">Mercredi</span>
+					<input type="text" class="form-control" placeholder="hh:mm"
+						th:field="${student.availability.startTimeWednesday}" />
+					<span class="input-group-addon" id="sizing-addon3">à</span>
+					<input
+						type="text" class="form-control" placeholder="hh:mm" th:field="${student.availability.endTimeWednesday}" />
 				</div>
-			
-				<div class="row">
-					<article class="col-md-4"></article>
-					<article class="col-md-4">
-						<div class="input-group input-group-sm">
-							<span class="input-group-addon addonDay" id="sizing-addon3">Jeudi</span>
-							<input type="text" class="form-control" placeholder="hh:mm" 
-								th:field="${student.availability.startTimeThursday}" />
-							<span class="input-group-addon" id="sizing-addon3">à</span>
-							<input
-							type="text" class="form-control" placeholder="hh:mm"  th:field="${student.availability.endTimeThursday}" />
-						</div>
-					</article>
+			</article>
+		</div>
+		<div class="row">
+			<article class="col-md-4"></article>
+			<article class="col-md-4">
+				<div class="input-group">
+					<span class="input-group-addon addonDay" id="sizing-addon3">Jeudi</span>
+					<input type="text" class="form-control" placeholder="hh:mm" 
+						th:field="${student.availability.startTimeThursday}" />
+					<span class="input-group-addon" id="sizing-addon3">à</span>
+					<input
+					type="text" class="form-control" placeholder="hh:mm"  th:field="${student.availability.endTimeThursday}" />
 				</div>
-				
-				<div class="row">
-					<article class="col-md-4"></article>
-					<article class="col-md-4">
-						<div class="input-group input-group-sm">
-							<span class="input-group-addon addonDay" id="sizing-addon3">Vendredi</span>
-							<input type="text" class="form-control" placeholder="hh:mm"
-								th:field="${student.availability.startTimeFriday}" />
-							<span class="input-group-addon" id="sizing-addon3">à</span>
-							<input
-								type="text" class="form-control" placeholder="hh:mm"  th:field="${student.availability.endTimeFriday}" />
-						</div>
-					</article>
+			</article>
+		</div>
+		<div class="row">
+			<article class="col-md-4"></article>
+			<article class="col-md-4">
+				<div class="input-group">
+					<span class="input-group-addon addonDay" id="sizing-addon3">Vendredi</span>
+					<input type="text" class="form-control" placeholder="hh:mm"
+						th:field="${student.availability.startTimeFriday}" />
+					<span class="input-group-addon" id="sizing-addon3">à</span>
+					<input
+						type="text" class="form-control" placeholder="hh:mm"  th:field="${student.availability.endTimeFriday}" />
 				</div>
-					
-			</div>		
-					
-							
-			
-			<br> <br>
-			<div class="indications">
-				<p>
-					Veuillez entrez les créneaux entre lesquels vous êtes disponible.<br>
-					Exemple Lundi de 10 heures à 18 heures : Dans la colonne Lundi
-					entrez 10 à 18.
-				</p>
-			</div>
-			<br>
+			</article>
+		</div>
+		
+		<br>
+		<br>
+		<div class="indications">
+			<p>
+				Veuillez entrez les créneaux entre lesquels vous êtes disponible.<br>
+				Exemple Lundi de 10 heures à 18 heures : Dans la colonne Lundi
+				entrez 10 à 18.
+			</p>
+		</div>
+		<br>
+	</div>
 </body>
-
 
 </html>
