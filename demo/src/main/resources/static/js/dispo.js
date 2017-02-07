@@ -1,8 +1,11 @@
  // When the document is ready
 $(document).ready(function () {
 
-$('.input-daterange').datepicker({
-    todayBtn: "linked"
-	});
+$('.input-date, .input-daterange').datepicker({
+	language: 'fr',
+	autoclose: true,
+	clearBtn: true,
+	keyboardNavigation: false
+});
 
 });

@@ -4,9 +4,8 @@
 <head>
 	<title>Contrats</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
-	rel="stylesheet">
+	<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 </head>
 <body>
 	<div th:fragment="content">
@@ -26,8 +25,7 @@
 				<thead>
 					<tr>
 						<th>Employeur</th>
-						<th>Date de d&eacute;but</th>
-						<th>Date de fin</th>
+						<th>Période</th>
 						<th>Nombre d'heures total</th>
 						<th>Missions</th>
 					</tr>
@@ -35,8 +33,18 @@
 				<tbody>
 					<tr th:each="externalContract, stat : ${student.externalContracts}">
                         <td><input type="text" class="form-control" th:value="${student.externalContracts[__${stat.index}__].employer}" th:field="${student.externalContracts[__${stat.index}__].employer}"></td>
-						<td><input type="text" class="form-control" th:value="${student.externalContracts[__${stat.index}__].startDate}" th:field="${student.externalContracts[__${stat.index}__].startDate}"></td>
-                        <td><input type="text" class="form-control" th:value="${student.externalContracts[__${stat.index}__].endDate}" th:field="${student.externalContracts[__${stat.index}__].endDate}"></td>
+					
+						<td>
+					    <div class="input-group input-daterange">
+						    <div class="input-group-addon">Du</div>
+						    <input type="text" class="form-control" th:value="${student.externalContracts[__${stat.index}__].startDate}" th:field="${student.externalContracts[__${stat.index}__].startDate}"
+						    readonly="readonly" style="cursor:text; background:white;">
+						    <div class="input-group-addon">au</div>
+						    <input type="text" class="form-control" th:value="${student.externalContracts[__${stat.index}__].endDate}" th:field="${student.externalContracts[__${stat.index}__].endDate}"
+						    readonly="readonly" style="cursor:text; background:white;">
+						</div>
+						</td>
+					    
                         <td><input type="text" class="form-control" th:value="${student.externalContracts[__${stat.index}__].hours}" th:field="${student.externalContracts[__${stat.index}__].hours}"></td>
                         <td><input type="text" class="form-control" th:value="${student.externalContracts[__${stat.index}__].missions}" th:field="${student.externalContracts[__${stat.index}__].missions}"></td>
 					</tr>
