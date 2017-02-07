@@ -82,9 +82,7 @@ public class StudentController {
 	}
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public ModelAndView hello(Model model,HttpSession session) {
-		
-		System.out.println("debut de home GET");
+	public ModelAndView homeStudent(Model model,HttpSession session) {
 		
 		if(session.getAttribute("student")==null){
 			return new ModelAndView("redirect:authentication");
@@ -92,7 +90,6 @@ public class StudentController {
 		
 		student=(Student) session.getAttribute("student");
 		
-		System.out.println("Home GET Avant le premier if");
 		if (studentService.getStudentByNip(student.getNip())==null){
 			System.out.println("Home GET Dans le premier if");
 			StudentLDAP studentLDAP = /* new StudentLDAP(); */ studentLDAPService.getStudentLDAP(student.getNip());
@@ -125,11 +122,56 @@ public class StudentController {
 		model.addAttribute("student", student);
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
-		System.out.println("Juste avant la fin");
-		return new ModelAndView("home");
+		
+		return new ModelAndView("homeStudent");
+	}
+	
+	
+	@RequestMapping(value = "/candidature", method = RequestMethod.GET)
+	public ModelAndView hello(Model model,HttpSession session) {
+		if(session.getAttribute("student")==null){
+			return new ModelAndView("redirect:authentication");
+		}
+		
+		student=(Student) session.getAttribute("student");
+		
+		if (studentService.getStudentByNip(student.getNip())==null){
+			System.out.println("Home GET Dans le premier if");
+			StudentLDAP studentLDAP = /* new StudentLDAP(); */ studentLDAPService.getStudentLDAP(student.getNip());
+			
+			TrainingLDAP trainingLDAP = /*new TrainingLDAP();*/ trainingLDAPService.getTrainingLDAP(2017, student.getNip());
+			System.out.println("Home GET Apres la recup LDAP");
+			student.setFirstName(studentLDAP.getEtu_prenom());
+			student.setLastName(studentLDAP.getEtu_nom());
+			student.setNationality(studentLDAP.getEtu_libnationalite());
+			student.setEmail(studentLDAP.getEtu_email());
+			student.getTrainings().get(0).setDate(trainingLDAP.getIns_ANNEE());
+			student.getTrainings().get(0).setName(trainingLDAP.getIns_LIBDIPLOME());
+			student.getTrainings().get(0).setPlace("Lille");	
+			System.out.println("Home GET fin du if");
+			
+		}
+		else {
+			System.out.println("dans le else");
+			student=studentService.getStudentByNip(student.getNip());
+			
+			try{
+			Resource cvStudent = storageService.loadAsResource(student.getNip().toString());
+			model.addAttribute("file",cvStudent);}
+			catch (Exception e) {
+			System.out.println("pas de cv trouvé");
+			}
+			
+		}
+		
+		model.addAttribute("student", student);
+		Iterable<Mission> missions = missionRepository.findAll();
+		model.addAttribute("listMission", missions);
+		
+		return new ModelAndView("candidature");
 	}
 
-	@RequestMapping(value = "/home", method = RequestMethod.POST)
+	@RequestMapping(value = "/candidature", method = RequestMethod.POST)
 	public ModelAndView addEtudiant(@ModelAttribute Student std,BindingResult bindingResult, @RequestParam("file") MultipartFile file,
 		@RequestParam(value="action", required=true) String action, RedirectAttributes redirectAttributes, Model model, Errors e, HttpSession session) {
 		
@@ -139,7 +181,7 @@ public class StudentController {
 			for (ObjectError error : bindingResult.getAllErrors()) {
 				System.out.println(error);
 			}
-			return new ModelAndView("redirect:home");
+			return new ModelAndView("redirect:candidature");
 		}
 		
 		Student  realStudent;
@@ -193,7 +235,7 @@ public class StudentController {
 		}
 		
 		}
-		return new ModelAndView("redirect:home");
+		return new ModelAndView("redirect:candidature");
 	}
 
 	/*
