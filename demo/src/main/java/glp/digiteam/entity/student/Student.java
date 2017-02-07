@@ -19,6 +19,7 @@ public class Student {
 
 	@Id
 	private Integer nip;
+	private Integer civilite;
 	private String firstName;
 	private String lastName;
 	private int phone;
@@ -207,6 +208,14 @@ public class Student {
 
 	public void setTrainings(List<Training> trainings) {
 		this.trainings = trainings;
+	}
+
+	public Integer getCivilite() {
+		return civilite;
+	}
+
+	public void setCivilite(Integer civilite) {
+		this.civilite = civilite;
 	}
 
 	@Override
