@@ -1,9 +1,14 @@
 package glp.digiteam.entity.offer;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -15,9 +20,9 @@ public class Service {
 	
 	String name;
 
-	@OneToOne
-	private GenericOffer offer;
-	
+
+	@OneToMany(mappedBy="service", cascade=CascadeType.ALL,targetEntity=AbstractOffer.class)
+	private List<Offer> offers = new ArrayList<>();
 	
 	public Service(){
 		
@@ -39,13 +44,15 @@ public class Service {
 		this.id = id;
 	}
 
-	public GenericOffer getOffer() {
-		return offer;
+	public List<Offer> getOffers() {
+		return offers;
 	}
 
-	public void setOffer(GenericOffer offer) {
-		this.offer = offer;
+	public void setOffers(List<Offer> offers) {
+		this.offers = offers;
 	}
+
+
 	
 	
 	
