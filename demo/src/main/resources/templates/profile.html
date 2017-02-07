@@ -20,18 +20,102 @@
 	<div class="container ">
 		<div class="tab-pane active">
 			<h4 class="titreFormulaire">Infos perso</h4>
-			<label>Civilite</label>
-			<label th:if="${student.civilite}==0">Monsieur</label><label th:if="${student.civilite}==1">Madame</label> <br> 
-			<label>Nom</label> <br> <label th:text="${student.lastName}"
-				id="lastName"></label> <br> <label>Prenom</label> <br> <label
-				th:text="${student.firstName}" id="firstName"></label> <br> <label>Email</label>
-			<br> <label th:text="${student.email}" id="email"></label> <br>
-			<label>Nationalite</label> <br> <label
-				th:text="${student.nationality}" id="nationality"></label> <br>
-			<label>Phone</label> <br> <label th:text="${student.phone}"
-				id="phone"></label> <br>
+			
+				<label th:if="${student.civilite}==0">Monsieur</label>
+					<label th:if="${student.civilite}==1">Madame</label>
+				<label th:text="${student.lastName}"id="lastName"></label>  
+			<label th:text="${student.firstName}" id="firstName"></label>
+				
+				
+				<br>
+				<label th:text="${student.email}"id="email"></label>
+				<br>
+					<label th:text="${student.phone}"id="phone"></label>
+				<br>
+				<label for="selectbasic">Nationalité </label>
+				<label
+				th:text="${student.nationality}" id="nationality"></label>
+				<br>
+				<label th:if="${student.nationality}!='FRANCAISE'"
+				th:text="${student.dateVISA}" id="dateVISA"></label>
+				<br>
+				
+			
 			<h4 class="titreFormulaire">CV</h4>
 			<h4 class="titreFormulaire">Adresse</h4>
+			<div class="row">
+			<div class="col-md-6 col-xs-6">
+				<div class="row">
+					<div class="col-md-6">
+					<label>Rue : </label>
+					</div> 
+					<div class="col-md-6">
+					<label
+				th:text="${student.address.street}" id="street"></label>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-md-6">
+					<label>Complement : </label> 
+					</div>
+					<div class="col-md-6">
+					<label th:text="${student.address.complement}"	id="complement"></label>
+					</div>
+				</div>
+				<br>
+				
+			<div class="col-md-6 col-xs-6">
+				<div class="row">
+					<div class="col-md-6">
+					<label>Pr&eacute;nom : </label>
+					</div> 
+					<div class="col-md-6">
+					<input class="form-control" th:value="${student.firstName}" th:field="${student.firstName}" id="firstName" readonly>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-md-6">
+					<label>T&eacute;l&eacute;phone : </label>
+					</div>
+					<div class="col-md-6">
+					<input class="form-control" th:value="${student.phone}" th:field="${student.phone}" type="text" id="phone">
+					</div>
+				</div>
+			</div>
+			<br>
+		</div>
+		<br>
+
+		<div class="row">
+			<div class="col-md-6 col-xs-6">
+				<div class="row">
+					<div class="col-md-6">
+					<label for="radios">Titre de séjour : </label>
+					</div> 
+					<div class="col-md-6">
+					<label>Oui</label>
+					<input type="radio" name="radios" id="validVISA" value="validVISA" onClick="test()">
+					<label>Non</label>
+					<input checked type="radio" name="radios" id="InvalidVISA" onClick="test()" value="InvalidVISA">
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 col-xs-6">
+				<div class="row">
+					<div class="col-md-6" >
+					<label class="divExpiryDateVISA" style="display: none">Date de validit&eacute; : </label>
+					</div>
+					<div class="col-md-6">
+					<input type="text" class="form-control input-date divExpiryDateVISA" th:value="${student.dateVisa}" th:field="${student.dateVisa}"
+					readonly="readonly" style="display:none; cursor:text; background:white;"/>
+					</div>
+				</div>
+			</div>
+			<br>
+		</div>
+		<br>
 			<label>Rue</label> <br> <label
 				th:text="${student.address.street}" id="street"></label> <br> <label>Complement</label>
 			<br> <label th:text="${student.address.complement}"
@@ -71,7 +155,7 @@
 			<h4 class="titreFormulaire">Contrats</h4>
 			<div class="table-responsive">
 				<table class="table table-striped table-bordered table-hover"
-					align="center">
+					>
 					<thead>
 						<tr>
 							<th>Employeur</th>
@@ -228,6 +312,7 @@
 				th:text="${student.misc.otherFormations}" id="autresformations"></label>
 			<br>
 		</div>
+		
 	</div>
 </body>
 
