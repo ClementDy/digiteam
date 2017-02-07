@@ -4,6 +4,7 @@
 <head  xmlns:th="http://www.thymeleaf.org">
 
 <link type="text/css" href="/css/form.css" rel="stylesheet" />
+<link type="text/css" href="/css/offer.css" rel="stylesheet" />
 
 <script src="js/header.js"></script>
 
@@ -35,7 +36,68 @@
 
 
 
-		<form>
+		<form accept-charset="UTF-8" th:action="@{/saveOffer}"
+			th:object="${offer}" method="post" enctype="multipart/form-data">
+			
+			
+			<br>
+
+
+			<div class="titreOffre">
+				<h4>Offre</h4>
+			</div>
+
+			<br>
+
+			<div class="row">
+				<div class="form-group">
+					<p class="control-label col-md-3"> Cette offre est proposée par </p>
+				</div>
+			</div>
+			
+			<br>
+			
+			<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-2"> Titre :</label>
+					<div class="col-md-6">
+						<input th:field="${offer.title}"  type="text" class="form-control"
+							placeholder="Titre de l'offre">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-12">
+					<label>Mission :</label>
+					<textarea th:field="${offer.mission}" class="form-control" rows="5"></textarea>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="form-group col-md-12">
+					<label>Comp&eacute;tences n&eacute;cessaires :</label>
+					<textarea th:field="${offer.skills}" class="form-control" rows="5"></textarea>
+				</div>
+			</div>
+			
+			
+			<div class="row">
+				<div class="form-group">
+					<label class="col-md-2">R&eacute;mun&eacute;ration (&euro;/heure)</label>
+					<div class="col-md-2">
+						<div class="input-group">
+							<input th:field="${offer.remuneration}" class="form-control">
+							<span class="input-group-addon">&euro;</span>
+						</div>
+					</div>
+					<div class="col-md-5">
+						<input th:field="${offer.remunerationInfo}" placeholder="Autres informations..." class="form-control"></input>
+					</div>
+				</div>
+			</div>
+			
+			<br>
+			
 			<div class="titreOffre">
 				<h4>Contacts</h4>
 			</div>
@@ -46,13 +108,13 @@
 				<div class="form-group">
 					<label class="control-label col-md-2"> Nom :</label>
 					<div class="col-md-4">
-						<input type="text" class="form-control" placeholder="Nom">
+						<input type="text" th:field="${offer.responsible.lastName}" class="form-control" placeholder="Nom">
 					</div>
 
 					<div class="form-group">
 						<label class="control-label col-md-2"> Pr&eacute;nom :</label>
 						<div class="col-md-4">
-							<input type="text" class="form-control"
+							<input type="text" cth:field="${offer.responsible.firstName}"  class="form-control"
 								placeholder="Pr&eacute;nom">
 						</div>
 					</div>
@@ -65,7 +127,7 @@
 				<div class="form-group">
 					<label class="control-label col-md-2"> Mail :</label>
 					<div class="col-md-4">
-						<input type="email" class="form-control"
+						<input th:field="${offer.responsible.email}"  type="email" class="form-control"
 							placeholder="monadresse@exemple.com">
 					</div>
 
@@ -73,49 +135,17 @@
 						<label class="control-label col-md-2">
 							T&eacute;l&eacute;phone :</label>
 						<div class="col-md-3">
-							<input type="phone" class="form-control col-md-3" placeholder="">
+							<input th:field="${offer.responsible.phone}"  type="phone" class="form-control col-md-3" placeholder="">
 						</div>
 					</div>
 				</div>
 			</div>
 
-
-			<br>
-
-
-			<div class="titreOffre">
-				<h4>Offre</h4>
-			</div>
-
-			<br>
-
-			<div class="row">
-
-				<div class="form-group">
-					<label class="control-label col-md-2"> Titre :</label>
-					<div class="col-md-6">
-						<input type="text" class="form-control"
-							placeholder="Titre de l'offre">
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="form-group col-md-12">
-					<label>Mission :</label>
-					<textarea class="form-control" rows="5"></textarea>
-				</div>
-			</div>
+			
 			
 			<div class="row">
-				<div class="form-group">
-					<label class="col-md-2">R&eacute;mun&eacute;ration (&euro;/heure)</label>
-					<div class="col-md-1">
-						<input class="form-control col-md-1"></input>
-					</div>
-				</div>
+				<article class="col-md-6 col-sm-6"><input type="submit" class="btn btn-lille1" value="Enregistrer"></article>
 			</div>
-			
-		
 
 
 		</form>
@@ -123,6 +153,8 @@
 	<br>
 	
 	</div>
+	
+	<br>
 
 
 </body>
