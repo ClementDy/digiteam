@@ -10,7 +10,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
 @Entity
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class AbstractOffer {
 	
 	@Id
@@ -32,6 +32,7 @@ public class AbstractOffer {
 	public AbstractOffer(){
 		
 	}
+	
 
 	public long getId() {
 		return id;
