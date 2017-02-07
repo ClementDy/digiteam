@@ -29,7 +29,6 @@ public class Responsible {
 
 	
 	public Responsible(){
-		
 	}
 	
 	public long getId() {
@@ -70,7 +69,7 @@ public class Responsible {
 	public void setOffers(List<Offer> offers) {
 		this.offers = offers;
 	}
-	
-	
+
+
 	
 }

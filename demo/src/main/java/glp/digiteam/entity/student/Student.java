@@ -26,32 +26,32 @@ public class Student {
 	private String email;
 	private String nationality;
 	private Boolean published = false;
-	
+
 	private String motivation;
-	
+
 	private String visa;
-	
+
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date dateVisa = new Date();
-	
+
 	@OneToOne(mappedBy="student", cascade=CascadeType.ALL)
 	private Address address;
 
 	@OneToOne(mappedBy="student", cascade=CascadeType.ALL)
 	private Availability availability;
-	
+
 	@OneToMany(mappedBy="student", cascade=CascadeType.ALL)
 	private List<ExternalContract> externalContracts = new ArrayList<>();
-	
+
 	@OneToOne(mappedBy="student", cascade=CascadeType.ALL)
 	private Miscellaneous misc;
-	
+
 	@OneToOne(mappedBy="student", cascade=CascadeType.ALL)
 	private Wish wish;
-	
+
 	@OneToMany(mappedBy="student",cascade = CascadeType.ALL)
 	List<Training> trainings = new ArrayList<Training>();
-	
+
 	public Student() {
 		this.address = new Address(this);
 		this.availability = new Availability(this);
@@ -61,12 +61,12 @@ public class Student {
 			externalContracts.add(new ExternalContract(this));
 		}
 		if(trainings.size()!=6){
-		for (int i = 0; i < 6; i++) {
-			trainings.add(new Training(this));
-		}
+			for (int i = 0; i < 6; i++) {
+				trainings.add(new Training(this));
+			}
 		}
 	}
-	
+
 	public Student(String firstName, String lastName, int phone, String email, String nationality, String motivation, Wish wish) {
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -77,7 +77,7 @@ public class Student {
 		this.wish = wish;
 	}
 
-	
+
 	public Address getAddress() {
 		return address;
 	}
@@ -93,15 +93,15 @@ public class Student {
 	public void setAvailability(Availability availability) {
 		this.availability = availability;
 	}
-	
+
 	public List<ExternalContract> getExternalContracts() {
 		return externalContracts;
 	}
-	
+
 	public void setExternalContracts(List<ExternalContract> externalContracts) {
 		this.externalContracts = externalContracts;
 	}
-	
+
 	public Miscellaneous getMisc() {
 		return misc;
 	}
@@ -117,7 +117,7 @@ public class Student {
 	public void setWish(Wish wish) {
 		this.wish = wish;
 	}
-	
+
 
 	public Integer getNip() {
 		return nip;
@@ -196,11 +196,11 @@ public class Student {
 	public void setPublished(Boolean published) {
 		this.published = published;
 	}
-	
+
 	public Boolean getPublished() {
 		return published;
 	}
-	
+
 
 	public List<Training> getTrainings() {
 		return trainings;

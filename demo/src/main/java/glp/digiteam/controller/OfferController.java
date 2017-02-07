@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import glp.digiteam.entity.offer.AbstractOffer;
 import glp.digiteam.entity.offer.GenericOffer;
 import glp.digiteam.entity.offer.Offer;
 import glp.digiteam.entity.student.Mission;
 import glp.digiteam.entity.student.Student;
 import glp.digiteam.repository.MissionRepository;
+import glp.digiteam.services.OfferService;
 
 @EnableAutoConfiguration
 @Controller
@@ -26,6 +28,8 @@ public class OfferController {
 	@Autowired
 	private MissionRepository missionRepository;
 	
+	@Autowired
+	OfferService offerService;
 	Student student;
 	
 	@RequestMapping(value = "/contracts", method = RequestMethod.GET)
@@ -39,7 +43,7 @@ public class OfferController {
 	@RequestMapping(value = "/newGeneriqueOffer", method = RequestMethod.GET)
 	public String newGeneriqueOffer(Model model,HttpSession session) {
 		System.out.println("GET offer");
-		Offer offer=new GenericOffer();
+		AbstractOffer offer=new GenericOffer();
 		model.addAttribute("offer", offer);
 		
 		Iterable<Mission> missions = missionRepository.findAll();
@@ -49,9 +53,10 @@ public class OfferController {
 	}
 	
 	@RequestMapping(value = "/newGeneriqueOffer", method = RequestMethod.POST)
-	public ModelAndView saveOffer(@ModelAttribute Offer offer,Model model,HttpSession session) {
+	public ModelAndView saveOffer(@ModelAttribute AbstractOffer offer,Model model,HttpSession session) {
 
-		System.out.println("Enregistrement de l'offre");
+		
+		offerService.saveOffer(offer);
 		return new ModelAndView("redirect:offersHome");
 	}
 }
