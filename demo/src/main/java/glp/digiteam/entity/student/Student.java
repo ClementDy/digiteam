@@ -24,6 +24,7 @@ public class Student {
 	private int phone;
 	private String email;
 	private String nationality;
+	private Boolean published = false;
 	
 	private String motivation;
 	
@@ -191,8 +192,14 @@ public class Student {
 	}
 
 
+	public void setPublished(Boolean published) {
+		this.published = published;
+	}
 	
-
+	public Boolean getPublished() {
+		return published;
+	}
+	
 
 	public List<Training> getTrainings() {
 		return trainings;

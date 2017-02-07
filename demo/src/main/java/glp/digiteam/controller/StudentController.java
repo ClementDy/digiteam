@@ -83,7 +83,9 @@ public class StudentController {
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public ModelAndView hello(Model model,HttpSession session) {
+		
 		System.out.println("debut de home GET");
+		
 		if(session.getAttribute("student")==null){
 			return new ModelAndView("redirect:authentication");
 		}
@@ -120,8 +122,6 @@ public class StudentController {
 			
 		}
 		
-	
-		
 		model.addAttribute("student", student);
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
@@ -131,7 +131,9 @@ public class StudentController {
 
 	@RequestMapping(value = "/home", method = RequestMethod.POST)
 	public ModelAndView addEtudiant(@ModelAttribute Student std,BindingResult bindingResult, @RequestParam("file") MultipartFile file,
-	RedirectAttributes redirectAttributes, Model model, Errors e, HttpSession session) {
+		@RequestParam(value="action", required=true) String action, RedirectAttributes redirectAttributes, Model model, Errors e, HttpSession session) {
+		
+		if(action.equals("publish")|| action.equals("save")){
 
 		if(bindingResult.hasErrors()){
 			for (ObjectError error : bindingResult.getAllErrors()) {
@@ -171,6 +173,15 @@ public class StudentController {
 		
 		std.setNip(this.student.getNip());
 		
+	    if(action.equals("publish")){
+		
+	    std.setPublished(true);
+			
+		}else if(action.equals("save")){
+	    
+		std.setPublished(false);
+		
+		}
 	
 		model.addAttribute("student", std);
 		studentService.saveStudentProfile(std);
@@ -180,7 +191,8 @@ public class StudentController {
 			redirectAttributes.addFlashAttribute("message",
 					"You successfully uploaded " + file.getOriginalFilename() + "!");
 		}
-
+		
+		}
 		return new ModelAndView("redirect:home");
 	}
 
