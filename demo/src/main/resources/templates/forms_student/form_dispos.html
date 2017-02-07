@@ -9,7 +9,6 @@
 </head>
 <body>
 	<div th:fragment="content">
-
 		<br> <br>
 		<h4 class="titreFormulaire">Vos disponibilit&eacute;s</h4>
 		<br>
@@ -17,24 +16,24 @@
 		
 			<div class="row">
 				<article class="col-md-3"></article>
+				 <div class="input-daterange" id="datepicker" >
 				<article class="col-md-3">
 					<div class="input-group input-group-sm">
-						<span class="input-group-addon" id="sizing-addon3">Du</span> <input
-							th:type="text" class="form-control" id="startDate"
-							placeholder="jj/mm/yyyy" aria-describedby="sizing-addon3"
-							th:field="${student.availability.startDate}" />
+						<span class="input-group-addon" id="sizing-addon3">Du</span>   <input type="text" class="form-control" placeholder="jj/mm/yyyy" name="start" th:field="${student.availability.startDate}" />
 					</div>
 				</article>
 				<article class="col-md-3">
 					<div class="input-group input-group-sm">
-						<span class="input-group-addon" id="sizing-addon3">Au</span> <input
-							class="form-control" th:field="${student.availability.endDate}"
-							placeholder="jj/mm/yyyy" th:type="text"
-							aria-describedby="sizing-addon3" />
+						<span class="input-group-addon" id="sizing-addon3">Au</span> 
+						<input type="text" class="form-control" placeholder="jj/mm/yyyy" name="end" th:field="${student.availability.endDate}" />
 					</div>
 				</article>
 			</div>
 			
+			
+                  
+                    
+                </div>
 
 			<br>
 			
@@ -123,4 +122,6 @@
 			</div>
 			<br>
 </body>
+
+
 </html>
