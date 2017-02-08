@@ -19,7 +19,7 @@ public class Student {
 
 	@Id
 	private Integer nip;
-	private Integer civilite;
+	private int civilite;
 	private String firstName;
 	private String lastName;
 	private int phone;
@@ -210,11 +210,11 @@ public class Student {
 		this.trainings = trainings;
 	}
 
-	public Integer getCivilite() {
+	public int getCivilite() {
 		return civilite;
 	}
 
-	public void setCivilite(Integer civilite) {
+	public void setCivilite(int civilite) {
 		this.civilite = civilite;
 	}
 
