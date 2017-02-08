@@ -18,10 +18,11 @@ public class Referent {
 	private long id;
 	private String name;
 	
-	
-	@OneToMany(mappedBy="referent", cascade=CascadeType.ALL,targetEntity=AbstractOffer.class)
-	private List<AbstractOffer> offers = new ArrayList<AbstractOffer>();
 
+	@OneToMany(mappedBy="referent", cascade=CascadeType.ALL)
+	private List<Responsible> responsible = new ArrayList<Responsible>();
+
+	
 	
 	
 	public Referent(){
@@ -44,17 +45,23 @@ public class Referent {
 		this.name = name;
 	}
 
-	public List<AbstractOffer> getOffers() {
-		return offers;
+
+
+	public List<Responsible> getResponsible() {
+		return responsible;
 	}
 
-	public void setOffers(List<AbstractOffer> offers) {
-		this.offers = offers;
+	public void setResponsible(List<Responsible> responsible) {
+		this.responsible = responsible;
 	}
-
-	public void addOffer(AbstractOffer offer){
-		this.offers.add(offer);
+	
+	public void addResponsible(Responsible responsible){
+		this.responsible.add(responsible);
 	}
+	
+	
+	
+	
 
 
 }

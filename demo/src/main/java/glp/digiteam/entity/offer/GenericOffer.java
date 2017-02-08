@@ -9,6 +9,11 @@ public class GenericOffer extends AbstractOffer implements Offer{
 	
 	private double remuneration;
 	private String remunerationInfo;
+	private String type;
+
+
+
+
 
 
 	private String title;
@@ -65,6 +70,17 @@ public class GenericOffer extends AbstractOffer implements Offer{
 
 	public void setSkills(String skills) {
 		this.skills = skills;
+	}
+	
+	public String getType() {
+		return type;
+	}
+
+
+
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 

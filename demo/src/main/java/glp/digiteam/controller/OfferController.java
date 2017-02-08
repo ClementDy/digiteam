@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,22 +28,18 @@ public class OfferController {
 	@Autowired
 	private MissionRepository missionRepository;
 	
-	@Autowired
-
-	private ResponsibleService responsibleService;
-	
 
 	@Autowired
 	ReferentService referentService;
 
-
 	
 	Responsible responsible;
 	
-	AbstractOffer offer;
+	GenericOffer offer=new GenericOffer();
 	
 	
 	OfferService offerService;
+	
 	Referent referent;
 	
 	@RequestMapping(value = "/contracts", method = RequestMethod.GET)
@@ -55,17 +52,14 @@ public class OfferController {
 	
 	@RequestMapping(value = "/newGeneriqueOffer", method = RequestMethod.GET)
 	public String newGeneriqueOffer(Model model,HttpSession session) {
-		
-		referent=new Referent();
+	
 		responsible=new Responsible();
 		
-
-		offer=new GenericOffer();
+		model.addAttribute("referent", referent);
+		System.out.println(referent.getName());
 		
 		
 		model.addAttribute("offer", offer);
-		
-		
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
 		model.addAttribute("referent", referent);
@@ -73,17 +67,21 @@ public class OfferController {
 	}
 	
 	@RequestMapping(value = "/newGeneriqueOffer", method = RequestMethod.POST)
-	public ModelAndView saveOffer(Model model,HttpSession session) {
+	public ModelAndView saveOffer(@ModelAttribute GenericOffer ofr,Model model,HttpSession session) {
 
+		model.addAttribute("referent",referent);
 		
-		referent.addOffer(offer);
-		offer.setReferent(referent);
+		referent.addResponsible(responsible);
+		responsible.setReferent(referent);
+		responsible.addOffer(ofr);
+		ofr.setResponsible(responsible);
+
+		model.addAttribute("offer",ofr);
 		
-		responsible.addOffer(offer);
-		offer.setResponsible(responsible);
-		System.out.println(responsible.getOffers().toString());
-		responsibleService.saveResponsible(responsible);
+		
+	
+		
 		referentService.saveReferent(referent);
-		return new ModelAndView("redirect:offersHome");
+		return new ModelAndView("redirect:offers/offersHome");
 	}
 }

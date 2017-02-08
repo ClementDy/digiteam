@@ -1,6 +1,5 @@
 package glp.digiteam.entity.offer;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,12 +16,10 @@ public class AbstractOffer {
 	@GeneratedValue(strategy=GenerationType.TABLE)
 	private long id;
 	
-	@ManyToOne
-	private Referent referent;
-	
+
 	@ManyToOne
 	private Responsible responsible;
-	
+
 	@ManyToOne
 	private Service service;
 
@@ -51,14 +48,10 @@ public class AbstractOffer {
 	}
 	
 
-	public Referent getReferent() {
-		return referent;
-	}
 
-	public void setReferent(Referent referent) {
-		this.referent = referent;
-	}
 	
+
+
 	public Service getService() {
 		return service;
 	}

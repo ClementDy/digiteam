@@ -24,7 +24,7 @@
 
 <body onload="activeNav('offers')">
 
-	<div th:include="header::header"></div>
+	<div th:include="headerReferent::headerReferent"></div>
 
 	<div class="container">
 
@@ -66,7 +66,7 @@
 			<div class="row">
 				<div class="form-group">
 					<div class="col-md-6">
-						<input th:field="${offer.title}" type="text" class="form-control"
+						<input  th:field="${offer.title}" type="text" class="form-control"
 							placeholder="Titre de l'offre">
 					</div>
 				</div>
@@ -138,7 +138,7 @@
 					<div class="form-group">
 						<label class="control-label col-md-2"> Pr&eacute;nom :</label>
 						<div class="col-md-3">
-							<input type="text" cth:field="${offer.responsible.firstName}"
+							<input type="text" th:field="${offer.responsible.firstName}"
 								class="form-control" placeholder="Pr&eacute;nom">
 						</div>
 					</div>
@@ -159,7 +159,7 @@
 						<label class="control-label col-md-2">
 							T&eacute;l&eacute;phone :</label>
 						<div class="col-md-3">
-							<input th:field="${offer.responsible.phone}" type="phone"
+							<input th:field="${offer.responsible.phone}" type="text"
 								class="form-control col-md-3" placeholder="">
 						</div>
 					</div>

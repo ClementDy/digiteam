@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>Student</h3>
+	<h4>Nom:</h4>
+	<p th:text="${referent.name}" />
+	<h4>Titre:</h4>
+	<p th:text="${offer.title}" />
+	<h4>Type:</h4>
+	<p th:text="${offer.type}" />
+	<h4>Details:</h4>
+	<p th:text="${offer.mission}" />
+	<h4>Competences:</h4>
+	<p th:text="${offer.skills}" />
+	<h4>Remuneraztion:</h4>
+	<p th:text="${offer.remuneration}" />
+	<h4>Remu Infos:</h4>
+	<p th:text="${offer.remunerationInfo}" />
+	<h4>Referent Name:</h4>
+ 	<!--  <p th:text="${offer.referent.name}" />-->
+	<h4>REsponsible name:</h4>
+	<p th:text="${offer.responsible.firstName}" />
+
+	</body>
+</html>

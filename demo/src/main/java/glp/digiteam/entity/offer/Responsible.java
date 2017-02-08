@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -24,7 +25,11 @@ public class Responsible {
 	private String email;
 	private int phone;
 	
-	@OneToMany(mappedBy="responsible", /*cascade=CascadeType.ALL,*/targetEntity=AbstractOffer.class)
+	@ManyToOne
+	private Referent referent;
+	
+	
+	@OneToMany(mappedBy="responsible", cascade=CascadeType.ALL,targetEntity=AbstractOffer.class)
 	private List<AbstractOffer> offers = new ArrayList<AbstractOffer>();
 
 	
@@ -61,7 +66,6 @@ public class Responsible {
 	public void setPhone(int phone) {
 		this.phone = phone;
 	}
-
 	public List<AbstractOffer> getOffers() {
 		return offers;
 	}
@@ -73,6 +77,16 @@ public class Responsible {
 	public void addOffer(AbstractOffer offer){
 		this.offers.add(offer);
 	}
+
+	public Referent getReferent() {
+		return referent;
+	}
+
+	public void setReferent(Referent referent) {
+		this.referent = referent;
+	}
+	
+	
 
 	
 }
