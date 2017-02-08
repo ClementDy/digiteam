@@ -9,7 +9,7 @@ public class StorageProperties {
     /**
      * Folder location for storing files
      */
-    private String location = "../CVs/upload-dir";
+    private String location = "/home/debian/GLP/CVs/upload-dir";
 
     public String getLocation() {
         return location;
