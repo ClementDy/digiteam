@@ -20,7 +20,7 @@ public class Address {
 	
 	private String complement;
 	
-	private int postalCode;
+	private String postalCode;
 
 	private String city;
 
@@ -68,11 +68,11 @@ public class Address {
 		this.complement = complement;
 	}
 
-	public int getPostalCode() {
+	public String getPostalCode() {
 		return postalCode;
 	}
 	
-	public void setPostalCode(int postalCode) {
+	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
 	

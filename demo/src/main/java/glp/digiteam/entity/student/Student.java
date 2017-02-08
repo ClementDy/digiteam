@@ -23,7 +23,7 @@ public class Student {
 	private int civilite;
 	private String firstName;
 	private String lastName;
-	private int phone;
+	private String phone;
 	private String email;
 	private String nationality;
 	private Boolean published = false;
@@ -70,7 +70,7 @@ public class Student {
 		}
 	}
 
-	public Student(String firstName, String lastName, int phone, String email, String nationality, String motivation, Wish wish) {
+	public Student(String firstName, String lastName, String phone, String email, String nationality, String motivation, Wish wish) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phone = phone;
@@ -147,11 +147,11 @@ public class Student {
 		this.lastName = lastName;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 

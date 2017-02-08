@@ -36,6 +36,7 @@ import glp.digiteam.repository.MissionRepository;
 import glp.digiteam.services.StudentService;
 import glp.digiteam.uploadFile.StorageFileNotFoundException;
 import glp.digiteam.uploadFile.StorageService;
+import glp.digiteam.validator.StudentValidator;
 
 @EnableAutoConfiguration
 @Controller
@@ -167,65 +168,68 @@ public class StudentController {
 		
 		if(action.equals("Publier")|| action.equals("Enregistrer")){
 
-		if(bindingResult.hasErrors()){
-			for (ObjectError error : bindingResult.getAllErrors()) {
-				System.out.println(error);
+			if(action.equals("Publier")) {
+				StudentValidator studentValidator = new StudentValidator();
+				studentValidator.validate(std, bindingResult);
+				
+				if(bindingResult.hasErrors()){
+					Iterable<Mission> missions = missionRepository.findAll();
+					model.addAttribute("listMission", missions);
+					return new ModelAndView("candidature");
+				}
 			}
-			return new ModelAndView("redirect:candidature");
-		}
-		
-		Student  realStudent;
-		
-		if(studentService.getStudentByNip(this.student.getNip())!=null){
-	
-	    realStudent = studentService.getStudentByNip(this.student.getNip());
-	    
-		std.getAddress().setId(realStudent.getAddress().getId());
-		std.getAddress().setStudent(realStudent);
-		
-		std.getWish().setId(realStudent.getWish().getId());
-		std.getWish().setStudent(realStudent);
-		
-		std.getAvailability().setId(realStudent.getAvailability().getId());
-		std.getAvailability().setStudent(realStudent);
-		
-		std.getMisc().setId(realStudent.getMisc().getId());
-		std.getMisc().setStudent(realStudent);
-		
-		for (int i = 0; i < std.getTrainings().size(); i++) {
-			std.getTrainings().get(i).setId(realStudent.getTrainings().get(i).getId());
-			std.getTrainings().get(i).setStudent(realStudent);
-		}
-		for (int i = 0; i < std.getExternalContracts().size(); i++) {
-			std.getExternalContracts().get(i).setId(realStudent.getExternalContracts().get(i).getId());
-			std.getExternalContracts().get(i).setStudent(realStudent);
-		}
-		
-		}
-		
-		std.setNip(this.student.getNip());
-		
-	    if(action.equals("Publier")){
-		
-	    std.setPublished(true);
 			
-		}else if(action.equals("Enregistrer")){
-	    
-		std.setPublished(false);
+			Student  realStudent;
+			
+			if(studentService.getStudentByNip(this.student.getNip())!=null){
 		
-		}
-	
-		model.addAttribute("student", std);
-		studentService.saveStudentProfile(std);
+		    realStudent = studentService.getStudentByNip(this.student.getNip());
+		    
+			std.getAddress().setId(realStudent.getAddress().getId());
+			std.getAddress().setStudent(realStudent);
+			
+			std.getWish().setId(realStudent.getWish().getId());
+			std.getWish().setStudent(realStudent);
+			
+			std.getAvailability().setId(realStudent.getAvailability().getId());
+			std.getAvailability().setStudent(realStudent);
+			
+			std.getMisc().setId(realStudent.getMisc().getId());
+			std.getMisc().setStudent(realStudent);
+			
+			for (int i = 0; i < std.getTrainings().size(); i++) {
+				std.getTrainings().get(i).setId(realStudent.getTrainings().get(i).getId());
+				std.getTrainings().get(i).setStudent(realStudent);
+			}
+			for (int i = 0; i < std.getExternalContracts().size(); i++) {
+				std.getExternalContracts().get(i).setId(realStudent.getExternalContracts().get(i).getId());
+				std.getExternalContracts().get(i).setStudent(realStudent);
+			}
+			
+			}
+			
+			std.setNip(this.student.getNip());
+			
+		    if(action.equals("Publier")){
+		    	
+		    	std.setPublished(true);
+				
+			}else {
+				
+				std.setPublished(false);
+				
+			}
 		
-		if (!file.isEmpty()) {
-			storageService.store(file,student.getNip());
-			redirectAttributes.addFlashAttribute("message",
-					"You successfully uploaded " + file.getOriginalFilename() + "!");
+			model.addAttribute("student", std);
+			studentService.saveStudentProfile(std);
+			
+			if (!file.isEmpty()) {
+				storageService.store(file,student.getNip());
+				redirectAttributes.addFlashAttribute("message","You successfully uploaded " + file.getOriginalFilename() + "!");
+			}
+			
 		}
-		
-		}
-		return new ModelAndView("redirect:candidature");
+		return new ModelAndView("redirect:home");
 	}
 
 	/*

@@ -24,13 +24,14 @@
 					</div>
 				</div>
 				<br>
-				<div class="row">
+				<div class="row form-group"  th:classappend="${#fields.hasErrors('email')}? 'has-error'">
 					<div class="col-md-6">
-					<label>Mail : </label> 
+					<label class="control-label">Mail * : </label> 
 					</div>
 					<div class="col-md-6">
 					<input class="form-control" th:value="${student.email}" th:field="${student.email}" id="email">
-					</div>
+	
+					</div>	
 				</div>
 				<br>
 				<div class="row">
@@ -52,9 +53,9 @@
 					</div>
 				</div>
 				<br>
-				<div class="row">
+				<div class="row form-group"  th:classappend="${#fields.hasErrors('phone')}? 'has-error'">
 					<div class="col-md-6">
-					<label>T&eacute;l&eacute;phone : </label>
+					<label class="control-label">T&eacute;l&eacute;phone * : </label>
 					</div>
 					<div class="col-md-6">
 					<input class="form-control" th:value="${student.phone}" th:field="${student.phone}" type="text" id="phone">
@@ -67,9 +68,9 @@
 
 		<div class="row">
 			<div class="col-md-6 col-xs-6">
-				<div class="row">
+				<div class="row form-group">
 					<div class="col-md-6">
-					<label for="radios">Titre de séjour : </label>
+					<label class="control-label" for="radios">Titre de séjour  : </label>
 					</div> 
 					<div class="col-md-6">
 					<label>Oui</label>
@@ -80,9 +81,9 @@
 				</div>
 			</div>
 			<div class="col-md-6 col-xs-6">
-				<div class="row">
+				<div class="row form-group"  th:classappend="${#fields.hasErrors('dateVisa')}? 'has-error'">
 					<div class="col-md-6" >
-					<label class="divExpiryDateVISA" style="display: none">Date de validit&eacute; : </label>
+					<label class="control-label divExpiryDateVISA" style="display: none">Date de validit&eacute;  : </label>
 					</div>
 					<div class="col-md-6">
 					<input type="text" class="form-control input-date divExpiryDateVISA" th:value="${student.dateVisa}" th:field="${student.dateVisa}"
@@ -97,18 +98,18 @@
 		<h4 class="titreFormulaire">Votre adresse</h4>
 		<div class="row">
 			<div class="col-md-6 col-xs-6">
-				<div class="row">
+				<div class="row form-group"  th:classappend="${#fields.hasErrors('address.street')}? 'has-error'">
 					<div class="col-md-6">
-					<label>Rue : </label>
+					<label class="control-label">Rue * : </label>
 					</div> 
 					<div class="col-md-6">
 					<input class="form-control" th:value="${student.address.street}" th:field="${student.address.street}" type="text">
 					</div>
 				</div>
 				<br>
-				<div class="row">
+				<div class="row form-group"  th:classappend="${#fields.hasErrors('address.complement')}? 'has-error'">
 					<div class="col-md-6">
-					<label>Complément : </label>
+					<label class="control-label">Complément * : </label>
 					</div> 
 					<div class="col-md-6">
 					<input class="form-control" th:value="${student.address.complement}" th:field="${student.address.complement}" type="text" id="complement">
@@ -116,18 +117,18 @@
 				</div>
 			</div>
 			<div class="col-md-6 col-xs-6">
-				<div class="row">
+				<div class="row form-group"  th:classappend="${#fields.hasErrors('address.city')}? 'has-error'">
 					<div class="col-md-6">
-					<label>Ville :</label>
+					<label class="control-label">Ville * :</label>
 					</div> 
 					<div class="col-md-6">
 					<input class="form-control" th:value="${student.address.city}" th:field="${student.address.city}" type="text" id="city">
 					</div>
 				</div>
 				<br>
-				<div class="row">
+				<div class="row form-group"  th:classappend="${#fields.hasErrors('address.postalCode')}? 'has-error'">
 					<div class="col-md-6">
-					<label>Code postal : </label> 
+					<label class="control-label">Code postal * : </label> 
 					</div>
 					<div class="col-md-6">
 					<input class="form-control" th:value="${student.address.postalCode}" th:field="${student.address.postalCode}" type="text" id="postalCode">
@@ -141,13 +142,15 @@
 		<h4 class="titreFormulaire">Votre curriculum vitae</h4>
 		<div class="row">
 			<div class="col-md-12">
-				<label class="left">Déposez votre CV : </label>
+				<label class="left control-label">Déposez votre CV : </label>
 				<input type="file" name="file" />
 				<div th:each="file : ${files}"><a th:href="${file}" th:text="${file}"></a></div>
 			</div>
 			<br>
 		</div>
 		<br>
+		<p>* champs obligatoire<p>
+		
 		
 		<script>
 			function test() {
