@@ -13,11 +13,11 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 	@Bean
-+	
--	CommandLineRunner init(StorageService storageService) {
--		return (args) -> {
--
--            storageService.init();
--		};
--	}
+	
+	CommandLineRunner init(StorageService storageService) {
+		return (args) -> {
+
+           storageService.init();
+		};
+	}
 }
