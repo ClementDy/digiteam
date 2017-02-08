@@ -7,10 +7,11 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -26,7 +27,11 @@ public class Student {
 	private String email;
 	private String nationality;
 	private Boolean published = false;
+	
+	@Lob
+	@Type(type = "org.hibernate.type.TextType")
 	private String motivation;
+	
 	private String visa;
 
 	@DateTimeFormat(pattern="dd/MM/yyyy")
