@@ -1,7 +1,6 @@
 package glp.digiteam.controller;
 
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,12 +10,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 import glp.digiteam.entity.offer.AbstractOffer;
 import glp.digiteam.entity.offer.GenericOffer;
-import glp.digiteam.entity.offer.Offer;
+import glp.digiteam.entity.offer.Referent;
 import glp.digiteam.entity.student.Mission;
-import glp.digiteam.entity.student.Student;
 import glp.digiteam.repository.MissionRepository;
 import glp.digiteam.services.OfferService;
 
@@ -30,13 +27,13 @@ public class OfferController {
 	
 	@Autowired
 	OfferService offerService;
-	Student student;
+	Referent referent;
 	
 	@RequestMapping(value = "/contracts", method = RequestMethod.GET)
 	public String homeContracts(Model model,HttpSession session) {
 		
-		student=(Student) session.getAttribute("student");
-		model.addAttribute("student", student);
+		referent= (Referent) session.getAttribute("referent");
+		model.addAttribute("referent", referent);
 		return "offers/offersHome";
 	}
 	
@@ -48,7 +45,7 @@ public class OfferController {
 		
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
-		model.addAttribute("student", student);
+		model.addAttribute("referent", referent);
 		return "offers/newGeneriqueOffer";
 	}
 	
