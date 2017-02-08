@@ -26,9 +26,7 @@ public class Student {
 	private String email;
 	private String nationality;
 	private Boolean published = false;
-
 	private String motivation;
-
 	private String visa;
 
 	@DateTimeFormat(pattern="dd/MM/yyyy")

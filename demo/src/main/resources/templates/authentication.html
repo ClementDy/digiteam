@@ -24,13 +24,13 @@
 
 <body>
 
-  	<form th:object="${student}" th:action="@{/authentication}" method="post">
+  	<form th:object="${student}"th:action="@{/authentication}" method="post">
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Authentification</h3>
+                        <h3 class="panel-title">Authentification : Étudiant</h3>
                     </div>
                     <div class="panel-body">
                          <fieldset>
@@ -40,9 +40,7 @@
                                         <input name="remember" type="checkbox" value="Remember Me">Se souvenir de moi
                                     </label>
                                 </div>
-                                
-                                <!-- Change this to a button or input when using this as a form -->
-  									 
+                                  									 
                                 <input type="submit" class="btn btn-block btn-lille1" value="Se connecter">
                             </fieldset>
                     </div>
@@ -50,7 +48,33 @@
             </div>
         </div>
     </div>
-    </form> 
+    </form>
+    
+    <form th:object="${referent}"th:action="@{/authentication}" method="post">
+    <div class ="container">
+    	<div class="row">
+    	   <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Authentification : Référent</h3>
+                    </div>
+                    <div class="panel-body">
+                         <fieldset>
+						<input th:field="${referent.name}" class="form-control" placeholder="Name" name="Name" type="text" autofocus>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="remember" type="checkbox" value="Remember Me">Se souvenir de moi
+                                    </label>
+                                </div>                               									 
+                                <input type="submit" class="btn btn-block btn-lille1" value="Se connecter">
+                            </fieldset>
+                    </div>
+                </div>
+            </div>   
+    	</div>
+    </div>
+    
+    </form>
 </body>
 <style>
 

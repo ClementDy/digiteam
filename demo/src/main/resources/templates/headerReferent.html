@@ -6,7 +6,7 @@
 </head>
 <body>
 
-	<div th:fragment="header">
+	<div th:fragment="headerReferent">
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
 				<div class="navbar-header">
@@ -17,7 +17,7 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" th:href="@{/home}"> <span
+					<a class="navbar-brand" th:href="@{/#}"> <span
 						class="glyphicon glyphicon-book
 					"></span>
 					</a>
@@ -27,8 +27,7 @@
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li id="candidatures"><a th:href="@{/candidature}">Candidatures<span
-								class="home"></span></a></li>
+						<li id="offers"><a th:href="@{/contracts}" >Offres</a></li>
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
@@ -36,10 +35,9 @@
 							data-toggle="dropdown" role="button" aria-haspopup="true"
 							aria-expanded="false">
 							
-							<span th:text="${student.lastName}"></span><span> </span><span  th:text="${student.firstName}"></span><span> </span><span class="glyphicon glyphicon-user"></span></a>
+							<span th:text="${referent.name}"></span><span> </span><span> </span><span class="glyphicon glyphicon-user"></span></a>
 							<ul class="dropdown-menu">
-		
-	
+							
 								<li><a href="#">Param&egrave;tres</a></li>
 								<li role="separator" class="divider"></li>
 								<li><a th:href="@{/profile}">Mon Profil</a></li>
