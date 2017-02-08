@@ -24,7 +24,7 @@ public class Referent {
 	
 	
 	@OneToMany(mappedBy="referent", cascade=CascadeType.ALL,targetEntity=AbstractOffer.class)
-	private List<Offer> offers = new ArrayList<Offer>();
+	private List<AbstractOffer> offers = new ArrayList<AbstractOffer>();
 
 	
 	
@@ -48,12 +48,16 @@ public class Referent {
 		this.lastName = lastName;
 	}
 
-	public List<Offer> getOffers() {
+	public List<AbstractOffer> getOffers() {
 		return offers;
 	}
 
-	public void setOffers(List<Offer> offers) {
+	public void setOffers(List<AbstractOffer> offers) {
 		this.offers = offers;
+	}
+	
+	public void addOffer(AbstractOffer offer){
+		this.offers.add(offer);
 	}
 
 	

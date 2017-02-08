@@ -68,6 +68,15 @@ public class GenericOffer extends AbstractOffer implements Offer{
 	}
 
 
+
+
+	@Override
+	public String toString() {
+		return "GenericOffer [remuneration=" + remuneration + ", remunerationInfo=" + remunerationInfo + ", title="
+				+ title + ", mission=" + mission + ", skills=" + skills + "]";
+	}
+
+
 	
 	
 	

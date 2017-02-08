@@ -15,21 +15,38 @@ import org.springframework.web.servlet.ModelAndView;
 import glp.digiteam.entity.offer.AbstractOffer;
 import glp.digiteam.entity.offer.GenericOffer;
 import glp.digiteam.entity.offer.Offer;
+import glp.digiteam.entity.offer.Referent;
+import glp.digiteam.entity.offer.Responsible;
 import glp.digiteam.entity.student.Mission;
 import glp.digiteam.entity.student.Student;
 import glp.digiteam.repository.MissionRepository;
+import glp.digiteam.repository.ResponsibleRepository;
 import glp.digiteam.services.OfferService;
+import glp.digiteam.services.ReferentService;
+import glp.digiteam.services.ResponsibleService;
 
 @EnableAutoConfiguration
 @Controller
-@ComponentScan(basePackages = "glp.digiteam.services")
+@ComponentScan({"glp.digiteam.services","glp.digiteam.entity.offer"})
 public class OfferController {
 
 	@Autowired
 	private MissionRepository missionRepository;
 	
 	@Autowired
-	OfferService offerService;
+	private ResponsibleService responsibleService;
+	
+
+	@Autowired
+	ReferentService referentService;
+
+	Referent referent;
+	
+	Responsible responsible;
+	
+	AbstractOffer offer;
+	
+	
 	Student student;
 	
 	@RequestMapping(value = "/contracts", method = RequestMethod.GET)
@@ -42,21 +59,36 @@ public class OfferController {
 	
 	@RequestMapping(value = "/newGeneriqueOffer", method = RequestMethod.GET)
 	public String newGeneriqueOffer(Model model,HttpSession session) {
-		System.out.println("GET offer");
-		AbstractOffer offer=new GenericOffer();
+		
+		referent=new Referent();
+		responsible=new Responsible();
+		
+
+		offer=new GenericOffer();
+		
+		
 		model.addAttribute("offer", offer);
+		
 		
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
 		model.addAttribute("student", student);
+	
 		return "offers/newGeneriqueOffer";
 	}
 	
 	@RequestMapping(value = "/newGeneriqueOffer", method = RequestMethod.POST)
-	public ModelAndView saveOffer(@ModelAttribute AbstractOffer offer,Model model,HttpSession session) {
+	public ModelAndView saveOffer(Model model,HttpSession session) {
 
 		
-		offerService.saveOffer(offer);
+		referent.addOffer(offer);
+		offer.setReferent(referent);
+		
+		responsible.addOffer(offer);
+		offer.setResponsible(responsible);
+		System.out.println(responsible.getOffers().toString());
+		responsibleService.saveResponsible(responsible);
+		referentService.saveReferent(referent);
 		return new ModelAndView("redirect:offersHome");
 	}
 }
