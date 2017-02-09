@@ -35,7 +35,7 @@ public class Student {
 	private String visa;
 
 	@DateTimeFormat(pattern="dd/MM/yyyy")
-	private Date dateVisa = new Date();
+	private Date dateVisa;
 
 	@OneToOne(mappedBy="student", cascade=CascadeType.ALL)
 	private Address address;

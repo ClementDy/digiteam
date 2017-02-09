@@ -20,9 +20,9 @@ public class Availability {
 	private Student student;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date startDate = new Date();
+	private Date startDate;
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date endDate = new Date();
+	private Date endDate;
 
 	@DateTimeFormat(pattern = "HH:mm")
 	private Date startTimeMonday;

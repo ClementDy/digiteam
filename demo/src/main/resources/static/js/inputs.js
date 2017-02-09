@@ -1,0 +1,45 @@
+function cancelEvent(event) {
+	event.preventDefault();
+	event.stopImmediatePropagation();
+}
+
+function getValueAfterKeypress($input, keycode) {
+	var caretPosition = $input[0].selectionStart;
+  
+  var result = $input.val().substring(0, caretPosition) +
+    				   String.fromCharCode(keycode) +
+    				   $input.val().substring(caretPosition);
+  
+  return result;
+}
+
+function isValidInteger(string) {
+	var regex = /^\d*$/;
+  
+  return regex.test(string);
+}
+
+//When the document is ready
+$(document).ready(function () {
+
+$(".input-integer").bind({
+  paste: function() {
+    if (!isValidInteger(event.clipboardData.getData('text/plain'))) {
+      cancelEvent(event);
+    }
+  },
+  keypress: function() {
+  	if (!isValidInteger(getValueAfterKeypress($(this), event.which))) {
+      cancelEvent(event);
+    }
+  }
+});
+
+$('.input-date, .input-daterange').datepicker({
+	language: 'fr',
+	autoclose: true,
+	clearBtn: true,
+	keyboardNavigation: false
+});
+
+});
