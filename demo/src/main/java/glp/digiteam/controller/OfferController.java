@@ -71,6 +71,10 @@ public class OfferController {
 
 		model.addAttribute("referent",referent);
 		
+		responsible.setEmail(ofr.getResponsible().getEmail());
+		responsible.setFirstName(ofr.getResponsible().getFirstName());
+		responsible.setLastName(ofr.getResponsible().getLastName());
+		responsible.setPhone(ofr.getResponsible().getPhone());
 		referent.addResponsible(responsible);
 		responsible.setReferent(referent);
 		responsible.addOffer(ofr);
@@ -79,9 +83,7 @@ public class OfferController {
 		model.addAttribute("offer",ofr);
 		
 		
-	
-		
 		referentService.saveReferent(referent);
-		return new ModelAndView("redirect:offers/offersHome");
+		return new ModelAndView("redirect:contracts");
 	}
 }
