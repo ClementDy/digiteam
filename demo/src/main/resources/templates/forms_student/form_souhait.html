@@ -12,7 +12,7 @@
 		
 		<h4 class="titreFormulaire"> Vos formations souhaitées</h4>
 		
-		<div class="row">
+		<div class="row form-group" th:classappend="${#fields.hasErrors('wish.missions')}? 'has-error'">
 			<div class="col-md-5">
 				<br> <label> Missions : </label> <select size="10"
 					class="form-control" id="allMissions">
@@ -41,6 +41,7 @@
 				</select>
 			</div>
 		</div>
+		<p th:if="${#fields.hasErrors('wish.missions')}" style="color:darkRed;" >Veuillez choisir au moins une mission</p>
 		<br><br>
 		<div class="row">
 			<div class="col-md-6">

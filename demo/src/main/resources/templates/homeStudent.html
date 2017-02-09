@@ -24,11 +24,15 @@
 <div th:fragment="content">
 
 	<div class="container">
+	 	<div th:if="${student.published}==NULL" class="jumbotron">
+            <h2>Bienvenue</h2>
+            <p>Vous n'avez pas de candidature enregistrée</p>
+            <p><a class="btn btn-lille1" th:href="@{/candidature}">Creer une candidature</a></p>        
+        </div>
         <div th:if="${student.published}==false" class="jumbotron">
             <h2>Candidature</h2>
-            <p>Vous n'avez pas de candidature publiée</p>
-            <p>Cliquez créer une candidature ou continuer la saisie d'une candidature</p>
-            <p><a class="btn btn-lille1" th:href="@{/candidature}">START</a></p>        
+            <p>Vous avez commencé la saisie d'une candidature</p>
+            <a class="btn btn-lille1" th:href="@{/candidature}">Continuer la saisie</a>        
         </div>
          <div th:if="${student.published}==true" class="jumbotron">
             <h2>Candidature publiée</h2>
