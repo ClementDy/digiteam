@@ -1,5 +1,7 @@
 package glp.digiteam.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -9,18 +11,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import glp.digiteam.entity.offer.AbstractOffer;
 import glp.digiteam.entity.offer.GenericOffer;
 import glp.digiteam.entity.offer.Referent;
 import glp.digiteam.entity.offer.Responsible;
 import glp.digiteam.entity.student.Mission;
+import glp.digiteam.entity.student.Student;
 import glp.digiteam.repository.MissionRepository;
 import glp.digiteam.repository.ReferentRepository;
-import glp.digiteam.repository.StudentRepository;
 import glp.digiteam.services.OfferService;
 import glp.digiteam.services.ReferentService;
-import glp.digiteam.services.ResponsibleService;
+import glp.digiteam.services.StudentService;
 
 @EnableAutoConfiguration
 @Controller
@@ -32,20 +35,22 @@ public class OfferController {
 	
 
 	@Autowired
-	ReferentService referentService;
+	private ReferentService referentService;
 	
 	@Autowired
-	ReferentRepository referentRepository;
+	private ReferentRepository referentRepository;
 
+	@Autowired
+	private StudentService studentService;
 	
-	Responsible responsible;
+	private Responsible responsible;
 	
-	GenericOffer offer=new GenericOffer();
+	private GenericOffer offer=new GenericOffer();
 	
 	
-	OfferService offerService;
+	private OfferService offerService;
 	
-	Referent referent;
+	private Referent referent;
 	
 	@RequestMapping(value = "/contracts", method = RequestMethod.GET)
 	public String homeContracts(Model model,HttpSession session) {
@@ -97,5 +102,25 @@ public class OfferController {
 		
 		referentService.saveReferent(referent);
 		return new ModelAndView("redirect:contracts");
+	}
+	
+	@RequestMapping(value = "/consult", method = RequestMethod.GET)
+	public String consult(Model model,HttpSession session) {
+		referent= (Referent) session.getAttribute("referent");
+		referent=referentRepository.findByName(referent.getName());
+		model.addAttribute("referent", referent);
+		
+		List<Student> listCandidature = studentService.getAllCandidature();
+		model.addAttribute("listCandidature", listCandidature);
+		return "consult";
+	}
+	
+	@RequestMapping(value = "/profil", method = RequestMethod.GET)
+	public String profil(Model model,HttpSession session,@RequestParam(value="nip", required=true) Integer nip) {
+		referent= (Referent) session.getAttribute("referent");
+		referent=referentRepository.findByName(referent.getName());
+		model.addAttribute("referent", referent);
+		model.addAttribute("student", studentService.getStudentByNip(nip));
+		return "profile";
 	}
 }

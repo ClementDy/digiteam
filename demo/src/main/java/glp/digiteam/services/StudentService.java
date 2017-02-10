@@ -1,5 +1,8 @@
 package glp.digiteam.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +29,17 @@ public class StudentService {
 	public void unpublishProfil(Student student){
 		student.setPublished(false);
 		studentRepository.save(student);
+	}
+	
+	public List<Student> getAllCandidature(){
+		Iterable<Student> allStudent = studentRepository.findAll();
+		List<Student> candidaturePublished = new ArrayList<>();
+		for (Student student : allStudent) {
+			if(student.getPublished()==true){
+				candidaturePublished.add(student);
+			}
+		}
+		
+		return candidaturePublished;
 	}
 }

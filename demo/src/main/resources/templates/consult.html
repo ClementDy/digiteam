@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head xmlns:th="http://www.thymeleaf.org">
+
+<link type="text/css" href="/css/form.css" rel="stylesheet" />
+
+<script src="js/header.js"></script>
+
+<script src="js/jquery-1.9.1.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/header.css">
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+	<div th:include="headerReferent::headerReferent"></div>
+	<div class="container">
+	<row>
+
+		<div th:each="student : ${listCandidature}" class="col-sm-6 col-md-3">
+			<div class="thumbnail">
+
+				<div class="centered-text"><b><span th:text="${student.firstName}"></span>&nbsp;<span th:text="${student.lastName}"></span></b></div>
+				<br>
+				
+				<p>Formation : <span  th:text="${student.trainings[__${0}__].name}">&nbsp;<span th:text="${student.trainings[__${0}__].date}"></span></p>
+				
+				<p>Email : <span  th:text="${student.email}"></span></p>
+				
+				<p class="centered-text" ><a th:href="@{profil(nip=${student.nip})}"  class="btn btn-info" role="button"><span class="glyphicon glyphicon-search"></span> Voir le profil</a></p>
+			</div>
+		</div>
+	</row>
+	
+	</div>
+
+</body>
+
+</html>
+
+<style>
+.centered-text {
+    text-align:center
+}    
+</style>
