@@ -151,13 +151,20 @@
 				<div th:each="file : ${files}"><a th:href="${file}" th:text="${file}"></a></div>
 			</div>
 			<div class="col-md-12" th:if="${student.cv}!=NULL">
-				<label  class="left control-label">Votre CV : </label>	<label th:text="${student.cv}" ></label><br>
-				<label>Modifier votre CV</label>
-				<input type="file" name="file" />
-				<div th:each="file : ${files}"><a th:href="${file}" th:text="${file}"></a></div>
+				<label  class="left control-label">Votre CV : </label>	<label th:text="${student.cv}" ></label><br><br>
+				
+				
+				<label style="display: inline-block;">Modifier votre CV</label>
+				<br>​
+				<input  type="file" name="file" style="display: inline-block;"/>
+				
+				<div  th:each="file : ${files}"><a th:href="${file}" th:text="${file}"></a></div>
+				</div>
 			</div>
+			
 			<br>
 		</div>
+		
 		<br>
 		<p>* champs obligatoires<p>
 		

@@ -93,11 +93,13 @@ public class StudentController {
 		
 		if (studentService.getStudentByNip(student.getNip())==null){
 			StudentLDAP studentLDAP = /* new StudentLDAP(); */ studentLDAPService.getStudentLDAP(student.getNip());
-			//TrainingLDAP trainingLDAP = /*new TrainingLDAP();*/ trainingLDAPService.getTrainingLDAP(2017, student.getNip());
+			TrainingLDAP trainingLDAP = /*new TrainingLDAP();*/ trainingLDAPService.getTrainingLDAP(2017, student.getNip());
 			student.setCivilite(studentLDAP.getEtu_civilite());
 			student.setFirstName(studentLDAP.getEtu_prenom());
 			student.setLastName(studentLDAP.getEtu_nom());
-			
+			student.getTrainings().get(0).setDate(trainingLDAP.getIns_ANNEE());
+			student.getTrainings().get(0).setName(trainingLDAP.getIns_LIBDIPLOME());
+			student.getTrainings().get(0).setPlace("Lille");	
 		}
 		else {
 			student=studentService.getStudentByNip(student.getNip());
@@ -209,6 +211,7 @@ public class StudentController {
 			}
 			
 			std.setNip(this.student.getNip());
+			std.getTrainings().get(0).setPlace("Lille");	
 			
 		    if(action.equals("Publier")){
 		    	
