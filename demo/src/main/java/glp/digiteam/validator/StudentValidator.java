@@ -37,16 +37,14 @@ public class StudentValidator implements Validator {
 			errors.rejectValue("address.postalCode", "");
 		}
 
-		if (student.getAvailability().getStartDate().after(student.getAvailability().getEndDate())) {
+		/*if (student.getAvailability().getStartDate().after(student.getAvailability().getEndDate())) {
 			errors.rejectValue("availability.startDate", "");
 			errors.rejectValue("availability.endDate", "");
-		}
+		}*/
 		
 		if (student.getWish().getMissions().size()==0) {
 			errors.rejectValue("wish.missions", "");
 		}
-
-
 	}
 
 	public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
@@ -60,5 +58,4 @@ public class StudentValidator implements Validator {
 	public boolean isNumeric(String s) {
 		return s.matches("[-+]?\\d*\\.?\\d+");
 	}
-
 }
