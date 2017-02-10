@@ -21,13 +21,15 @@
 				<article class="col-md-3">
 					<div class="input-group">
 						<span class="input-group-addon" id="sizing-addon3">Du</span>
-						<input type="text" class="form-control" placeholder="jj/mm/aaaa" name="start" th:field="${student.availability.startDate}" />
+						<input type="text" class="form-control" placeholder="jj/mm/aaaa" name="start" th:value="${student.availability.startDate}" th:field="${student.availability.startDate}"
+						readonly="readonly" style="cursor:text; background:white;">
 					</div>
 				</article>
 				<article class="col-md-3">
 					<div class="input-group">
-						<span class="input-group-addon" id="sizing-addon3">Au</span> 
-						<input type="text" class="form-control" placeholder="jj/mm/aaaa" name="end" th:field="${student.availability.endDate}" />
+						<span class="input-group-addon" id="sizing-addon3">Au</span>
+						<input type="text" class="form-control" placeholder="jj/mm/aaaa" name="end" th:value="${student.availability.endDate}" th:field="${student.availability.endDate}"
+						readonly="readonly" style="cursor:text; background:white;">
 					</div>
 				</article>
 			</div>
