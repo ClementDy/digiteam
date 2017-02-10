@@ -219,7 +219,7 @@ public class StudentController {
 				std.setPublished(false);
 				
 			}
-		
+		    std.setCv(file.getOriginalFilename());
 			model.addAttribute("student", std);
 			studentService.saveStudentProfile(std);
 			
@@ -255,7 +255,7 @@ public class StudentController {
 	@GetMapping("/files/{filename:.+}")
 	@ResponseBody
 	public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
-
+		student.setCv(filename);
 		Resource file = storageService.loadAsResource(filename);
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")

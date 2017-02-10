@@ -26,6 +26,7 @@ public class Student {
 	private String phone;
 	private String email;
 	private String nationality;
+	private String cv;
 	private Boolean published = false;
 	
 	@Lob
@@ -219,6 +220,16 @@ public class Student {
 
 	public void setCivilite(int civilite) {
 		this.civilite = civilite;
+	}
+	
+	
+
+	public String getCv() {
+		return cv;
+	}
+
+	public void setCv(String cv) {
+		this.cv = cv;
 	}
 
 	@Override
