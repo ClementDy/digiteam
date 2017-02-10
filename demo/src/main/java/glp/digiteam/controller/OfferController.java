@@ -16,6 +16,8 @@ import glp.digiteam.entity.offer.Referent;
 import glp.digiteam.entity.offer.Responsible;
 import glp.digiteam.entity.student.Mission;
 import glp.digiteam.repository.MissionRepository;
+import glp.digiteam.repository.ReferentRepository;
+import glp.digiteam.repository.StudentRepository;
 import glp.digiteam.services.OfferService;
 import glp.digiteam.services.ReferentService;
 import glp.digiteam.services.ResponsibleService;
@@ -31,6 +33,9 @@ public class OfferController {
 
 	@Autowired
 	ReferentService referentService;
+	
+	@Autowired
+	ReferentRepository referentRepository;
 
 	
 	Responsible responsible;
@@ -46,6 +51,7 @@ public class OfferController {
 	public String homeContracts(Model model,HttpSession session) {
 		
 		referent= (Referent) session.getAttribute("referent");
+		referent=referentRepository.findByName(referent.getName());
 		model.addAttribute("referent", referent);
 		return "offers/offersHome";
 	}
@@ -54,9 +60,15 @@ public class OfferController {
 	public String newGeneriqueOffer(Model model,HttpSession session) {
 	
 		responsible=new Responsible();
-		
 		model.addAttribute("referent", referent);
 		System.out.println(referent.getName());
+		
+		
+		for(int i=0;i<referent.getResponsible().size();i++){
+			for(int j=0;j<referent.getResponsible().get(i).getOffers().size();j++){
+				System.out.println(referent.getResponsible().get(i).getOffers().get(j).getTitle());
+			}
+		}
 		
 		
 		model.addAttribute("offer", offer);

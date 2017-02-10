@@ -16,7 +16,7 @@ public class GenericOffer extends AbstractOffer implements Offer{
 
 
 
-	private String title;
+
 	private String mission;
 	private String skills;
 	
@@ -39,13 +39,7 @@ public class GenericOffer extends AbstractOffer implements Offer{
 		this.remuneration = remuneration;
 	}
 
-	public String getTitle() {
-		return title;
-	}
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
 
 	public String getMission() {
 		return mission;
@@ -88,8 +82,7 @@ public class GenericOffer extends AbstractOffer implements Offer{
 
 	@Override
 	public String toString() {
-		return "GenericOffer [remuneration=" + remuneration + ", remunerationInfo=" + remunerationInfo + ", title="
-				+ title + ", mission=" + mission + ", skills=" + skills + "]";
+		return "GenericOffer [remuneration=" + remuneration + ", remunerationInfo=" + remunerationInfo + ", mission=" + mission + ", skills=" + skills + "]";
 	}
 
 

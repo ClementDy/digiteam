@@ -8,15 +8,20 @@
 
 <script src="js/header.js"></script>
 
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/bootstrap-datepicker.fr.min.js"></script>
+
+<script src="js/inputs.js"></script>
+
+<link rel="stylesheet" href="css/bootstrap-datepicker3.css">
+
+
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/header.css">
-<!-- Bootstrap core JavaScript
-	    ================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -119,6 +124,18 @@
 				</div>
 			</div>
 
+			<br>
+			
+			<div class="row">
+				<div class="form-group col-md-3">
+					<label>Date de validit&eacute;  : </label>
+					<input type="text" class="form-control input-date"  th:field="${offer.validityDate}"
+					readonly="readonly" style=" cursor:text; background:white;"/>
+					
+				</div>
+			</div>
+			
+			
 			<br>
 
 			<div class="titreOffre">

@@ -6,6 +6,8 @@ import glp.digiteam.entity.offer.Referent;
 
 
 public interface ReferentRepository extends CrudRepository<Referent,Long>{
+
+	Referent findByName(String name);
 	
 
 }

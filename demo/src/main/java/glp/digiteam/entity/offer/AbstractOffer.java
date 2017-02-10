@@ -1,5 +1,7 @@
 package glp.digiteam.entity.offer;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
@@ -24,7 +28,11 @@ public class AbstractOffer {
 	private Service service;
 
 	
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	private Date validityDate;
+
 	
+	private String title;
 	
 	public AbstractOffer(){
 	}
@@ -48,7 +56,13 @@ public class AbstractOffer {
 	}
 	
 
+	public String getTitle() {
+		return title;
+	}
 
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	
 
 
@@ -59,6 +73,17 @@ public class AbstractOffer {
 	public void setService(Service service) {
 		this.service = service;
 	}
+
+
+	public Date getValidityDate() {
+		return validityDate;
+	}
+
+
+	public void setValidityDate(Date validityDate) {
+		this.validityDate = validityDate;
+	}
+	
 	
 
 	

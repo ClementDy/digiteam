@@ -19,4 +19,11 @@ public class ReferentService {
 	public Referent saveReferent(Referent referent){
 		return referentRepository.save(referent);
 	}
+	
+	public Referent getReferentByName(String name){
+		if(referentRepository.findByName(name)!=null){
+			return referentRepository.findByName(name);
+		}
+		return null;
+	}
 }

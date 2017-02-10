@@ -73,23 +73,7 @@
 								</tr>
 
 							</thead>
-							<tr>
-								<td>Offre n°1</td>
-								<td>Surveillant d'examen d'Anglais</td>
-								<td>Monsieur Duchemin</td>
-								<td>26/01/2016</td>
-								<td>
-									<button type="button" class="btn btn-success"
-										aria-label="Left Align">
-										<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-									</button>
-									<button type="button" class="btn btn-primary"
-										aria-label="Left Align">
-										<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-									</button>
-									<button class="btn btn-warning">Dépublier</button>
-								</td>
-							</tr>
+							
 
 
 						</table>
@@ -109,6 +93,49 @@
 				<div id="collapseTwo" class="panel-collapse collapse"
 					role="tabpanel" aria-labelledby="headingTwo">
 					<div class="panel-body"></div>
+					<table class="table table-responsive">
+
+							<thead>
+								<tr>
+									<td><strong>N° de l'offre</strong></td>
+									<td><strong>Titre</strong></td>
+									<td><strong>Responsable</strong></td>
+									<td><strong>Date</strong></td>
+									<td></td>
+								</tr>
+
+							</thead>
+							
+							
+							 <span th:each="responsible : ${referent.responsible}">
+		     					<tr>
+		     						<td th:each="offer: ${responsible.offers}">
+						                <label th:text="${offer.id}"></label>
+						        	</td>
+						        	<td th:each="offer: ${responsible.offers}" th:text="${offer.title}">
+						        	</td>
+						       		<td> <span th:each="offer: ${responsible.offers}" th:text="${responsible.firstName}"></span><span></span> <span th:each="offer: ${responsible.offers}" th:text="${responsible.lastName}"></span>
+						        	</td>
+						       		<td th:each="offer: ${responsible.offers}" th:text="${offer.validityDate}"></td>
+						        
+		    		
+									<td>
+								
+									<button type="button" class="btn btn-success"
+										aria-label="Left Align">
+										<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+									</button>
+									<button type="button" class="btn btn-primary"
+										aria-label="Left Align">
+										<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+									</button>
+									
+									</td>
+							</tr>
+									</span>
+
+
+						</table>
 				</div>
 			</div>
 			<div class="panel panel-default">
@@ -124,11 +151,27 @@
 				<div id="collapseThree" class="panel-collapse collapse"
 					role="tabpanel" aria-labelledby="headingThree">
 					<div class="panel-body"></div>
+					
+					<table class="table table-responsive">
+					
+						<thead>
+									<tr>
+										<td><strong>N° de l'offre</strong></td>
+										<td><strong>Titre</strong></td>
+										<td><strong>Responsable</strong></td>
+										<td><strong>Date</strong></td>
+										<td></td>
+									</tr>
+	
+						</thead>
+					</table>
+				
 				</div>
 			</div>
 		</div>
-
-
+	
+	
+	
 
 	</div>
 </body>
