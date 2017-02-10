@@ -25,14 +25,20 @@
 				th:if="${student.civilite}==1">Madame</label> <label
 				th:text="${student.lastName}" id="lastName"></label> <label
 				th:text="${student.firstName}" id="firstName"></label> <br> <label
-				th:text="${student.email}" id="email"></label> <br> <label
-				th:text="${student.phone}" id="phone"></label> <br> <label
-				for="selectbasic">Nationalité </label> <label
+				th:text="${student.email}" id="email"></label> <br>
+				 <label
+				for="selectbasic">Nationalité </label>
+				<label
 				th:text="${student.nationality}" id="nationality"></label> <br>
+				<label th:text="${student.phone}" id="phone"></label> <br> 
+				 
 			<label th:if="${student.nationality}!='FRANCAISE'"
 				th:text="${student.dateVISA}" id="dateVISA"></label> <br>
 
-
+			<div th:if="${student.cv}!=NULL">
+			<h4 class="titreFormulaire">CV</h4>
+			<label  class="left control-label">Votre CV : </label>	<label th:text="${student.cv}" ></label><br><br>
+			</div>
 			
 			<h4 class="titreFormulaire">Adresse</h4>
 			<div class="row">
