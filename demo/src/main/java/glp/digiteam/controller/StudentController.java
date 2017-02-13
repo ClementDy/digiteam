@@ -1,6 +1,5 @@
 package glp.digiteam.controller;
 
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,92 +43,92 @@ import glp.digiteam.validator.StudentValidator;
 public class StudentController {
 
 	private final StorageService storageService;
-	
+
 	Student student;
-	
-	@Autowired 
+
+	@Autowired
 	private StudentLDAPService studentLDAPService;
 	@Autowired
 	private TrainingLDAPService trainingLDAPService;
 
 	@Autowired
 	private StudentService studentService;
-	
+
 	@Autowired
 	private MissionRepository missionRepository;
-	//11202572
-	
+	// 11202572
+
 	@RequestMapping(value = "/home2", method = RequestMethod.GET)
 	public String hello2(Model model) {
 		return "/refound/home";
 	}
-	
+
 	@RequestMapping(value = "/date", method = RequestMethod.GET)
 	public String date(Model model) {
 		return "date";
 	}
-	
+
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
-	public String profile(Model model,HttpSession session) {
-		
+	public String profile(Model model, HttpSession session) {
+
 		model.addAttribute("student", student);
 		return "profile";
 	}
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView redirectslash(Model model,HttpSession session) {
-		
+	public ModelAndView redirectslash(Model model, HttpSession session) {
+
 		return new ModelAndView("redirect:authentication");
 	}
-	
+
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public ModelAndView homeStudent(Model model,HttpSession session,@RequestParam(value="action", required=false) String action) {
-		
-		if(session.getAttribute("student")==null){
+	public ModelAndView homeStudent(Model model, HttpSession session,
+			@RequestParam(value = "action", required = false) String action) {
+
+		if (session.getAttribute("student") == null) {
 			return new ModelAndView("redirect:authentication");
 		}
-		
-		student=(Student) session.getAttribute("student");
-		
-		if (studentService.getStudentByNip(student.getNip())==null){
+
+		student = (Student) session.getAttribute("student");
+
+		if (studentService.getStudentByNip(student.getNip()) == null) {
 			StudentLDAP studentLDAP = /* new StudentLDAP(); */ studentLDAPService.getStudentLDAP(student.getNip());
-			//TrainingLDAP trainingLDAP = /*new TrainingLDAP();*/ trainingLDAPService.getTrainingLDAP(2017, student.getNip());
+			// TrainingLDAP trainingLDAP = /*new TrainingLDAP();*/
+			// trainingLDAPService.getTrainingLDAP(2017, student.getNip());
 			student.setCivilite(studentLDAP.getEtu_civilite());
 			student.setFirstName(studentLDAP.getEtu_prenom());
 			student.setLastName(studentLDAP.getEtu_nom());
-			
-		}
-		else {
-			student=studentService.getStudentByNip(student.getNip());
-			try{
-				if(action.equals("unpublish")){
+
+		} else {
+			student = studentService.getStudentByNip(student.getNip());
+			try {
+				if (action.equals("unpublish")) {
 					studentService.unpublishProfil(student);
 				}
-			}
-			catch(Exception e){
-				
+			} catch (Exception e) {
+
 			}
 		}
-		
+
 		model.addAttribute("student", student);
-	
+
 		return new ModelAndView("homeStudent");
 	}
-	
-	
+
 	@RequestMapping(value = "/candidature", method = RequestMethod.GET)
-	public ModelAndView hello(Model model,HttpSession session) {
-		if(session.getAttribute("student")==null){
+	public ModelAndView hello(Model model, HttpSession session) {
+		if (session.getAttribute("student") == null) {
 			return new ModelAndView("redirect:authentication");
 		}
-		
-		student=(Student) session.getAttribute("student");
-		
-		if (studentService.getStudentByNip(student.getNip())==null){
+
+		student = (Student) session.getAttribute("student");
+
+		if (studentService.getStudentByNip(student.getNip()) == null) {
 			System.out.println("Home GET Dans le premier if");
 			StudentLDAP studentLDAP = /* new StudentLDAP(); */ studentLDAPService.getStudentLDAP(student.getNip());
-			
-			TrainingLDAP trainingLDAP = /*new TrainingLDAP();*/ trainingLDAPService.getTrainingLDAP(2017, student.getNip());
+
+			TrainingLDAP trainingLDAP = /* new TrainingLDAP(); */ trainingLDAPService.getTrainingLDAP(2017,
+					student.getNip());
 			System.out.println("Home GET Apres la recup LDAP");
 			student.setFirstName(studentLDAP.getEtu_prenom());
 			student.setLastName(studentLDAP.getEtu_nom());
@@ -138,98 +137,101 @@ public class StudentController {
 			student.setCivilite(studentLDAP.getEtu_civilite());
 			student.getTrainings().get(0).setDate(trainingLDAP.getIns_ANNEE());
 			student.getTrainings().get(0).setName(trainingLDAP.getIns_LIBDIPLOME());
-			student.getTrainings().get(0).setPlace("Lille");	
+			student.getTrainings().get(0).setPlace("Lille");
 			System.out.println("Home GET fin du if");
-			
-		}
-		else {
+
+		} else {
 			System.out.println("dans le else");
-			student=studentService.getStudentByNip(student.getNip());
-			
-			try{
-			Resource cvStudent = storageService.loadAsResource(student.getNip().toString());
-			model.addAttribute("file",cvStudent);}
-			catch (Exception e) {
-			System.out.println("pas de cv trouvé");
+			student = studentService.getStudentByNip(student.getNip());
+
+			try {
+				Resource cvStudent = storageService.loadAsResource(student.getNip().toString());
+				model.addAttribute("file", cvStudent);
+			} catch (Exception e) {
+				System.out.println("pas de cv trouvé");
 			}
-			
+
 		}
-		
+
 		model.addAttribute("student", student);
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
-		
+
 		return new ModelAndView("candidature");
 	}
 
 	@RequestMapping(value = "/candidature", method = RequestMethod.POST)
-	public ModelAndView addEtudiant(@ModelAttribute Student std,BindingResult bindingResult, @RequestParam("file") MultipartFile file,
-		@RequestParam(value="action", required=true) String action, RedirectAttributes redirectAttributes, Model model, Errors e, HttpSession session) {
-		
-		if(action.equals("Publier")|| action.equals("Enregistrer")){
+	public ModelAndView addEtudiant(@ModelAttribute Student std, BindingResult bindingResult,
+			@RequestParam("file") MultipartFile file, @RequestParam(value = "action", required = true) String action,
+			RedirectAttributes redirectAttributes, Model model, Errors e, HttpSession session) {
 
-			if(action.equals("Publier")) {
+		if (action.equals("Publier") || action.equals("Enregistrer")) {
+
+			if (action.equals("Publier")) {
 				StudentValidator studentValidator = new StudentValidator();
 				studentValidator.validate(std, bindingResult);
-				
-				if(bindingResult.hasErrors()){
+
+				if (bindingResult.hasErrors()) {
 					Iterable<Mission> missions = missionRepository.findAll();
 					model.addAttribute("listMission", missions);
 					return new ModelAndView("candidature");
 				}
 			}
-			
-			Student  realStudent;
-			
-			if(studentService.getStudentByNip(this.student.getNip())!=null){
-		
-		    realStudent = studentService.getStudentByNip(this.student.getNip());
-		    
-			std.getAddress().setId(realStudent.getAddress().getId());
-			std.getAddress().setStudent(realStudent);
-			
-			std.getWish().setId(realStudent.getWish().getId());
-			std.getWish().setStudent(realStudent);
-			
-			std.getAvailability().setId(realStudent.getAvailability().getId());
-			std.getAvailability().setStudent(realStudent);
-			
-			std.getMisc().setId(realStudent.getMisc().getId());
-			std.getMisc().setStudent(realStudent);
-			
-			for (int i = 0; i < std.getTrainings().size(); i++) {
-				std.getTrainings().get(i).setId(realStudent.getTrainings().get(i).getId());
-				std.getTrainings().get(i).setStudent(realStudent);
+
+			Student realStudent;
+
+			if (studentService.getStudentByNip(this.student.getNip()) != null) {
+
+				realStudent = studentService.getStudentByNip(this.student.getNip());
+
+				std.getAddress().setId(realStudent.getAddress().getId());
+				std.getAddress().setStudent(realStudent);
+
+				std.getWish().setId(realStudent.getWish().getId());
+				std.getWish().setStudent(realStudent);
+
+				std.getAvailability().setId(realStudent.getAvailability().getId());
+				std.getAvailability().setStudent(realStudent);
+
+				std.getMisc().setId(realStudent.getMisc().getId());
+				std.getMisc().setStudent(realStudent);
+
+				for (int i = 0; i < std.getTrainings().size(); i++) {
+					std.getTrainings().get(i).setId(realStudent.getTrainings().get(i).getId());
+					std.getTrainings().get(i).setStudent(realStudent);
+				}
+				for (int i = 0; i < std.getExternalContracts().size(); i++) {
+					std.getExternalContracts().get(i).setId(realStudent.getExternalContracts().get(i).getId());
+					std.getExternalContracts().get(i).setStudent(realStudent);
+				}
+
 			}
-			for (int i = 0; i < std.getExternalContracts().size(); i++) {
-				std.getExternalContracts().get(i).setId(realStudent.getExternalContracts().get(i).getId());
-				std.getExternalContracts().get(i).setStudent(realStudent);
-			}
-			
-			}
-			
+
 			std.setNip(this.student.getNip());
-			
-		    if(action.equals("Publier")){
-		    	
-		    	std.setPublished(true);
-				
-			}else {
-				
-				std.setPublished(false);
-				
+			std.setCv(file.getOriginalFilename());
+
+			if (!file.isEmpty()) {
+				storageService.store(file, student.getNip());
+				redirectAttributes.addFlashAttribute("message",
+						"You successfully uploaded " + file.getOriginalFilename() + "!");
 			}
-		    std.setCv(file.getOriginalFilename());
+			
+
+			if (action.equals("Publier")) {
+
+				std.setStatut("published");
+				model.addAttribute("student", std);
+				studentService.saveStudentProfile(std);
+				return new ModelAndView("redirect:home");
+
+			} 
+			std.setStatut("register");
 			model.addAttribute("student", std);
 			studentService.saveStudentProfile(std);
-			
-			if (!file.isEmpty()) {
-				storageService.store(file,student.getNip());
-				redirectAttributes.addFlashAttribute("message","You successfully uploaded " + file.getOriginalFilename() + "!");
-			}
-			
 		}
-		return new ModelAndView("redirect:home");
+		
+		return new ModelAndView("candidature");
+		
 	}
 
 	/*
@@ -246,7 +248,7 @@ public class StudentController {
 	 * true)); }
 	 */
 	// CV
-	
+
 	@Autowired
 	public StudentController(StorageService storageService) {
 		this.storageService = storageService;

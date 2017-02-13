@@ -27,7 +27,7 @@ public class StudentService {
 	}
 	
 	public void unpublishProfil(Student student){
-		student.setPublished(false);
+		student.setStatut("register");
 		studentRepository.save(student);
 	}
 	
@@ -35,7 +35,7 @@ public class StudentService {
 		Iterable<Student> allStudent = studentRepository.findAll();
 		List<Student> candidaturePublished = new ArrayList<>();
 		for (Student student : allStudent) {
-			if(student.getPublished()==true){
+			if(student.getStatut()=="published"){
 				candidaturePublished.add(student);
 			}
 		}

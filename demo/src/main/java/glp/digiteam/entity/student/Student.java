@@ -14,7 +14,6 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
-
 @Entity
 public class Student {
 
@@ -27,33 +26,33 @@ public class Student {
 	private String email;
 	private String nationality;
 	private String cv;
-	private Boolean published = false;
-	
+	private String statut;
+
 	@Lob
 	@Type(type = "org.hibernate.type.TextType")
 	private String motivation;
-	
+
 	private String visa;
 
-	@DateTimeFormat(pattern="dd/MM/yyyy")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dateVisa;
 
-	@OneToOne(mappedBy="student", cascade=CascadeType.ALL)
+	@OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
 	private Address address;
 
-	@OneToOne(mappedBy="student", cascade=CascadeType.ALL)
+	@OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
 	private Availability availability;
 
-	@OneToMany(mappedBy="student", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
 	private List<ExternalContract> externalContracts = new ArrayList<>();
 
-	@OneToOne(mappedBy="student", cascade=CascadeType.ALL)
+	@OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
 	private Miscellaneous misc;
 
-	@OneToOne(mappedBy="student", cascade=CascadeType.ALL)
+	@OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
 	private Wish wish;
 
-	@OneToMany(mappedBy="student",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
 	List<Training> trainings = new ArrayList<Training>();
 
 	public Student() {
@@ -64,14 +63,15 @@ public class Student {
 		for (int i = 0; i < 5; i++) {
 			externalContracts.add(new ExternalContract(this));
 		}
-		if(trainings.size()!=6){
+		if (trainings.size() != 6) {
 			for (int i = 0; i < 6; i++) {
 				trainings.add(new Training(this));
 			}
 		}
 	}
 
-	public Student(String firstName, String lastName, String phone, String email, String nationality, String motivation, Wish wish) {
+	public Student(String firstName, String lastName, String phone, String email, String nationality, String motivation,
+			Wish wish) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phone = phone;
@@ -80,7 +80,6 @@ public class Student {
 		this.motivation = motivation;
 		this.wish = wish;
 	}
-
 
 	public Address getAddress() {
 		return address;
@@ -122,7 +121,6 @@ public class Student {
 		this.wish = wish;
 	}
 
-
 	public Integer getNip() {
 		return nip;
 	}
@@ -130,7 +128,6 @@ public class Student {
 	public void setNip(Integer nip) {
 		this.nip = nip;
 	}
-
 
 	public String getFirstName() {
 		return firstName;
@@ -196,15 +193,13 @@ public class Student {
 		this.dateVisa = dateVisa;
 	}
 
-
-	public void setPublished(Boolean published) {
-		this.published = published;
+	public String getStatut() {
+		return statut;
 	}
 
-	public Boolean getPublished() {
-		return published;
+	public void setStatut(String statut) {
+		this.statut = statut;
 	}
-
 
 	public List<Training> getTrainings() {
 		return trainings;
@@ -221,8 +216,6 @@ public class Student {
 	public void setCivilite(int civilite) {
 		this.civilite = civilite;
 	}
-	
-	
 
 	public String getCv() {
 		return cv;
