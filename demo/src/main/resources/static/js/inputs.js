@@ -19,6 +19,12 @@ function isValidInteger(string) {
   return regex.test(string);
 }
 
+function isValidPhoneNumber(string) {
+	var regex = /^\+?\d*$/;
+  
+  return regex.test(string);
+}
+
 //When the document is ready
 $(document).ready(function () {
 
@@ -30,6 +36,19 @@ $(".input-integer").bind({
   },
   keypress: function() {
   	if (!isValidInteger(getValueAfterKeypress($(this), event.which))) {
+      cancelEvent(event);
+    }
+  }
+});
+
+$(".input-phonenumber").bind({
+  paste: function() {
+    if (!isValidPhoneNumber(event.clipboardData.getData('text/plain'))) {
+      cancelEvent(event);
+    }
+  },
+  keypress: function() {
+  	if (!isValidPhoneNumber(getValueAfterKeypress($(this), event.which))) {
       cancelEvent(event);
     }
   }

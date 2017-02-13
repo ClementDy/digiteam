@@ -58,7 +58,7 @@
 					<label class="control-label">T&eacute;l&eacute;phone * : </label>
 					</div>
 					<div class="col-md-6">
-					<input class="form-control" th:value="${student.phone}" th:field="${student.phone}" type="text" id="phone">
+					<input class="form-control input-phonenumber" th:value="${student.phone}" th:field="${student.phone}" type="text" id="phone">
 					<p th:if="${#fields.hasErrors('phone')}" style="color:darkRed;" >champ obligatoire</p>
 					</div>
 				</div>
@@ -134,7 +134,7 @@
 					<label class="control-label">Code postal * : </label> 
 					</div>
 					<div class="col-md-6">
-					<input class="form-control" th:value="${student.address.postalCode}" th:field="${student.address.postalCode}" type="text" id="postalCode">
+					<input class="form-control input-integer" th:value="${student.address.postalCode}" th:field="${student.address.postalCode}" type="text" id="postalCode">
 					<p th:if="${#fields.hasErrors('address.postalCode')}" style="color:darkRed;" >champ obligatoire</p>
 					</div>
 				</div>
