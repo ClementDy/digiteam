@@ -39,7 +39,8 @@
 			<label th:if="${student.dateVisa}!=NULL"
 				th:text="${student.dateVISA}" id="dateVISA"></label> <br>
 				
-			<div th:if="${student.cv}!=NULL">
+			
+			<div th:if="${student.cv}!=''">
 			<h4 class="titreFormulaire">CV</h4>
 			<label  class="left control-label">Votre CV : </label>	<label th:text="${student.cv}" ></label><br><br>
 			</div>
