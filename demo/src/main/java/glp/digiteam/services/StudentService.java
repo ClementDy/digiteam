@@ -35,7 +35,7 @@ public class StudentService {
 		Iterable<Student> allStudent = studentRepository.findAll();
 		List<Student> candidaturePublished = new ArrayList<>();
 		for (Student student : allStudent) {
-			if(student.getStatut()=="published"){
+			if(student.getStatut().equals("published")){
 				candidaturePublished.add(student);
 			}
 		}

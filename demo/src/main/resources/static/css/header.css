@@ -1,3 +1,14 @@
+body{
+background-color:lightgrey;
+   background-size:cover;
+background-image:url(../img/fond.jpg);
+}
+
+
+.jumbotron{
+background-color:white;}
+
+
 .headerImg{
 	margin-top:30px;
 	margin-bottom:30px;
@@ -7,7 +18,10 @@
 	margin-left:20px;
 }
 
-
+.tab-pane{
+	border-radius:10px;
+	background:white;
+}
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus,
 	.navbar-default .navbar-nav>.active>a:hover {
 	color: #ae2573;
@@ -35,6 +49,18 @@
 	color: #337ab7;
 }
 
+.containerProfil{
+	background:white;
+}
+
+.containerOffer{
+	background:white;
+	border-radius:10px;
+}
+
+.containerAuthentication{
+	margin-top:10%;	
+}
 
 #ongletLille1 {
 	background-color: #ae2573;

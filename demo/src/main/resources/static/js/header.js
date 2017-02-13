@@ -7,4 +7,9 @@ function activeNav(id) {
 		$('#candidatures').addClass("active");
 		$('#offers').removeClass("active");
 	}
+	else if(id=='consult'){
+		$('#consult').addClass("active");
+		$('#offers').removeClass("active");
+		$('#candidatures').removeClass("active");
+	}
 }

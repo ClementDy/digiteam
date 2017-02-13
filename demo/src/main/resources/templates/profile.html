@@ -7,6 +7,7 @@
 <!-- Bootstrap core JavaScript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
+<link rel="stylesheet" href="css/header.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script
@@ -17,8 +18,8 @@
 </head>
 <body onload="activeNav('candidatures')">
 	<div th:include="header::header"></div>
-	<div class="container ">
-		<div class="tab-pane active">
+	<div class="container containerProfil">
+		<div class="tab-pane">
 			<h4 class="titreFormulaire">Infos perso</h4>
 
 			<label th:if="${student.civilite}==0">Monsieur</label> <label
