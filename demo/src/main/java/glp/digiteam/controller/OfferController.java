@@ -104,6 +104,7 @@ public class OfferController {
 		return new ModelAndView("redirect:contracts");
 	}
 	
+	
 	@RequestMapping(value = "/consult", method = RequestMethod.GET)
 	public String consult(Model model,HttpSession session) {
 		referent= (Referent) session.getAttribute("referent");

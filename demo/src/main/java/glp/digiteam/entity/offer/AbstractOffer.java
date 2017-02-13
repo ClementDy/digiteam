@@ -31,6 +31,9 @@ public class AbstractOffer {
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date validityDate;
 
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	private Date creationDate;
+
 	
 	private String title;
 	
