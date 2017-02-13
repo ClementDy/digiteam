@@ -31,10 +31,13 @@
 				<label
 				th:text="${student.nationality}" id="nationality"></label> <br>
 				<label th:text="${student.phone}" id="phone"></label> <br> 
-				 
+			
+			 
 			<label th:if="${student.nationality}!='FRANCAISE'"
 				th:text="${student.dateVISA}" id="dateVISA"></label> <br>
-
+			<label th:if="${student.dateVisa}!=NULL"
+				th:text="${student.dateVISA}" id="dateVISA"></label> <br>
+				
 			<div th:if="${student.cv}!=NULL">
 			<h4 class="titreFormulaire">CV</h4>
 			<label  class="left control-label">Votre CV : </label>	<label th:text="${student.cv}" ></label><br><br>
@@ -100,7 +103,7 @@
 					<tbody>
 
 						<tr th:each="training, stat : ${student.trainings}"
-							th:if="${student.trainings[__${stat.index}__].date}!=''">
+							th:if="${student.trainings[__${stat.index}__].date}!=0">
 							<td><label
 								th:text="${student.trainings[__${stat.index}__].date}"></label></td>
 							<td><label

@@ -70,7 +70,7 @@ public class StudentController {
 
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public String profile(Model model, HttpSession session) {
-
+		student=studentService.getStudentByNip(student.getNip());
 		model.addAttribute("student", student);
 		return "profile";
 	}
@@ -156,7 +156,7 @@ public class StudentController {
 		model.addAttribute("student", student);
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
-
+		studentService.saveStudentProfile(student);
 		return new ModelAndView("candidature");
 	}
 

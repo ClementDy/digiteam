@@ -37,7 +37,7 @@
          <div th:if="${student.statut}=='published'" class="jumbotron">
             <h2>Candidature publiée</h2>
             <p> Vous avez une candidature publiée</p>
-            <a class="btn btn-lille1" href="@{/profile}">Consulter</a>
+            <a class="btn btn-lille1" th:href="@{/profile}">Consulter</a>
             <a class="btn btn-lille1" th:href="@{/candidature}">Modifier</a>
             <a class="btn btn-lille1" th:href="@{/home(action='unpublish')}">Dépublier</a> 
         </div>

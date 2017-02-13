@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
@@ -52,7 +53,7 @@ public class Student {
 	@OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
 	private Wish wish;
 
-	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER,mappedBy = "student", cascade = CascadeType.ALL)
 	List<Training> trainings = new ArrayList<Training>();
 
 	public Student() {
