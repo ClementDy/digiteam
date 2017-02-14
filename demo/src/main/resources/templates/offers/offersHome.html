@@ -81,6 +81,32 @@
 
 							</thead>
 							
+								 <span th:each="responsible : ${referent.responsible}">
+		     					<tr th:each="offer: ${responsible.offers}" th:if="${offer.status}=='Validated'">
+		     						<td>
+						                <label th:text="${offer.id}"></label>
+						        	</td>
+						        	<td   th:text="${offer.title}">
+						        	</td>
+						       		<td> <span  th:text="${responsible.firstName}"></span><span></span> <span  th:text="${responsible.lastName}"></span>
+						        	</td>
+						       		<td  th:text="${offer.validityDate}"></td>
+						        
+		    		
+									<td>
+								
+									<button type="button" class="btn btn-success"
+										aria-label="Left Align">
+										<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+									</button>
+									<button type="button" class="btn btn-primary"
+										aria-label="Left Align">
+										<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+									</button>
+									
+									</td>
+								</tr>
+							</span>
 
 
 						</table>
@@ -121,15 +147,15 @@
 							
 							
 							 <span th:each="responsible : ${referent.responsible}">
-		     					<tr>
-		     						<td th:each="offer: ${responsible.offers}">
+		     					<tr th:each="offer: ${responsible.offers}" th:if="${offer.status}=='Waiting'">
+		     						<td>
 						                <label th:text="${offer.id}"></label>
 						        	</td>
-						        	<td th:each="offer: ${responsible.offers}" th:text="${offer.title}">
+						        	<td   th:text="${offer.title}">
 						        	</td>
-						       		<td> <span th:each="offer: ${responsible.offers}" th:text="${responsible.firstName}"></span><span></span> <span th:each="offer: ${responsible.offers}" th:text="${responsible.lastName}"></span>
+						       		<td> <span  th:text="${responsible.firstName}"></span><span></span> <span  th:text="${responsible.lastName}"></span>
 						        	</td>
-						       		<td th:each="offer: ${responsible.offers}" th:text="${offer.validityDate}"></td>
+						       		<td  th:text="${offer.validityDate}"></td>
 						        
 		    		
 									<td>
@@ -144,8 +170,8 @@
 									</button>
 									
 									</td>
-							</tr>
-									</span>
+								</tr>
+							</span>
 
 
 						</table>
@@ -180,7 +206,32 @@
 
 							</thead>
 							
-							
+								 <span th:each="responsible : ${referent.responsible}">
+		     					<tr th:each="offer: ${responsible.offers}" th:if="${offer.status}=='Refused'">
+		     						<td>
+						                <label th:text="${offer.id}"></label>
+						        	</td>
+						        	<td   th:text="${offer.title}">
+						        	</td>
+						       		<td> <span  th:text="${responsible.firstName}"></span><span></span> <span  th:text="${responsible.lastName}"></span>
+						        	</td>
+						       		<td  th:text="${offer.validityDate}"></td>
+						        
+		    		
+									<td>
+								
+									<button type="button" class="btn btn-success"
+										aria-label="Left Align">
+										<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+									</button>
+									<button type="button" class="btn btn-primary"
+										aria-label="Left Align">
+										<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+									</button>
+									
+									</td>
+								</tr>
+							</span>
 							 
 
 
@@ -217,6 +268,34 @@
 									</tr>
 	
 						</thead>
+						
+						 <span th:each="responsible : ${referent.responsible}">
+		     					<tr th:each="offer: ${responsible.offers}" th:if="${offer.status}=='Expired'">
+		     						<td>
+						                <label th:text="${offer.id}"></label>
+						        	</td>
+						        	<td  th:text="${offer.title}">
+						        	</td>
+						       		<td> <span  th:text="${responsible.firstName}"></span><span></span> <span  th:text="${responsible.lastName}"></span>
+						        	</td>
+						       		<td  th:text="${offer.validityDate}"></td>
+						        
+		    		
+									<td>
+								
+									<button type="button" class="btn btn-success"
+										aria-label="Left Align">
+										<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+									</button>
+									<button type="button" class="btn btn-primary"
+										aria-label="Left Align">
+										<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+									</button>
+									
+									</td>
+								</tr>
+							</span>
+							
 					</table>
 				
 				</div>

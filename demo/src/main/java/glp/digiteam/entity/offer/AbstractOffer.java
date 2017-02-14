@@ -32,8 +32,10 @@ public class AbstractOffer {
 	private Date validityDate;
 
 	@DateTimeFormat(pattern="dd/MM/yyyy")
-	private Date creationDate;
+	private Date creationDate=new Date();
 
+	private String status;
+	
 	
 	private String title;
 	
@@ -86,6 +88,29 @@ public class AbstractOffer {
 	public void setValidityDate(Date validityDate) {
 		this.validityDate = validityDate;
 	}
+
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
+
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	
+	
 	
 	
 

@@ -81,7 +81,8 @@
 
 			<div class="row">
 				<div class="form-group col-md-5">
-					<label class="">Type de la mission :</label> <select size="1"
+					<label class="">Type de la mission :</label> 
+					<select size="1" th:field="${offer.type}"
 						class="form-control" id="allMissions">
 						<option th:each="mission : ${listMission}"
 							th:value="${mission.id}" th:text="${mission.title}"></option>

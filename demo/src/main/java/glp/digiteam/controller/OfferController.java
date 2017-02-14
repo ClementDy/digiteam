@@ -96,7 +96,7 @@ public class OfferController {
 		responsible.setReferent(referent);
 		responsible.addOffer(ofr);
 		ofr.setResponsible(responsible);
-
+		ofr.setStatus("Waiting");
 		model.addAttribute("offer",ofr);
 		
 		
