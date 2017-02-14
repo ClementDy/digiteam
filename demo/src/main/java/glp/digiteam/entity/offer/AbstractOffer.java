@@ -30,12 +30,17 @@ public class AbstractOffer {
 	
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date validityDate;
+	
+	
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	private Date moderationDate;
 
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date creationDate=new Date();
 
 	private String status;
 	
+	private String comment;
 	
 	private String title;
 	
@@ -108,6 +113,27 @@ public class AbstractOffer {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+
+	public Date getModerationDate() {
+		return moderationDate;
+	}
+
+
+	public void setModerationDate(Date moderationDate) {
+		this.moderationDate = moderationDate;
+	}
+
+
+	public String getComment() {
+		return comment;
+	}
+
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+	
 	
 	
 	

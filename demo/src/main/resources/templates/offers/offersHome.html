@@ -139,7 +139,7 @@
 									<td><strong>N° de l'offre</strong></td>
 									<td><strong>Titre</strong></td>
 									<td><strong>Responsable</strong></td>
-									<td><strong>Date</strong></td>
+									<td><strong>Date de cr&eacute;ation</strong></td>
 									<td></td>
 								</tr>
 
@@ -155,7 +155,7 @@
 						        	</td>
 						       		<td> <span  th:text="${responsible.firstName}"></span><span></span> <span  th:text="${responsible.lastName}"></span>
 						        	</td>
-						       		<td  th:text="${offer.validityDate}"></td>
+						       		<td  th:text="${offer.creationDate}"></td>
 						        
 		    		
 									<td>
@@ -164,10 +164,7 @@
 										aria-label="Left Align">
 										<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
 									</button>
-									<button type="button" class="btn btn-primary"
-										aria-label="Left Align">
-										<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-									</button>
+									
 									
 									</td>
 								</tr>

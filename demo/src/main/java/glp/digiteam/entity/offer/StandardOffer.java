@@ -22,6 +22,7 @@ public class StandardOffer extends AbstractOffer implements Offer{
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date startDate;
 	
+	private int hoursPerWeek;
 	
 
 
@@ -113,6 +114,22 @@ public class StandardOffer extends AbstractOffer implements Offer{
 
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
+	}
+	
+	
+
+
+
+
+	public int getHoursPerWeek() {
+		return hoursPerWeek;
+	}
+
+
+
+
+	public void setHoursPerWeek(int hoursPerWeek) {
+		this.hoursPerWeek = hoursPerWeek;
 	}
 
 
