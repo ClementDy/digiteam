@@ -52,6 +52,18 @@ public class Referent {
 	public void addResponsible(Responsible responsible){
 		this.responsible.add(responsible);
 	}
+
+
+
+	public ServiceEntity getService() {
+		return service;
+	}
+
+
+
+	public void setService(ServiceEntity service) {
+		this.service = service;
+	}
 	
 	
 	

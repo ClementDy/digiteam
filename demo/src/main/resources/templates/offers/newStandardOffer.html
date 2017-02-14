@@ -56,8 +56,7 @@
 
 			<div class="row service">
 				<div class="form-group">
-					<p class="control-label">Cette offre est proposée par</p>
-					<!--<label th:value="${offer.service.name}"></label>-->
+					<p class="control-label">Cette offre est proposée par le service : <span th:text="${referent.service.libelle}"></span>
 				</div>
 			</div>
 
@@ -170,10 +169,11 @@
 
 			<div class="row">
 				<div class="form-group col-md-3">
-					<label>Date de validit&eacute; : </label> <input type="text"
-						class="form-control input-date" th:field="${offer.validityDate}"
-						readonly="readonly" style="cursor: text; background: white;"
-						required />
+					<label>Date de validit&eacute; : </label> 
+					<input type="text"
+						class="form-control input-date" type="date" th:field="${offer.validityDate}"
+						readonly="readonly"   style="cursor: text; background: white;"
+						 required>
 
 				</div>
 			</div>

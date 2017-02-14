@@ -23,7 +23,7 @@ public class Responsible {
 	private String lastName;
 	
 	private String email;
-	private int phone;
+	private Integer phone;
 	
 	@ManyToOne
 	private Referent referent;
@@ -60,10 +60,10 @@ public class Responsible {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getPhone() {
+	public Integer getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(Integer phone) {
 		this.phone = phone;
 	}
 	public List<AbstractOffer> getOffers() {

@@ -69,10 +69,7 @@ public class OfferController {
 	public String newGeneriqueOffer(Model model,HttpSession session) {
 		GenericOffer offer=new GenericOffer();
 		responsible=new Responsible();
-		model.addAttribute("referent", referent);
-		System.out.println(referent.getName());
-		
-		
+		model.addAttribute("referent", referent);		
 		model.addAttribute("offer", offer);
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
@@ -160,7 +157,9 @@ public class OfferController {
 	public void checkOffer(Referent referent){
 		for(int i=0;i<referent.getResponsible().size();i++){
 			for(int j=0;j<referent.getResponsible().get(i).getOffers().size();j++){
-				if(referent.getResponsible().get(i).getOffers().get(j).getValidityDate().getTime()<(Calendar.getInstance().getTime().getTime())){
+				if(referent.getResponsible().
+						get(i).getOffers().get(j).getValidityDate().
+						getTime()<(Calendar.getInstance().getTime().getTime())){
 					referent.getResponsible().get(i).getOffers().get(j).setStatus("Expired");
 					referentService.saveReferent(referent);
 				}
