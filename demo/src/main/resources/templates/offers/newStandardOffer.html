@@ -71,7 +71,7 @@
 			<div class="row">
 				<div class="form-group">
 					<div class="col-md-6">
-						<input  th:field="${offer.title}" type="text" class="form-control"
+						<input th:field="${offer.title}" type="text" class="form-control"
 							placeholder="Titre de l'offre" required>
 					</div>
 				</div>
@@ -81,9 +81,8 @@
 
 			<div class="row">
 				<div class="form-group col-md-5">
-					<label class="">Type de la mission :</label> 
-					<select size="1" th:field="${offer.type}"
-						class="form-control" id="allMissions">
+					<label class="">Type de la mission :</label> <select size="1"
+						th:field="${offer.type}" class="form-control" id="allMissions">
 						<option th:each="mission : ${listMission}"
 							th:value="${mission.id}" th:text="${mission.title}"></option>
 					</select>
@@ -106,7 +105,8 @@
 
 			<div class="row">
 				<div class="form-group">
-					<label class="col-md-4">R&eacute;mun&eacute;ration (/heure) :</label>
+					<label class="col-md-4">R&eacute;mun&eacute;ration (/heure)
+						:</label>
 				</div>
 			</div>
 
@@ -114,8 +114,8 @@
 				<div class="form-group">
 					<div class="col-md-2">
 						<div class="input-group">
-							<input th:field="${offer.remuneration}" class="form-control" required>
-							<span class="input-group-addon">&euro;</span>
+							<input th:field="${offer.remuneration}" class="form-control"
+								required> <span class="input-group-addon">&euro;</span>
 						</div>
 					</div>
 					<div class="col-md-5">
@@ -126,55 +126,59 @@
 			</div>
 
 			<br>
-			
+
 			<div class="row">
 				<div class="form-group">
 					<label class="col-md-4">P&eacute;riode :</label>
 				</div>
 			</div>
-			
+
 			<div class="row">
-			<div class="input-daterange" id="datepicker" >
-				<article class="col-md-3">
-					<div class="input-group">
-						<span class="input-group-addon" id="sizing-addon3">Du</span>
-						<input type="text" class="form-control" placeholder="jj/mm/aaaa" name="start" th:field="${offer.startDate}" 
-						readonly="readonly" style="cursor:text; background:white;" required>
-					</div>
-				</article>
-				<article class="col-md-3">
-					<div class="input-group">
-						<span class="input-group-addon" id="sizing-addon3">Au</span>
-						<input type="text" class="form-control" placeholder="jj/mm/aaaa" name="end" th:field="${offer.endDate}" 
-						readonly="readonly" style="cursor:text; background:white;" required>
-					</div>
-				</article>
+				<div class="input-daterange" id="datepicker">
+					<article class="col-md-3">
+						<div class="input-group">
+							<span class="input-group-addon" id="sizing-addon3">Du</span> <input
+								type="text" class="form-control" placeholder="jj/mm/aaaa"
+								name="start" th:field="${offer.startDate}" readonly="readonly"
+								style="cursor: text; background: white;" required>
+						</div>
+					</article>
+					<article class="col-md-3">
+						<div class="input-group">
+							<span class="input-group-addon" id="sizing-addon3">Au</span> <input
+								type="text" class="form-control" placeholder="jj/mm/aaaa"
+								name="end" th:field="${offer.endDate}" readonly="readonly"
+								style="cursor: text; background: white;" required>
+						</div>
+					</article>
+				</div>
 			</div>
-		</div>
-		
-		<br>
+
+			<br>
 			<div class="row">
 				<div class="form-inline col-md-12">
-					<label ">Nombre d'heures par semaine :</label>
-					<input  class="col-md-2"th:field="${offer.hoursPerWeek}" type="number" class="form-control" required>
+					<label">Nombre d'heures par semaine :</label> <input
+						class="col-md-2" th:field="${offer.hoursPerWeek}" type="number"
+						class="form-control" required>
 				</div>
 			</div>
-	
-			
-		<br>
-			
-			
-			
+
+
+			<br>
+
+
+
 			<div class="row">
 				<div class="form-group col-md-3">
-					<label>Date de validit&eacute;  : </label>
-					<input type="text" class="form-control input-date"  th:field="${offer.validityDate}"
-					readonly="readonly" style=" cursor:text; background:white;" required/>
-					
+					<label>Date de validit&eacute; : </label> <input type="text"
+						class="form-control input-date" th:field="${offer.validityDate}"
+						readonly="readonly" style="cursor: text; background: white;"
+						required />
+
 				</div>
 			</div>
-			
-			
+
+
 			<br>
 
 			<div class="titreOffre">
@@ -190,12 +194,12 @@
 						<input type="text" th:field="${offer.responsible.lastName}"
 							class="form-control" placeholder="Nom" required>
 					</div>
-					
+
 					<div class="form-group">
 						<label class="control-label col-md-2"> Pr&eacute;nom :</label>
 						<div class="col-md-3">
 							<input type="text" th:field="${offer.responsible.firstName}"
-								class="form-control" placeholder="Pr&eacute;nom" required >
+								class="form-control" placeholder="Pr&eacute;nom" required>
 						</div>
 					</div>
 				</div>
@@ -208,7 +212,8 @@
 					<label class="control-label col-md-2"> Mail :</label>
 					<div class="col-md-3">
 						<input th:field="${offer.responsible.email}" type="email"
-							class="form-control" placeholder="monadresse@exemple.com" required>
+							class="form-control" placeholder="monadresse@exemple.com"
+							required>
 					</div>
 
 					<div class="form-group">
