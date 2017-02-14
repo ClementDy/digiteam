@@ -13,6 +13,11 @@ public class ServiceWebService {
 		
 	}
 
+	public ServiceWebService(String code, String libelle) {
+		this.code=code;
+		this.libelle=libelle;
+	}
+
 	public String getCode() {
 		return code;
 	}
@@ -27,6 +32,11 @@ public class ServiceWebService {
 
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
+	}
+
+	@Override
+	public String toString() {
+		return "ServiceWebService [code=" + code + ", libelle=" + libelle + "]";
 	}
 	
 	

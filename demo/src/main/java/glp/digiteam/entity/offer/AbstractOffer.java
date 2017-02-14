@@ -25,7 +25,7 @@ public class AbstractOffer {
 	private Responsible responsible;
 
 	@ManyToOne
-	private Service service;
+	private ServiceEntity service;
 
 	
 	@DateTimeFormat(pattern="dd/MM/yyyy")
@@ -76,11 +76,11 @@ public class AbstractOffer {
 	
 
 
-	public Service getService() {
+	public ServiceEntity getService() {
 		return service;
 	}
 
-	public void setService(Service service) {
+	public void setService(ServiceEntity service) {
 		this.service = service;
 	}
 
@@ -133,13 +133,6 @@ public class AbstractOffer {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	
-	
-	
-	
-	
-	
 
-	
 
 }

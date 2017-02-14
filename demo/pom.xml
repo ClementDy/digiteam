@@ -76,18 +76,19 @@
 			<artifactId>jersey-client</artifactId>
 			<version>1.19.3</version>
 		</dependency>
-		
+
 		<dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-json</artifactId>
-            <version>1.19.3</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-servlet</artifactId>
-            <version>1.19.3</version>
-        </dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-json</artifactId>
+			<version>1.19.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-servlet</artifactId>
+			<version>1.19.3</version>
+		</dependency>
+
 
 	</dependencies>
 

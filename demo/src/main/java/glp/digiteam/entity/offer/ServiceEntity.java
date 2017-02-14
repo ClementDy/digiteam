@@ -10,9 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
-public class Service {
+@Table(name = "service")
+public class ServiceEntity {
 
 	@Id
 	private String code;
@@ -21,13 +23,20 @@ public class Service {
 
 
 	@OneToMany(mappedBy="service", cascade=CascadeType.ALL,targetEntity=AbstractOffer.class)
-	private List<Offer> offers = new ArrayList<>();
+	private List<Referent> referents = new ArrayList<>();
 	
-	public Service(){
+	public ServiceEntity(){
 		
 	}
 	
 	
+
+	public ServiceEntity(String code, String libelle) {
+		this.code = code;
+		this.libelle = libelle;
+	}
+
+
 
 	public String getCode() {
 		return code;
@@ -53,13 +62,19 @@ public class Service {
 
 
 
-	public List<Offer> getOffers() {
-		return offers;
+	public List<Referent> getReferents() {
+		return referents;
 	}
 
-	public void setOffers(List<Offer> offers) {
-		this.offers = offers;
+
+
+	public void setReferents(List<Referent> referents) {
+		this.referents = referents;
 	}
+
+
+
+	
 
 
 	
