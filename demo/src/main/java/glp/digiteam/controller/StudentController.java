@@ -27,15 +27,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import glp.digiteam.entity.student.Mission;
 import glp.digiteam.entity.student.Student;
-import glp.digiteam.ldap.StudentLDAP;
-import glp.digiteam.ldap.StudentLDAPService;
-import glp.digiteam.ldap.TrainingLDAP;
-import glp.digiteam.ldap.TrainingLDAPService;
 import glp.digiteam.repository.MissionRepository;
 import glp.digiteam.services.StudentService;
 import glp.digiteam.uploadFile.StorageFileNotFoundException;
 import glp.digiteam.uploadFile.StorageService;
 import glp.digiteam.validator.StudentValidator;
+import glp.digiteam.webServices.StudentWebService;
+import glp.digiteam.webServices.StudentWebServiceService;
+import glp.digiteam.webServices.TrainingWebService;
+import glp.digiteam.webServices.TrainingWebServiceService;
 
 @EnableAutoConfiguration
 @Controller
@@ -47,9 +47,9 @@ public class StudentController {
 	Student student;
 
 	@Autowired
-	private StudentLDAPService studentLDAPService;
+	private StudentWebServiceService studentLDAPService;
 	@Autowired
-	private TrainingLDAPService trainingLDAPService;
+	private TrainingWebServiceService trainingLDAPService;
 
 	@Autowired
 	private StudentService studentService;
@@ -84,7 +84,7 @@ public class StudentController {
 		student = (Student) session.getAttribute("student");
 
 		if (studentService.getStudentByNip(student.getNip()) == null) {
-			StudentLDAP studentLDAP = /* new StudentLDAP(); */ studentLDAPService.getStudentLDAP(student.getNip());
+			StudentWebService studentLDAP = /* new StudentLDAP(); */ studentLDAPService.getStudentLDAP(student.getNip());
 			// TrainingLDAP trainingLDAP = /*new TrainingLDAP();*/
 			// trainingLDAPService.getTrainingLDAP(2017, student.getNip());
 			student.setCivilite(studentLDAP.getEtu_civilite());
@@ -117,9 +117,9 @@ public class StudentController {
 
 		if (studentService.getStudentByNip(student.getNip()) == null) {
 			System.out.println("Home GET Dans le premier if");
-			StudentLDAP studentLDAP = /* new StudentLDAP(); */ studentLDAPService.getStudentLDAP(student.getNip());
+			StudentWebService studentLDAP = /* new StudentLDAP(); */ studentLDAPService.getStudentLDAP(student.getNip());
 
-			TrainingLDAP trainingLDAP = /* new TrainingLDAP(); */ trainingLDAPService.getTrainingLDAP(2017,
+			TrainingWebService trainingLDAP = /* new TrainingLDAP(); */ trainingLDAPService.getTrainingLDAP(2017,
 					student.getNip());
 			System.out.println("Home GET Apres la recup LDAP");
 			student.setFirstName(studentLDAP.getEtu_prenom());

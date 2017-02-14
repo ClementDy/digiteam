@@ -1,9 +1,9 @@
-package glp.digiteam.ldap;
+package glp.digiteam.webServices;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class StudentLDAP {
+public class StudentWebService {
 
 	private int etu_NIP;
 	private int etu_civilite;
@@ -14,7 +14,7 @@ public class StudentLDAP {
 	private String etu_libnationalite;
 	private String etu_email;
 
-	public StudentLDAP(){
+	public StudentWebService(){
 		
 	}
 

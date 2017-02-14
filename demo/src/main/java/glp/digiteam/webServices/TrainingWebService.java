@@ -1,9 +1,9 @@
-package glp.digiteam.ldap;
+package glp.digiteam.webServices;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class TrainingLDAP {
+public class TrainingWebService {
 
 	private int ins_DIPLOME;
 	private String ins_LIBDIPLOME;
@@ -13,7 +13,7 @@ public class TrainingLDAP {
 	private String ins_LIBPARCOURS;
 	private String ins_NIVEAU;
 	
-	public TrainingLDAP(){
+	public TrainingWebService(){
 		
 	}
 
