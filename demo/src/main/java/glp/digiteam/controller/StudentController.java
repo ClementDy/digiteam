@@ -149,7 +149,7 @@ public class StudentController {
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
 		studentService.saveStudentProfile(student);
-		return new ModelAndView("candidature");
+		return new ModelAndView("candidature::tab(activeTab='intro')");
 	}
 
 	@RequestMapping(value = "/candidature", method = RequestMethod.POST)
@@ -166,7 +166,7 @@ public class StudentController {
 				if (bindingResult.hasErrors()) {
 					Iterable<Mission> missions = missionRepository.findAll();
 					model.addAttribute("listMission", missions);
-					return new ModelAndView("candidature");
+					return new ModelAndView("candidature::tab(activeTab='intro')");
 				}
 			}
 
@@ -222,8 +222,7 @@ public class StudentController {
 			studentService.saveStudentProfile(std);
 		}
 		
-		return new ModelAndView("candidature");
-		
+		return new ModelAndView("candidature::tab(activeTab='intro')");
 	}
 
 	/*

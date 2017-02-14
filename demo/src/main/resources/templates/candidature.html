@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="tab(activeTab)">
 <head>
 
 <link type="text/css" href="/css/form.css" rel="stylesheet" />
@@ -15,87 +15,92 @@
 
 <link rel="stylesheet" href="css/bootstrap-datepicker3.css">
 
-
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="css/header.css">
 
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
 
 <body onload="activeNav('candidatures');initializeMyMission();countChars(document.getElementById('motivations').value);">
-
 	<div th:include="header::header"></div>
 	<div style="text-align: center" class="container">
 		<h1>Formulaire de candidature</h1>
 		<br>
 	</div>
+
 	<div style="text-align: center" id="exTab1" class="container">
 		<ul class="nav nav-pills">
-			<li id="ongletLille1" class="active"><a href="#1"
-				data-toggle="tab">Introduction</a></li>
-			<li id="ongletLille1"><a href="#2" data-toggle="tab">Informations personnelles</a></li>
-			<li id="ongletLille1"><a href="#3" data-toggle="tab">Formations</a></li>
-			<li id="ongletLille1"><a href="#4" data-toggle="tab">Contrats</a></li>
-			<li id="ongletLille1"><a href="#5" data-toggle="tab">Souhaits</a></li>
-			<li id="ongletLille1"><a href="#6" data-toggle="tab">Disponibilit&eacute;s</a></li>
-			<li id="ongletLille1"><a href="#7" data-toggle="tab">Divers</a></li>
-			<li id="ongletLille1"><a href="#8" data-toggle="tab">Publication</a></li>
+			<li id="ongletLille1" th:class="${activeTab == 'intro'} ? 'active'">
+				<a href="#1" data-toggle="tab">Introduction</a>
+			</li>
+			<li id="ongletLille1" th:class="${activeTab == 'infos'} ? 'active'">
+				<a href="#2" data-toggle="tab">Informations personnelles</a>
+			</li>
+			<li id="ongletLille1" th:class="${activeTab == 'formations'} ? 'active'">
+				<a href="#3" data-toggle="tab">Formations</a>
+			</li>
+			<li id="ongletLille1" th:class="${activeTab == 'contracts'} ? 'active'">
+				<a href="#4" data-toggle="tab">Contrats</a>
+			</li>
+			<li id="ongletLille1" th:class="${activeTab == 'souhait'} ? 'active'">
+				<a href="#5" data-toggle="tab">Souhaits</a>
+			</li>
+			<li id="ongletLille1" th:class="${activeTab == 'dispos'} ? 'active'">
+			<a href="#6" data-toggle="tab">Disponibilit&eacute;s</a>
+			</li>
+			<li id="ongletLille1" th:class="${activeTab == 'divers'} ? 'active'">
+			<a href="#7" data-toggle="tab">Divers</a>
+			</li>
+			<li id="ongletLille1" th:class="${activeTab == 'save'} ? 'active'">
+			<a href="#8" data-toggle="tab">Publication</a>
+			</li>
 		</ul>
 
 		<form accept-charset="UTF-8" th:action="@{/candidature}"
 			th:object="${student}" method="post" enctype="multipart/form-data">
+
 			<div class="tab-content clearfix">
+				<div th:class="'tab-pane ' + (${activeTab == 'intro'} ? 'active')" id="1">
+					<div class="contentPane"
+						th:include="forms_student/form_intro::content"></div>
+				</div>
 
-				<div class="tab-content clearfix">
-					<div class="tab-pane active" id="1">
-						<div class="contentPane">
-							<h2>Introduction</h2>
-							<br> <br>
-							<p>Afin de publier votre candidature, vous devez remplir
-								tous les champs obligatoires de chaque onglet.</p>
-							<p> Vous pouvez enregistrer vos modifications en cliquant sur le bouton enregistrer en bas de chaque formulaire.</p>
-						</div>
-					</div>
+				<div th:class="'tab-pane ' + (${activeTab == 'infos'} ? 'active')" id="2">
+					<div class="contentPane"
+						th:include="forms_student/form_infos::content"></div>
+				</div>
 
-					<div class="tab-pane" id="2">
-						<div class="contentPane"
-							th:include="forms_student/form_infos::content"></div>
-					</div>
+				<div th:class="'tab-pane ' + (${activeTab == 'formations'} ? 'active')" id="3">
+					<div class="contentPane"
+						th:include="forms_student/form_formations::content"></div>
+				</div>
+				
+				<div th:class="'tab-pane ' + (${activeTab == 'contracts'} ? 'active')" id="4">
+					<div class="contentPane"
+						th:include="forms_student/form_contracts::content"></div>
+				</div>
 
-					<div class="tab-pane" id="3">
-						<div class="contentPane"
-							th:include="forms_student/form_formations::content"></div>
-					</div>
-					
-					<div class="tab-pane" id="4">
-						<div class="contentPane"
-							th:include="forms_student/form_contracts::content"></div>
-					</div>
-					
-					<div class="tab-pane" id="5">
-						<div class="contentPane"
-							th:include="forms_student/form_souhait::content"></div>
-					</div>
+				<div th:class="'tab-pane ' + (${activeTab == 'souhait'} ? 'active')" id="5">
+					<div class="contentPane"
+						th:include="forms_student/form_souhait::content"></div>
+				</div>
 
-					<div class="tab-pane" id="6">
-						<div class="contentPane"
-							th:include="forms_student/form_dispos::content"></div>
-					</div>
-					
-					<div class="tab-pane" id="7">
-						<div class="contentPane"
-							th:include="forms_student/form_divers::content"></div>
-					</div>
-					
-					<div class="tab-pane" id="8">
-						<div class="contentPane"
-							th:include="forms_student/form_save::content"></div>
-					</div>
+				<div th:class="'tab-pane ' + (${activeTab == 'dispos'} ? 'active')" id="6">
+					<div class="contentPane"
+						th:include="forms_student/form_dispos::content"></div>
+				</div>
+				
+				<div th:class="'tab-pane ' + (${activeTab == 'divers'} ? 'active')" id="7">
+					<div class="contentPane"
+						th:include="forms_student/form_divers::content"></div>
+				</div>
+				
+				<div th:class="'tab-pane ' + (${activeTab == 'save'} ? 'active')" id="8">
+					<div class="contentPane"
+						th:include="forms_student/form_save::content"></div>
 				</div>
 			</div>
 			
@@ -111,6 +116,5 @@
 	</div>
 	<br>
 	<br>
-
 </body>
 </html>
