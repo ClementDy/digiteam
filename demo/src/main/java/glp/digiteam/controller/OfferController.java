@@ -1,5 +1,6 @@
 package glp.digiteam.controller;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -57,6 +58,9 @@ public class OfferController {
 		
 		referent= (Referent) session.getAttribute("referent");
 		referent=referentRepository.findByName(referent.getName());
+		
+		checkOffer(referent);
+		
 		model.addAttribute("referent", referent);
 		return "offers/offersHome";
 	}
@@ -77,7 +81,7 @@ public class OfferController {
 	}
 	
 	@RequestMapping(value = "/newGeneriqueOffer", method = RequestMethod.POST)
-	public ModelAndView saveOffer(@ModelAttribute GenericOffer ofr,Model model,HttpSession session) {
+	public ModelAndView saveGenericOffer(@ModelAttribute GenericOffer ofr,Model model,HttpSession session) {
 
 		model.addAttribute("referent",referent);
 		
@@ -94,7 +98,7 @@ public class OfferController {
 		
 		
 		referentService.saveReferent(referent);
-		return new ModelAndView("redirect:contracts");
+		return new ModelAndView("redirect:offers");
 	}
 	
 	@RequestMapping(value = "/newStandardOffer", method = RequestMethod.GET)
@@ -109,6 +113,27 @@ public class OfferController {
 		model.addAttribute("listMission", missions);
 		model.addAttribute("referent", referent);
 		return "offers/newStandardOffer";
+	}
+	
+	@RequestMapping(value = "/newStandardOffer", method = RequestMethod.POST)
+	public ModelAndView saveStandardOffer(@ModelAttribute StandardOffer ofr,Model model,HttpSession session) {
+
+		model.addAttribute("referent",referent);
+		
+		responsible.setEmail(ofr.getResponsible().getEmail());
+		responsible.setFirstName(ofr.getResponsible().getFirstName());
+		responsible.setLastName(ofr.getResponsible().getLastName());
+		responsible.setPhone(ofr.getResponsible().getPhone());
+		referent.addResponsible(responsible);
+		responsible.setReferent(referent);
+		responsible.addOffer(ofr);
+		ofr.setResponsible(responsible);
+		ofr.setStatus("Waiting");
+		model.addAttribute("offer",ofr);
+		
+		
+		referentService.saveReferent(referent);
+		return new ModelAndView("redirect:offers");
 	}
 	
 	
@@ -130,5 +155,16 @@ public class OfferController {
 		model.addAttribute("referent", referent);
 		model.addAttribute("student", studentService.getStudentByNip(nip));
 		return "profile";
+	}
+	
+	public void checkOffer(Referent referent){
+		for(int i=0;i<referent.getResponsible().size();i++){
+			for(int j=0;j<referent.getResponsible().get(i).getOffers().size();j++){
+				if(referent.getResponsible().get(i).getOffers().get(j).getValidityDate().getTime()<(Calendar.getInstance().getTime().getTime())){
+					referent.getResponsible().get(i).getOffers().get(j).setStatus("Expired");
+					referentService.saveReferent(referent);
+				}
+			}
+		}
 	}
 }

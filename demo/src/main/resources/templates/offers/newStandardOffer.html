@@ -27,7 +27,7 @@
 
 </head>
 
-<body onload="activeNav('offers')">
+<body>
 
 	<div th:include="headerReferent::headerReferent"></div>
 
@@ -41,7 +41,7 @@
 
 
 
-		<form accept-charset="UTF-8" th:action="@{/newGeneriqueOffer}"
+		<form accept-charset="UTF-8" th:action="@{/newStandardOffer}"
 			th:object="${offer}" method="post" enctype="multipart/form-data">
 
 
@@ -133,14 +133,14 @@
 				<article class="col-md-3">
 					<div class="input-group">
 						<span class="input-group-addon" id="sizing-addon3">Du</span>
-						<input type="text" class="form-control" placeholder="jj/mm/aaaa" name="start" th:value="${offer.startDate}" th:field="${student.availability.startDate}"
+						<input type="text" class="form-control" placeholder="jj/mm/aaaa" name="start" th:field="${offer.startDate}" 
 						readonly="readonly" style="cursor:text; background:white;">
 					</div>
 				</article>
 				<article class="col-md-3">
 					<div class="input-group">
 						<span class="input-group-addon" id="sizing-addon3">Au</span>
-						<input type="text" class="form-control" placeholder="jj/mm/aaaa" name="end" th:value="${offer.endDate}" th:field="${student.availability.endDate}"
+						<input type="text" class="form-control" placeholder="jj/mm/aaaa" name="end" th:field="${offer.endDate}" 
 						readonly="readonly" style="cursor:text; background:white;">
 					</div>
 				</article>
