@@ -15,10 +15,9 @@ import javax.persistence.OneToOne;
 public class Service {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
+	private String code;
 	
-	String name;
+	String libelle;
 
 
 	@OneToMany(mappedBy="service", cascade=CascadeType.ALL,targetEntity=AbstractOffer.class)
@@ -28,21 +27,31 @@ public class Service {
 		
 	}
 	
-	public String getName() {
-		return name;
+	
+
+	public String getCode() {
+		return code;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
-	public long getId() {
-		return id;
+
+
+	public String getLibelle() {
+		return libelle;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+
+
+	public void setLibelle(String libelle) {
+		this.libelle = libelle;
 	}
+
+
 
 	public List<Offer> getOffers() {
 		return offers;

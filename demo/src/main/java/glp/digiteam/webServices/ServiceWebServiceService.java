@@ -9,19 +9,19 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 @Service
-public class TrainingWebServiceService {
+public class ServiceWebServiceService {
 
-	private WebResource service;
 	
-	public TrainingWebServiceService() {
+private WebResource service;
+	
+	public ServiceWebServiceService() {
 		Client client = Client.create(new DefaultClientConfig());
 		
 		service = client.resource("http://adminieea.fil.univ-lille1.fr:8080/verlaine/rest");
 	}
 	
-	public TrainingWebService getTrainingLDAP(int year, long nip) {
-		return service.path("/etudiant/"+year+"/"+nip).accept(MediaType.APPLICATION_JSON_TYPE).get(TrainingWebService.class);
+	public ServiceWebService getServices() {
+		return  service.path("/services").accept(MediaType.APPLICATION_JSON_TYPE).get(ServiceWebService.class);
 	}
-	
 	
 }
