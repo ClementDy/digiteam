@@ -40,7 +40,7 @@ public class AuthenticationController {
 			return new ModelAndView("redirect:/home");
 		} else {
 			session.setAttribute("referent", referent);
-			return new ModelAndView("redirect:/contracts");
+			return new ModelAndView("redirect:/offers");
 		}
 
 	}

@@ -58,15 +58,7 @@ public class StudentController {
 	private MissionRepository missionRepository;
 	// 11202572
 
-	@RequestMapping(value = "/home2", method = RequestMethod.GET)
-	public String hello2(Model model) {
-		return "/refound/home";
-	}
 
-	@RequestMapping(value = "/date", method = RequestMethod.GET)
-	public String date(Model model) {
-		return "date";
-	}
 
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public String profile(Model model, HttpSession session) {

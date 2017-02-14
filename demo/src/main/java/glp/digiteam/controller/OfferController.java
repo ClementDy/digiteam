@@ -17,6 +17,7 @@ import glp.digiteam.entity.offer.AbstractOffer;
 import glp.digiteam.entity.offer.GenericOffer;
 import glp.digiteam.entity.offer.Referent;
 import glp.digiteam.entity.offer.Responsible;
+import glp.digiteam.entity.offer.StandardOffer;
 import glp.digiteam.entity.student.Mission;
 import glp.digiteam.entity.student.Student;
 import glp.digiteam.repository.MissionRepository;
@@ -45,14 +46,13 @@ public class OfferController {
 	
 	private Responsible responsible;
 	
-	private GenericOffer offer=new GenericOffer();
 	
 	
 	private OfferService offerService;
 	
 	private Referent referent;
 	
-	@RequestMapping(value = "/contracts", method = RequestMethod.GET)
+	@RequestMapping(value = "/offers", method = RequestMethod.GET)
 	public String homeContracts(Model model,HttpSession session) {
 		
 		referent= (Referent) session.getAttribute("referent");
@@ -63,17 +63,10 @@ public class OfferController {
 	
 	@RequestMapping(value = "/newGeneriqueOffer", method = RequestMethod.GET)
 	public String newGeneriqueOffer(Model model,HttpSession session) {
-	
+		GenericOffer offer=new GenericOffer();
 		responsible=new Responsible();
 		model.addAttribute("referent", referent);
 		System.out.println(referent.getName());
-		
-		
-		for(int i=0;i<referent.getResponsible().size();i++){
-			for(int j=0;j<referent.getResponsible().get(i).getOffers().size();j++){
-				System.out.println(referent.getResponsible().get(i).getOffers().get(j).getTitle());
-			}
-		}
 		
 		
 		model.addAttribute("offer", offer);
@@ -102,6 +95,20 @@ public class OfferController {
 		
 		referentService.saveReferent(referent);
 		return new ModelAndView("redirect:contracts");
+	}
+	
+	@RequestMapping(value = "/newStandardOffer", method = RequestMethod.GET)
+	public String newStandardOffer(Model model,HttpSession session) {
+		StandardOffer offer=new StandardOffer();
+		responsible=new Responsible();
+		model.addAttribute("referent", referent);
+		
+				
+		model.addAttribute("offer", offer);
+		Iterable<Mission> missions = missionRepository.findAll();
+		model.addAttribute("listMission", missions);
+		model.addAttribute("referent", referent);
+		return "offers/newStandardOffer";
 	}
 	
 	
