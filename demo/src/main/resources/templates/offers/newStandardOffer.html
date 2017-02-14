@@ -106,7 +106,7 @@
 
 			<div class="row">
 				<div class="form-group">
-					<label class="col-md-4">R&eacute;mun&eacute;ration :</label>
+					<label class="col-md-4">R&eacute;mun&eacute;ration (/heure) :</label>
 				</div>
 			</div>
 
@@ -128,7 +128,12 @@
 			<br>
 			
 			<div class="row">
-			<article class="col-md-3"></article>
+				<div class="form-group">
+					<label class="col-md-4">P&eacute;riode :</label>
+				</div>
+			</div>
+			
+			<div class="row">
 			<div class="input-daterange" id="datepicker" >
 				<article class="col-md-3">
 					<div class="input-group">
@@ -146,6 +151,19 @@
 				</article>
 			</div>
 		</div>
+		
+		<br>
+			<div class="row">
+				<div class="form-inline col-md-12">
+					<label ">Nombre d'heures par semaine :</label>
+					<input  class="col-md-2"th:field="${offer.title}" type="number" class="form-control">
+				</div>
+			</div>
+	
+			
+		<br>
+			
+			
 			
 			<div class="row">
 				<div class="form-group col-md-3">
