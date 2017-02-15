@@ -20,6 +20,7 @@ public class AbstractOffer {
 	@GeneratedValue(strategy=GenerationType.TABLE)
 	private long id;
 	
+	
 
 	@ManyToOne
 	private Responsible responsible;
