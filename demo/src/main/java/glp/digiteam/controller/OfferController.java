@@ -65,7 +65,7 @@ public class OfferController {
 		return "offers/offersHome";
 	}
 	
-	@RequestMapping(value = "/newGeneriqueOffer", method = RequestMethod.GET)
+	@RequestMapping(value = "/newGenericOffer", method = RequestMethod.GET)
 	public String newGeneriqueOffer(Model model,HttpSession session) {
 		GenericOffer offer=new GenericOffer();
 		responsible=new Responsible();
@@ -74,10 +74,10 @@ public class OfferController {
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
 		model.addAttribute("referent", referent);
-		return "offers/newGeneriqueOffer";
+		return "offers/newGenericOffer";
 	}
 	
-	@RequestMapping(value = "/newGeneriqueOffer", method = RequestMethod.POST)
+	@RequestMapping(value = "/newGenericOffer", method = RequestMethod.POST)
 	public ModelAndView saveGenericOffer(@ModelAttribute GenericOffer ofr,Model model,HttpSession session) {
 
 		model.addAttribute("referent",referent);
