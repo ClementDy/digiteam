@@ -45,6 +45,8 @@ public class AbstractOffer {
 	private String title;
 	
 	public AbstractOffer(){
+		
+		
 	}
 	
 

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -12,8 +13,8 @@ public class Administrator extends StaffLille1{
 	
 	
 	
-	@OneToMany(mappedBy="administrator", cascade=CascadeType.ALL)
-	private List<Moderator> responsible = new ArrayList<Moderator>();
+	@OneToMany(fetch = FetchType.EAGER,mappedBy="administrator", cascade=CascadeType.ALL)
+	private List<Moderator> moderators = new ArrayList<Moderator>();
 
 	
 	public Administrator(){
@@ -21,15 +22,18 @@ public class Administrator extends StaffLille1{
 	}
 
 
-	public List<Moderator> getResponsible() {
-		return responsible;
+	public List<Moderator> getModerators() {
+		return moderators;
 	}
 
 
-	public void setResponsible(List<Moderator> responsible) {
-		this.responsible = responsible;
+	public void setModerators(List<Moderator> moderators) {
+		this.moderators = moderators;
 	}
 	
+	public void addModerator(Moderator moderator){
+		this.moderators.add(moderator);
+	}
 	
 
 }

@@ -49,7 +49,6 @@ public class OfferController {
 	
 	
 	
-	private OfferService offerService;
 	
 	private Referent referent;
 	
