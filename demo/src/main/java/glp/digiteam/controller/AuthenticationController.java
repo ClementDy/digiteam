@@ -40,13 +40,13 @@ public class AuthenticationController {
 	public String authenficationStudent(Model model) throws JSONException {
 		Student student = new Student();
 		Referent referent = new Referent();
-		List<ServiceWebService> services = servicewebsrviceservice.getServicesWS();
+		/*List<ServiceWebService> services = servicewebsrviceservice.getServicesWS();
 
 		for (ServiceWebService serviceWebService : services) {
 			ServiceEntity servicentity = new ServiceEntity(serviceWebService.getCode(), serviceWebService.getLibelle());
 			serviceservice.saveService(servicentity);
 		}
-
+*/
 		model.addAttribute("student",student);
 
 		model.addAttribute("referent",referent);

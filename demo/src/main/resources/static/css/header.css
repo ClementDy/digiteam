@@ -6,7 +6,12 @@ background-image:url(../img/fond.jpg);
 
 
 .jumbotron{
-background-color:white;}
+background-color:white;
+border-style:solid;
+border-width: 1px;
+border-radius : 10px;
+ border-color: #ae2573;
+}
 
 
 .headerImg{
