@@ -12,11 +12,9 @@ import javax.persistence.OneToMany;
 
 
 @Entity
-public class Referent {
+public class Referent extends StaffLille1{
 
-	@Id
-	private String name;
-	
+
 
 	@OneToMany(mappedBy="referent", cascade=CascadeType.ALL)
 	private List<Responsible> responsible = new ArrayList<Responsible>();
@@ -29,15 +27,6 @@ public class Referent {
 		
 	}
 
-
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 
 
