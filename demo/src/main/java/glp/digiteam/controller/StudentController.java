@@ -90,6 +90,7 @@ public class StudentController {
 			student.setCivilite(studentLDAP.getEtu_civilite());
 			student.setFirstName(studentLDAP.getEtu_prenom());
 			student.setLastName(studentLDAP.getEtu_nom());
+			student.setEmail(studentLDAP.getEtu_email());
 
 		} else {
 			student = studentService.getStudentByNip(student.getNip());
@@ -103,7 +104,7 @@ public class StudentController {
 		}
 
 		model.addAttribute("student", student);
-
+		studentService.saveStudentProfile(student);
 		return new ModelAndView("homeStudent");
 	}
 
