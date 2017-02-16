@@ -17,6 +17,7 @@ import glp.digiteam.entity.offer.GenericOffer;
 import glp.digiteam.entity.offer.Moderator;
 import glp.digiteam.entity.offer.StaffLille1;
 import glp.digiteam.repository.AdministratorRepository;
+import glp.digiteam.repository.ModeratorRepository;
 import glp.digiteam.repository.ReferentRepository;
 import glp.digiteam.services.AdministratorService;
 import glp.digiteam.services.ReferentService;
@@ -28,6 +29,9 @@ public class AdministratorController {
 
 	@Autowired
 	private AdministratorRepository administratorRepository;
+
+	@Autowired
+	private ModeratorRepository moderatorRepository;
 
 
 	@Autowired
@@ -49,7 +53,12 @@ public class AdministratorController {
 	public String getHomeStaffLille1(Model model,HttpSession session) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		System.out.println(staffLille1.getName());
-		isAdministrator(staffLille1);
+		if(isAdministrator(staffLille1)){
+			administratorRepository.findByName(staffLille1.getName());
+		}
+		if(isModerator(staffLille1)){
+			moderatorRepository.findByName(staffLille1.getName());
+		}
 		return "homeStaffLille1";
 	}
 	
@@ -66,11 +75,19 @@ public class AdministratorController {
 	
 	public boolean isAdministrator(StaffLille1 staffLille1){
 		if(administratorRepository.findByName(staffLille1.getName())!=null){
-			System.out.println("Admin");
+			System.out.println("Admin!");
 			return true;
 		}
 		return false;
 		
+	}
+	
+	public boolean isModerator(StaffLille1 staffLille1){
+		if(moderatorRepository.findByName(staffLille1.getName())!=null){
+			System.out.println("Moderateur!");
+			return true;
+		}
+		return false;
 	}
 	
 }
