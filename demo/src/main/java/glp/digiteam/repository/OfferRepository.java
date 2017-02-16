@@ -15,6 +15,6 @@ public interface OfferRepository extends CrudRepository<AbstractOffer, String>{
 	
 	  @Query("select o from AbstractOffer o where o.status = 'Validated' order by o.moderationDate desc")
 	  List<AbstractOffer> findLast5Offers();
-	  
 
+	  AbstractOffer findById(long id);
 }

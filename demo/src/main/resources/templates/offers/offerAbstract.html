@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head xmlns:th="http://www.thymeleaf.org">
+
+
+<link type="text/css" href="/css/showOffer.css" rel="stylesheet" />
+
+<script src="js/header.js"></script>
+
+<script src="js/inputs.js"></script>
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="css/header.css">
+
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+	<div th:include="header::header"></div>
+
+	<div class="container">
+
+
+		<div class="row">
+			<div class="titleOffer">
+				<label th:text=${offer.title}></label>
+			</div>
+		</div>
+		<div class="row">
+			Offre n° : <b><span th:text=${offer.id}></span></b>
+		</div>
+
+		<div class="row">
+			<p>
+				Offre émise par le service : <b><span
+					th:text="${offer.service.libelle}"></span></b>
+			</p>
+		</div>
+		<br/>
+
+		<div class="row">
+			<label class="title">D&eacute;tails de la mission </label>
+		</div>
+		
+		<div class="row">
+			<span th:text="${offer.mission}"></span>
+		</div>
+		<br />
+		
+		<div class="row">
+			<label class="title">Comp&eacute;tences n&eacute;cessaires :</label>
+
+		</div>
+		<div class="row">
+			<span th:text="${offer.skills}"></span>
+		</div><br/>
+		
+		<div class="row">
+				<label class="title">R&eacute;mun&eacute;ration (/heure):</label>
+		</div>
+
+		<div class="row">
+		<span th:text="${offer.remuneration}"></span>	&euro;
+		<span th:text="${offer.remunerationInfo}"></span>
+		</div>
+		<br/>
+		<br/>
+
+		<div class="row">
+				<p><span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;Cette offre disponible jusqu'au <span th:text="${offer.validityDate}"></span></p>
+		</div>
+		<br>
+
+        <div class="row">
+		<div class="contactTitle">
+			<h4>Contact</h4>
+		</div>
+
+		<br>
+
+		<div class="row">
+				<p>Resonsable de l'offre &agrave contacter :
+				 <b><span th:text="${offer.responsible.lastName}"></span>&nbsp;
+				 <span th:text="${offer.responsible.firstName}"></span></b></p>
+		</div>
+		<div class="row">
+		     <p>Email : <b><span th:text="${offer.responsible.email}"></span></b></p>
+		</div>
+		<div class="row">
+		     <p>T&eacutel&eacutephone : <b><span th:text="${offer.responsible.phone}"></span></b></p>
+		</div>
+
+
+
+		<br> <br>
+
+		<br>
+
+
+
+
+
+	</div>
+
+	<br>
+
+
+</body>
+
+<style>
+.row {
+	margin-left: 10%;
+	margin-right: 10%;
+}
+</style>
+
+
+
+</html>

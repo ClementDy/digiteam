@@ -210,6 +210,26 @@ public class StudentController {
 		return new ModelAndView("candidature::tab(activeTab='intro')");
 	}
 
+	
+	@RequestMapping(value = "/offer", method = RequestMethod.GET)
+	public ModelAndView showOffer(Model model, HttpSession session,@RequestParam(value = "id", required = true) long id) {
+		if (session.getAttribute("student") == null) {
+			return new ModelAndView("redirect:authentication");
+		}
+
+		AbstractOffer offer = offerRepository.findById(id);
+		System.out.println(student);
+		model.addAttribute("student", student);
+		
+		if(offer!=null){
+			model.addAttribute("offer", offer);
+			return new ModelAndView("offers/offerAbstract");
+		}
+		
+		return new ModelAndView("homeStudent");
+	}
+	
+	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 	    binder.registerCustomEditor(String.class, new StringTrimmerEditor(false));
