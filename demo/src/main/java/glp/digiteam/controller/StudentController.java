@@ -52,11 +52,7 @@ public class StudentController {
 	private final StorageService storageService;
 
 	Student student;
-
-	@Autowired
-	private StudentWebServiceService studentLDAPService;
-	@Autowired
-	private TrainingWebServiceService trainingLDAPService;
+	
 
 	@Autowired
 	private StudentService studentService;
@@ -93,18 +89,7 @@ public class StudentController {
 		}
 
 		student = (Student) session.getAttribute("student");
-
-		if (studentService.getStudentByNip(student.getNip()) == null) {
-			StudentWebService studentLDAP = /* new StudentLDAP(); */ studentLDAPService.getStudentLDAP(student.getNip());
-			// TrainingLDAP trainingLDAP = /*new TrainingLDAP();*/
-			// trainingLDAPService.getTrainingLDAP(2017, student.getNip());
-			student.setCivilite(studentLDAP.getEtu_civilite());
-			student.setFirstName(studentLDAP.getEtu_prenom());
-			student.setLastName(studentLDAP.getEtu_nom());
-			student.setEmail(studentLDAP.getEtu_email());
-
-		} else {
-			student = studentService.getStudentByNip(student.getNip());
+		if (studentService.getStudentByNip(student.getNip()) != null) {
 			try {
 				if (action.equals("unpublish")) {
 					studentService.unpublishProfil(student);
@@ -112,18 +97,14 @@ public class StudentController {
 			} catch (Exception e) {
 
 			}
-		}
+
+		} 
 
 		model.addAttribute("student", student);
 
-		studentService.saveStudentProfile(student);
-
-
+		
 		List<AbstractOffer> abstractOffers = offerRepository.findLast5Offers();
 
-		for (AbstractOffer abstractOffer : abstractOffers) {
-			System.out.println(abstractOffer.getId());
-		}
 		model.addAttribute("abstractOffers",abstractOffers);
 
 
@@ -137,41 +118,25 @@ public class StudentController {
 		}
 
 		student = (Student) session.getAttribute("student");
-
-		if (studentService.getStudentByNip(student.getNip()) == null) {
-			System.out.println("Home GET Dans le premier if");
-			StudentWebService studentLDAP = /* new StudentLDAP(); */ studentLDAPService.getStudentLDAP(student.getNip());
-
-			TrainingWebService trainingLDAP = /* new TrainingLDAP(); */ trainingLDAPService.getTrainingLDAP(2017,
-					student.getNip());
-			System.out.println("Home GET Apres la recup LDAP");
-			student.setFirstName(studentLDAP.getEtu_prenom());
-			student.setLastName(studentLDAP.getEtu_nom());
-			student.setNationality(studentLDAP.getEtu_libnationalite());
-			student.setEmail(studentLDAP.getEtu_email());
-			student.setCivilite(studentLDAP.getEtu_civilite());
-			student.getTrainings().get(0).setDate(trainingLDAP.getIns_ANNEE());
-			student.getTrainings().get(0).setName(trainingLDAP.getIns_LIBDIPLOME());
-			student.getTrainings().get(0).setPlace("Lille");
-			System.out.println("Home GET fin du if");
-
-		} else {
-			System.out.println("dans le else");
-			student = studentService.getStudentByNip(student.getNip());
-
+		if (studentService.getStudentByNip(student.getNip()) != null) {
 			try {
 				Resource cvStudent = storageService.loadAsResource(student.getNip().toString());
 				model.addAttribute("file", cvStudent);
 			} catch (Exception e) {
-				System.out.println("pas de cv trouvé");
+				System.out.println("No CV found");
 			}
 
-		}
 
+		} 
+
+		student=studentService.getStudentByNip(student.getNip());
 		model.addAttribute("student", student);
+		
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
+		
 		studentService.saveStudentProfile(student);
+
 		return new ModelAndView("candidature::tab(activeTab='intro')");
 	}
 

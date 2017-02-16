@@ -88,7 +88,12 @@
 			<artifactId>jersey-servlet</artifactId>
 			<version>1.19.3</version>
 		</dependency>
-
+	 <dependency>
+      <groupId>net.unicon.cas</groupId>
+      <artifactId>cas-client-autoconfig-support</artifactId>
+      <version>1.2.0-GA</version>
+      <scope>runtime</scope>
+  </dependency>
 
 	</dependencies>
 

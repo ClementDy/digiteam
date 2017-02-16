@@ -21,8 +21,13 @@ import glp.digiteam.entity.offer.Referent;
 import glp.digiteam.entity.offer.ServiceEntity;
 import glp.digiteam.entity.student.Student;
 import glp.digiteam.services.ServiceService;
+import glp.digiteam.services.StudentService;
 import glp.digiteam.webServices.ServiceWebService;
 import glp.digiteam.webServices.ServiceWebServiceService;
+import glp.digiteam.webServices.StudentWebService;
+import glp.digiteam.webServices.StudentWebServiceService;
+import glp.digiteam.webServices.TrainingWebService;
+import glp.digiteam.webServices.TrainingWebServiceService;
 
 
 @EnableAutoConfiguration
@@ -35,6 +40,15 @@ public class AuthenticationController {
 
 	@Autowired
 	private ServiceService serviceservice;
+
+	@Autowired
+	private StudentService studentService;
+	
+	@Autowired
+	private TrainingWebServiceService trainingLDAPService;
+	
+	@Autowired
+	private StudentWebServiceService studentLDAPService;
 
 	@RequestMapping(value = "/authentication", method = RequestMethod.GET)
 	public String authenficationStudent(Model model) throws JSONException {
@@ -59,8 +73,31 @@ public class AuthenticationController {
 	public ModelAndView getStudent(@Valid @ModelAttribute Student student,Referent referent,BindingResult bindingresult, Model model, HttpSession session) {
 
 		if (student.getNip() != null) {
-			session.setAttribute("student", student);
-			return new ModelAndView("redirect:/home");
+			if (studentService.getStudentByNip(student.getNip())!=null){
+				student= studentService.getStudentByNip(student.getNip());
+				model.addAttribute("student", student);
+				session.setAttribute("student", student);
+				return new ModelAndView("redirect:/home");			
+			}else {
+				StudentWebService studentLDAP = studentLDAPService.getStudentLDAP(student.getNip());
+				TrainingWebService trainingLDAP =  trainingLDAPService.getTrainingLDAP(2017,
+						student.getNip());
+				
+				student.setCivilite(studentLDAP.getEtu_civilite());
+				student.setFirstName(studentLDAP.getEtu_prenom());
+				student.setLastName(studentLDAP.getEtu_nom());
+				student.setEmail(studentLDAP.getEtu_email());
+				student.setNationality(studentLDAP.getEtu_libnationalite());
+				student.getTrainings().get(0).setDate(trainingLDAP.getIns_ANNEE());
+				student.getTrainings().get(0).setName(trainingLDAP.getIns_LIBDIPLOME());
+				student.getTrainings().get(0).setPlace("Lille");
+				model.addAttribute("student", student);
+				session.setAttribute("student", student);
+				studentService.saveStudentProfile(student);
+				
+				return new ModelAndView("redirect:/home");
+			}
+			
 		} else {
 			session.setAttribute("referent", referent);
 			return new ModelAndView("redirect:/offers");
