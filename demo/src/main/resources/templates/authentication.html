@@ -34,10 +34,12 @@
 						<div class="panel-heading">
 							<h3 class="panel-title">Authentification : Étudiant</h3>
 						</div>
-						<div class="panel-body">
+						<div class="panel-body" th:classappend="${#fields.hasErrors('nip')}? 'has-error'">
 							<fieldset>
 								<input th:field="${student.nip}" class="form-control"
 									placeholder="Nip" name="Nip" type="text" autofocus>
+						<label th:if="${notGoodNip}" style="color:Red;" >Ce Nip n'existe pas</label>
+						
 								<div class="checkbox">
 									<label> <input name="remember" type="checkbox"
 										value="Remember Me">Se souvenir de moi
