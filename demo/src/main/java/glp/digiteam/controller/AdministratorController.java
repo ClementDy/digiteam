@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import glp.digiteam.entity.offer.Administrator;
 import glp.digiteam.entity.offer.GenericOffer;
 import glp.digiteam.entity.offer.Moderator;
+import glp.digiteam.entity.offer.Referent;
 import glp.digiteam.entity.offer.StaffLille1;
 import glp.digiteam.repository.AdministratorRepository;
 import glp.digiteam.repository.ModeratorRepository;
@@ -32,6 +33,9 @@ public class AdministratorController {
 
 	@Autowired
 	private ModeratorRepository moderatorRepository;
+
+	@Autowired
+	private ReferentRepository referentRepository;
 
 
 	@Autowired
@@ -52,13 +56,19 @@ public class AdministratorController {
 	@RequestMapping(value = "/homeStaffLille1", method = RequestMethod.GET)
 	public String getHomeStaffLille1(Model model,HttpSession session) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		System.out.println(staffLille1.getName());
 		if(isAdministrator(staffLille1)){
-			administratorRepository.findByName(staffLille1.getName());
+			Administrator administrator=administratorRepository.findByName(staffLille1.getName());
+			model.addAttribute("user",administrator);
 		}
 		if(isModerator(staffLille1)){
-			moderatorRepository.findByName(staffLille1.getName());
-		}
+			Moderator moderator=moderatorRepository.findByName(staffLille1.getName());
+			model.addAttribute("user",moderator);
+		}	
+		if(isReferent(staffLille1)){
+			Referent referent=referentRepository.findByName(staffLille1.getName());
+			System.out.println(referent.getClass().getName());
+			model.addAttribute("user",referent);
+		}	
 		return "homeStaffLille1";
 	}
 	
@@ -85,6 +95,15 @@ public class AdministratorController {
 	public boolean isModerator(StaffLille1 staffLille1){
 		if(moderatorRepository.findByName(staffLille1.getName())!=null){
 			System.out.println("Moderateur!");
+			return true;
+		}
+		return false;
+	}
+	
+
+	public boolean isReferent(StaffLille1 staffLille1){
+		if(referentRepository.findByName(staffLille1.getName())!=null){
+			System.out.println("Referent!");
 			return true;
 		}
 		return false;
