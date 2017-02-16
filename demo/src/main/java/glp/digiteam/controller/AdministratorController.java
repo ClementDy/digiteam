@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import glp.digiteam.entity.offer.Administrator;
 import glp.digiteam.entity.offer.GenericOffer;
 import glp.digiteam.entity.offer.Moderator;
+import glp.digiteam.entity.offer.StaffLille1;
 import glp.digiteam.repository.AdministratorRepository;
 import glp.digiteam.repository.ReferentRepository;
 import glp.digiteam.services.AdministratorService;
@@ -43,6 +44,15 @@ public class AdministratorController {
 		return "administrator/homeAdministrator";
 	}
 	
+
+	@RequestMapping(value = "/homeStaffLille1", method = RequestMethod.GET)
+	public String getHomeStaffLille1(Model model,HttpSession session) {
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		System.out.println(staffLille1.getName());
+		isAdministrator(staffLille1);
+		return "homeStaffLille1";
+	}
+	
 	@RequestMapping(value = "/newModerator", method = RequestMethod.POST)
 	public String newModerator(@ModelAttribute Moderator mode) {
 		administrator.addModerator(mode);
@@ -52,6 +62,15 @@ public class AdministratorController {
 		
 		
 		return "administrator/homeAdministrator";
+	}
+	
+	public boolean isAdministrator(StaffLille1 staffLille1){
+		if(administratorRepository.findByName(staffLille1.getName())!=null){
+			System.out.println("Admin");
+			return true;
+		}
+		return false;
+		
 	}
 	
 }

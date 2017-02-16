@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import glp.digiteam.entity.offer.Referent;
 import glp.digiteam.entity.offer.ServiceEntity;
+import glp.digiteam.entity.offer.StaffLille1;
 import glp.digiteam.entity.student.Student;
 import glp.digiteam.services.ServiceService;
 import glp.digiteam.services.StudentService;
@@ -54,6 +55,8 @@ public class AuthenticationController {
 	public String authenficationStudent(Model model) throws JSONException {
 		Student student = new Student();
 		Referent referent = new Referent();
+		StaffLille1 staffLille1 = new StaffLille1();
+		
 		List<ServiceWebService> services = servicewebsrviceservice.getServicesWS();
 
 		for (ServiceWebService serviceWebService : services) {
@@ -64,6 +67,9 @@ public class AuthenticationController {
 		model.addAttribute("student",student);
 
 		model.addAttribute("referent",referent);
+		
+
+		model.addAttribute("staffLille1",staffLille1);
 
 		return "authentication";
 	}
@@ -72,7 +78,7 @@ public class AuthenticationController {
 	@RequestMapping(value ="/authentication", method = RequestMethod.POST)
 	public ModelAndView getStudent(@Valid @ModelAttribute Student student,Referent referent,BindingResult bindingresult, Model model, HttpSession session) {
 
-		if (student.getNip() != null) {
+		if (student.getNip()!=null) {
 			if (studentService.getStudentByNip(student.getNip())!=null){
 				student= studentService.getStudentByNip(student.getNip());
 				model.addAttribute("student", student);
@@ -98,10 +104,15 @@ public class AuthenticationController {
 				return new ModelAndView("redirect:/home");
 			}
 			
-		} else {
+		}else{
 			session.setAttribute("referent", referent);
 			return new ModelAndView("redirect:/offers");
 		}
-
+	}
+	
+	@RequestMapping(value ="/authenticationStaff", method = RequestMethod.POST)
+	public ModelAndView getStaff(@ModelAttribute StaffLille1 staffLille1,BindingResult bindingresult, Model model, HttpSession session) {
+		session.setAttribute("staffLille1", staffLille1);
+		return new ModelAndView("redirect:/homeStaffLille1");
 	}
 }

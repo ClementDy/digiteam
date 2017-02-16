@@ -25,67 +25,102 @@
 
 <body>
 
-  	<form th:object="${student}"th:action="@{/authentication}" method="post">
-    <div class="container containerAuthentication">
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="login-panel panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Authentification : Étudiant</h3>
-                    </div>
-                    <div class="panel-body">
-                         <fieldset>
-						<input th:field="${student.nip}" class="form-control" placeholder="Nip" name="Nip" type="text" autofocus>
-                                <div class="checkbox">
-                                    <label>
-                                        <input name="remember" type="checkbox" value="Remember Me">Se souvenir de moi
-                                    </label>
-                                </div>
-                                  									 
-                                <input type="submit" class="btn btn-block btn-lille1" value="Se connecter">
-                            </fieldset>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </form>
-    
-    <form th:object="${referent}"th:action="@{/authentication}" method="post">
-    <div class ="container">
-    	<div class="row">
-    	   <div class="col-md-4 col-md-offset-4">
-                <div class="login-panel panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Authentification : Référent</h3>
-                    </div>
-                    <div class="panel-body">
-                         <fieldset>
-						<input th:field="${referent.name}" class="form-control" placeholder="Name" name="Name" type="text" autofocus>
-                                <div class="checkbox">
-                                    <label>
-                                        <input name="remember" type="checkbox" value="Remember Me">Se souvenir de moi
-                                    </label>
-                                </div>                               									 
-                                <input type="submit" class="btn btn-block btn-lille1" value="Se connecter">
-                            </fieldset>
-                    </div>
-                </div>
-            </div>   
-    	</div>
-    </div>
-    
-    </form>
+	<form th:object="${student}" th:action="@{/authentication}"
+		method="post">
+		<div class="container containerAuthentication">
+			<div class="row">
+				<div class="col-md-4 col-md-offset-4">
+					<div class="login-panel panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Authentification : Étudiant</h3>
+						</div>
+						<div class="panel-body">
+							<fieldset>
+								<input th:field="${student.nip}" class="form-control"
+									placeholder="Nip" name="Nip" type="text" autofocus>
+								<div class="checkbox">
+									<label> <input name="remember" type="checkbox"
+										value="Remember Me">Se souvenir de moi
+									</label>
+								</div>
+
+								<input type="submit" class="btn btn-block btn-lille1"
+									value="Se connecter">
+							</fieldset>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<form th:object="${referent}" th:action="@{/authentication}"
+		method="post">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-md-offset-4">
+					<div class="login-panel panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Authentification : Référent</h3>
+						</div>
+						<div class="panel-body">
+							<fieldset>
+								<input th:field="${referent.name}" class="form-control"
+									placeholder="Name" name="Name" type="text" autofocus>
+								<div class="checkbox">
+									<label> <input name="remember" type="checkbox"
+										value="Remember Me">Se souvenir de moi
+									</label>
+								</div>
+								<input type="submit" class="btn btn-block btn-lille1"
+									value="Se connecter">
+							</fieldset>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<form th:object="${staffLille1}" th:action="@{/authenticationStaff}"
+		method="post">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-md-offset-4">
+					<div class="login-panel panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Authentification : Personnel de
+								Lille 1</h3>
+						</div>
+						<div class="panel-body">
+							<fieldset>
+								<input th:field="${staffLille1.name}" class="form-control"
+									placeholder="Name" name="Name" type="text" autofocus>
+								<div class="checkbox">
+									<label> <input name="remember" type="checkbox"
+										value="Remember Me">Se souvenir de moi
+									</label>
+								</div>
+								<input type="submit" class="btn btn-block btn-lille1"
+									value="Se connecter">
+							</fieldset>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</form>
 </body>
 <style>
-
-.btn-lille1{
-	background:#ae2573;
-	color:white;
+.btn-lille1 {
+	background: #ae2573;
+	color: white;
 }
-.panel-default > .panel-heading {
-		background:#ae2573;
-		color:white;
-	}
+
+.panel-default>.panel-heading {
+	background: #ae2573;
+	color: white;
+}
 </style>
 </html>
