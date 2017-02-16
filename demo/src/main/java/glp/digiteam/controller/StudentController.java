@@ -5,21 +5,20 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.io.Resource;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,10 +38,6 @@ import glp.digiteam.services.StudentService;
 import glp.digiteam.uploadFile.StorageFileNotFoundException;
 import glp.digiteam.uploadFile.StorageService;
 import glp.digiteam.validator.StudentValidator;
-import glp.digiteam.webServices.StudentWebService;
-import glp.digiteam.webServices.StudentWebServiceService;
-import glp.digiteam.webServices.TrainingWebService;
-import glp.digiteam.webServices.TrainingWebServiceService;
 
 @EnableAutoConfiguration
 @Controller
@@ -51,7 +46,7 @@ public class StudentController {
 
 	private final StorageService storageService;
 
-	Student student;
+	private Student student;
 	
 
 	@Autowired
@@ -59,13 +54,10 @@ public class StudentController {
 
 	@Autowired
 	private MissionRepository missionRepository;
-	// 11202572
 	
 	@Autowired
-	OfferRepository offerRepository;
+	private OfferRepository offerRepository;
 	
-
-
 
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public String profile(Model model, HttpSession session) {
@@ -154,7 +146,10 @@ public class StudentController {
 				if (bindingResult.hasErrors()) {
 					Iterable<Mission> missions = missionRepository.findAll();
 					model.addAttribute("listMission", missions);
-					return new ModelAndView("candidature::tab(activeTab='intro')");
+					return new ModelAndView(
+							"candidature::tab(activeTab='"
+							+ studentValidator.getFirstErrorTab(bindingResult)
+							+ "')");
 				}
 			}
 
@@ -213,6 +208,11 @@ public class StudentController {
 		return new ModelAndView("candidature::tab(activeTab='intro')");
 	}
 
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+	    binder.registerCustomEditor(String.class, new StringTrimmerEditor(false));
+	}
+	
 	/*
 	 * @InitBinder private void dateBinder(WebDataBinder binder) {
 	 * SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");

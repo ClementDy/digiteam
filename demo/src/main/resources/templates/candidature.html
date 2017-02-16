@@ -63,42 +63,42 @@
 			th:object="${student}" method="post" enctype="multipart/form-data">
 
 			<div class="tab-content clearfix">
-				<div th:class="'tab-pane ' + (${activeTab == 'intro'} ? 'active')" id="1">
+				<div th:class="tab-pane" th:classappend="${activeTab == 'intro'} ? 'active'" id="1">
 					<div class="contentPane"
 						th:include="forms_student/form_intro::content"></div>
 				</div>
 
-				<div th:class="'tab-pane ' + (${activeTab == 'infos'} ? 'active')" id="2">
+				<div th:class="tab-pane" th:classappend="${activeTab == 'infos'} ? 'active'" id="2">
 					<div class="contentPane"
 						th:include="forms_student/form_infos::content"></div>
 				</div>
 
-				<div th:class="'tab-pane ' + (${activeTab == 'formations'} ? 'active')" id="3">
+				<div th:class="tab-pane" th:classappend="${activeTab == 'formations'} ? 'active'" id="3">
 					<div class="contentPane"
 						th:include="forms_student/form_formations::content"></div>
 				</div>
 				
-				<div th:class="'tab-pane ' + (${activeTab == 'contracts'} ? 'active')" id="4">
+				<div th:class="tab-pane" th:classappend="${activeTab == 'contracts'} ? 'active'" id="4">
 					<div class="contentPane"
 						th:include="forms_student/form_contracts::content"></div>
 				</div>
 
-				<div th:class="'tab-pane ' + (${activeTab == 'souhait'} ? 'active')" id="5">
+				<div th:class="tab-pane" th:classappend="${activeTab == 'souhait'} ? 'active'" id="5">
 					<div class="contentPane"
 						th:include="forms_student/form_souhait::content"></div>
 				</div>
 
-				<div th:class="'tab-pane ' + (${activeTab == 'dispos'} ? 'active')" id="6">
+				<div th:class="tab-pane" th:classappend="${activeTab == 'dispos'} ? 'active'" id="6">
 					<div class="contentPane"
 						th:include="forms_student/form_dispos::content"></div>
 				</div>
 				
-				<div th:class="'tab-pane ' + (${activeTab == 'divers'} ? 'active')" id="7">
+				<div th:class="tab-pane" th:classappend="${activeTab == 'divers'} ? 'active'" id="7">
 					<div class="contentPane"
 						th:include="forms_student/form_divers::content"></div>
 				</div>
 				
-				<div th:class="'tab-pane ' + (${activeTab == 'save'} ? 'active')" id="8">
+				<div th:class="tab-pane" th:classappend="${activeTab == 'save'} ? 'active'" id="8">
 					<div class="contentPane"
 						th:include="forms_student/form_save::content"></div>
 				</div>
