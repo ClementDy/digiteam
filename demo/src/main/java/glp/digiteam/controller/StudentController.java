@@ -63,6 +63,8 @@ public class StudentController {
 	public String profile(Model model, HttpSession session) {
 		student=studentService.getStudentByNip(student.getNip());
 		model.addAttribute("student", student);
+		String pathCV = "http://172.28.2.17/"+student.getNip();
+		model.addAttribute("pathCV", pathCV);
 		return "profile";
 	}
 

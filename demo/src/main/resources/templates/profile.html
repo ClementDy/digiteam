@@ -43,7 +43,8 @@
 			<div th:if="${student.cv}!=''">
 			<h4 class="titreFormulaire">CV</h4>
 			
-			<label  class="left control-label">Votre CV : </label>	<iframe src="http://172.28.2.17/11203333" width="800" height="600" align="middle"></iframe><label th:text="${student.cv}" ></label><br><br>
+				<iframe th:attr="src=${pathCV}" ></iframe><br><br>
+				
 			</div>
 			
 			<h4 class="titreFormulaire">Adresse</h4>
@@ -325,6 +326,16 @@
 	border-radius: 50%;
 	border: none;
 	color: white;
+}
+
+iframe{
+text-align: center;
+width:800px ;
+height: 600px ;
+align:bottom ;
+margin: 0 auto;
+display:block;
+
 }
 
 .btn-lille1 {
