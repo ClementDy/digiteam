@@ -9,6 +9,7 @@ import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -97,7 +98,7 @@ public class StudentController {
 		model.addAttribute("student", student);
 
 		
-		List<AbstractOffer> abstractOffers = offerRepository.findLast5Offers();
+		List<AbstractOffer> abstractOffers = offerRepository.findLastOffers(new PageRequest(0, 5));
 
 		model.addAttribute("abstractOffers",abstractOffers);
 

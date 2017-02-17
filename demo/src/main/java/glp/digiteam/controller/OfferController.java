@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -136,7 +137,7 @@ public class OfferController {
 	}
 
 
-	@RequestMapping(value = "/consult", method = RequestMethod.GET)
+	@RequestMapping(value = "/consult_candidatures", method = RequestMethod.GET)
 	public String consult(Model model,HttpSession session) {
 		referent= (Referent) session.getAttribute("referent");
 		referent=referentRepository.findByName(referent.getName());
@@ -144,7 +145,17 @@ public class OfferController {
 
 		List<Student> listCandidature = studentService.getAllCandidature();
 		model.addAttribute("listCandidature", listCandidature);
-		return "consult";
+		return "consult_candidatures";
+	}
+	
+	@RequestMapping(value = "/consult_offers", method = RequestMethod.GET)
+	public String consult_offers(Model model,HttpSession session) {
+		model.addAttribute("referent", referent);
+		
+		List<AbstractOffer> listOffers = offerRepository.findLastOffers(new PageRequest(0, 50));
+		model.addAttribute("listOffers",listOffers);
+		
+		return "offers/consult_offers";
 	}
 
 	@RequestMapping(value = "/profil", method = RequestMethod.GET)

@@ -14,7 +14,7 @@ import glp.digiteam.entity.offer.AbstractOffer;
 public interface OfferRepository extends CrudRepository<AbstractOffer, String>{
 	
 	  @Query("select o from AbstractOffer o where o.status = 'Validated' order by o.moderationDate desc")
-	  List<AbstractOffer> findLast5Offers();
+	  List<AbstractOffer> findLastOffers(Pageable pageable);
 
 	  AbstractOffer findById(long id);
 }
