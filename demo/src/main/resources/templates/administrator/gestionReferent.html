@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<title></title>
+
+
+<script src="js/header.js"></script>
+
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="css/header.css">
+
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+</head>
+
+<body onload="activeNav('gestionReferent')">
+
+	<div th:include="headerStaffLille1::headerStaffLille1"></div>
+
+	<div class="container containerWhite">
+		<form accept-charset="UTF-8" th:action="@{/newReferent}"
+			th:object="${referent}" method="post">
+
+			<div class="row">
+
+				<div class="col-md-12">
+					<h3 class="titreFormulaire">Ajouter un r&eacute;f&eacute;rent</h3>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4">
+					<label>Nom du r&eacute;f&eacute;rent :</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<input class="form-control" th:field="${referent.name}" type="text"
+						placeholder="Nom" required>
+				</div>
+			</div>
+			<br>
+			
+			<div class="row">
+				<div class="form-group col-md-5">
+					<label class="">Service :</label> <select size="1"
+						th:field="${referent.service}" class="form-control" id="allMissions">
+						<option th:each="services : ${service}"
+							th:value="${services.code}" th:text="${services.libelle}"></option>
+					</select>
+				</div>
+			</div>
+			
+			<br>
+			<div class="row">
+				<div class="col-md-12">
+					<button class="btn btn-lille1 col-md-6">Valider</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

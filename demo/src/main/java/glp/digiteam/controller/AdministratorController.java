@@ -16,11 +16,14 @@ import glp.digiteam.entity.offer.Administrator;
 import glp.digiteam.entity.offer.GenericOffer;
 import glp.digiteam.entity.offer.Moderator;
 import glp.digiteam.entity.offer.Referent;
+import glp.digiteam.entity.offer.ServiceEntity;
 import glp.digiteam.entity.offer.StaffLille1;
 import glp.digiteam.repository.AdministratorRepository;
 import glp.digiteam.repository.ModeratorRepository;
 import glp.digiteam.repository.ReferentRepository;
+import glp.digiteam.repository.ServiceRepository;
 import glp.digiteam.services.AdministratorService;
+import glp.digiteam.services.ModeratorService;
 import glp.digiteam.services.ReferentService;
 
 @EnableAutoConfiguration
@@ -41,17 +44,38 @@ public class AdministratorController {
 	@Autowired
 	private AdministratorService administratorService;
 	
+	@Autowired
+	private ModeratorService moderatorService;
+	
+	@Autowired 
+	private ServiceRepository serviceRepository;
 	
 	Moderator moderator=new Moderator();
+	Referent referent=new Referent();
 	Administrator administrator;
 
-	@RequestMapping(value = "/homeAdministrator", method = RequestMethod.GET)
-	public String getHomeAdministrator(Model model) {
-		administrator=administratorRepository.findByName("admin");
+	@RequestMapping(value = "/gestionModerator", method = RequestMethod.GET)
+	public String gestionModerator(Model model,HttpSession session) {
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		administrator=administratorRepository.findByName(staffLille1.getName());
+		model.addAttribute("user",administrator);
 		model.addAttribute(moderator);
-		return "administrator/homeAdministrator";
+		return "administrator/gestionModerator";
 	}
 	
+	
+	@RequestMapping(value = "/gestionReferent", method = RequestMethod.GET)
+	public String gestionReferent(Model model,HttpSession session) {
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		moderator=moderatorRepository.findByName(staffLille1.getName());
+		
+		Iterable<ServiceEntity> services = serviceRepository.findAll();
+		model.addAttribute("service",services);
+		model.addAttribute("user",moderator);
+		model.addAttribute(referent);
+		
+		return "administrator/gestionReferent";
+	}
 
 	@RequestMapping(value = "/homeStaffLille1", method = RequestMethod.GET)
 	public String getHomeStaffLille1(Model model,HttpSession session) {
@@ -73,14 +97,25 @@ public class AdministratorController {
 	}
 	
 	@RequestMapping(value = "/newModerator", method = RequestMethod.POST)
-	public String newModerator(@ModelAttribute Moderator mode) {
+	public ModelAndView newModerator(@ModelAttribute Moderator mode) {
 		administrator.addModerator(mode);
 		mode.setAdministrator(administrator);
 		
 		administratorService.saveAdministrator(administrator);
 		
 		
-		return "administrator/homeAdministrator";
+		return new ModelAndView("redirect:homeStaffLille1");
+	}
+	
+	@RequestMapping(value = "/newReferent", method = RequestMethod.POST)
+	public ModelAndView newReferent(@ModelAttribute Referent referent) {
+		moderator.addReferent(referent);
+		referent.setModerator(moderator);
+		
+		moderatorService.saveModerator(moderator);
+		
+
+		return new ModelAndView("redirect:homeStaffLille1");
 	}
 	
 	public boolean isAdministrator(StaffLille1 staffLille1){

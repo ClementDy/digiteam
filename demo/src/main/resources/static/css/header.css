@@ -43,7 +43,10 @@ border-radius : 10px;
 }
 
 .titreFormulaire{
-
+	background-color: #ae2573;
+	color:white;
+	margin-bottom:40px;
+	text-align:center;
 	border-radius:5px;	
 }
 
@@ -64,10 +67,12 @@ border-radius : 10px;
 	border-radius:10px;
 }
 
-.containerOffer{
+.containerOffer, .containerWhite{
 	background:white;
 	border-radius:10px;
+	border: 1px solid #ae2573;
 }
+
 
 .containerAuthentication{
 	margin-top:10%;	

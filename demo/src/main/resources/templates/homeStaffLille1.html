@@ -1,57 +1,31 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head  xmlns:th="http://www.thymeleaf.org">
 <meta charset="UTF-8">
 <title></title>
 
-</head>
-<body>
 
-	<h1> Ajouter un gestionnaire</h1>
-	<label th:text="${user.name}"></label>
+
+<script src="js/header.js"></script>
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="css/header.css">
 	
-	<table class="table table-responsive">
-						<div th:if="${user.class.name}=='glp.digiteam.entity.offer.Referent'">
-							<thead>
-								<tr>
-									<td><strong>N° de l'offre</strong></td>
-									<td><strong>Libell&eacute;</strong></td>
-									<td><strong>Responsable</strong></td>
-									<td><strong>Date</strong></td>
-									<td></td>
-								</tr>
-
-						
-							</thead>
-								 <span th:each="responsible : ${user.responsible}">
-		     					<tr th:each="offer: ${responsible.offers}" th:if="${offer.status}=='Validated'">
-		     						<td>
-						                <label th:text="${offer.id}"></label>
-						        	</td>
-						        	<td   th:text="${offer.title}">
-						        	</td>
-						       		<td> <span  th:text="${responsible.firstName}"></span><span></span> <span  th:text="${responsible.lastName}"></span>
-						        	</td>
-						       		<td  th:text="${offer.validityDate}"></td>
-						        
-		    		
-									<td>
-								
-									<button type="button" class="btn btn-success"
-										aria-label="Left Align">
-										<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-									</button>
-									<button type="button" class="btn btn-primary"
-										aria-label="Left Align">
-										<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-									</button>
-									
-									</td>
-								</tr>
-							</span>
+	
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
-						</table>
-						</div>
+</head>
+<body onload="activeNav('offers')">
+
+	<div th:include="headerStaffLille1::headerStaffLille1"></div>
+
+
+	
 </body>
 </html>

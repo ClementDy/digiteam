@@ -18,7 +18,7 @@ public class Moderator extends StaffLille1{
 	private Administrator administrator;
 	
 	@OneToMany(fetch = FetchType.EAGER,mappedBy="moderator", cascade=CascadeType.ALL)
-	private List<Referent> moderators = new ArrayList<Referent>();
+	private List<Referent> referents = new ArrayList<Referent>();
 
 	
 	
@@ -37,13 +37,18 @@ public class Moderator extends StaffLille1{
 	}
 
 
-	public List<Referent> getModerators() {
-		return moderators;
+	public List<Referent> getReferents() {
+		return referents;
 	}
 
 
-	public void setModerators(List<Referent> moderators) {
-		this.moderators = moderators;
+	public void setReferents(List<Referent> referent) {
+		this.referents = referent;
+	}
+
+
+	public void addReferent(Referent referent) {
+		this.referents.add(referent);		
 	}
 	
 	

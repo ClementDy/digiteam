@@ -12,4 +12,18 @@ function activeNav(id) {
 		$('#offers').removeClass("active");
 		$('#candidatures').removeClass("active");
 	}
+	else if(id=='gestionModerator'){
+		$('#gestionModerator').addClass("active");
+		$('#consult').removeClass("active");
+		$('#offers').removeClass("active");
+		$('#candidatures').removeClass("active");
+	}
+	else if(id=='gestionReferent'){
+		$('#gestionReferent').addClass("active");
+		$('#gestionModerator').removeClass("active");
+		$('#consult').removeClass("active");
+		$('#offers').removeClass("active");
+		$('#candidatures').removeClass("active");
+		
+	}
 }
