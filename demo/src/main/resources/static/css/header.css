@@ -80,6 +80,10 @@ border-radius : 10px;
 	margin-bottom: 4px;
 }
 
+.cvIframe{
+	width:80%;
+	height:80%;
+}
 
 a {
 	color: white;

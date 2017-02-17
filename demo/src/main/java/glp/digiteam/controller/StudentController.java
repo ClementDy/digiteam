@@ -129,6 +129,9 @@ public class StudentController {
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
 		
+		String pathCV = "http://172.28.2.17/"+student.getNip();
+		model.addAttribute("pathCV", pathCV);
+		
 		studentService.saveStudentProfile(student);
 
 		return new ModelAndView("candidature::tab(activeTab='intro')");
