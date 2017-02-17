@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import glp.digiteam.entity.offer.Administrator;
@@ -94,6 +95,18 @@ public class AdministratorController {
 			model.addAttribute("user",referent);
 		}	
 		return "homeStaffLille1";
+	}
+	
+	@RequestMapping(value = "/deleteModerator", method = RequestMethod.GET)
+	public ModelAndView deleteModerator(Model model,HttpSession session,@RequestParam(value="admin",required=true)String admin,@RequestParam(value="name",required=true)String name) {
+	
+		Administrator administrator=administratorRepository.findByName(admin);
+	
+		administrator.removeModerator(name);
+		//moderatorRepository.deleteByFirstName(name);
+		administratorService.saveAdministrator(administrator);
+		
+		return new ModelAndView("redirect:gestionModerator");
 	}
 	
 	@RequestMapping(value = "/newModerator", method = RequestMethod.POST)

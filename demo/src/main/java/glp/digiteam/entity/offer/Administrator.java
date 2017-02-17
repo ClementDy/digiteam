@@ -35,5 +35,18 @@ public class Administrator extends StaffLille1{
 		this.moderators.add(moderator);
 	}
 	
+	public void removeModerator(String name){
+		for(int i=0;i<moderators.size();i++){
+			System.out.println("aaa-"+moderators.get(i).getName());
+			if(moderators.get(i).getName().equals(name)){
+				System.out.println("OKLM");
+				moderators.remove(i);
+			}
+		}
+		
+		for(Moderator moderator:moderators){
+			System.out.println(moderator.getName());
+		}
+	}
 
 }
