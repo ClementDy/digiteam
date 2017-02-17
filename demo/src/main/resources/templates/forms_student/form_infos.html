@@ -32,8 +32,8 @@
 					<div class="col-md-6">
 						<input class="form-control" th:value="${student.email}"
 							th:field="${student.email}" id="email">
-						<p th:if="${#fields.hasErrors('email')}" style="color: darkRed;">Veuillez
-							saisir une email valide</p>
+						<p th:if="${#fields.hasErrors('email')}" style="color: darkRed;"
+							th:errors="${student.email}"/>
 					</div>
 				</div>
 				<br>
@@ -67,8 +67,8 @@
 						<input class="form-control input-phonenumber"
 							th:value="${student.phone}" th:field="${student.phone}"
 							type="text" id="phone">
-						<p th:if="${#fields.hasErrors('phone')}" style="color: darkRed;">champ
-							obligatoire</p>
+						<p th:if="${#fields.hasErrors('phone')}" style="color: darkRed;"
+							th:errors="${student.phone}"/>
 					</div>
 				</div>
 			</div>
@@ -95,8 +95,7 @@
 			</div>
 			<div class="col-md-6 col-xs-6 divExpiryDateVISA"
 				th:style="${student.dateVisa != null} ? 'display:block' : 'display:none'">
-				<div class="row form-group"
-					th:classappend="${#fields.hasErrors('dateVisa')}? 'has-error'">
+				<div class="row form-group">
 					<div class="col-md-6">
 						<label class="control-label">Date de validit&eacute; : </label>
 					</div>
@@ -122,9 +121,9 @@
 					<div class="col-md-6">
 						<input class="form-control" th:value="${student.address.street}"
 							th:field="${student.address.street}" type="text">
+						<p th:if="${#fields.hasErrors('address.street')}" style="color: darkRed;"
+							th:errors="${student.address.street}"/>
 					</div>
-					<p th:if="${#fields.hasErrors('address.street')}"
-						style="color: darkRed;">champ obligatoire</p>
 				</div>
 				<br>
 				<div class="row">
@@ -148,8 +147,8 @@
 					<div class="col-md-6">
 						<input class="form-control" th:value="${student.address.city}"
 							th:field="${student.address.city}" type="text" id="city">
-						<p th:if="${#fields.hasErrors('address.city')}"
-							style="color: darkRed;">champ obligatoire</p>
+						<p th:if="${#fields.hasErrors('address.city')}" style="color: darkRed;"
+							th:errors="${student.address.city}"/>
 					</div>
 				</div>
 				<br>
@@ -163,8 +162,8 @@
 							th:value="${student.address.postalCode}"
 							th:field="${student.address.postalCode}" type="text"
 							id="postalCode">
-						<p th:if="${#fields.hasErrors('address.postalCode')}"
-							style="color: darkRed;">champ obligatoire</p>
+						<p th:if="${#fields.hasErrors('address.postalCode')}" style="color: darkRed;"
+							th:errors="${student.address.postalCode}"/>
 					</div>
 				</div>
 			</div>
