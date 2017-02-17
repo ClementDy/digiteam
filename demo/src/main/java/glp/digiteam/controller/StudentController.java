@@ -233,6 +233,17 @@ public class StudentController {
 	}
 	
 	
+	@RequestMapping(value = "/deconnexionStudent", method = RequestMethod.GET)
+	public ModelAndView deconnexion(Model model, HttpSession session) {
+		if (session.getAttribute("student") == null) {
+			return new ModelAndView("redirect:authentication");
+		}
+
+		this.student = null;
+	
+		return new ModelAndView("redirect:authentication");
+	}
+	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 	    binder.registerCustomEditor(String.class, new StringTrimmerEditor(false));

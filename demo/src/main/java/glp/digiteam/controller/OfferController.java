@@ -22,6 +22,7 @@ import glp.digiteam.entity.offer.StandardOffer;
 import glp.digiteam.entity.student.Mission;
 import glp.digiteam.entity.student.Student;
 import glp.digiteam.repository.MissionRepository;
+import glp.digiteam.repository.OfferRepository;
 import glp.digiteam.repository.ReferentRepository;
 import glp.digiteam.services.OfferService;
 import glp.digiteam.services.ReferentService;
@@ -47,7 +48,8 @@ public class OfferController {
 
 	private Responsible responsible;
 
-
+	@Autowired
+	private OfferRepository offerRepository;
 
 
 	private Referent referent;
@@ -164,5 +166,20 @@ public class OfferController {
 				}
 			}
 		}
+	}
+	
+	
+	@RequestMapping(value = "/offerShow", method = RequestMethod.GET)
+	public ModelAndView showOffer(Model model, HttpSession session,@RequestParam(value = "id", required = true) long id) {
+
+		AbstractOffer offer = offerRepository.findById(id);;
+		model.addAttribute("referent", referent);
+
+		if(offer!=null){
+			model.addAttribute("offer", offer);
+			return new ModelAndView("offers/offerAbstract");
+		}
+		
+		return new ModelAndView("offers/offersHome");
 	}
 }
