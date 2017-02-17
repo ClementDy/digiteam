@@ -141,6 +141,7 @@ public class StudentController {
 	@RequestMapping(value = "/candidature", method = RequestMethod.POST)
 	public ModelAndView addEtudiant(@ModelAttribute Student std, BindingResult bindingResult,
 			@RequestParam("file") MultipartFile file, @RequestParam(value = "action", required = true) String action,
+			@RequestParam(value="currentTab", required=false, defaultValue="intro") String currentTab,
 			RedirectAttributes redirectAttributes, Model model, Errors e, HttpSession session) {
 
 		if (action.equals("Publier") || action.equals("Enregistrer")) {
@@ -211,7 +212,10 @@ public class StudentController {
 			studentService.saveStudentProfile(std);
 		}
 		
-		return new ModelAndView("candidature::tab(activeTab='intro')");
+		return new ModelAndView(
+				"candidature::tab(activeTab='"+
+				currentTab+
+				"')");
 	}
 
 	

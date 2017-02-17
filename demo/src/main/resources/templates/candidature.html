@@ -34,28 +34,28 @@
 	<div style="text-align: center" id="exTab1" class="container">
 		<ul class="nav nav-pills">
 			<li id="ongletLille1" th:class="${activeTab == 'intro'} ? 'active'">
-				<a href="#1" data-toggle="tab">Introduction</a>
+				<a href="#intro" data-toggle="tab">Introduction</a>
 			</li>
 			<li id="ongletLille1" th:class="${activeTab == 'infos'} ? 'active'">
-				<a href="#2" data-toggle="tab">Informations personnelles</a>
+				<a href="#infos" data-toggle="tab">Informations personnelles</a>
 			</li>
 			<li id="ongletLille1" th:class="${activeTab == 'formations'} ? 'active'">
-				<a href="#3" data-toggle="tab">Formations</a>
+				<a href="#formations" data-toggle="tab">Formations</a>
 			</li>
 			<li id="ongletLille1" th:class="${activeTab == 'contracts'} ? 'active'">
-				<a href="#4" data-toggle="tab">Contrats</a>
+				<a href="#contracts" data-toggle="tab">Contrats</a>
 			</li>
 			<li id="ongletLille1" th:class="${activeTab == 'souhait'} ? 'active'">
-				<a href="#5" data-toggle="tab">Souhaits</a>
+				<a href="#souhait" data-toggle="tab">Souhaits</a>
 			</li>
 			<li id="ongletLille1" th:class="${activeTab == 'dispos'} ? 'active'">
-			<a href="#6" data-toggle="tab">Disponibilit&eacute;s</a>
+				<a href="#dispos" data-toggle="tab">Disponibilit&eacute;s</a>
 			</li>
 			<li id="ongletLille1" th:class="${activeTab == 'divers'} ? 'active'">
-			<a href="#7" data-toggle="tab">Divers</a>
+				<a href="#divers" data-toggle="tab">Divers</a>
 			</li>
 			<li id="ongletLille1" th:class="${activeTab == 'save'} ? 'active'">
-			<a href="#8" data-toggle="tab">Publication</a>
+				<a href="#save" data-toggle="tab">Publication</a>
 			</li>
 		</ul>
 
@@ -63,42 +63,42 @@
 			th:object="${student}" method="post" enctype="multipart/form-data">
 
 			<div class="tab-content clearfix">
-				<div th:class="tab-pane" th:classappend="${activeTab == 'intro'} ? 'active'" id="1">
+				<div th:class="tab-pane" th:classappend="${activeTab == 'intro'} ? 'active'" id="intro">
 					<div class="contentPane"
 						th:include="forms_student/form_intro::content"></div>
 				</div>
 
-				<div th:class="tab-pane" th:classappend="${activeTab == 'infos'} ? 'active'" id="2">
+				<div th:class="tab-pane" th:classappend="${activeTab == 'infos'} ? 'active'" id="infos">
 					<div class="contentPane"
 						th:include="forms_student/form_infos::content"></div>
 				</div>
 
-				<div th:class="tab-pane" th:classappend="${activeTab == 'formations'} ? 'active'" id="3">
+				<div th:class="tab-pane" th:classappend="${activeTab == 'formations'} ? 'active'" id="formations">
 					<div class="contentPane"
 						th:include="forms_student/form_formations::content"></div>
 				</div>
 				
-				<div th:class="tab-pane" th:classappend="${activeTab == 'contracts'} ? 'active'" id="4">
+				<div th:class="tab-pane" th:classappend="${activeTab == 'contracts'} ? 'active'" id="contracts">
 					<div class="contentPane"
 						th:include="forms_student/form_contracts::content"></div>
 				</div>
 
-				<div th:class="tab-pane" th:classappend="${activeTab == 'souhait'} ? 'active'" id="5">
+				<div th:class="tab-pane" th:classappend="${activeTab == 'souhait'} ? 'active'" id="souhait">
 					<div class="contentPane"
 						th:include="forms_student/form_souhait::content"></div>
 				</div>
 
-				<div th:class="tab-pane" th:classappend="${activeTab == 'dispos'} ? 'active'" id="6">
+				<div th:class="tab-pane" th:classappend="${activeTab == 'dispos'} ? 'active'" id="dispos">
 					<div class="contentPane"
 						th:include="forms_student/form_dispos::content"></div>
 				</div>
 				
-				<div th:class="tab-pane" th:classappend="${activeTab == 'divers'} ? 'active'" id="7">
+				<div th:class="tab-pane" th:classappend="${activeTab == 'divers'} ? 'active'" id="divers">
 					<div class="contentPane"
 						th:include="forms_student/form_divers::content"></div>
 				</div>
 				
-				<div th:class="tab-pane" th:classappend="${activeTab == 'save'} ? 'active'" id="8">
+				<div th:class="tab-pane" th:classappend="${activeTab == 'save'} ? 'active'" id="save">
 					<div class="contentPane"
 						th:include="forms_student/form_save::content"></div>
 				</div>
@@ -108,7 +108,9 @@
 			
 			<div class="row">
 				<article class="col-md-12 col-sm-12">
-					<input type="submit" class="btn btn-lille1" name="action" value="Enregistrer" onclick="selectMission();alert('Candidature enregistrée')">
+					<input id="currentTab" type="hidden" name="currentTab" th:value="${activeTab}">
+					<input type="submit" class="btn btn-lille1" name="action" value="Enregistrer" 
+					onclick="selectMission();setCurrentTab();alert('Profil enregistré');">
 				</article>
 			</div>
 		
@@ -116,5 +118,11 @@
 	</div>
 	<br>
 	<br>
+	
+	<script>
+		function setCurrentTab() {
+			$('#currentTab').val( $('.tab-content').find('.active').attr('id') );
+		}
+	</script>
 </body>
 </html>
