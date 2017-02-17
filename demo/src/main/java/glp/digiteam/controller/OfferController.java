@@ -1,6 +1,7 @@
 package glp.digiteam.controller;
 
 import java.util.Calendar;
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -168,11 +169,34 @@ public class OfferController {
 		}
 	}
 	
+	@RequestMapping(value= "/newOffer",method=RequestMethod.GET)
+	public ModelAndView newOffer(Model model, HttpSession session,@RequestParam(value = "id", required = true) long id){
+		AbstractOffer offer = offerRepository.findById(id);
+		responsible=new Responsible();
+		model.addAttribute("responsible", responsible);
+		offer.setStatus("Waiting");
+		offer.setCreationDate(Calendar.getInstance().getTime());
+		offer.setValidityDate(null);
+		model.addAttribute("offer",offer);
+		model.addAttribute("referent",referent);
+		Iterable<Mission> missions = missionRepository.findAll();
+		model.addAttribute("listMission", missions);
+		
+		if(offer.getClass().getName().equals("glp.digiteam.entity.offer.GenericOffer")){
+			
+			return new ModelAndView("offers/newGenericOffer");
+		}else {
+			
+			return new ModelAndView("offers/newStandardOffer");
+		}
+			
+	}
+	
 	
 	@RequestMapping(value = "/offerShow", method = RequestMethod.GET)
 	public ModelAndView showOffer(Model model, HttpSession session,@RequestParam(value = "id", required = true) long id) {
 
-		AbstractOffer offer = offerRepository.findById(id);;
+		AbstractOffer offer = offerRepository.findById(id);
 		model.addAttribute("referent", referent);
 
 		if(offer!=null){
