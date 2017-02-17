@@ -35,12 +35,12 @@
 			
 			 
 			<label th:if="${student.nationality}!='FRANCAISE'"
-				th:text="${student.dateVISA}" id="dateVISA"></label> <br>
+				th:text="${student.dateVisa}" id="dateVISA"></label> <br>
 			<label th:if="${student.dateVisa}!=NULL"
-				th:text="${student.dateVISA}" id="dateVISA"></label> <br>
+				th:text="${student.dateVisa}" id="dateVISA"></label> <br>
 				
 			
-			<div th:if="${student.cv}!=''">
+			<div th:if="${student.cv}!=NULL">
 			<h4 class="titreFormulaire">CV</h4>
 			
 				<iframe th:attr="src=${pathCV}" ></iframe><br><br>
