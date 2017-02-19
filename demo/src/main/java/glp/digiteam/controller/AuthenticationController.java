@@ -23,7 +23,6 @@ import glp.digiteam.entity.offer.StaffLille1;
 import glp.digiteam.entity.student.Student;
 import glp.digiteam.services.ServiceService;
 import glp.digiteam.services.StudentService;
-import glp.digiteam.validator.StudentValidator;
 import glp.digiteam.webServices.ServiceWebService;
 import glp.digiteam.webServices.ServiceWebServiceService;
 import glp.digiteam.webServices.StudentWebService;

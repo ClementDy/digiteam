@@ -12,6 +12,21 @@ function getValueAfterKeypress($input, keycode) {
   
   return result;
 }
+function validateFormGeneric() {
+    var x = document.forms["formgeneric"]["validityDate"].value;
+    if (x == "") {
+        alert("Le champ Date de validité doit être rempli");
+        return false;
+    }
+}
+
+function validateFormStandard(){
+    var x = document.forms["formstandard"]["validityDate"].value;
+    if (x == "") {
+        alert("Le champ Date de validité doit être rempli");
+        return false;
+    }
+}
 
 function isValidInteger(string) {
 	var regex = /^\d*$/;

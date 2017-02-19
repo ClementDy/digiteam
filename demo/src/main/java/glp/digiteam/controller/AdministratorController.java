@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import glp.digiteam.entity.offer.Administrator;
-import glp.digiteam.entity.offer.GenericOffer;
 import glp.digiteam.entity.offer.Moderator;
 import glp.digiteam.entity.offer.Referent;
 import glp.digiteam.entity.offer.ServiceEntity;
@@ -25,7 +24,6 @@ import glp.digiteam.repository.ReferentRepository;
 import glp.digiteam.repository.ServiceRepository;
 import glp.digiteam.services.AdministratorService;
 import glp.digiteam.services.ModeratorService;
-import glp.digiteam.services.ReferentService;
 
 @EnableAutoConfiguration
 @Controller

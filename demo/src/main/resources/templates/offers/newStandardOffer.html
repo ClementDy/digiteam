@@ -41,8 +41,8 @@
 
 
 
-		<form accept-charset="UTF-8" th:action="@{/newStandardOffer}"
-			th:object="${offer}" method="post" enctype="multipart/form-data">
+		<form accept-charset="UTF-8" th:action="@{/newStandardOffer}" name="formstandard"
+			th:object="${offer}" method="post" enctype="multipart/form-data"  onsubmit="return validateFormStandard()">
 
 
 			<br>
@@ -171,7 +171,7 @@
 				<div class="form-group col-md-3">
 					<label>Date de validit&eacute; : </label> 
 					<input type="text"
-						class="form-control input-date" type="date" th:field="${offer.validityDate}"
+						class="form-control input-date" type="text" th:field="${offer.validityDate}"
 						readonly="readonly"   style="cursor: text; background: white;"
 						 required>
 

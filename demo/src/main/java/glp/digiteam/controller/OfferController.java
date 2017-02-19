@@ -26,9 +26,9 @@ import glp.digiteam.entity.student.Student;
 import glp.digiteam.repository.MissionRepository;
 import glp.digiteam.repository.OfferRepository;
 import glp.digiteam.repository.ReferentRepository;
-import glp.digiteam.services.OfferService;
 import glp.digiteam.services.ReferentService;
 import glp.digiteam.services.StudentService;
+
 
 @EnableAutoConfiguration
 @Controller
@@ -70,6 +70,7 @@ public class OfferController {
 
 	@RequestMapping(value = "/newGenericOffer", method = RequestMethod.GET)
 	public String newGeneriqueOffer(Model model,HttpSession session) {
+		
 		GenericOffer offer=new GenericOffer();
 		responsible=new Responsible();
 		model.addAttribute("referent", referent);		
