@@ -2,39 +2,71 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head xmlns:th="http://www.thymeleaf.org">
 
-<link type="text/css" href="/css/form.css" rel="stylesheet" />
 
 <script src="js/header.js"></script>
 
 <script src="js/jquery-1.9.1.min.js"></script>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/consultCandidature.css">
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
 
 <body onload="activeNav('consult');">
-	<div th:if="${referent != null}"  th:include="headerReferent::headerReferent"></div>
-	<div class="container">
-	<div class="row">
- 	<div class="list-group">
-		<div th:each="student : ${listCandidature}" class="col-sm-6 col-md-3">
-			<div class="thumbnail">
+	<div th:if="${referent != null}"
+		th:include="headerReferent::headerReferent"></div>
+	<div class="container-fluid containerCustom">
+	
+		<div class="row titlePage">
+			Candidatures publi&eacute;es
+		</div>
+		
+		<div class="searchPart">
+			<form class="navbar-form" role="search">
+    		<div class="input-group add-on">
+      			<input class="form-control" placeholder="Search" name="srch-term" id="srch-term" type="text">
+     			<div class="input-group-btn">
+        			<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+     			 </div>
+    		</div>
+ 			 </form>
+		</div>
+		
+		<div class="row">
+			<div class="list-group">
+				<div th:each="student : ${listCandidature}"
+					class="col-sm-6 col-md-3">
+					<div class="thumbnail">
 
-				<div class="centered-text"><b><span th:text="${student.firstName}"></span>&nbsp;<span th:text="${student.lastName}"></span></b></div>
-				<br>
-				
-				<p>Formation : <span  th:text="${student.trainings[__${0}__].name}">&nbsp;<span th:text="${student.trainings[__${0}__].date}"></span></p>
-				
-				<p>Email : <span  th:text="${student.email}"></span></p>
-				
-				<p class="centered-text" ><a th:href="@{profil(nip=${student.nip})}"  class="btn btn-info" role="button"><span class="glyphicon glyphicon-search"></span> Voir le profil</a></p>
+						<div class="studentName">
+							<br> <b>	<span th:if="${student.civilite}==0">M. </span> <span th:if="${student.civilite}==1">
+							Mme. </span><span th:text="${student.firstName}"></span>&nbsp;
+							<span th:text="${student.lastName}"></span></b>
+						</div>
+						<br>
+
+						<p class="text">
+							<b>Formation : </b> 
+							<span th:text="${student.trainings[__${0}__].name}">&nbsp;<span th:text="${student.trainings[__${0}__].date}"></span>
+						</p>
+
+						<p class="text">
+							<b>Email : </b><span th:text="${student.email}"></span>
+						</p>
+
+						<p class=" text centered-text">
+							<a th:href="@{profil(nip=${student.nip})}" class="btn btn-info" role="button">
+							<span class="glyphicon glyphicon-search"></span> Voir le profil compl&egrave;te</a>
+						</p>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-	</div>
 	</div>
 
 </body>
@@ -43,6 +75,6 @@
 
 <style>
 .centered-text {
-    text-align:center
-}    
+	text-align: center
+}
 </style>

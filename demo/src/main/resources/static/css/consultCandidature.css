@@ -1,0 +1,37 @@
+.thumbnail {
+	border: solid 1px #ae2573;
+}
+
+.text {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	padding-left: 3%;
+}
+
+.studentName {
+	text-align: center;
+	font-size: 15px;
+}
+
+.containerCustom {
+	margin-right: 3%;
+	margin-left: 3%;
+	padding-bottom: 15%;
+}
+
+.titlePage {
+	margin-right: 0%;
+	margin-left:  0%;
+	text-align: center;
+	font-size: 22px;
+	margin-top: 1%;
+	background-color: #ae2573;
+	color: white;
+	border-radius: 7px;
+}
+
+.searchPart{
+	padding-bottom: 1%;
+	padding-top: 1%;
+}
