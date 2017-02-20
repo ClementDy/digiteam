@@ -60,6 +60,8 @@
 				</div>
 			</div>
 			
+			
+			
 			<br>
 			<div class="row">
 				<div class="col-md-12">
@@ -67,6 +69,37 @@
 				</div>
 			</div>
 		</form>
+	</div>
+	
+	<br>
+	<br>
+	<br>
+
+	<div class="container containerWhite">
+
+		<div class="row">
+
+			<div class="col-md-12">
+				<h3 class="titreFormulaire">Vos r&eacute;f&eacute;rens :</h3>
+			</div>
+		</div>
+			<div class="row">
+			<span th:each="referent : ${user.referents}">
+				
+					<div class="col-sm-6 col-md-3">
+						<div class="thumbnail">
+							<img src="img/profil.png" alt="...">
+							<div class="caption">
+								<p><strong>Nom : </strong><span  th:text="${referent.name}"></span></p>
+									
+								<!-- 	<a  th:href="@{/deleteModerator(name=${moderator.name},admin=${user.name})}" class="btn btn-danger" role="button">Supprimer</a> --> 
+							
+							</div>
+						</div>
+					</div>
+				</div>
+			</span>
+			</div>
 	</div>
 </body>
 </html>
