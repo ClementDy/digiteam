@@ -38,7 +38,7 @@ import glp.digiteam.repository.OfferRepository;
 import glp.digiteam.services.StudentService;
 import glp.digiteam.uploadFile.StorageFileNotFoundException;
 import glp.digiteam.uploadFile.StorageService;
-import glp.digiteam.validator.StudentValidator;
+import glp.digiteam.validator.PublishProfileValidator;
 
 @EnableAutoConfiguration
 @Controller
@@ -147,15 +147,15 @@ public class StudentController {
 		if (action.equals("Publier") || action.equals("Enregistrer")) {
 
 			if (action.equals("Publier")) {
-				StudentValidator studentValidator = new StudentValidator();
-				studentValidator.validate(std, bindingResult);
+				PublishProfileValidator publishValidator = new PublishProfileValidator();
+				publishValidator.validate(std, bindingResult);
 
 				if (bindingResult.hasErrors()) {
 					Iterable<Mission> missions = missionRepository.findAll();
 					model.addAttribute("listMission", missions);
 					return new ModelAndView(
 							"candidature::tab(activeTab='"
-							+ studentValidator.getFirstErrorTab(bindingResult)
+							+ publishValidator.getFirstErrorTab(bindingResult)
 							+ "')");
 				}
 			}
@@ -211,7 +211,9 @@ public class StudentController {
 			model.addAttribute("student", std);
 			studentService.saveStudentProfile(std);
 		}
-		
+
+		Iterable<Mission> missions = missionRepository.findAll();
+		model.addAttribute("listMission", missions);
 		return new ModelAndView(
 				"candidature::tab(activeTab='"+
 				currentTab+

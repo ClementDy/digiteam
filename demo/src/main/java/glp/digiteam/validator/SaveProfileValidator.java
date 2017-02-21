@@ -4,13 +4,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
-import org.thymeleaf.util.StringUtils;
-
 import glp.digiteam.entity.student.Student;
 
-public class StudentValidator implements Validator {
+public class SaveProfileValidator implements Validator {
 
 	@Override
 	public boolean supports(Class clazz) {
@@ -22,39 +19,21 @@ public class StudentValidator implements Validator {
 		Student student = (Student) target;
 
 		// form_infos
-		if (StringUtils.isEmpty(student.getEmail())) {
-			errors.rejectValue("email", "field.required");
-		}
-		else if (!validateEmailAddress(student.getEmail())) {
+		if (!validateEmailAddress(student.getEmail())) {
 			errors.rejectValue("email", "field.invalid");
 		}
 
-		if (StringUtils.isEmpty(student.getPhone())) {
-			errors.rejectValue("phone", "field.required");
-		}
-		else if (!validatePhoneNumber(student.getPhone())) {
+		if (!validatePhoneNumber(student.getPhone())) {
 			errors.rejectValue("phone", "field.invalid");
 		}
 		
-		ValidationUtils.rejectIfEmpty(errors, "address.city", "field.required");
-		
-		ValidationUtils.rejectIfEmpty(errors, "address.street", "field.required");
-
-		if (StringUtils.isEmpty(student.getAddress().getPostalCode())) {
-			errors.rejectValue("address.postalCode", "field.required");
-		}
-		else if (!validatePostalCode(student.getAddress().getPostalCode())) {
+		if (!validatePostalCode(student.getAddress().getPostalCode())) {
 			errors.rejectValue("address.postalCode", "field.invalid");
 		}
 		
-		// form_souhait
-		if (student.getWish().getMissions().isEmpty()) {
-			errors.rejectValue("wish.missions", "field.required");
-		}
+		// form_contracts
 		
 		// form_dispos
-
-		// form_divers
 	}
 
 	public String getFirstErrorTab(Errors errors) {
@@ -62,22 +41,15 @@ public class StudentValidator implements Validator {
 		// form_infos
 		if (errors.hasFieldErrors("email") ||
 			errors.hasFieldErrors("phone") ||
-			errors.hasFieldErrors("address.city") ||
-			errors.hasFieldErrors("address.street") ||
 			errors.hasFieldErrors("address.postalCode")
 		) {
 			return "infos";
 		}
 
-		// form_souhait
-		if (errors.hasFieldErrors("wish.missions")) {
-			return "souhait";
-		}
+		// form_contracts
 		
 		// form_dispos
 
-		// form_divers
-		
 		// default
 		return "intro";
 	}
