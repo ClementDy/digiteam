@@ -3,6 +3,7 @@ package glp.digiteam.controller;
 import java.util.Calendar;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -140,13 +144,49 @@ public class OfferController {
 
 	@RequestMapping(value = "/consult_candidatures", method = RequestMethod.GET)
 	public String consult(Model model,HttpSession session) {
-		referent= (Referent) session.getAttribute("referent");
-		referent=referentRepository.findByName(referent.getName());
+		model.addAttribute("referent", referent);
+		Iterable<Mission> missions = missionRepository.findAll();
+		model.addAttribute("listMission", missions);
+		
+		List<Student> listCandidatures = studentService.getAllCandidature();
+		model.addAttribute("listCandidature", listCandidatures);
+		return "consult_candidatures";
+	}
+	
+	@RequestMapping(value = "/consult_candidatures", method = RequestMethod.POST)
+	public String consultCandidatures(
+			@RequestParam(value="firstName", required=true, defaultValue="") String firstName,
+            @RequestParam(value="lastName", required=true,defaultValue="") String lastName,
+            @RequestParam(value="formation", required=true,defaultValue="") String formation,Model model, HttpSession session) {
+		
 		model.addAttribute("referent", referent);
 
-		List<Student> listCandidature = studentService.getAllCandidature();
-		model.addAttribute("listCandidature", listCandidature);
+		if(lastName.equals("") && !firstName.equals("") && formation.equals("") ){
+			List<Student> listCandidatures = studentService.findByFirstNamePublish(firstName);;
+			model.addAttribute("listCandidature", listCandidatures);
+			model.addAttribute("size", listCandidatures.size());
+			return "consult_candidatures";
+			
+		}
+		if(!lastName.equals("") && firstName.equals("") && formation.equals("")){
+			List<Student> listCandidatures = studentService.findByLastNamePublish(lastName);
+			model.addAttribute("listCandidature", listCandidatures);
+			model.addAttribute("size", listCandidatures.size());
+			return "consult_candidatures";
+			
+		}
+		if(lastName.equals("") && firstName.equals("") && !formation.equals("") ){
+			List<Student> listCandidatures = studentService.findWithTraining(formation);
+			model.addAttribute("listCandidature", listCandidatures);
+			model.addAttribute("size", listCandidatures.size());
+			return "consult_candidatures";
+			
+		}
+		List<Student> listCandidatures = studentService.getAllCandidature();
+		model.addAttribute("listCandidature", listCandidatures);
+		model.addAttribute("size", listCandidatures.size());
 		return "consult_candidatures";
+	
 	}
 	
 	@RequestMapping(value = "/consult_offers", method = RequestMethod.GET)

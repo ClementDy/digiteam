@@ -21,17 +21,44 @@
 }
 
 .titlePage {
-	margin-right: 0%;
-	margin-left:  0%;
+    
+    margin-right: 0%;
+	margin-left: 0%;
 	text-align: center;
 	font-size: 22px;
-	margin-top: 1%;
 	background-color: #ae2573;
 	color: white;
-	border-radius: 7px;
+	border-radius: 5px;
+}
+
+#searchTitle{
+	margin-left: 1%;
+	font-style: italic;
 }
 
 .searchPart{
+	background-color : white;
 	padding-bottom: 1%;
 	padding-top: 1%;
+	margin-bottom: 3%;
+    border-radius: 5px;
+	border: solid 1px #ae2573;
+}
+
+.row{
+	padding-right: 2%;
+	padding-left: 2%;
+}
+.alert-info{
+	margin-right: 1%;
+	margin-left:  1%;
+	border: solid 1px lightblue;
+}
+
+.glyphicon-search{
+	margin-top: 3px;
+}
+
+.centered-text {
+	text-align: center;
 }
