@@ -12,7 +12,7 @@
 			<img src="img/logo-lille1.svg" height="90" width="242"></img>
 		</div>
 		<nav class="navbar navbar-default">
-			<div class="container-fluid">
+			<div class="container-fluid backgroundHeader">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed"
 						data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
@@ -38,6 +38,9 @@
 						<li id="gestionModerator" th:if="${user.class.name}=='glp.digiteam.entity.offer.Administrator'"><a th:href="@{/gestionModerator}">Gestion des mod&eacute;rateurs</a></li>
 						<!-- Onglets MODERATOR -->
 						<li id="gestionReferent" th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'"><a th:href="@{/gestionReferent}">Gestion des r&eacute;f&eacute;rents</a></li>
+						<!-- Onglets STUDENT -->
+						<li id="gestionReferent" th:if="${user.class.name}=='glp.digiteam.entity.student.Student'"><a th:href="@{/candidature}">Candidature</a></li>
+						
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
@@ -45,12 +48,13 @@
 							data-toggle="dropdown" role="button" aria-haspopup="true"
 							aria-expanded="false">
 							
-							<span th:text="${user.name}"></span><span> </span><span> </span><span class="glyphicon glyphicon-user"></span></a>
-							<ul class="dropdown-menu">
+							<span th:if="${user.class.name}=='glp.digiteam.entity.student.Student'"><span th:text="${user.lastName}"></span><span> </span><span  th:text="${user.firstName}"></span><span> </span><span class="glyphicon glyphicon-user"></span></span>
+							<span th:if="${user.class.name}!='glp.digiteam.entity.student.Student'" th:text="${user.name}"></span><span> </span><span> </span><span class="glyphicon glyphicon-user"></span>
+							</a><ul class="dropdown-menu">
 							
 								<li><a href="#">Param&egrave;tres</a></li>
 								<li role="separator" class="divider"></li>
-								<li><a th:href="@{/profile}">Mon Profil</a></li>
+								<li th:if="${user.class.name}=='glp.digiteam.entity.student.Student'"><a th:href="@{/profile}">Mon Profil</a></li>
 								<li role="separator" class="divider"></li>
 								<li><a th:href="@{/authentication}">D&eacute;connexion</a></li>
 							</ul></li>

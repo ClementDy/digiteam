@@ -58,14 +58,14 @@ public class AuthenticationController {
 		Student student = new Student();
 		Referent referent = new Referent();
 		StaffLille1 staffLille1 = new StaffLille1();
-
+		// /*
 		List<ServiceWebService> services = servicewebsrviceservice.getServicesWS();
 
 		for (ServiceWebService serviceWebService : services) {
 			ServiceEntity servicentity = new ServiceEntity(serviceWebService.getCode(), serviceWebService.getLibelle());
 			serviceservice.saveService(servicentity);
 		}
-
+		// */
 		model.addAttribute("student",student);
 
 		model.addAttribute("referent",referent);
@@ -91,6 +91,7 @@ public class AuthenticationController {
 				return new ModelAndView("redirect:/home");			
 			}else {
 				try{
+				//	/*
 					StudentWebService studentLDAP = studentLDAPService.getStudentLDAP(student.getNip());
 					TrainingWebService trainingLDAP =  trainingLDAPService.getTrainingLDAP(2017,
 							student.getNip());
@@ -103,7 +104,7 @@ public class AuthenticationController {
 					student.getTrainings().get(0).setDate(trainingLDAP.getIns_ANNEE());
 					student.getTrainings().get(0).setName(trainingLDAP.getIns_LIBDIPLOME());
 					student.getTrainings().get(0).setPlace("Lille");
-
+				//*/
 				} catch (Exception e) {
 					notGoodNip=true;				
 					return new ModelAndView("redirect:/authentication");
