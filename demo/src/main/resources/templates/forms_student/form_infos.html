@@ -33,7 +33,7 @@
 						<input class="form-control" th:value="${student.email}"
 							th:field="${student.email}" id="email">
 						<p th:if="${#fields.hasErrors('email')}" style="color: darkRed;"
-							th:errors="${student.email}"/>
+							th:errors="${student.email}" />
 					</div>
 				</div>
 				<br>
@@ -68,7 +68,7 @@
 							th:value="${student.phone}" th:field="${student.phone}"
 							type="text" id="phone">
 						<p th:if="${#fields.hasErrors('phone')}" style="color: darkRed;"
-							th:errors="${student.phone}"/>
+							th:errors="${student.phone}" />
 					</div>
 				</div>
 			</div>
@@ -80,7 +80,8 @@
 			<div class="col-md-6 col-xs-6">
 				<div class="row form-group">
 					<div class="col-md-6">
-						<label class="control-label" for="radios">Titre de séjour : </label>
+						<label class="control-label" for="radios">Titre de séjour
+							: </label>
 					</div>
 					<div class="col-md-6">
 						<input type="radio" name="radios" id="InvalidVISA"
@@ -120,8 +121,8 @@
 					<div class="col-md-6">
 						<input class="form-control" th:value="${student.address.street}"
 							th:field="${student.address.street}" type="text">
-						<p th:if="${#fields.hasErrors('address.street')}" style="color: darkRed;"
-							th:errors="${student.address.street}"/>
+						<p th:if="${#fields.hasErrors('address.street')}"
+							style="color: darkRed;" th:errors="${student.address.street}" />
 					</div>
 				</div>
 				<br>
@@ -146,8 +147,8 @@
 					<div class="col-md-6">
 						<input class="form-control" th:value="${student.address.city}"
 							th:field="${student.address.city}" type="text" id="city">
-						<p th:if="${#fields.hasErrors('address.city')}" style="color: darkRed;"
-							th:errors="${student.address.city}"/>
+						<p th:if="${#fields.hasErrors('address.city')}"
+							style="color: darkRed;" th:errors="${student.address.city}" />
 					</div>
 				</div>
 				<br>
@@ -161,8 +162,8 @@
 							th:value="${student.address.postalCode}"
 							th:field="${student.address.postalCode}" type="text"
 							id="postalCode">
-						<p th:if="${#fields.hasErrors('address.postalCode')}" style="color: darkRed;"
-							th:errors="${student.address.postalCode}"/>
+						<p th:if="${#fields.hasErrors('address.postalCode')}"
+							style="color: darkRed;" th:errors="${student.address.postalCode}" />
 					</div>
 				</div>
 			</div>
@@ -194,7 +195,7 @@
 			</div>
 		</div>
 		<div class="row">
-		
+
 			<div class="col-md-12 cv" th:if="${student.cv}!=NULL">
 				<iframe class="cvIframe" th:attr="src=${pathCV}"></iframe>
 				<br>

@@ -74,11 +74,22 @@ public class OfferController {
 
 	@RequestMapping(value = "/offers", method = RequestMethod.GET)
 	public String homeContracts(Model model,HttpSession session) {
-
-		referent= (Referent) session.getAttribute("referent");
-		referent=referentRepository.findByName(referent.getName());
-
-		checkOffer(referent);
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		if(isAdministrator(staffLille1)){
+			Administrator administrator=administratorRepository.findByName(staffLille1.getName());
+			model.addAttribute("user",administrator);
+		}
+		if(isModerator(staffLille1)){
+			Moderator moderator=moderatorRepository.findByName(staffLille1.getName());
+			model.addAttribute("user",moderator);
+		}	
+		if(isReferent(staffLille1)){
+			Referent referent=referentRepository.findByName(staffLille1.getName());
+			checkOffer(referent);
+			System.out.println(referent.getClass().getName());
+			model.addAttribute("user",referent);
+		}	
+		
 		
 		model.addAttribute("referent", referent);
 		return "offers/offersHome";
