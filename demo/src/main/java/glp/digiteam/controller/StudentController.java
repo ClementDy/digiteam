@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +40,7 @@ import glp.digiteam.services.StudentService;
 import glp.digiteam.uploadFile.StorageFileNotFoundException;
 import glp.digiteam.uploadFile.StorageService;
 import glp.digiteam.validator.PublishProfileValidator;
+import glp.digiteam.validator.SaveProfileValidator;
 
 @EnableAutoConfiguration
 @Controller
@@ -143,7 +145,18 @@ public class StudentController {
 			@RequestParam("file") MultipartFile file, @RequestParam(value = "action", required = true) String action,
 			@RequestParam(value="currentTab", required=false, defaultValue="intro") String currentTab,
 			RedirectAttributes redirectAttributes, Model model, Errors e, HttpSession session) {
-
+		/*
+		SaveProfileValidator saveValidator = new SaveProfileValidator();
+		saveValidator.validate(std, bindingResult);
+		if (bindingResult.hasErrors()) {
+			Iterable<Mission> missions = missionRepository.findAll();
+			model.addAttribute("listMission", missions);
+			return new ModelAndView(
+					"candidature::tab(activeTab='"
+					+ saveValidator.getFirstErrorTab(bindingResult)
+					+ "')");
+		}
+		*/
 		if (action.equals("Publier") || action.equals("Enregistrer")) {
 
 			if (action.equals("Publier")) {

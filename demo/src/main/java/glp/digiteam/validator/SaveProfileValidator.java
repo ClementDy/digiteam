@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.Validator;
 import glp.digiteam.entity.student.Student;
 
@@ -32,7 +33,7 @@ public class SaveProfileValidator implements Validator {
 		}
 		
 		// form_contracts
-		
+
 		// form_dispos
 	}
 
@@ -47,6 +48,11 @@ public class SaveProfileValidator implements Validator {
 		}
 
 		// form_contracts
+		for (FieldError fe : errors.getFieldErrors()) {
+			if (fe.getField().startsWith("externalContracts")) {
+				return "contracts";
+			}
+		}
 		
 		// form_dispos
 

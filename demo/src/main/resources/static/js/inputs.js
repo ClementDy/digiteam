@@ -6,12 +6,13 @@ function cancelEvent(event) {
 function getValueAfterKeypress($input, keycode) {
 	var caretPosition = $input[0].selectionStart;
   
-  var result = $input.val().substring(0, caretPosition) +
-    				   String.fromCharCode(keycode) +
-    				   $input.val().substring(caretPosition);
+	var result = $input.val().substring(0, caretPosition) +
+    			 String.fromCharCode(keycode) +
+    			 $input.val().substring(caretPosition);
   
-  return result;
+	return result;
 }
+
 function validateFormGeneric() {
     var x = document.forms["formgeneric"]["validityDate"].value;
     if (x == "") {
@@ -31,17 +32,19 @@ function validateFormStandard(){
 function isValidInteger(string) {
 	var regex = /^\d*$/;
   
-  return regex.test(string);
+	return regex.test(string);
 }
 
 function isValidPhoneNumber(string) {
 	var regex = /^\+?\d*$/;
   
-  return regex.test(string);
+	return regex.test(string);
 }
 
 //When the document is ready
 $(document).ready(function () {
+
+$('.input-integer').tooltip();
 
 $(".input-integer").bind({
   paste: function() {
