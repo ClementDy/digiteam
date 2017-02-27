@@ -21,13 +21,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import glp.digiteam.entity.offer.AbstractOffer;
+import glp.digiteam.entity.offer.Administrator;
 import glp.digiteam.entity.offer.GenericOffer;
+import glp.digiteam.entity.offer.Moderator;
 import glp.digiteam.entity.offer.Referent;
 import glp.digiteam.entity.offer.Responsible;
+import glp.digiteam.entity.offer.StaffLille1;
 import glp.digiteam.entity.offer.StandardOffer;
 import glp.digiteam.entity.student.Mission;
 import glp.digiteam.entity.student.Student;
+import glp.digiteam.repository.AdministratorRepository;
 import glp.digiteam.repository.MissionRepository;
+import glp.digiteam.repository.ModeratorRepository;
 import glp.digiteam.repository.OfferRepository;
 import glp.digiteam.repository.ReferentRepository;
 import glp.digiteam.services.ReferentService;
@@ -41,6 +46,13 @@ public class OfferController {
 
 	@Autowired
 	private MissionRepository missionRepository;
+
+	
+	@Autowired
+	private AdministratorRepository administratorRepository;
+
+	@Autowired
+	private ModeratorRepository moderatorRepository;
 
 
 	@Autowired
@@ -67,7 +79,7 @@ public class OfferController {
 		referent=referentRepository.findByName(referent.getName());
 
 		checkOffer(referent);
-
+		
 		model.addAttribute("referent", referent);
 		return "offers/offersHome";
 	}
@@ -144,7 +156,21 @@ public class OfferController {
 
 	@RequestMapping(value = "/consult_candidatures", method = RequestMethod.GET)
 	public String consult(Model model,HttpSession session) {
-		model.addAttribute("referent", referent);
+		
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		if(isAdministrator(staffLille1)){
+			Administrator administrator=administratorRepository.findByName(staffLille1.getName());
+			model.addAttribute("user",administrator);
+		}
+		if(isModerator(staffLille1)){
+			Moderator moderator=moderatorRepository.findByName(staffLille1.getName());
+			model.addAttribute("user",moderator);
+		}	
+		if(isReferent(staffLille1)){
+			Referent referent=referentRepository.findByName(staffLille1.getName());
+			System.out.println(referent.getClass().getName());
+			model.addAttribute("user",referent);
+		}	
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
 		
@@ -191,7 +217,20 @@ public class OfferController {
 	
 	@RequestMapping(value = "/consult_offers", method = RequestMethod.GET)
 	public String consult_offers(Model model,HttpSession session) {
-		model.addAttribute("referent", referent);
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		if(isAdministrator(staffLille1)){
+			Administrator administrator=administratorRepository.findByName(staffLille1.getName());
+			model.addAttribute("user",administrator);
+		}
+		if(isModerator(staffLille1)){
+			Moderator moderator=moderatorRepository.findByName(staffLille1.getName());
+			model.addAttribute("user",moderator);
+		}	
+		if(isReferent(staffLille1)){
+			Referent referent=referentRepository.findByName(staffLille1.getName());
+			System.out.println(referent.getClass().getName());
+			model.addAttribute("user",referent);
+		}	
 		
 		List<AbstractOffer> listOffers = offerRepository.findLastOffers(new PageRequest(0, 50));
 		model.addAttribute("listOffers",listOffers);
@@ -257,5 +296,31 @@ public class OfferController {
 		}
 		
 		return new ModelAndView("offers/offersHome");
+	}
+	
+	public boolean isAdministrator(StaffLille1 staffLille1){
+		if(administratorRepository.findByName(staffLille1.getName())!=null){
+			System.out.println("Admin!");
+			return true;
+		}
+		return false;
+		
+	}
+	
+	public boolean isModerator(StaffLille1 staffLille1){
+		if(moderatorRepository.findByName(staffLille1.getName())!=null){
+			System.out.println("Moderateur!");
+			return true;
+		}
+		return false;
+	}
+	
+
+	public boolean isReferent(StaffLille1 staffLille1){
+		if(referentRepository.findByName(staffLille1.getName())!=null){
+			System.out.println("Referent!");
+			return true;
+		}
+		return false;
 	}
 }

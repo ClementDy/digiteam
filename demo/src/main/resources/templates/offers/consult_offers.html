@@ -9,61 +9,65 @@
 
 <script src="js/jquery-1.9.1.min.js"></script>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/header.css">
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
 
-<body>
-	
-	
-	<div th:if="${student != null}" th:include="header::header"></div>
-    <div th:if="${referent != null}" th:include="headerReferent::headerReferent"></div>
+<body onload="activeNav('consult_offers');">
+
+
+
+	<div th:include="headerStaffLille1::headerStaffLille1"></div>
+
+
 	<div class="container">
-	<div class="row titleTab">
-	<label>Affichage de toutes les offres publiées :</label>
-	</div>
-			<div class="panel panel-default">
-					<div class="panel-body">
-						<table class="table table-responsive">
+		<br>
+		<div class="titreFormulaire">
+			<label>Affichage de toutes les offres publiées :</label>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<table class="table table-responsive">
 
-							<thead>
-								<tr>
-									<td><strong>N° de l'offre</strong></td>
-									<td><strong>Libell&eacute;</strong></td>
-									<td><strong>Responsable</strong></td>
-									<td><strong>Date</strong></td>
-									<td></td>
-								</tr>
+					<thead>
+						<tr>
+							<td><strong>N° de l'offre</strong></td>
+							<td><strong>Libell&eacute;</strong></td>
+							<td><strong>Responsable</strong></td>
+							<td><strong>Date</strong></td>
+							<td></td>
+						</tr>
 
-							</thead>
+					</thead>
 
-							<tr th:each="offer: ${listOffers}"">
-								<td><label th:text="${offer.id}"></label></td>
-								<td th:text="${offer.title}"></td>
-								<td><span th:text="${offer.responsible.firstName}"></span><span></span>
-									<span th:text="${offer.responsible.lastName}"></span></td>
-								<td th:text="${offer.validityDate}"></td>
-
-
-								<td><a class="btn btn-success" aria-label="Left Align"
-									th:href="@{/offerShow(id=${offer.id})}"> <span
-										class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-								</a>
-								</td>
-							</tr>
-						
+					<tr th:each="offer: ${listOffers}"">
+						<td><label th:text="${offer.id}"></label></td>
+						<td th:text="${offer.title}"></td>
+						<td><span th:text="${offer.responsible.firstName}"></span><span></span>
+							<span th:text="${offer.responsible.lastName}"></span></td>
+						<td th:text="${offer.validityDate}"></td>
 
 
-						</table>
-					</div>
-				</div>
-		
-		
+						<td><a class="btn btn-success" aria-label="Left Align"
+							th:href="@{/offerShow(id=${offer.id})}"> <span
+								class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+						</a></td>
+					</tr>
+
+
+
+				</table>
+			</div>
 		</div>
 
-	
+
+	</div>
+
+
 </body>
 </html>

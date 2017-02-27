@@ -79,7 +79,7 @@ public class AuthenticationController {
 
 
 	@RequestMapping(value ="/authentication", method = RequestMethod.POST)
-	public ModelAndView getStudent(@Valid @ModelAttribute Student student,Referent referent,BindingResult bindingresult, Model model, HttpSession session) {
+	public ModelAndView getStudent(@Valid @ModelAttribute Student student,BindingResult bindingresult, Model model, HttpSession session) {
 
 		if (student.getNip()!=null) {
 
@@ -91,7 +91,7 @@ public class AuthenticationController {
 				return new ModelAndView("redirect:/home");			
 			}else {
 				try{
-				//	/*
+				//	/*/
 					StudentWebService studentLDAP = studentLDAPService.getStudentLDAP(student.getNip());
 					TrainingWebService trainingLDAP =  trainingLDAPService.getTrainingLDAP(2017,
 							student.getNip());
@@ -118,10 +118,8 @@ public class AuthenticationController {
 				return new ModelAndView("redirect:/home");
 			}
 
-		}else{
-			session.setAttribute("referent", referent);
-			return new ModelAndView("redirect:/offers");
 		}
+		return null;
 	}
 
 	@RequestMapping(value ="/authenticationStaff", method = RequestMethod.POST)

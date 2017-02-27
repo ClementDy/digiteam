@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="css/header.css">
+
+<link rel="stylesheet" href="css/offer.css">
 	
 	
 <script
@@ -24,6 +26,7 @@
 
 	<div th:include="headerReferent::headerReferent"></div>
 
+	<div th:fragment="offersHome">
 	<div class="container containerOffer">
 		<br>
 
@@ -81,7 +84,7 @@
 
 							</thead>
 							
-								 <span th:each="responsible : ${referent.responsible}">
+								 <span th:each="responsible : ${user.responsible}">
 		     					<tr th:each="offer: ${responsible.offers}" th:if="${offer.status}=='Validated'">
 		     						<td>
 						                <label th:text="${offer.id}"></label>
@@ -148,7 +151,7 @@
 							</thead>
 							
 							
-							 <span th:each="responsible : ${referent.responsible}">
+							 <span th:each="responsible : ${user.responsible}">
 		     					<tr th:each="offer: ${responsible.offers}" th:if="${offer.status}=='Waiting'">
 		     						<td>
 						                <label th:text="${offer.id}"></label>
@@ -205,7 +208,7 @@
 
 							</thead>
 							
-								 <span th:each="responsible : ${referent.responsible}">
+								 <span th:each="responsible : ${user.responsible}">
 		     					<tr th:each="offer: ${responsible.offers}" th:if="${offer.status}=='Refused'">
 		     						<td>
 						                <label th:text="${offer.id}"></label>
@@ -266,7 +269,7 @@
 	
 						</thead>
 						
-						 <span th:each="responsible : ${referent.responsible}">
+						 <span th:each="responsible : ${user.responsible}">
 		     					<tr th:each="offer: ${responsible.offers}" th:if="${offer.status}=='Expired'">
 		     						<td>
 						                <label th:text="${offer.id}"></label>
@@ -295,6 +298,7 @@
 				
 				</div>
 			</div>
+		</div>
 		</div>
 	
 	

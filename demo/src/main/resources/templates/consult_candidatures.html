@@ -18,13 +18,12 @@
 </head>
 
 <body onload="activeNav('consult');">
-	<div th:if="${referent != null}"
-		th:include="headerReferent::headerReferent"></div>
-	<div class="container-fluid containerCustom">
+	<div  th:include="headerStaffLille1::headerStaffLille1"></div>
+	<div class="container">
 	
-		<div class="row titlePage">
-			Candidatures publi&eacute;es
-		</div>
+		
+		<h4 class="titreFormulaire">Vos informations</h4>
+	
 		
 		<div class="searchPart">
 			<div id="searchTitle">Recherche de candidature(s)</div>

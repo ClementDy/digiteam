@@ -16,10 +16,10 @@ text-align:center;
 }
 
 .titreOffre {
-	background-color: #ae2573;
-	color: white;
-	text-align: center;
-	border-radius:5px;
+	background-color: #ae2573 !important;
+	color: white !important;
+	text-align: center !important;
+	border-radius:5px !important;
 }
 
 .rowForm {
