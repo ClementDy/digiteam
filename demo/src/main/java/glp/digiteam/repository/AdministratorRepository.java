@@ -8,4 +8,6 @@ import glp.digiteam.entity.student.Student;
 public interface AdministratorRepository extends CrudRepository<Administrator, String>{
 
     Administrator findByName(String name);
+    
+
 }

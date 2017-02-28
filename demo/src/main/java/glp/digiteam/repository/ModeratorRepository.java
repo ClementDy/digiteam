@@ -12,7 +12,7 @@ public interface ModeratorRepository extends CrudRepository<Moderator, String> {
 
     Moderator findByName(String name);
     
-    /*@Transactional
-    Long deleteByFirstName(String name);
-*/
+    @Transactional
+    Long deleteByName(String name);
+
 }

@@ -98,13 +98,26 @@ public class AdministratorController {
 	@RequestMapping(value = "/deleteModerator", method = RequestMethod.GET)
 	public ModelAndView deleteModerator(Model model,HttpSession session,@RequestParam(value="admin",required=true)String admin,@RequestParam(value="name",required=true)String name) {
 	
+		
 		Administrator administrator=administratorRepository.findByName(admin);
 	
 		administrator.removeModerator(name);
-		//moderatorRepository.deleteByFirstName(name);
+		moderatorRepository.deleteByName(name);
 		administratorService.saveAdministrator(administrator);
 		
 		return new ModelAndView("redirect:gestionModerator");
+	}
+	
+	@RequestMapping(value = "/deleteReferent", method = RequestMethod.GET)
+	public ModelAndView deleteReferent(Model model,HttpSession session,@RequestParam(value="mode",required=true)String mode,@RequestParam(value="name",required=true)String name) {
+	
+		Moderator moderator=moderatorRepository.findByName(mode);
+	
+		moderator.removeReferent(name);
+		referentRepository.deleteByName(name);
+		moderatorService.saveModerator(moderator);
+		
+		return new ModelAndView("redirect:gestionReferent");
 	}
 	
 	@RequestMapping(value = "/newModerator", method = RequestMethod.POST)

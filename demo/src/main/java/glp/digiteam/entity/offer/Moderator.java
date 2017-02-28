@@ -51,6 +51,13 @@ public class Moderator extends StaffLille1{
 		this.referents.add(referent);		
 	}
 	
+	public void removeReferent(String name){
+		for(int i=0;i<referents.size();i++){
+			if(referents.get(i).getName().equals(name)){
+				referents.remove(i);
+			}
+		}
+	}
 	
 
 }
