@@ -13,7 +13,6 @@
 		
 		<br>
 		<br>
-		
 		<h4 class="titreFormulaire">Missions souhaitées</h4>
 		
 		<div class="row">
@@ -50,7 +49,8 @@
 				Veuillez choisir au moins une mission</p>
 			</div>
 		</div>
-		<div class="row">
+		<br>
+		<div class="row form-group">
 			<div class="col-md-12">
 			<label for="autre">Autres missions souhaitées (précisez) : </label>
 			<textarea class="form-control" id="autre"
@@ -63,23 +63,24 @@
 		<br>
 		
 		<h4 class="titreFormulaire">Vos motivations *</h4>
-			<div class="row" th:classappend="${#fields.hasErrors('motivation')}? 'has-error'">
-				<div class="col-md-12">
-				<textarea class="form-control " id="motivations"
-					th:value="${student.motivation}" th:field="${student.motivation}"
-					oninput="countChars(this.value)" maxlength="900" rows="10"
-					style="resize: none;"></textarea>
-				</div>
+		
+		<div class="row" th:classappend="${#fields.hasErrors('motivation')}? 'has-error'">
+			<div class="col-md-12">
+			<textarea class="form-control " id="motivations"
+				th:value="${student.motivation}" th:field="${student.motivation}"
+				oninput="countChars(this.value)" maxlength="900" rows="10"
+				style="resize: none;"></textarea>
 			</div>
+		</div>
 
-			<div class="indications">
-					<b><span id="checkCount" style="color: red">&#x2718;</span></b><i>
-						Entre 450 et 900 caractères (<span id="charsCount">0</span>)
-					</i>
-					<span th:if="${#fields.hasErrors('motivation')}" style="color: darkRed; float: right;"
-					th:errors="${student.motivation}"></span>
-			</div>
-			<br>
+		<div class="indications">
+				<b><span id="checkCount" style="color: red">&#x2718;</span></b><i>
+					Entre 450 et 900 caractères (<span id="charsCount">0</span>)
+				</i>
+				<span th:if="${#fields.hasErrors('motivation')}" style="color: darkRed; float: right;"
+				th:errors="${student.motivation}"></span>
+		</div>
+		<br>
 	</div>
 </body>
 </html>
