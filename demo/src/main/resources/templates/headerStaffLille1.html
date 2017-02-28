@@ -34,14 +34,19 @@
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
+						
 						<!-- Onglets REFERENT -->
 						<li id="offers" th:if="${user.class.name}=='glp.digiteam.entity.offer.Referent'"><a th:href="@{/offers}" >Offres</a></li>	
 						<li id="consult_offers"><a th:href="@{/consult_offers}">Consulter les offres</a></li>
 						<li id="consult" th:if="${user.class.name}=='glp.digiteam.entity.offer.Referent'"><a th:href="@{/consult_candidatures}">Consulter les candidatures</a></li>
+						
 						<!-- Onglets ADMINISTRATOR -->
 						<li id="gestionModerator" th:if="${user.class.name}=='glp.digiteam.entity.offer.Administrator'"><a th:href="@{/gestionModerator}">Gestion des mod&eacute;rateurs</a></li>
+					
 						<!-- Onglets MODERATOR -->
+						<li id="gestionOffers" th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'"><a th:href="@{/gestionOffers}">Gestion des offres</a></li>
 						<li id="gestionReferent" th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'"><a th:href="@{/gestionReferent}">Gestion des r&eacute;f&eacute;rents</a></li>
+						
 						<!-- Onglets STUDENT -->
 						<li id="gestionReferent" th:if="${user.class.name}=='glp.digiteam.entity.student.Student'"><a th:href="@{/candidature}">Candidature</a></li>
 						

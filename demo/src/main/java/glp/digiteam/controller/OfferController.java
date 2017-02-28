@@ -327,6 +327,13 @@ public class OfferController {
 	
 	@RequestMapping(value= "/newOffer",method=RequestMethod.GET)
 	public ModelAndView newOffer(Model model, HttpSession session,@RequestParam(value = "id", required = true) long id){
+		
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		if(isReferent(staffLille1)){
+			Referent referent=referentRepository.findByName(staffLille1.getName());
+			System.out.println(referent.getClass().getName());
+			model.addAttribute("user",referent);
+		}	
 		AbstractOffer offer = offerRepository.findById(id);
 		responsible=new Responsible();
 		model.addAttribute("responsible", responsible);
@@ -334,7 +341,6 @@ public class OfferController {
 		offer.setCreationDate(Calendar.getInstance().getTime());
 		offer.setValidityDate(null);
 		model.addAttribute("offer",offer);
-		model.addAttribute("referent",referent);
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
 		
@@ -353,6 +359,14 @@ public class OfferController {
 	public ModelAndView showOffer(Model model, HttpSession session,@RequestParam(value = "id", required = true) long id) {
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		if(isAdministrator(staffLille1)){
+			Administrator administrator=administratorRepository.findByName(staffLille1.getName());
+			model.addAttribute("user",administrator);
+		}
+		if(isModerator(staffLille1)){
+			Moderator moderator=moderatorRepository.findByName(staffLille1.getName());
+			model.addAttribute("user",moderator);
+		}	
 		if(isReferent(staffLille1)){
 			Referent referent=referentRepository.findByName(staffLille1.getName());
 			System.out.println(referent.getClass().getName());
@@ -367,6 +381,20 @@ public class OfferController {
 		}
 		
 		return new ModelAndView("offers/offersHome");
+	}
+	
+	@RequestMapping(value = "/gestionOffers", method = RequestMethod.GET)
+	public ModelAndView gestionOffers(Model model, HttpSession session) {
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		if(isModerator(staffLille1)){
+			Moderator moderator=moderatorRepository.findByName(staffLille1.getName());
+			model.addAttribute("user",moderator);
+		}	
+		
+
+		Iterable<AbstractOffer> offers = offerRepository.findAll();
+		model.addAttribute("offers",offers);
+		return new ModelAndView("offers/gestionOffers");
 	}
 	
 	public boolean isAdministrator(StaffLille1 staffLille1){

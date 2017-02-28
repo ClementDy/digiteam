@@ -33,4 +33,13 @@ function activeNav(id) {
 		$('#gestionModerator').removeClass("active");
 		$('#consult').removeClass("active");
 	}
+	else if(id=='gestionOffers'){
+		$('#gestionOffers').addClass("active");
+		$('#consult_offers').removeClass("active");
+		$('#offers').removeClass("active");
+		$('#candidatures').removeClass("active");
+		$('#gestionReferent').removeClass("active");
+		$('#gestionModerator').removeClass("active");
+		$('#consult').removeClass("active");
+	}
 }
