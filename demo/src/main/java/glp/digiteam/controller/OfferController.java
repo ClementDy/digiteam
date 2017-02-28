@@ -285,7 +285,7 @@ public class OfferController {
 			model.addAttribute("user",referent);
 		}	
 		
-		List<AbstractOffer> listOffers = offerRepository.findLastOffers(new PageRequest(0, 30));
+		Iterable<AbstractOffer> listOffers = offerRepository.findLastOffers(new PageRequest(0, 30));
 		model.addAttribute("listOffers",listOffers);
 		
 		return "offers/consult_offers";

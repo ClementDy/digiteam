@@ -101,7 +101,7 @@ public class StudentController {
 		model.addAttribute("student", student);
 
 		
-		List<AbstractOffer> abstractOffers = offerRepository.findLastOffers(new PageRequest(0, 5));
+		Iterable<AbstractOffer> abstractOffers = offerRepository.findLastOffers(new PageRequest(0, 5));
 
 		model.addAttribute("abstractOffers",abstractOffers);
 

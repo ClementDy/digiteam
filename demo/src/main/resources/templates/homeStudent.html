@@ -25,8 +25,44 @@
 		<div th:include="header::header"></div>
 
 		<div th:fragment="content">
-
+			
 			<div class="container">
+			
+			<br>
+			
+			<div th:if="${not #lists.isEmpty(abstractOffers)}" class="jumbotron"
+					style="border-radius: 10px;">
+					<h2>Derni&egrave;res offres publiées :</h2>
+					<br />
+					<table class="table table-responsive">
+						<thead>
+							<tr>
+								<td><strong>N° de l'offre</strong></td>
+								<td><strong>Mission</strong></td>
+								<td><strong>Responsable</strong></td>
+								<td></td>
+							</tr>
+
+						</thead>
+
+						<tr th:each="abstractOffer : ${abstractOffers}">
+							<td><label th:text="${abstractOffer.id}"></label></td>
+							<td th:text="${abstractOffer.title}"></td>
+
+							<td><span th:text="${abstractOffer.responsible.firstName}"></span><span></span>
+								<span th:text="${abstractOffer.responsible.lastName}"></span>
+							<td><a class="btn btn-success" aria-label="Left Align"
+								th:href="@{/offer(id=${abstractOffer.id})}"> <span
+									class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+							</a></td>
+						</tr>
+					</table>
+				</div>
+				
+				
+			<br> <br>
+
+		
 				<div th:if="${student.statut}==NULL" class="jumbotron">
 					<h2>Bienvenue</h2>
 					<p>Vous n'avez pas de candidature enregistrée</p>
@@ -47,35 +83,7 @@
 						class="btn btn-lille1" th:href="@{/candidature}">Modifier</a> <a
 						class="btn btn-lille1" th:href="@{/home(action='unpublish')}">Dépublier</a>
 				</div>
-				<div th:if="${not #lists.isEmpty(abstractOffers)}" class="jumbotron" style="border-radius:10px;">
-					<h2>Derni&egrave;res offres publiées :</h2><br/>
-					<table class="table table-responsive">
-						<thead>
-							<tr>
-								<td><strong>N° de l'offre</strong></td>
-								<td><strong>Mission</strong></td>
-								<td><strong>Responsable</strong></td>
-								<td></td>
-							</tr>
-
-						</thead>
-
-						<tr th:each="abstractOffer : ${abstractOffers}">
-							<td><label th:text="${abstractOffer.id}"></label></td>
-							<td th:text="${abstractOffer.title}"></td>
-
-							<td><span th:text="${abstractOffer.responsible.firstName}"></span><span></span>
-								<span th:text="${abstractOffer.responsible.lastName}"></span>
-							<td>
-
-								<a class="btn btn-success" aria-label="Left Align" th:href="@{/offer(id=${abstractOffer.id})}">
-									<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-								</a>
-
-							</td>
-						</tr>
-					</table>
-				</div>
+				
 			</div>
 		</div>
 	</div>
