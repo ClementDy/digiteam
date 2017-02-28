@@ -133,6 +133,7 @@ public class OfferController {
 		referent.addResponsible(responsible);
 		responsible.setReferent(referent);
 		responsible.addOffer(ofr);
+		ofr.setService(referent.getService());
 		ofr.setResponsible(responsible);
 		ofr.setStatus("Waiting");
 		model.addAttribute("offer",ofr);
@@ -181,6 +182,7 @@ public class OfferController {
 		responsible.setReferent(referent);
 		responsible.addOffer(ofr);
 		ofr.setResponsible(responsible);
+		ofr.setService(referent.getService());
 		ofr.setStatus("Waiting");
 		model.addAttribute("offer",ofr);
 
