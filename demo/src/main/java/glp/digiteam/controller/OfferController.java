@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
+
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -192,33 +194,47 @@ public class OfferController {
 	
 	@RequestMapping(value = "/consult_candidatures", method = RequestMethod.POST)
 	public String consultCandidatures(
-			@RequestParam(value="firstName", required=true, defaultValue="") String firstName,
-            @RequestParam(value="lastName", required=true,defaultValue="") String lastName,
+			@RequestParam(value="name", required=true, defaultValue="") String name,
             @RequestParam(value="formation", required=true,defaultValue="") String formation,Model model, HttpSession session) {
 		
-		model.addAttribute("referent", referent);
-
-		if(lastName.equals("") && !firstName.equals("") && formation.equals("") ){
-			List<Student> listCandidatures = studentService.findByFirstNamePublish(firstName);;
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		if(isAdministrator(staffLille1)){
+			Administrator administrator=administratorRepository.findByName(staffLille1.getName());
+			model.addAttribute("user",administrator);
+		}
+		if(isModerator(staffLille1)){
+			Moderator moderator=moderatorRepository.findByName(staffLille1.getName());
+			model.addAttribute("user",moderator);
+		}	
+		if(isReferent(staffLille1)){
+			Referent referent=referentRepository.findByName(staffLille1.getName());
+			System.out.println(referent.getClass().getName());
+			model.addAttribute("user",referent);
+		}	
+		
+		
+		if(!name.equals("") && formation.equals("") ){
+			List<Student> listCandidatures = studentService.findByName(name);;
 			model.addAttribute("listCandidature", listCandidatures);
 			model.addAttribute("size", listCandidatures.size());
 			return "consult_candidatures";
 			
 		}
-		if(!lastName.equals("") && firstName.equals("") && formation.equals("")){
-			List<Student> listCandidatures = studentService.findByLastNamePublish(lastName);
+		if(!name.equals("")  && !formation.equals("")){
+			List<Student> listCandidatures = studentService.findWithParameter(name,formation);
 			model.addAttribute("listCandidature", listCandidatures);
 			model.addAttribute("size", listCandidatures.size());
 			return "consult_candidatures";
 			
 		}
-		if(lastName.equals("") && firstName.equals("") && !formation.equals("") ){
+		if(name.equals("")  && !formation.equals("") ){
 			List<Student> listCandidatures = studentService.findWithTraining(formation);
 			model.addAttribute("listCandidature", listCandidatures);
 			model.addAttribute("size", listCandidatures.size());
 			return "consult_candidatures";
 			
 		}
+		
 		List<Student> listCandidatures = studentService.getAllCandidature();
 		model.addAttribute("listCandidature", listCandidatures);
 		model.addAttribute("size", listCandidatures.size());
@@ -251,9 +267,21 @@ public class OfferController {
 
 	@RequestMapping(value = "/profil", method = RequestMethod.GET)
 	public String profil(Model model,HttpSession session,@RequestParam(value="nip", required=true) Integer nip) {
-		referent= (Referent) session.getAttribute("referent");
-		referent=referentRepository.findByName(referent.getName());
-		model.addAttribute("referent", referent);
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		
+		if(isAdministrator(staffLille1)){
+			Administrator administrator=administratorRepository.findByName(staffLille1.getName());
+			model.addAttribute("user",administrator);
+		}
+		if(isModerator(staffLille1)){
+			Moderator moderator=moderatorRepository.findByName(staffLille1.getName());
+			model.addAttribute("user",moderator);
+		}	
+		if(isReferent(staffLille1)){
+			Referent referent=referentRepository.findByName(staffLille1.getName());
+			System.out.println(referent.getClass().getName());
+			model.addAttribute("user",referent);
+		}	
 		model.addAttribute("student", studentService.getStudentByNip(nip));
 		return "profile";
 	}

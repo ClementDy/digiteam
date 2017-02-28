@@ -47,7 +47,7 @@
 						class="btn btn-lille1" th:href="@{/candidature}">Modifier</a> <a
 						class="btn btn-lille1" th:href="@{/home(action='unpublish')}">Dépublier</a>
 				</div>
-				<div class="jumbotron" style="border-radius:10px;">
+				<div th:if="${not #lists.isEmpty(abstractOffers)}" class="jumbotron" style="border-radius:10px;">
 					<h2>Derni&egrave;res offres publiées :</h2><br/>
 					<table class="table table-responsive">
 						<thead>

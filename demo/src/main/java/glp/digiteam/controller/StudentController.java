@@ -65,6 +65,7 @@ public class StudentController {
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public String profile(Model model, HttpSession session) {
 		student=studentService.getStudentByNip(student.getNip());
+		model.addAttribute("user", student);
 		model.addAttribute("student", student);
 		String pathCV = "http://172.28.2.17/"+student.getNip();
 		model.addAttribute("pathCV", pathCV);

@@ -15,15 +15,10 @@
 }
 
 .containerCustom {
-	margin-right: 3%;
-	margin-left: 3%;
 	padding-bottom: 15%;
 }
 
 .titlePage {
-    
-    margin-right: 0%;
-	margin-left: 0%;
 	text-align: center;
 	font-size: 22px;
 	background-color: #ae2573;
@@ -45,10 +40,6 @@
 	border: solid 1px #ae2573;
 }
 
-.row{
-	padding-right: 2%;
-	padding-left: 2%;
-}
 .alert-info{
 	margin-right: 1%;
 	margin-left:  1%;
