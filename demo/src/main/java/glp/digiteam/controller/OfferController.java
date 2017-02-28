@@ -267,6 +267,7 @@ public class OfferController {
 	
 	@RequestMapping(value = "/consult_offers", method = RequestMethod.GET)
 	public String consult_offers(Model model,HttpSession session) {
+		
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		if(isAdministrator(staffLille1)){
 			Administrator administrator=administratorRepository.findByName(staffLille1.getName());
@@ -282,7 +283,7 @@ public class OfferController {
 			model.addAttribute("user",referent);
 		}	
 		
-		List<AbstractOffer> listOffers = offerRepository.findLastOffers(new PageRequest(0, 50));
+		List<AbstractOffer> listOffers = offerRepository.findLastOffers(new PageRequest(0, 30));
 		model.addAttribute("listOffers",listOffers);
 		
 		return "offers/consult_offers";
@@ -349,9 +350,15 @@ public class OfferController {
 	@RequestMapping(value = "/offerShow", method = RequestMethod.GET)
 	public ModelAndView showOffer(Model model, HttpSession session,@RequestParam(value = "id", required = true) long id) {
 
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		if(isReferent(staffLille1)){
+			Referent referent=referentRepository.findByName(staffLille1.getName());
+			System.out.println(referent.getClass().getName());
+			model.addAttribute("user",referent);
+		}	
+		
 		AbstractOffer offer = offerRepository.findById(id);
-		model.addAttribute("referent", referent);
-
+		
 		if(offer!=null){
 			model.addAttribute("offer", offer);
 			return new ModelAndView("offers/offerAbstract");
