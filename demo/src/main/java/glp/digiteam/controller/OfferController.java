@@ -100,20 +100,31 @@ public class OfferController {
 	@RequestMapping(value = "/newGenericOffer", method = RequestMethod.GET)
 	public String newGeneriqueOffer(Model model,HttpSession session) {
 		
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		if(isReferent(staffLille1)){
+			Referent referent=referentRepository.findByName(staffLille1.getName());
+			System.out.println(referent.getClass().getName());
+			model.addAttribute("user",referent);
+		}
+		
 		GenericOffer offer=new GenericOffer();
-		responsible=new Responsible();
-		model.addAttribute("referent", referent);		
+		responsible=new Responsible();	
 		model.addAttribute("offer", offer);
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
-		model.addAttribute("referent", referent);
 		return "offers/newGenericOffer";
 	}
 
 	@RequestMapping(value = "/newGenericOffer", method = RequestMethod.POST)
 	public ModelAndView saveGenericOffer(@ModelAttribute GenericOffer ofr,Model model,HttpSession session) {
 
-		model.addAttribute("referent",referent);
+		Referent referent = new Referent();
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		if(isReferent(staffLille1)){
+			referent=referentRepository.findByName(staffLille1.getName());
+			System.out.println(referent.getClass().getName());
+			model.addAttribute("user",referent);
+		}
 
 		responsible.setEmail(ofr.getResponsible().getEmail());
 		responsible.setFirstName(ofr.getResponsible().getFirstName());
@@ -133,22 +144,34 @@ public class OfferController {
 
 	@RequestMapping(value = "/newStandardOffer", method = RequestMethod.GET)
 	public String newStandardOffer(Model model,HttpSession session) {
+	
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		if(isReferent(staffLille1)){
+			Referent referent=referentRepository.findByName(staffLille1.getName());
+			System.out.println(referent.getClass().getName());
+			model.addAttribute("user",referent);
+		}
+		
 		StandardOffer offer=new StandardOffer();
 		responsible=new Responsible();
-		model.addAttribute("referent", referent);
 
 
 		model.addAttribute("offer", offer);
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
-		model.addAttribute("referent", referent);
 		return "offers/newStandardOffer";
 	}
 
 	@RequestMapping(value = "/newStandardOffer", method = RequestMethod.POST)
 	public ModelAndView saveStandardOffer(@ModelAttribute StandardOffer ofr,Model model,HttpSession session) {
 
-		model.addAttribute("referent",referent);
+		Referent referent = new Referent();
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		if(isReferent(staffLille1)){
+			referent=referentRepository.findByName(staffLille1.getName());
+			System.out.println(referent.getClass().getName());
+			model.addAttribute("user",referent);
+		}
 
 		responsible.setEmail(ofr.getResponsible().getEmail());
 		responsible.setFirstName(ofr.getResponsible().getFirstName());

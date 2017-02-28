@@ -22,9 +22,7 @@ public class Referent extends StaffLille1{
 	@ManyToOne
 	private ServiceEntity service ;
 	
-	@ManyToOne
-	private Moderator moderator;
-	
+
 	public Referent(){
 		
 	}
@@ -55,24 +53,5 @@ public class Referent extends StaffLille1{
 	public void setService(ServiceEntity service) {
 		this.service = service;
 	}
-
-
-
-
-	public Moderator getModerator() {
-		return moderator;
-	}
-
-
-
-
-	public void setModerator(Moderator moderator) {
-		this.moderator = moderator;
-	}
-	
-	
-	
-	
-
 
 }

@@ -24,6 +24,7 @@ import glp.digiteam.repository.ReferentRepository;
 import glp.digiteam.repository.ServiceRepository;
 import glp.digiteam.services.AdministratorService;
 import glp.digiteam.services.ModeratorService;
+import glp.digiteam.services.ReferentService;
 
 @EnableAutoConfiguration
 @Controller
@@ -42,6 +43,10 @@ public class AdministratorController {
 
 	@Autowired
 	private AdministratorService administratorService;
+	
+	@Autowired
+	private ReferentService referentService;
+	
 	
 	@Autowired
 	private ModeratorService moderatorService;
@@ -68,7 +73,10 @@ public class AdministratorController {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		moderator=moderatorRepository.findByName(staffLille1.getName());
 		
+		Iterable<Referent> referents = referentRepository.findAll();
 		Iterable<ServiceEntity> services = serviceRepository.findAll();
+		model.addAttribute("referents",referents);
+
 		model.addAttribute("service",services);
 		model.addAttribute("user",moderator);
 		model.addAttribute(referent);
@@ -113,7 +121,6 @@ public class AdministratorController {
 	
 		Moderator moderator=moderatorRepository.findByName(mode);
 	
-		moderator.removeReferent(name);
 		referentRepository.deleteByName(name);
 		moderatorService.saveModerator(moderator);
 		
@@ -128,18 +135,16 @@ public class AdministratorController {
 		administratorService.saveAdministrator(administrator);
 		
 		
-		return new ModelAndView("redirect:homeStaffLille1");
+		return new ModelAndView("redirect:gestionModerator");
 	}
 	
 	@RequestMapping(value = "/newReferent", method = RequestMethod.POST)
 	public ModelAndView newReferent(@ModelAttribute Referent referent) {
-		moderator.addReferent(referent);
-		referent.setModerator(moderator);
 		
-		moderatorService.saveModerator(moderator);
+		referentService.saveReferent(referent);
 		
 
-		return new ModelAndView("redirect:homeStaffLille1");
+		return new ModelAndView("redirect:gestionReferent");
 	}
 	
 	public boolean isAdministrator(StaffLille1 staffLille1){
