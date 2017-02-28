@@ -146,20 +146,23 @@ public class StudentController {
 			@RequestParam("file") MultipartFile file, @RequestParam(value = "action", required = true) String action,
 			@RequestParam(value="currentTab", required=false, defaultValue="intro") String currentTab,
 			RedirectAttributes redirectAttributes, Model model, Errors e, HttpSession session) {
-		/*
-		SaveProfileValidator saveValidator = new SaveProfileValidator();
-		saveValidator.validate(std, bindingResult);
-		if (bindingResult.hasErrors()) {
-			Iterable<Mission> missions = missionRepository.findAll();
-			model.addAttribute("listMission", missions);
-			return new ModelAndView(
-					"candidature::tab(activeTab='"
-					+ saveValidator.getFirstErrorTab(bindingResult)
-					+ "')");
-		}
-		*/
-		if (action.equals("Publier") || action.equals("Enregistrer")) {
+		
+		if (action.equals("Enregistrer") || action.equals("Publier")) {
 
+			if (action.equals("Enregistrer")) {
+				SaveProfileValidator saveValidator = new SaveProfileValidator();
+				saveValidator.validate(std, bindingResult);
+				
+				if (bindingResult.hasErrors()) {
+					Iterable<Mission> missions = missionRepository.findAll();
+					model.addAttribute("listMission", missions);
+					return new ModelAndView(
+							"candidature::tab(activeTab='"
+									+ saveValidator.getFirstErrorTab(bindingResult)
+									+ "')");
+				}
+			}
+			
 			if (action.equals("Publier")) {
 				PublishProfileValidator publishValidator = new PublishProfileValidator();
 				publishValidator.validate(std, bindingResult);

@@ -44,18 +44,6 @@
 						</div>
 						</td>
 					    
-					    <td><input type="text" class="form-control input-integer" th:value="${student.externalContracts[__${stat.index}__].hours}" th:field="${student.externalContracts[__${stat.index}__].hours}"></td>
-					    
-					    <!--
-					    <td>
-					    <div class="form-group" style="margin-bottom:0" th:classappend="${#fields.hasErrors('externalContracts[__${stat.index}__].hours')}? 'has-error'">
-					    	<input type="text" class="form-control input-integer" th:value="${student.externalContracts[__${stat.index}__].hours}" th:field="${student.externalContracts[__${stat.index}__].hours}">
-					    	<p th:if="${#fields.hasErrors('externalContracts[__${stat.index}__].hours')}" style="color: darkRed;"
-							th:errors="${student.externalContracts[__${stat.index}__].hours}"/>
-					    </div>
-					    </td>
-					    -->
-					    <!--
                        	<td>
                        	<div class="form-group" style="margin-bottom:0" th:classappend="${#fields.hasErrors('externalContracts[__${stat.index}__].hours')}? 'has-error has-feedback'">
                        		<input type="text" class="form-control input-integer" th:value="${student.externalContracts[__${stat.index}__].hours}" th:field="${student.externalContracts[__${stat.index}__].hours}"
@@ -64,7 +52,6 @@
                        		class="form-control-feedback glyphicon glyphicon-remove" aria-hidden="true"></span>
 						</div>
 						</td>
-                        -->
                         
                         <td><input type="text" class="form-control" th:value="${student.externalContracts[__${stat.index}__].missions}" th:field="${student.externalContracts[__${stat.index}__].missions}"></td>
 					

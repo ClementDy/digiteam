@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 import org.thymeleaf.util.StringUtils;
@@ -79,6 +80,11 @@ public class PublishProfileValidator implements Validator {
 		}
 
 		// form_contracts
+		for (FieldError fe : errors.getFieldErrors()) {
+			if (fe.getField().startsWith("externalContracts")) {
+				return "contracts";
+			}
+		}
 		
 		// form_souhait
 		if (errors.hasFieldErrors("wish.missions") ||
