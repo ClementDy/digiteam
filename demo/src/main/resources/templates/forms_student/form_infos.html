@@ -24,16 +24,19 @@
 					</div>
 				</div>
 				<br>
-				<div class="row form-group"
-					th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+				<div class="row" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
 					<div class="col-md-6">
 						<label class="control-label">Mail * : </label>
 					</div>
 					<div class="col-md-6">
-						<input class="form-control" th:value="${student.email}"
-							th:field="${student.email}" id="email">
-						<p th:if="${#fields.hasErrors('email')}" style="color: darkRed;"
-							th:errors="${student.email}" />
+						<div class="form-group" th:classappend="${#fields.hasErrors('email')}? 'has-feedback'">
+							<input type="text" id="email" class="form-control" 
+								th:value="${student.email}" th:field="${student.email}" 
+								data-toggle="tooltip" data-placement="bottom" th:title="${#strings.listJoin(#fields.errors('email'), ',')}">
+							<span th:if="${#fields.hasErrors('email')}"
+	                       		class="form-control-feedback glyphicon glyphicon-remove" aria-hidden="true">
+	                       	</span>
+						</div>
 					</div>
 				</div>
 				<br>
@@ -58,17 +61,19 @@
 					</div>
 				</div>
 				<br>
-				<div class="row form-group"
-					th:classappend="${#fields.hasErrors('phone')}? 'has-error'">
+				<div class="row" th:classappend="${#fields.hasErrors('phone')}? 'has-error'">
 					<div class="col-md-6">
 						<label class="control-label">T&eacute;l&eacute;phone * : </label>
 					</div>
 					<div class="col-md-6">
-						<input class="form-control input-phonenumber"
-							th:value="${student.phone}" th:field="${student.phone}"
-							type="text" id="phone">
-						<p th:if="${#fields.hasErrors('phone')}" style="color: darkRed;"
-							th:errors="${student.phone}" />
+						<div class="form-group" th:classappend="${#fields.hasErrors('phone')}? 'has-feedback'">
+							<input type="text" id="phone" class="form-control input-phonenumber" 
+								th:value="${student.phone}" th:field="${student.phone}"
+								data-toggle="tooltip" data-placement="bottom" th:title="${#strings.listJoin(#fields.errors('phone'), ',')}">
+							<span th:if="${#fields.hasErrors('phone')}"
+	                       		class="form-control-feedback glyphicon glyphicon-remove" aria-hidden="true">
+	                       	</span>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -113,16 +118,19 @@
 		<h4 class="titreFormulaire">Votre adresse</h4>
 		<div class="row">
 			<div class="col-md-6 col-xs-6">
-				<div class="row form-group"
-					th:classappend="${#fields.hasErrors('address.street')}? 'has-error'">
+				<div class="row" th:classappend="${#fields.hasErrors('address.street')}? 'has-error'">
 					<div class="col-md-6">
 						<label class="control-label">Rue * : </label>
 					</div>
 					<div class="col-md-6">
-						<input class="form-control" th:value="${student.address.street}"
-							th:field="${student.address.street}" type="text">
-						<p th:if="${#fields.hasErrors('address.street')}"
-							style="color: darkRed;" th:errors="${student.address.street}" />
+						<div class="form-group" th:classappend="${#fields.hasErrors('address.street')}? 'has-feedback'">
+							<input type="text" id="street" class="form-control" 
+								th:value="${student.address.street}" th:field="${student.address.street}"
+								data-toggle="tooltip" data-placement="bottom" th:title="${#strings.listJoin(#fields.errors('address.street'), ',')}">
+							<span th:if="${#fields.hasErrors('address.street')}"
+	                       		class="form-control-feedback glyphicon glyphicon-remove" aria-hidden="true">
+	                       	</span>
+						</div>
 					</div>
 				</div>
 				<br>
@@ -139,31 +147,35 @@
 				</div>
 			</div>
 			<div class="col-md-6 col-xs-6">
-				<div class="row form-group"
-					th:classappend="${#fields.hasErrors('address.city')}? 'has-error'">
+				<div class="row" th:classappend="${#fields.hasErrors('address.city')}? 'has-error'">
 					<div class="col-md-6">
 						<label class="control-label">Ville * :</label>
 					</div>
 					<div class="col-md-6">
-						<input class="form-control" th:value="${student.address.city}"
-							th:field="${student.address.city}" type="text" id="city">
-						<p th:if="${#fields.hasErrors('address.city')}"
-							style="color: darkRed;" th:errors="${student.address.city}" />
+						<div class="form-group" th:classappend="${#fields.hasErrors('address.city')}? 'has-feedback'">
+							<input type="text" id="city" class="form-control" 
+								th:value="${student.address.city}" th:field="${student.address.city}"
+								data-toggle="tooltip" data-placement="bottom" th:title="${#strings.listJoin(#fields.errors('address.city'), ',')}">
+							<span th:if="${#fields.hasErrors('address.city')}"
+	                       		class="form-control-feedback glyphicon glyphicon-remove" aria-hidden="true">
+	                       	</span>
+						</div>
 					</div>
 				</div>
 				<br>
-				<div class="row form-group"
-					th:classappend="${#fields.hasErrors('address.postalCode')}? 'has-error'">
+				<div class="row" th:classappend="${#fields.hasErrors('address.postalCode')}? 'has-error'">
 					<div class="col-md-6">
 						<label class="control-label">Code postal * : </label>
 					</div>
 					<div class="col-md-6">
-						<input class="form-control input-integer"
-							th:value="${student.address.postalCode}"
-							th:field="${student.address.postalCode}" type="text"
-							id="postalCode">
-						<p th:if="${#fields.hasErrors('address.postalCode')}"
-							style="color: darkRed;" th:errors="${student.address.postalCode}" />
+						<div class="form-group" th:classappend="${#fields.hasErrors('address.postalCode')}? 'has-feedback'">
+							<input type="text" id="postalCode" class="form-control input-integer"
+								th:value="${student.address.postalCode}" th:field="${student.address.postalCode}" 
+								data-toggle="tooltip" data-placement="bottom" th:title="${#strings.listJoin(#fields.errors('address.postalCode'), ',')}">
+							<span th:if="${#fields.hasErrors('address.postalCode')}"
+	                       		class="form-control-feedback glyphicon glyphicon-remove" aria-hidden="true">
+	                       	</span>
+						</div>
 					</div>
 				</div>
 			</div>

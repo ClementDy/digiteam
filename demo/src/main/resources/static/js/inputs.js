@@ -44,7 +44,7 @@ function isValidPhoneNumber(string) {
 //When the document is ready
 $(document).ready(function () {
 
-$('.input-integer').tooltip();
+$('.form-control').tooltip();
 
 $(".input-integer").bind({
   paste: function() {
