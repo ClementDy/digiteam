@@ -37,6 +37,7 @@ import glp.digiteam.repository.MissionRepository;
 import glp.digiteam.repository.ModeratorRepository;
 import glp.digiteam.repository.OfferRepository;
 import glp.digiteam.repository.ReferentRepository;
+import glp.digiteam.services.OfferService;
 import glp.digiteam.services.ReferentService;
 import glp.digiteam.services.StudentService;
 
@@ -70,6 +71,9 @@ public class OfferController {
 
 	@Autowired
 	private OfferRepository offerRepository;
+	
+	@Autowired
+	private OfferService offerService;
 
 
 	private Referent referent;
@@ -238,21 +242,21 @@ public class OfferController {
 		}	
 		
 		
-		if(!name.equals("") && formation.equals("") ){
+		if(!name.isEmpty() && formation.isEmpty() ){
 			List<Student> listCandidatures = studentService.findByName(name);;
 			model.addAttribute("listCandidature", listCandidatures);
 			model.addAttribute("size", listCandidatures.size());
 			return "consult_candidatures";
 			
 		}
-		if(!name.equals("")  && !formation.equals("")){
+		if(!name.isEmpty()  && !formation.isEmpty()){
 			List<Student> listCandidatures = studentService.findWithParameter(name,formation);
 			model.addAttribute("listCandidature", listCandidatures);
 			model.addAttribute("size", listCandidatures.size());
 			return "consult_candidatures";
 			
 		}
-		if(name.equals("")  && !formation.equals("") ){
+		if(name.isEmpty()  && !formation.isEmpty() ){
 			List<Student> listCandidatures = studentService.findWithTraining(formation);
 			model.addAttribute("listCandidature", listCandidatures);
 			model.addAttribute("size", listCandidatures.size());
@@ -288,9 +292,51 @@ public class OfferController {
 		List<AbstractOffer> listOffers = offerRepository.findLastOffers(new PageRequest(0, 30));
 		model.addAttribute("listOffers",listOffers);
 		
+		Iterable<Mission> missions = missionRepository.findAll();
+		model.addAttribute("listMission", missions);
+		
 		return "offers/consult_offers";
 	}
 
+	@RequestMapping(value = "/consult_offers", method = RequestMethod.POST)
+	public String consult_offers_search(
+			@RequestParam(value="libelle", required=true, defaultValue="") String libelle,
+            @RequestParam(value="num_offer", required=true,defaultValue="") String num_offer,
+            @RequestParam(value="responsive", required=true,defaultValue="") String responsive,
+            @RequestParam(value="mission", required=true,defaultValue="") String mission,
+            Model model,HttpSession session) {
+		
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		if(isAdministrator(staffLille1)){
+			Administrator administrator=administratorRepository.findByName(staffLille1.getName());
+			model.addAttribute("user",administrator);
+		}
+		if(isModerator(staffLille1)){
+			Moderator moderator=moderatorRepository.findByName(staffLille1.getName());
+			model.addAttribute("user",moderator);
+		}	
+		if(isReferent(staffLille1)){
+			Referent referent=referentRepository.findByName(staffLille1.getName());
+			System.out.println(referent.getClass().getName());
+			model.addAttribute("user",referent);
+		}	
+		
+		List<AbstractOffer> listOffers = offerService.searchOffers(libelle,num_offer,responsive,mission);
+		model.addAttribute("listOffers",listOffers);
+		
+		if(listOffers==null){
+			model.addAttribute("size", 0);
+		}
+		else{
+			model.addAttribute("size", listOffers.size());
+		}
+		
+		Iterable<Mission> missions = missionRepository.findAll();
+		model.addAttribute("listMission", missions);
+		
+		return "offers/consult_offers";
+	}
+	
 	@RequestMapping(value = "/profil", method = RequestMethod.GET)
 	public String profil(Model model,HttpSession session,@RequestParam(value="nip", required=true) Integer nip) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");

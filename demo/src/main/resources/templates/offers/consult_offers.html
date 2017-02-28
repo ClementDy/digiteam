@@ -27,9 +27,68 @@
 
 	<div class="container">
 		<br>
-		<div class="titreFormulaire">
-			<label>Affichage de toutes les offres publiées :</label>
+		<div class="searchPart">
+			<div id="searchTitle">Recherche d'offre(s)</div><br/>
+			<form class="navbar-form" method="post" role="search">
+			
+	    		<div class="row">
+	    		
+	    			<div class="col-md-4 col-sm-offset-2">
+		    			<div class="input-group">
+						      <span class="input-group-addon">Libell&eacute;</span>
+		      				   <input type="text" class="form-control" name="libelle" id="libelle" type="text">
+		      			</div>
+	      			</div>
+	      			<div class="col-md-4">
+	      				<div class="input-group">
+							<span class="input-group-addon">Num&eacute;ro de l'offre</span>
+							<input type="text" class="form-control" name="num_offer" id="num_offer" type="text">
+	    				</div>
+	    			</div>
+	    			
+	      		</div>
+	      		<br/>
+	      		<div class="row">
+	    		
+	    			<div class="col-md-4 col-sm-offset-2">
+		    			<div class="input-group">
+						      <span class="input-group-addon">Responsable</span>
+		      				   <input type="text" class="form-control" name="responsive" id="responsive" type="text">
+		      			</div>
+	      			</div>
+	      			<div class="col-md-4">
+	      				<div class="input-group">
+							<span class="input-group-addon">Mission </span>
+							<select size="1" class="form-control" id="allMissions" name="mission">
+								<option></option>
+								<option th:each="mission : ${listMission}" th:value="${mission.title}" th:text="${mission.title}" >
+								</option>
+							</select>
+	    				</div>
+	    			</div>
+	      			
+	      		</div>
+				<br/>
+				<div class="row">
+					<div class="col-xs-6 col-sm-6 col-xs-offset-5 input-group-btn">
+		        			<button class="btn btn-default" type="submit">Recherche <i class="glyphicon glyphicon-search"></i></button>
+		     		</div>
+	     		</div>
+ 			 </form>
+		</div><br/><br/>
+		
+		<div class="row" th:if="${size !=null }">
+			<div class="alert alert-info">
+			  <strong>Resultat trouv&eacute; : </strong> <span th:text="${size}"></span> offre<span th:if="${size > 1}">s</span>
+			</div>
 		</div>
+		
+		<div th:if="${size > 0} or ${size==null}">
+		
+		<div class="titreFormulaire">
+			<label>Offres publiées :</label>
+		</div>
+		
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<table class="table table-responsive">
@@ -61,7 +120,8 @@
 
 
 
-				</table>
+					</table>
+				</div>
 			</div>
 		</div>
 

@@ -51,7 +51,7 @@
 		
 		<div class="row" th:if="${size !=null }">
 			<div class="alert alert-info">
-			  <strong>Resultat trouv&eacute; : </strong> <span th:text="${size}"></span> candidatures 
+			  <strong>Resultat trouv&eacute; : </strong> <span th:text="${size}"></span> candidature<span th:if="${size > 1}">s</span>
 			</div>
 		</div>
 		
