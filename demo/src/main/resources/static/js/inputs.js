@@ -81,4 +81,9 @@ $(document).ready(function () {
 		clearBtn: true,
 		keyboardNavigation: false
 	});
+	$('.validityOffer').datepicker({
+		format: 'mm-dd-yyyy',
+		endDate:'+0d',
+		autoclose:false
+	});
 });

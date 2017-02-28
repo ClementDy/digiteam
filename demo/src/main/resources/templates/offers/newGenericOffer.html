@@ -12,7 +12,7 @@
 <script src="js/bootstrap-datepicker.js"></script>
 <script src="js/bootstrap-datepicker.fr.min.js"></script>
 
-<script src="js/inputs.js"></script>
+
 
 <link rel="stylesheet" href="css/bootstrap-datepicker3.css">
 
@@ -24,7 +24,7 @@
 
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<script src="js/inputs.js"></script>
 </head>
 
 <body>
@@ -134,7 +134,7 @@
 				<div class="form-group col-md-3">
 					<label>Date de validit&eacute; : </label> <input type="text"
 						class="form-control input-date validityOffer"   th:field="${offer.validityDate}"
-						readonly="readonly" style="cursor: text; background: white;"  required>
+						readonly="readonly" style="cursor: text; background: white;" data-date-start-date="0d" data-date-end-date="+6m" required>
 					
 				</div>
 			</div>
