@@ -311,19 +311,25 @@ public class OfferController {
 			Model model,HttpSession session) {
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		if(isAdministrator(staffLille1)){
-			Administrator administrator=administratorRepository.findByName(staffLille1.getName());
-			model.addAttribute("user",administrator);
+		if(staffLille1!=null){
+			if(isAdministrator(staffLille1)){
+				Administrator administrator=administratorRepository.findByName(staffLille1.getName());
+				model.addAttribute("user",administrator);
+			}
+			if(isModerator(staffLille1)){
+				Moderator moderator=moderatorRepository.findByName(staffLille1.getName());
+				model.addAttribute("user",moderator);
+			}	
+			if(isReferent(staffLille1)){
+				Referent referent=referentRepository.findByName(staffLille1.getName());
+				System.out.println(referent.getClass().getName());
+				model.addAttribute("user",referent);
+			}	
 		}
-		if(isModerator(staffLille1)){
-			Moderator moderator=moderatorRepository.findByName(staffLille1.getName());
-			model.addAttribute("user",moderator);
-		}	
-		if(isReferent(staffLille1)){
-			Referent referent=referentRepository.findByName(staffLille1.getName());
-			System.out.println(referent.getClass().getName());
-			model.addAttribute("user",referent);
-		}	
+		else{
+			Student student=(Student) session.getAttribute("student");
+			model.addAttribute("user",student);
+		}
 
 		List<AbstractOffer> listOffers = offerService.searchOffers(libelle,num_offer,responsive);
 		model.addAttribute("listOffers",listOffers);
