@@ -32,12 +32,12 @@
 					<tr>
 						 <td><input class="form-control"
 							style="width: 100%; text-align: center;"
-							th:field="${user.trainings[__${0}__].date}"
-							th:value="${user.trainings[__${0}__].date}" readonly></td> 
+							th:field="${student.trainings[__${0}__].date}"
+							th:value="${student.trainings[__${0}__].date}" readonly></td> 
 						<td><input class="form-control"
 							style="width: 100%; text-align: center;"
-							th:field="${user.trainings[__${0}__].name}"
-							th:value="${user.trainings[__${0}__].name}" readonly>
+							th:field="${student.trainings[__${0}__].name}"
+							th:value="${student.trainings[__${0}__].name}" readonly>
 						</td>
 
 					</tr>
@@ -57,17 +57,17 @@
 				</thead>
 				<tbody >
 					
-					<tr th:each="training, stat : ${user.trainings}"
+					<tr th:each="training, stat : ${student.trainings}"
 						th:if="${stat.index}>0" >
 						<td><input type="text" class="form-control"
-							th:value="${user.trainings[__${stat.index}__].date}"
-							th:field="${user.trainings[__${stat.index}__].date}"></td>
+							th:value="${student.trainings[__${stat.index}__].date}"
+							th:field="${student.trainings[__${stat.index}__].date}"></td>
 						<td><input type="text" class="form-control"
-							th:value="${user.trainings[__${stat.index}__].name}"
-							th:field="${user.trainings[__${stat.index}__].name}"></td>
+							th:value="${student.trainings[__${stat.index}__].name}"
+							th:field="${student.trainings[__${stat.index}__].name}"></td>
 						<td><input type="text" class="form-control"
-							th:value="${user.trainings[__${stat.index}__].place}"
-							th:field="${user.trainings[__${stat.index}__].place}"></td>
+							th:value="${student.trainings[__${stat.index}__].place}"
+							th:field="${student.trainings[__${stat.index}__].place}"></td>
 					</tr>
 
 				</tbody>

@@ -293,7 +293,7 @@ public class OfferController {
 		}
 		else{
 			Student student=(Student) session.getAttribute("student");
-			model.addAttribute("user",student);
+			model.addAttribute("student",student);
 		}
 
 
@@ -423,7 +423,7 @@ public class OfferController {
 		}
 		else{
 			Student student=(Student) session.getAttribute("student");
-			model.addAttribute("user",student);
+			model.addAttribute("student",student);
 		}
 		AbstractOffer offer = offerRepository.findById(id);
 
