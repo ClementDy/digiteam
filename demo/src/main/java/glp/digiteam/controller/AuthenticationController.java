@@ -16,6 +16,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import glp.digiteam.entity.offer.Referent;
 import glp.digiteam.entity.offer.ServiceEntity;
@@ -79,7 +81,7 @@ public class AuthenticationController {
 
 
 	@RequestMapping(value ="/authentication", method = RequestMethod.POST)
-	public ModelAndView getStudent(@Valid @ModelAttribute Student student,BindingResult bindingresult, Model model, HttpSession session) {
+	public ModelAndView getStudent(@Valid @ModelAttribute Student student, WebRequest request,BindingResult bindingresult, Model model, HttpSession session,SessionStatus status) {
 
 		if (student.getNip()!=null) {
 
@@ -87,6 +89,7 @@ public class AuthenticationController {
 				student= studentService.getStudentByNip(student.getNip());
 				model.addAttribute("student", student);
 				session.setAttribute("student", student);
+				request.removeAttribute("staffLille1", WebRequest.SCOPE_SESSION);
 				notGoodNip=false;
 				return new ModelAndView("redirect:/home");			
 			}else {
@@ -114,6 +117,7 @@ public class AuthenticationController {
 				model.addAttribute("student", student);
 				session.setAttribute("student", student);
 				studentService.saveStudentProfile(student);
+			    request.removeAttribute("staffLille1", WebRequest.SCOPE_SESSION);
 
 				return new ModelAndView("redirect:/home");
 			}
@@ -123,7 +127,7 @@ public class AuthenticationController {
 	}
 
 	@RequestMapping(value ="/authenticationStaff", method = RequestMethod.POST)
-	public ModelAndView getStaff(@ModelAttribute StaffLille1 staffLille1,BindingResult bindingresult, Model model, HttpSession session) {
+	public ModelAndView getStaff(@ModelAttribute StaffLille1 staffLille1,BindingResult bindingresult, Model model, HttpSession session,SessionStatus status) {
 		session.setAttribute("staffLille1", staffLille1);
 		return new ModelAndView("redirect:/homeStaffLille1");
 	}
