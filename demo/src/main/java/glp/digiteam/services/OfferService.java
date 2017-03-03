@@ -1,5 +1,7 @@
 package glp.digiteam.services;
 
+import static org.mockito.Mockito.ignoreStubs;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import glp.digiteam.entity.offer.AbstractOffer;
+import glp.digiteam.entity.offer.GenericOffer;
 import glp.digiteam.entity.offer.Referent;
 import glp.digiteam.entity.offer.Responsible;
 import glp.digiteam.repository.OfferRepository;
@@ -37,20 +40,37 @@ public class OfferService {
 		return  offerRepository.findLastOffers(pageable);
 	}
 	
-	public List<AbstractOffer> searchOffers(String libelle,String num_offer,String responsive,String mission){
-		if(libelle.isEmpty() && num_offer.isEmpty() && responsive.isEmpty() && mission.isEmpty()){
-			return offerRepository.findLastOffers(new PageRequest(0, 30));
+	public List<AbstractOffer> searchOffers(String libelle,String num_offer,String responsive){
+		
+		if(libelle.isEmpty() && num_offer.isEmpty() && responsive.isEmpty()){
+			return offerRepository.findLastOffers(new PageRequest(0, 40));
 		}
 		
-		if(!libelle.isEmpty() && num_offer.isEmpty() && responsive.isEmpty() && mission.isEmpty()){
+		if(!libelle.isEmpty() && num_offer.isEmpty() && responsive.isEmpty()){
 			return offerRepository.findOfferWithLib(libelle.toLowerCase());
 		}
 		
-		if(libelle.isEmpty() && num_offer.isEmpty() && responsive.isEmpty() && !mission.isEmpty()){
-			return offerRepository.findOfferWithMission(mission);
+		if(!libelle.isEmpty() &&  !num_offer.isEmpty() && responsive.isEmpty() && isNumeric(num_offer)){
+			return offerRepository.findOfferWithLibOffer(libelle.toLowerCase(),Long.parseLong(num_offer));
 		}
 		
-		if(libelle.isEmpty() && num_offer.isEmpty() && !responsive.isEmpty() && mission.isEmpty()){
+		if(!libelle.isEmpty() &&  !num_offer.isEmpty() && !responsive.isEmpty() && isNumeric(num_offer)){
+			String[] splited = responsive.split("\\s+");
+			List<Responsible> res = null;
+			
+			if (splited.length > 1) {
+				res =responsibleRepository.findByNameWithParam(splited[0],splited[1]);
+			}
+			else if (splited.length == 1) {
+				res =responsibleRepository.findByNameWithParam(splited[0]);
+			}
+			
+			if(!res.isEmpty()){
+				return offerRepository.findOfferWithAllParam(libelle.toLowerCase(),Long.parseLong(num_offer),res);
+			}
+		}
+		
+		if(libelle.isEmpty() && num_offer.isEmpty() && !responsive.isEmpty()){
 			
 			String[] splited = responsive.split("\\s+");
 			List<Responsible> res = null;
@@ -67,7 +87,39 @@ public class OfferService {
 			}
 		}
 		
-		if(libelle.isEmpty() && !num_offer.isEmpty() && responsive.isEmpty() && mission.isEmpty() && isNumeric(num_offer)){
+		if(!libelle.isEmpty() &&  num_offer.isEmpty() && !responsive.isEmpty()){
+			String[] splited = responsive.split("\\s+");
+			List<Responsible> res = null;
+			
+			if (splited.length > 1) {
+				res =responsibleRepository.findByNameWithParam(splited[0],splited[1]);
+			}
+			else if (splited.length == 1) {
+				res =responsibleRepository.findByNameWithParam(splited[0]);
+			}
+			
+			if(!res.isEmpty()){
+				return offerRepository.findOfferWithResLib(libelle.toLowerCase(),res);
+			}
+		}
+		
+		if(libelle.isEmpty() &&  !num_offer.isEmpty() && !responsive.isEmpty() && isNumeric(num_offer)){
+			String[] splited = responsive.split("\\s+");
+			List<Responsible> res = null;
+			
+			if (splited.length > 1) {
+				res =responsibleRepository.findByNameWithParam(splited[0],splited[1]);
+			}
+			else if (splited.length == 1) {
+				res =responsibleRepository.findByNameWithParam(splited[0]);
+			}
+			
+			if(!res.isEmpty()){
+				return offerRepository.findOfferWithResOffer(Long.parseLong(num_offer),res);
+			}
+		}
+		
+		if(libelle.isEmpty() && !num_offer.isEmpty() && responsive.isEmpty() && isNumeric(num_offer)){
 			List<AbstractOffer> offer = new ArrayList<>();
 			offer.add(offerRepository.findById(Long.parseLong(num_offer)));
 			return (offer);

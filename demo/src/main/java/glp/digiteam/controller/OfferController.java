@@ -300,9 +300,6 @@ public class OfferController {
 		Iterable<AbstractOffer> listOffers = offerRepository.findLastOffers(new PageRequest(0, 30));
 		model.addAttribute("listOffers",listOffers);
 
-		Iterable<Mission> missions = missionRepository.findAll();
-		model.addAttribute("listMission", missions);
-
 		return "offers/consult_offers";
 	}
 
@@ -311,7 +308,6 @@ public class OfferController {
 			@RequestParam(value="libelle", required=true, defaultValue="") String libelle,
 			@RequestParam(value="num_offer", required=true,defaultValue="") String num_offer,
 			@RequestParam(value="responsive", required=true,defaultValue="") String responsive,
-			@RequestParam(value="mission", required=true,defaultValue="") String mission,
 			Model model,HttpSession session) {
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
@@ -329,7 +325,7 @@ public class OfferController {
 			model.addAttribute("user",referent);
 		}	
 
-		List<AbstractOffer> listOffers = offerService.searchOffers(libelle,num_offer,responsive,mission);
+		List<AbstractOffer> listOffers = offerService.searchOffers(libelle,num_offer,responsive);
 		model.addAttribute("listOffers",listOffers);
 
 		if(listOffers==null){
@@ -338,9 +334,6 @@ public class OfferController {
 		else{
 			model.addAttribute("size", listOffers.size());
 		}
-
-		Iterable<Mission> missions = missionRepository.findAll();
-		model.addAttribute("listMission", missions);
 
 		return "offers/consult_offers";
 	}
