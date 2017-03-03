@@ -48,7 +48,7 @@
 						<li id="gestionReferent" th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'"><a th:href="@{/gestionReferent}">Gestion des r&eacute;f&eacute;rents</a></li>
 						
 						<!-- Onglets STUDENT -->
-						<li id="gestionReferent" th:if="${user.class.name}=='glp.digiteam.entity.student.Student'"><a th:href="@{/candidature}">Candidature</a></li>
+						<li id="candidatures" th:if="${user.class.name}=='glp.digiteam.entity.student.Student'"><a th:href="@{/candidature}">Candidature</a></li>
 						
 					</ul>
 
