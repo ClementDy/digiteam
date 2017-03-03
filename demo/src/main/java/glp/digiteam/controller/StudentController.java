@@ -98,7 +98,7 @@ public class StudentController {
 
 		} 
 
-		model.addAttribute("student", student);
+		model.addAttribute("user", student);
 
 		
 		Iterable<AbstractOffer> abstractOffers = offerRepository.findLastOffers(new PageRequest(0, 5));
@@ -128,7 +128,7 @@ public class StudentController {
 		} 
 
 		student=studentService.getStudentByNip(student.getNip());
-		model.addAttribute("student", student);
+		model.addAttribute("user", student);
 		
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
@@ -219,13 +219,13 @@ public class StudentController {
 			if (action.equals("Publier")) {
 
 				std.setStatut("published");
-				model.addAttribute("student", std);
+				model.addAttribute("user", std);
 				studentService.saveStudentProfile(std);
 				return new ModelAndView("redirect:home");
 
 			} 
 			std.setStatut("register");
-			model.addAttribute("student", std);
+			model.addAttribute("user", std);
 			studentService.saveStudentProfile(std);
 		}
 
@@ -246,7 +246,7 @@ public class StudentController {
 
 		AbstractOffer offer = offerRepository.findById(id);
 		System.out.println(student);
-		model.addAttribute("student", student);
+		model.addAttribute("user", student);
 		
 		if(offer!=null){
 			model.addAttribute("offer", offer);

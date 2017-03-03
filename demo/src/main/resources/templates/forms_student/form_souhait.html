@@ -40,8 +40,8 @@
 			<div class="col-md-5 form-group" 
 				th:classappend="${#fields.hasErrors('wish.missions')}? 'has-error'">
 				<label class="control-label">Missions choisies * (4 max) : </label>
-				<select size="10" class="form-control" id="myMissions" th:field="${student.wish.missions}" multiple="multiple">
-				<option th:each="mission : ${student.wish.missions}"
+				<select size="10" class="form-control" id="myMissions" th:field="${user.wish.missions}" multiple="multiple">
+				<option th:each="mission : ${user.wish.missions}"
 						th:value="${mission.id}" th:text="${mission.title}">
 				</option>
 				</select>
@@ -54,8 +54,8 @@
 			<div class="col-md-12">
 			<label for="autre">Autres missions souhaitées (précisez) : </label>
 			<textarea class="form-control" id="autre"
-				th:value="${student.wish.otherWish}"
-				th:field="${student.wish.otherWish}" maxlength="100" rows="3"
+				th:value="${user.wish.otherWish}"
+				th:field="${user.wish.otherWish}" maxlength="100" rows="3"
 				style="resize: none"></textarea>
 			</div>
 			<br>
@@ -67,7 +67,7 @@
 		<div class="row" th:classappend="${#fields.hasErrors('motivation')}? 'has-error'">
 			<div class="col-md-12">
 			<textarea class="form-control " id="motivations"
-				th:value="${student.motivation}" th:field="${student.motivation}"
+				th:value="${user.motivation}" th:field="${user.motivation}"
 				oninput="countChars(this.value)" maxlength="900" rows="10"
 				style="resize: none;"></textarea>
 			</div>
@@ -78,7 +78,7 @@
 					Entre 450 et 900 caractères (<span id="charsCount">0</span>)
 				</i>
 				<span th:if="${#fields.hasErrors('motivation')}" style="color: darkRed; float: right;"
-				th:errors="${student.motivation}"></span>
+				th:errors="${user.motivation}"></span>
 		</div>
 		<br>
 	</div>

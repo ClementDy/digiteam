@@ -37,6 +37,7 @@ import glp.digiteam.repository.MissionRepository;
 import glp.digiteam.repository.ModeratorRepository;
 import glp.digiteam.repository.OfferRepository;
 import glp.digiteam.repository.ReferentRepository;
+import glp.digiteam.repository.StudentRepository;
 import glp.digiteam.services.OfferService;
 import glp.digiteam.services.ReferentService;
 import glp.digiteam.services.StudentService;
@@ -50,7 +51,7 @@ public class OfferController {
 	@Autowired
 	private MissionRepository missionRepository;
 
-	
+
 	@Autowired
 	private AdministratorRepository administratorRepository;
 
@@ -71,7 +72,7 @@ public class OfferController {
 
 	@Autowired
 	private OfferRepository offerRepository;
-	
+
 	@Autowired
 	private OfferService offerService;
 
@@ -95,22 +96,22 @@ public class OfferController {
 			System.out.println(referent.getClass().getName());
 			model.addAttribute("user",referent);
 		}	
-		
-		
+
+
 		model.addAttribute("referent", referent);
 		return "offers/offersHome";
 	}
 
 	@RequestMapping(value = "/newGenericOffer", method = RequestMethod.GET)
 	public String newGeneriqueOffer(Model model,HttpSession session) {
-		
+
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		if(isReferent(staffLille1)){
 			Referent referent=referentRepository.findByName(staffLille1.getName());
 			System.out.println(referent.getClass().getName());
 			model.addAttribute("user",referent);
 		}
-		
+
 		GenericOffer offer=new GenericOffer();
 		responsible=new Responsible();	
 		model.addAttribute("offer", offer);
@@ -149,14 +150,14 @@ public class OfferController {
 
 	@RequestMapping(value = "/newStandardOffer", method = RequestMethod.GET)
 	public String newStandardOffer(Model model,HttpSession session) {
-	
+
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		if(isReferent(staffLille1)){
 			Referent referent=referentRepository.findByName(staffLille1.getName());
 			System.out.println(referent.getClass().getName());
 			model.addAttribute("user",referent);
 		}
-		
+
 		StandardOffer offer=new StandardOffer();
 		responsible=new Responsible();
 
@@ -198,7 +199,7 @@ public class OfferController {
 
 	@RequestMapping(value = "/consult_candidatures", method = RequestMethod.GET)
 	public String consult(Model model,HttpSession session) {
-		
+
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		if(isAdministrator(staffLille1)){
 			Administrator administrator=administratorRepository.findByName(staffLille1.getName());
@@ -215,17 +216,17 @@ public class OfferController {
 		}	
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
-		
+
 		List<Student> listCandidatures = studentService.getAllCandidature();
 		model.addAttribute("listCandidature", listCandidatures);
 		return "consult_candidatures";
 	}
-	
+
 	@RequestMapping(value = "/consult_candidatures", method = RequestMethod.POST)
 	public String consultCandidatures(
 			@RequestParam(value="name", required=true, defaultValue="") String name,
-            @RequestParam(value="formation", required=true,defaultValue="") String formation,Model model, HttpSession session) {
-		
+			@RequestParam(value="formation", required=true,defaultValue="") String formation,Model model, HttpSession session) {
+
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		if(isAdministrator(staffLille1)){
 			Administrator administrator=administratorRepository.findByName(staffLille1.getName());
@@ -240,72 +241,79 @@ public class OfferController {
 			System.out.println(referent.getClass().getName());
 			model.addAttribute("user",referent);
 		}	
-		
-		
+
+
 		if(!name.isEmpty() && formation.isEmpty() ){
 			List<Student> listCandidatures = studentService.findByName(name);;
 			model.addAttribute("listCandidature", listCandidatures);
 			model.addAttribute("size", listCandidatures.size());
 			return "consult_candidatures";
-			
+
 		}
 		if(!name.isEmpty()  && !formation.isEmpty()){
 			List<Student> listCandidatures = studentService.findWithParameter(name,formation);
 			model.addAttribute("listCandidature", listCandidatures);
 			model.addAttribute("size", listCandidatures.size());
 			return "consult_candidatures";
-			
+
 		}
 		if(name.isEmpty()  && !formation.isEmpty() ){
 			List<Student> listCandidatures = studentService.findWithTraining(formation);
 			model.addAttribute("listCandidature", listCandidatures);
 			model.addAttribute("size", listCandidatures.size());
 			return "consult_candidatures";
-			
+
 		}
-		
+
 		List<Student> listCandidatures = studentService.getAllCandidature();
 		model.addAttribute("listCandidature", listCandidatures);
 		model.addAttribute("size", listCandidatures.size());
 		return "consult_candidatures";
-	
+
 	}
-	
+
 	@RequestMapping(value = "/consult_offers", method = RequestMethod.GET)
 	public String consult_offers(Model model,HttpSession session) {
-		
+
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		if(isAdministrator(staffLille1)){
-			Administrator administrator=administratorRepository.findByName(staffLille1.getName());
-			model.addAttribute("user",administrator);
+		if(staffLille1!=null){
+			if(isAdministrator(staffLille1)){
+				Administrator administrator=administratorRepository.findByName(staffLille1.getName());
+				model.addAttribute("user",administrator);
+			}
+			if(isModerator(staffLille1)){
+				Moderator moderator=moderatorRepository.findByName(staffLille1.getName());
+				model.addAttribute("user",moderator);
+			}	
+			if(isReferent(staffLille1)){
+				Referent referent=referentRepository.findByName(staffLille1.getName());
+				System.out.println(referent.getClass().getName());
+				model.addAttribute("user",referent);
+			}	
 		}
-		if(isModerator(staffLille1)){
-			Moderator moderator=moderatorRepository.findByName(staffLille1.getName());
-			model.addAttribute("user",moderator);
-		}	
-		if(isReferent(staffLille1)){
-			Referent referent=referentRepository.findByName(staffLille1.getName());
-			System.out.println(referent.getClass().getName());
-			model.addAttribute("user",referent);
-		}	
-		
+		else{
+			Student student=(Student) session.getAttribute("student");
+			model.addAttribute("user",student);
+		}
+
+
 		Iterable<AbstractOffer> listOffers = offerRepository.findLastOffers(new PageRequest(0, 30));
 		model.addAttribute("listOffers",listOffers);
-		
+
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
-		
+
 		return "offers/consult_offers";
 	}
 
 	@RequestMapping(value = "/consult_offers", method = RequestMethod.POST)
 	public String consult_offers_search(
 			@RequestParam(value="libelle", required=true, defaultValue="") String libelle,
-            @RequestParam(value="num_offer", required=true,defaultValue="") String num_offer,
-            @RequestParam(value="responsive", required=true,defaultValue="") String responsive,
-            @RequestParam(value="mission", required=true,defaultValue="") String mission,
-            Model model,HttpSession session) {
-		
+			@RequestParam(value="num_offer", required=true,defaultValue="") String num_offer,
+			@RequestParam(value="responsive", required=true,defaultValue="") String responsive,
+			@RequestParam(value="mission", required=true,defaultValue="") String mission,
+			Model model,HttpSession session) {
+
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		if(isAdministrator(staffLille1)){
 			Administrator administrator=administratorRepository.findByName(staffLille1.getName());
@@ -320,27 +328,27 @@ public class OfferController {
 			System.out.println(referent.getClass().getName());
 			model.addAttribute("user",referent);
 		}	
-		
+
 		List<AbstractOffer> listOffers = offerService.searchOffers(libelle,num_offer,responsive,mission);
 		model.addAttribute("listOffers",listOffers);
-		
+
 		if(listOffers==null){
 			model.addAttribute("size", 0);
 		}
 		else{
 			model.addAttribute("size", listOffers.size());
 		}
-		
+
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
-		
+
 		return "offers/consult_offers";
 	}
-	
+
 	@RequestMapping(value = "/profil", method = RequestMethod.GET)
 	public String profil(Model model,HttpSession session,@RequestParam(value="nip", required=true) Integer nip) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		
+
 		if(isAdministrator(staffLille1)){
 			Administrator administrator=administratorRepository.findByName(staffLille1.getName());
 			model.addAttribute("user",administrator);
@@ -354,7 +362,7 @@ public class OfferController {
 			System.out.println(referent.getClass().getName());
 			model.addAttribute("user",referent);
 		}	
-		model.addAttribute("student", studentService.getStudentByNip(nip));
+		model.addAttribute("user", studentService.getStudentByNip(nip));
 		return "profile";
 	}
 
@@ -370,10 +378,10 @@ public class OfferController {
 			}
 		}
 	}
-	
+
 	@RequestMapping(value= "/newOffer",method=RequestMethod.GET)
 	public ModelAndView newOffer(Model model, HttpSession session,@RequestParam(value = "id", required = true) long id){
-		
+
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		if(isReferent(staffLille1)){
 			Referent referent=referentRepository.findByName(staffLille1.getName());
@@ -389,46 +397,51 @@ public class OfferController {
 		model.addAttribute("offer",offer);
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
-		
+
 		if(offer.getClass().getName().equals("glp.digiteam.entity.offer.GenericOffer")){
-			
+
 			return new ModelAndView("offers/newGenericOffer");
 		}else {
-			
+
 			return new ModelAndView("offers/newStandardOffer");
 		}
-			
+
 	}
-	
-	
+
+
 	@RequestMapping(value = "/offerShow", method = RequestMethod.GET)
 	public ModelAndView showOffer(Model model, HttpSession session,@RequestParam(value = "id", required = true) long id) {
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		if(isAdministrator(staffLille1)){
-			Administrator administrator=administratorRepository.findByName(staffLille1.getName());
-			model.addAttribute("user",administrator);
+		if(staffLille1!=null){
+			if(isAdministrator(staffLille1)){
+				Administrator administrator=administratorRepository.findByName(staffLille1.getName());
+				model.addAttribute("user",administrator);
+			}
+			if(isModerator(staffLille1)){
+				Moderator moderator=moderatorRepository.findByName(staffLille1.getName());
+				model.addAttribute("user",moderator);
+			}	
+			if(isReferent(staffLille1)){
+				Referent referent=referentRepository.findByName(staffLille1.getName());
+				System.out.println(referent.getClass().getName());
+				model.addAttribute("user",referent);
+			}
 		}
-		if(isModerator(staffLille1)){
-			Moderator moderator=moderatorRepository.findByName(staffLille1.getName());
-			model.addAttribute("user",moderator);
-		}	
-		if(isReferent(staffLille1)){
-			Referent referent=referentRepository.findByName(staffLille1.getName());
-			System.out.println(referent.getClass().getName());
-			model.addAttribute("user",referent);
-		}	
-		
+		else{
+			Student student=(Student) session.getAttribute("student");
+			model.addAttribute("user",student);
+		}
 		AbstractOffer offer = offerRepository.findById(id);
-		
+
 		if(offer!=null){
 			model.addAttribute("offer", offer);
 			return new ModelAndView("offers/offerAbstract");
 		}
-		
+
 		return new ModelAndView("offers/offersHome");
 	}
-	
+
 	@RequestMapping(value = "/gestionOffers", method = RequestMethod.GET)
 	public ModelAndView gestionOffers(Model model, HttpSession session) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
@@ -436,22 +449,22 @@ public class OfferController {
 			Moderator moderator=moderatorRepository.findByName(staffLille1.getName());
 			model.addAttribute("user",moderator);
 		}	
-		
+
 
 		Iterable<AbstractOffer> offers = offerRepository.findAll();
 		model.addAttribute("offers",offers);
 		return new ModelAndView("offers/gestionOffers");
 	}
-	
+
 	public boolean isAdministrator(StaffLille1 staffLille1){
 		if(administratorRepository.findByName(staffLille1.getName())!=null){
 			System.out.println("Admin!");
 			return true;
 		}
 		return false;
-		
+
 	}
-	
+
 	public boolean isModerator(StaffLille1 staffLille1){
 		if(moderatorRepository.findByName(staffLille1.getName())!=null){
 			System.out.println("Moderateur!");
@@ -459,7 +472,7 @@ public class OfferController {
 		}
 		return false;
 	}
-	
+
 
 	public boolean isReferent(StaffLille1 staffLille1){
 		if(referentRepository.findByName(staffLille1.getName())!=null){

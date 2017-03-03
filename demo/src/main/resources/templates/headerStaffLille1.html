@@ -57,8 +57,8 @@
 							data-toggle="dropdown" role="button" aria-haspopup="true"
 							aria-expanded="false">
 							
-							<span th:if="${user.class.name}=='glp.digiteam.entity.student.Student'"><span th:text="${user.lastName}"></span><span> </span><span  th:text="${user.firstName}"></span><span> </span><span class="glyphicon glyphicon-user"></span></span>
-							<span th:if="${user.class.name}!='glp.digiteam.entity.student.Student'" th:text="${user.name}"></span><span> </span><span> </span><span class="glyphicon glyphicon-user"></span>
+							<span th:if="${user.class.name}=='glp.digiteam.entity.student.Student'"><span th:text="${user.lastName}"></span><span> </span><span  th:text="${user.firstName}"></span><span> </span><span th:if="${user.class.name}=='glp.digiteam.entity.student.Student'" class="glyphicon glyphicon-user"></span></span>
+							<span th:if="${user.class.name}!='glp.digiteam.entity.student.Student'" th:text="${user.name}"></span><span> </span><span> </span><span th:if="${user.class.name}!='glp.digiteam.entity.student.Student'" class="glyphicon glyphicon-user"></span>
 							</a><ul class="dropdown-menu">
 							
 								<li><a href="#">Param&egrave;tres</a></li>

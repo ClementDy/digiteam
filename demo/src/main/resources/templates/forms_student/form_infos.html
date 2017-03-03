@@ -20,8 +20,8 @@
 						<label>Nom : </label>
 					</div>
 					<div class="col-md-6">
-						<input class="form-control" th:value="${student.lastName}"
-							th:field="${student.lastName}" id="lastName" readonly>
+						<input class="form-control" th:value="${user.lastName}"
+							th:field="${user.lastName}" id="lastName" readonly>
 					</div>
 				</div>
 				<br>
@@ -32,7 +32,7 @@
 					<div class="col-md-6">
 						<div class="form-group" style="margin-bottom:0" th:classappend="${#fields.hasErrors('email')}? 'has-feedback'">
 							<input type="text" id="email" class="form-control" 
-								th:value="${student.email}" th:field="${student.email}" 
+								th:value="${user.email}" th:field="${user.email}" 
 								data-toggle="tooltip" data-placement="bottom" th:title="${#strings.listJoin(#fields.errors('email'), ',')}">
 							<span th:if="${#fields.hasErrors('email')}"
 	                       		class="form-control-feedback glyphicon glyphicon-remove" aria-hidden="true">
@@ -46,8 +46,8 @@
 						<label for="selectbasic">Nationalité : </label>
 					</div>
 					<div class="col-md-6">
-						<input class="form-control" th:value="${student.nationality}"
-							th:field="${student.nationality}" readonly>
+						<input class="form-control" th:value="${user.nationality}"
+							th:field="${user.nationality}" readonly>
 					</div>
 				</div>
 			</div>
@@ -57,8 +57,8 @@
 						<label>Pr&eacute;nom : </label>
 					</div>
 					<div class="col-md-6">
-						<input class="form-control" th:value="${student.firstName}"
-							th:field="${student.firstName}" id="firstName" readonly>
+						<input class="form-control" th:value="${user.firstName}"
+							th:field="${user.firstName}" id="firstName" readonly>
 					</div>
 				</div>
 				<br>
@@ -69,7 +69,7 @@
 					<div class="col-md-6">
 						<div class="form-group" style="margin-bottom:0" th:classappend="${#fields.hasErrors('phone')}? 'has-feedback'">
 							<input type="text" id="phone" class="form-control input-phonenumber" 
-								th:value="${student.phone}" th:field="${student.phone}"
+								th:value="${user.phone}" th:field="${user.phone}"
 								data-toggle="tooltip" data-placement="bottom" th:title="${#strings.listJoin(#fields.errors('phone'), ',')}">
 							<span th:if="${#fields.hasErrors('phone')}"
 	                       		class="form-control-feedback glyphicon glyphicon-remove" aria-hidden="true">
@@ -92,22 +92,22 @@
 					<div class="col-md-6">
 						<input type="radio" name="radios" id="InvalidVISA"
 							value="InvalidVISA" onClick="test()"
-							th:checked="${student.dateVisa == null}"> <label>Non</label>
+							th:checked="${user.dateVisa == null}"> <label>Non</label>
 						<input type="radio" name="radios" id="validVISA" value="validVISA"
-							onClick="test()" th:checked="${student.dateVisa != null}">
+							onClick="test()" th:checked="${user.dateVisa != null}">
 						<label>Oui</label>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-6 col-xs-6 divExpiryDateVISA"
-				th:style="${student.dateVisa != null} ? 'display:block' : 'display:none'">
+				th:style="${user.dateVisa != null} ? 'display:block' : 'display:none'">
 				<div class="row form-group">
 					<div class="col-md-6">
 						<label class="control-label">Date de validit&eacute; : </label>
 					</div>
 					<div class="col-md-6">
 						<input type="text" id="datevisa" class="form-control input-date"
-							th:value="${student.dateVisa}" th:field="${student.dateVisa}"
+							th:value="${user.dateVisa}" th:field="${user.dateVisa}"
 							readonly="readonly" style="cursor: text; background: white;" />
 					</div>
 				</div>
@@ -127,7 +127,7 @@
 					<div class="col-md-6">
 						<div class="form-group" style="margin-bottom:0" th:classappend="${#fields.hasErrors('address.street')}? 'has-feedback'">
 							<input type="text" id="street" class="form-control" 
-								th:value="${student.address.street}" th:field="${student.address.street}"
+								th:value="${user.address.street}" th:field="${user.address.street}"
 								data-toggle="tooltip" data-placement="bottom" th:title="${#strings.listJoin(#fields.errors('address.street'), ',')}">
 							<span th:if="${#fields.hasErrors('address.street')}"
 	                       		class="form-control-feedback glyphicon glyphicon-remove" aria-hidden="true">
@@ -142,8 +142,8 @@
 					</div>
 					<div class="col-md-6">
 						<input class="form-control"
-							th:value="${student.address.complement}"
-							th:field="${student.address.complement}" type="text"
+							th:value="${user.address.complement}"
+							th:field="${user.address.complement}" type="text"
 							id="complement">
 					</div>
 				</div>
@@ -156,7 +156,7 @@
 					<div class="col-md-6">
 						<div class="form-group" style="margin-bottom:0" th:classappend="${#fields.hasErrors('address.city')}? 'has-feedback'">
 							<input type="text" id="city" class="form-control" 
-								th:value="${student.address.city}" th:field="${student.address.city}"
+								th:value="${user.address.city}" th:field="${user.address.city}"
 								data-toggle="tooltip" data-placement="bottom" th:title="${#strings.listJoin(#fields.errors('address.city'), ',')}">
 							<span th:if="${#fields.hasErrors('address.city')}"
 	                       		class="form-control-feedback glyphicon glyphicon-remove" aria-hidden="true">
@@ -172,7 +172,7 @@
 					<div class="col-md-6">
 						<div class="form-group" th:classappend="${#fields.hasErrors('address.postalCode')}? 'has-feedback'">
 							<input type="text" id="postalCode" class="form-control input-integer"
-								th:value="${student.address.postalCode}" th:field="${student.address.postalCode}" 
+								th:value="${user.address.postalCode}" th:field="${user.address.postalCode}" 
 								data-toggle="tooltip" data-placement="bottom" th:title="${#strings.listJoin(#fields.errors('address.postalCode'), ',')}">
 							<span th:if="${#fields.hasErrors('address.postalCode')}"
 	                       		class="form-control-feedback glyphicon glyphicon-remove" aria-hidden="true">
@@ -188,14 +188,14 @@
 		<h4 class="titreFormulaire">Votre curriculum vitae</h4>
 		
 		<div class="row">
-			<div class="col-md-12" th:if="${student.cv}==NULL">
+			<div class="col-md-12" th:if="${user.cv}==NULL">
 				<label class="left control-label">Déposez votre CV : </label> <input
 					type="file" name="file" />
 				<div th:each="file : ${files}">
 					<a th:href="${file}" th:text="${file}"></a>
 				</div>
 			</div>
-			<div class="col-md-12" th:if="${student.cv}!=NULL">
+			<div class="col-md-12" th:if="${user.cv}!=NULL">
 
 
 
@@ -211,7 +211,7 @@
 		</div>
 		<div class="row">
 
-			<div class="col-md-12 cv" th:if="${student.cv}!=NULL">
+			<div class="col-md-12 cv" th:if="${user.cv}!=NULL">
 				<iframe class="cvIframe" th:attr="src=${pathCV}"></iframe>
 				<br>
 			</div>
