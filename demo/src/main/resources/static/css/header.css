@@ -6,18 +6,18 @@
 }
 
 body{
-background-color:lightgrey;
+	background-color:lightgrey;
    background-size:cover;
-background-image:url(../img/fond.jpg);
+	background-image:url(../img/fond.jpg);
 }
 
 
 .jumbotron{
-background-color:white;
-border-style:solid;
-border-width: 1px;
-border-radius : 10px;
- border-color: #ae2573;
+	background-color:white;
+	border-style:solid;
+	border-width: 1px;
+	border-radius : 10px;
+	border-color: #ae2573;
 }
 
 
@@ -57,11 +57,22 @@ border-radius : 10px;
 	border-radius:5px;	
 }
 
-.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover
-	{
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
 	background-color: white;
 	color: #ae2573;
 	border: 1px solid #ae2573;
+}
+
+.nav-pills>li.active.error-tab>a, .nav-pills>li.active.error-tab>a:focus, .nav-pills>li.active.error-tab>a:hover {
+	background-color: white;
+	color: #bc2929;
+	border: 1px solid #bc2929;
+}
+
+.nav-pills>li.error-tab>a, .nav-pills>li.error-tab>a:focus, .nav-pills>li.error-tab>a:hover {
+	background-color: #bc2929;
+	color: white;
+	font-weight: bold;
 }
 
 .backgroundHeader {

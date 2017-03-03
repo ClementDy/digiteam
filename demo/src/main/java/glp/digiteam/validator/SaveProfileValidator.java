@@ -1,5 +1,7 @@
 package glp.digiteam.validator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -58,6 +60,30 @@ public class SaveProfileValidator implements Validator {
 
 		// default
 		return "intro";
+	}
+	
+	public List<String> getErrorTabs(Errors errors) {
+		
+		List<String> errorTabs = new ArrayList<String>();
+		
+		// form_infos
+		if (errors.hasFieldErrors("email") ||
+			errors.hasFieldErrors("phone") ||
+			errors.hasFieldErrors("address.postalCode")
+		) {
+			errorTabs.add("infos");
+		}
+
+		// form_contracts
+		for (FieldError fe : errors.getFieldErrors()) {
+			if (fe.getField().startsWith("externalContracts")) {
+				errorTabs.add("contracts");
+			}
+		}
+		
+		// form_dispos
+		
+		return errorTabs;
 	}
 	
 	private static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile(

@@ -156,6 +156,10 @@ public class StudentController {
 				if (bindingResult.hasErrors()) {
 					Iterable<Mission> missions = missionRepository.findAll();
 					model.addAttribute("listMission", missions);
+					
+					Iterable<String> errorTabs = saveValidator.getErrorTabs(bindingResult);
+					model.addAttribute("errorTabs", errorTabs);
+					
 					return new ModelAndView(
 							"candidature::tab(activeTab='"
 									+ saveValidator.getFirstErrorTab(bindingResult)
@@ -170,6 +174,10 @@ public class StudentController {
 				if (bindingResult.hasErrors()) {
 					Iterable<Mission> missions = missionRepository.findAll();
 					model.addAttribute("listMission", missions);
+
+					Iterable<String> errorTabs = publishValidator.getErrorTabs(bindingResult);
+					model.addAttribute("errorTabs", errorTabs);
+					
 					return new ModelAndView(
 							"candidature::tab(activeTab='"
 							+ publishValidator.getFirstErrorTab(bindingResult)

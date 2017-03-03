@@ -36,22 +36,28 @@
 			<li id="ongletLille1" th:class="${activeTab == 'intro'} ? 'active'">
 				<a href="#intro" data-toggle="tab">Introduction</a>
 			</li>
-			<li id="ongletLille1" th:class="${activeTab == 'infos'} ? 'active'">
+			<li id="ongletLille1" th:class="${activeTab == 'infos'} ? 'active'"
+			th:classappend="${errorTabs} ? (${#lists.contains(errorTabs, 'infos')} ? 'error-tab')">
 				<a href="#infos" data-toggle="tab">Informations personnelles</a>
 			</li>
-			<li id="ongletLille1" th:class="${activeTab == 'formations'} ? 'active'">
+			<li id="ongletLille1" th:class="${activeTab == 'formations'} ? 'active'"
+			th:classappend="${errorTabs} ? (${#lists.contains(errorTabs, 'formations')} ? 'error-tab')">
 				<a href="#formations" data-toggle="tab">Formations</a>
 			</li>
-			<li id="ongletLille1" th:class="${activeTab == 'contracts'} ? 'active'">
+			<li id="ongletLille1" th:class="${activeTab == 'contracts'} ? 'active'"
+			th:classappend="${errorTabs} ? (${#lists.contains(errorTabs, 'contracts')} ? 'error-tab')">
 				<a href="#contracts" data-toggle="tab">Contrats</a>
 			</li>
-			<li id="ongletLille1" th:class="${activeTab == 'souhait'} ? 'active'">
+			<li id="ongletLille1" th:class="${activeTab == 'souhait'} ? 'active'"
+			th:classappend="${errorTabs} ? (${#lists.contains(errorTabs, 'souhait')} ? 'error-tab')">
 				<a href="#souhait" data-toggle="tab">Souhaits</a>
 			</li>
-			<li id="ongletLille1" th:class="${activeTab == 'dispos'} ? 'active'">
+			<li id="ongletLille1" th:class="${activeTab == 'dispos'} ? 'active'"
+			th:classappend="${errorTabs} ? (${#lists.contains(errorTabs, 'dispos')} ? 'error-tab')">
 				<a href="#dispos" data-toggle="tab">Disponibilit&eacute;s</a>
 			</li>
-			<li id="ongletLille1" th:class="${activeTab == 'divers'} ? 'active'">
+			<li id="ongletLille1" th:class="${activeTab == 'divers'} ? 'active'"
+			th:classappend="${errorTabs} ? (${#lists.contains(errorTabs, 'divers')} ? 'error-tab')">
 				<a href="#divers" data-toggle="tab">Divers</a>
 			</li>
 			<li id="ongletLille1" th:class="${activeTab == 'save'} ? 'active'">
