@@ -188,17 +188,15 @@
 		<h4 class="titreFormulaire">Votre curriculum vitae</h4>
 		
 		<div class="row">
-			<div class="col-md-12" th:if="${student.cv}==NULL">
+			<div class="col-md-12" th:if="${#strings.isEmpty(student.cv)}">
 				<label class="left control-label">Déposez votre CV : </label> <input
 					type="file" name="file" />
 				<div th:each="file : ${files}">
 					<a th:href="${file}" th:text="${file}"></a>
 				</div>
 			</div>
-			<div class="col-md-12" th:if="${student.cv}!=NULL">
-
-
-
+			
+			<div class="col-md-12" th:if="${!#strings.isEmpty(student.cv)}">
 				<label style="display: inline-block;">Modifier votre CV</label> <br>​
 				<input type="file" name="file" style="display: inline-block;" /> <br>
 
@@ -206,12 +204,11 @@
 					<a th:href="${file}" th:text="${file}"></a>
 				</div>
 				<br>
-
 			</div>
 		</div>
 		<div class="row">
 
-			<div class="col-md-12 cv" th:if="${student.cv}!=NULL">
+			<div class="col-md-12 cv" th:if="${!#strings.isEmpty(student.cv)}">
 				<iframe class="cvIframe" th:attr="src=${pathCV}"></iframe>
 				<br>
 			</div>

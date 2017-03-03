@@ -40,7 +40,7 @@
 				th:text="${student.dateVisa}" id="dateVISA"></label> <br>
 				
 			
-			<div th:if="${student.cv}!=NULL">
+			<div th:if="${!#strings.isEmpty(student.cv)}">
 			<h4 class="titreFormulaire">CV</h4>
 			
 				<iframe th:attr="src=${pathCV}" ></iframe><br><br>
@@ -162,7 +162,7 @@
 			</div>
 
 			<h4 class="titreFormulaire">Souhaits</h4>
-			<br> <label> Missions choisis :</label>
+			<br> <label> Missions choisies :</label>
 			<div class="table-responsive">
 				<div class="col-md-5">
 					<select size="4"
@@ -188,7 +188,7 @@
 				th:text="${student.wish.otherWish}" id="otherWish"></label> --><br><br>
 				
 				
-			<label>Motivations</label> <br> 
+			<label>Motivations :</label> <br> 
 			<textarea  class="form-control"  rows="5" th:field="${student.motivation}" readonly></textarea><br>
 			
 			<h4 class="titreFormulaire">Disponibilités</h4>
@@ -226,7 +226,8 @@
 							<span class="input-group-addon addonDay" id="sizing-addon3">Lundi</span>
 							<input type="text" placeholder="hh:mm" class="form-control"
 								th:field="${student.availability.startTimeMonday}" readonly />
-							<span class="input-group-addon" id="sizing-addon3">à</span> <input
+							<span class="input-group-addon" id="sizing-addon3" style="border-left:none; border-right:none">à</span>
+							<input
 								type="text" class="form-control" placeholder="hh:mm"
 								th:field="${student.availability.endTimeMonday}" readonly />
 						</div>
@@ -239,7 +240,8 @@
 							<span class="input-group-addon addonDay" id="sizing-addon3">Mardi</span>
 							<input type="text" class="form-control" placeholder="hh:mm"
 								th:field="${student.availability.startTimeTuesday}" readonly/> <span
-								class="input-group-addon" id="sizing-addon3">à</span> <input
+								class="input-group-addon" id="sizing-addon3" style="border-left:none; border-right:none">à</span>
+							<input
 								type="text" class="form-control" placeholder="hh:mm"
 								th:field="${student.availability.endTimeTuesday}" readonly/>
 						</div>
@@ -252,7 +254,8 @@
 							<span class="input-group-addon addonDay" id="sizing-addon3">Mercredi</span>
 							<input type="text" class="form-control" placeholder="hh:mm"
 								th:field="${student.availability.startTimeWednesday}" readonly/> <span
-								class="input-group-addon" id="sizing-addon3">à</span> <input
+								class="input-group-addon" id="sizing-addon3" style="border-left:none; border-right:none">à</span>
+							<input
 								type="text" class="form-control" placeholder="hh:mm"
 								th:field="${student.availability.endTimeWednesday}" readonly />
 						</div>
@@ -266,7 +269,8 @@
 							<span class="input-group-addon addonDay" id="sizing-addon3">Jeudi</span>
 							<input type="text" class="form-control" placeholder="hh:mm"
 								th:field="${student.availability.startTimeThursday}" readonly/> <span
-								class="input-group-addon" id="sizing-addon3">à</span> <input
+								class="input-group-addon" id="sizing-addon3" style="border-left:none; border-right:none">à</span>
+							<input
 								type="text" class="form-control" placeholder="hh:mm"
 								th:field="${student.availability.endTimeThursday}" readonly/>
 						</div>
@@ -280,7 +284,8 @@
 							<span class="input-group-addon addonDay" id="sizing-addon3">Vendredi</span>
 							<input type="text" class="form-control" placeholder="hh:mm"
 								th:field="${student.availability.startTimeFriday}" readonly/> <span
-								class="input-group-addon" id="sizing-addon3">à</span> <input
+								class="input-group-addon" id="sizing-addon3" style="border-left:none; border-right:none">à</span>
+							<input
 								type="text" class="form-control" placeholder="hh:mm"
 								th:field="${student.availability.endTimeFriday}" readonly/>
 						</div>
@@ -290,13 +295,13 @@
 			</div>
 			<h4 class="titreFormulaire">Divers</h4>
 			
-			<label>Associations (noms,rôles,missions)</label> <br> 
+			<label>Associations (noms, rôles, missions) :</label> <br> 
 			<input type="text" class="form-control"  			
 			th:field="${student.misc.nameAssociation}" readonly/>
 			
-			<br> <label>Connaissances Informatiques</label> <br> <input type="text" class="form-control" th:field="${student.misc.itKnowledge}" readonly/>
-			<br> <label>Connaissances Linguistiques</label> <br> <input type="text" class="form-control" th:field="${student.misc.languages}" readonly/> <br>
-			<label>Connaissances Informatiques</label> <br> <input type="text" class="form-control" th:field="${student.misc.otherFormations}" readonly/>
+			<br> <label>Connaissances informatiques :</label> <br> <input type="text" class="form-control" th:field="${student.misc.itKnowledge}" readonly/>
+			<br> <label>Connaissances linguistiques :</label> <br> <input type="text" class="form-control" th:field="${student.misc.languages}" readonly/> <br>
+			<label>Autres formations :</label> <br> <input type="text" class="form-control" th:field="${student.misc.otherFormations}" readonly/>
 			<br>
 		</div>
 
