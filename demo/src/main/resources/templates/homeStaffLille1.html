@@ -27,7 +27,27 @@
 <body>
 
 	<div th:include="headerStaffLille1::headerStaffLille1"></div>
-
+	
+	<div class="container containerWhite">
+		<br>
+  		<article th:if="${user.class.name}=='glp.digiteam.entity.offer.Referent'"  >
+  			<p> Bonjour <span th:text="${user.name}"></span>,</p>
+  			<p>En tant que r&eacute;f&eacute;rent vous avez accès à plusieurs fonctionnalités.</p>
+  			<p>Premièrement, vous avez accès à vos offres en cliquant sur l'onglet "Offre" du menu ci-dessus. Cette page vous permettra
+  			de consulter vos offres validées, en attente de validation, refusées et expirées.</p>
+  			<p>Depuis cette page, vous pourrez également créer de nouvelles offres. Vous aurez la possibilité de créer de nouvelles offres standard
+  			et générique mais également de créer une offre à partir d'une ancienne si par exemple cette dernière est refusée ou pour tout autre 
+  			raison.</p>
+  			<p> <a class="btn btn-primary" aria-label="Left Align" ><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>  Ce bouton
+  			vous permettra de créer une offre à partir de celle selectionnée.</p>
+  			<p><a class="btn btn-success" aria-label="Left Align">
+									<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+								    </a> Celui ci, vous permet de consulter votre offre.</p>
+  			
+  			
+   			
+ 		</article>
+	</div>
 	
 	
 </body>
