@@ -29,8 +29,31 @@
 			<div class="container">
 			
 			<br>
-			
-			<div th:if="${not #lists.isEmpty(abstractOffers)}" class="jumbotron"
+
+
+		
+				<div th:if="${student.statut}==NULL" class="jumbotron">
+					<h2>Bienvenue</h2>
+					<p>Vous n'avez pas de candidature enregistrée</p>
+					<p>
+						<a class="btn btn-lille1" th:href="@{/candidature}">Creer une
+							candidature</a>
+					</p>
+				</div>
+				<div th:if="${student.statut}=='register'" class="jumbotron">
+					<h2>Candidature en cours de saisie</h2>
+					<br /> <a class="btn btn-lille1" th:href="@{/candidature}">Continuer
+						la saisie</a>
+				</div>
+				<div th:if="${student.statut}=='published'" class="jumbotron">
+					<h2>Candidature publiée</h2>
+					<p>Vous avez une candidature publiée</p>
+					<a class="btn btn-lille1" th:href="@{/profile}">Consulter</a> <a
+						class="btn btn-lille1" th:href="@{/candidature}">Modifier</a> <a
+						class="btn btn-lille1" th:href="@{/home(action='unpublish')}">Dépublier</a>
+				</div>
+				<br>
+				<div th:if="${not #lists.isEmpty(abstractOffers)}" class="jumbotron"
 					style="border-radius: 10px;">
 					<h2>Derni&egrave;res offres publiées :</h2>
 					<br />
@@ -57,31 +80,6 @@
 							</a></td>
 						</tr>
 					</table>
-				</div>
-				
-				
-			<br> <br>
-
-		
-				<div th:if="${student.statut}==NULL" class="jumbotron">
-					<h2>Bienvenue</h2>
-					<p>Vous n'avez pas de candidature enregistrée</p>
-					<p>
-						<a class="btn btn-lille1" th:href="@{/candidature}">Creer une
-							candidature</a>
-					</p>
-				</div>
-				<div th:if="${student.statut}=='register'" class="jumbotron">
-					<h2>Candidature en cours de saisie</h2>
-					<br /> <a class="btn btn-lille1" th:href="@{/candidature}">Continuer
-						la saisie</a>
-				</div>
-				<div th:if="${student.statut}=='published'" class="jumbotron">
-					<h2>Candidature publiée</h2>
-					<p>Vous avez une candidature publiée</p>
-					<a class="btn btn-lille1" th:href="@{/profile}">Consulter</a> <a
-						class="btn btn-lille1" th:href="@{/candidature}">Modifier</a> <a
-						class="btn btn-lille1" th:href="@{/home(action='unpublish')}">Dépublier</a>
 				</div>
 				
 			</div>

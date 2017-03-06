@@ -88,6 +88,7 @@ public class StudentController {
 
 		student = (Student) session.getAttribute("student");
 		if (studentService.getStudentByNip(student.getNip()) != null) {
+			model.addAttribute("student", (studentService.getStudentByNip(student.getNip())));
 			try {
 				if (action.equals("unpublish")) {
 					studentService.unpublishProfil(student);
@@ -96,9 +97,11 @@ public class StudentController {
 
 			}
 
-		} 
+		} else{
+			model.addAttribute("student", student);
+		}
 
-		model.addAttribute("student", student);
+		
 
 		
 		Iterable<AbstractOffer> abstractOffers = offerRepository.findLastOffers(new PageRequest(0, 5));
