@@ -121,7 +121,10 @@ public class OfferService {
 		
 		if(libelle.isEmpty() && !num_offer.isEmpty() && responsive.isEmpty() && isNumeric(num_offer)){
 			List<AbstractOffer> offer = new ArrayList<>();
-			offer.add(offerRepository.findById(Long.parseLong(num_offer)));
+			AbstractOffer offerFind = offerRepository.findById(Long.parseLong(num_offer));
+			if(offerFind!=null){
+				offer.add(offerFind);
+			}
 			return (offer);
 		}
 		return null;
