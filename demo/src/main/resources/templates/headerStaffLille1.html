@@ -24,7 +24,11 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" th:href="@{/#}"> <span
+					<a class="navbar-brand"  th:if="${user.class.name}=='glp.digiteam.entity.student.Student'" th:href="@{/home}"> <span
+						class="glyphicon glyphicon-book
+					"></span>
+					</a>
+					<a class="navbar-brand" th:if="${user.class.name}!='glp.digiteam.entity.student.Student'" th:href="@{/#}"> <span
 						class="glyphicon glyphicon-book
 					"></span>
 					</a>
@@ -34,6 +38,9 @@
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
+						
+						<!-- Onglets STUDENT -->
+						<li id="candidatures" th:if="${user.class.name}=='glp.digiteam.entity.student.Student'"><a th:href="@{/candidature}">Candidature</a></li>
 						
 						<!-- Onglets REFERENT -->
 						<li id="offers" th:if="${user.class.name}=='glp.digiteam.entity.offer.Referent'"><a th:href="@{/offers}" >Offres</a></li>	
@@ -46,9 +53,6 @@
 						<!-- Onglets MODERATOR -->
 						<li id="gestionOffers" th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'"><a th:href="@{/gestionOffers}">Gestion des offres</a></li>
 						<li id="gestionReferent" th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'"><a th:href="@{/gestionReferent}">Gestion des r&eacute;f&eacute;rents</a></li>
-						
-						<!-- Onglets STUDENT -->
-						<li id="candidatures" th:if="${user.class.name}=='glp.digiteam.entity.student.Student'"><a th:href="@{/candidature}">Candidature</a></li>
 						
 					</ul>
 
