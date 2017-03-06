@@ -22,16 +22,49 @@
 
 <body>
 	<div class="bodyImg">
-			<div  th:include="headerStaffLille1::headerStaffLille1"></div>
+		<div th:include="headerStaffLille1::headerStaffLille1"></div>
 
 		<div th:fragment="content">
-			
+
 			<div class="container">
-			
-			<br>
+
+				<br>
+
+				<div class="jumbotron">
+					<br>
+					<article>
+						<p>
+							Bonjour <span th:text="${student.firstName}"></span>,
+						</p>
+						<p>En tant qu'&eacute;tudiant vous avez acc&egrave;s &agrave;
+							plusieurs fonctionnalit&eacute;s.</p>
+						<p>
+							Vous pouvez commencer ou modifier(cela entra&icirc;nera une
+							d&eacute;publication de la candidature) votre candidature en
+							cliquant sur <img src="/img/candidatures.png"> dans
+							l'onglet du menu ci-dessus. Pour d&eacute;publier votre
+							candidature, cliquez sur <img src="/img/depublier.png"> ci
+							dessous. Pour voir les informations de votre profil , vous pouvez
+							cliquer sur <img src="/img/profilcand.png"> dans l'onglet
+							comportant votre nom et pr&eacute;nom ci-dessus &agrave; droite
+
+						</p>
+						<p>
+							Vous pouvez &eacute;galement les consulter les offres et faire
+							des recherches en cliquant sur <img
+								src="/img/boutonconsulteroffres.png"> du menu ci-dessus.
+							Si vous voulez plus de d&eacute;tails sur ces offres, vous pouvez
+							cliquer sur <a class="btn btn-success" aria-label="Left Align">
+								<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+						</p>
 
 
-		
+
+
+					</article>
+
+				</div>
+
 				<div th:if="${student.statut}==NULL" class="jumbotron">
 					<h2>Bienvenue</h2>
 					<p>Vous n'avez pas de candidature enregistrée</p>
@@ -81,7 +114,7 @@
 						</tr>
 					</table>
 				</div>
-				
+
 			</div>
 		</div>
 	</div>
