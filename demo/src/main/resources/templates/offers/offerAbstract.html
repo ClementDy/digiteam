@@ -80,7 +80,7 @@
 		<br/>
 		<br/>
 
-		<div class="row" th:if="${offer.class.name}=='glp.digiteam.entity.offer.StandardOffer'">
+		<div class="row" th:if="${offer.class.name}!='glp.digiteam.entity.offer.StandardOffer'">
 				<p><span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;Cette offre disponible jusqu'au <span th:text="${offer.validityDate}"></span></p>
 		</div>
 		<br>
