@@ -26,6 +26,7 @@ import glp.digiteam.entity.offer.AbstractOffer;
 import glp.digiteam.entity.offer.Administrator;
 import glp.digiteam.entity.offer.GenericOffer;
 import glp.digiteam.entity.offer.Moderator;
+import glp.digiteam.entity.offer.Offer;
 import glp.digiteam.entity.offer.Referent;
 import glp.digiteam.entity.offer.Responsible;
 import glp.digiteam.entity.offer.StaffLille1;
@@ -40,6 +41,7 @@ import glp.digiteam.repository.ReferentRepository;
 import glp.digiteam.repository.StudentRepository;
 import glp.digiteam.services.OfferService;
 import glp.digiteam.services.ReferentService;
+import glp.digiteam.services.ResponsibleService;
 import glp.digiteam.services.StudentService;
 
 
@@ -62,6 +64,10 @@ public class OfferController {
 	@Autowired
 	private ReferentService referentService;
 
+	@Autowired
+	private ResponsibleService responsibleService;
+
+	
 	@Autowired
 	private ReferentRepository referentRepository;
 
@@ -120,7 +126,7 @@ public class OfferController {
 		return "offers/newGenericOffer";
 	}
 
-	@RequestMapping(value = "/newGenericOffer", method = RequestMethod.POST)
+	@RequestMapping(value = "/newGenericOffer", method = RequestMethod.POST,params="action=Enregistrer")
 	public ModelAndView saveGenericOffer(@ModelAttribute GenericOffer ofr,Model model,HttpSession session) {
 
 		Referent referent = new Referent();
@@ -147,6 +153,34 @@ public class OfferController {
 		referentService.saveReferent(referent);
 		return new ModelAndView("redirect:offers");
 	}
+	
+	@RequestMapping(value = "/newGenericOffer", method = RequestMethod.POST,params="action=Accepter")
+	public ModelAndView acceptGenericOffer(@ModelAttribute GenericOffer ofr,Model model,HttpSession session) {
+		/*
+		Referent referent = new Referent();
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		if(isReferent(staffLille1)){
+			referent=referentRepository.findByName(staffLille1.getName());
+			System.out.println(referent.getClass().getName());
+			model.addAttribute("user",referent);
+		}
+
+		responsible.setEmail(ofr.getResponsible().getEmail());
+		responsible.setFirstName(ofr.getResponsible().getFirstName());
+		responsible.setLastName(ofr.getResponsible().getLastName());
+		responsible.setPhone(ofr.getResponsible().getPhone());
+		referent.addResponsible(responsible);
+		responsible.setReferent(referent);
+		responsible.addOffer(ofr);
+		ofr.setService(referent.getService());
+		ofr.setResponsible(responsible);
+		ofr.setStatus("Waiting");
+		model.addAttribute("offer",ofr);
+
+
+		referentService.saveReferent(referent);*/
+		return new ModelAndView("redirect:offers");
+	}
 
 	@RequestMapping(value = "/newStandardOffer", method = RequestMethod.GET)
 	public String newStandardOffer(Model model,HttpSession session) {
@@ -168,7 +202,7 @@ public class OfferController {
 		return "offers/newStandardOffer";
 	}
 
-	@RequestMapping(value = "/newStandardOffer", method = RequestMethod.POST)
+	@RequestMapping(value = "/newStandardOffer", method = RequestMethod.POST,params="action=Enregistrer")
 	public ModelAndView saveStandardOffer(@ModelAttribute StandardOffer ofr,Model model,HttpSession session) {
 
 		Referent referent = new Referent();
@@ -194,6 +228,35 @@ public class OfferController {
 
 		referentService.saveReferent(referent);
 		return new ModelAndView("redirect:offers");
+	}
+	
+
+	@RequestMapping(value = "/newStandardOffer", method = RequestMethod.POST,params="action=Accepter")
+	public ModelAndView acceptStandardOffer(@ModelAttribute StandardOffer ofr,Model model,HttpSession session) {
+/*
+		Responsible responsible=responsibleService.getResponisibleByEmail(ofr.getResponsible().getEmail());
+		Referent referent = referentService.getReferentByName(responsible.getReferent().getName());
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		if(isModerator(staffLille1)){
+			Moderator moderator=moderatorRepository.findByName(staffLille1.getName());
+			model.addAttribute("user",moderator);
+		}
+	//	responsible.setEmail(ofr.getResponsible().getEmail());
+	//	responsible.setFirstName(ofr.getResponsible().getFirstName());
+	//	responsible.setLastName(ofr.getResponsible().getLastName());
+	//	responsible.setPhone(ofr.getResponsible().getPhone());
+	//	referent.addResponsible(responsible);
+	//	responsible.setReferent(referent);
+	//	responsible.addOffer(ofr);
+	//	ofr.setResponsible(responsible);
+	//	ofr.setService(referent.getService());
+		ofr.setStatus("Validated");
+		model.addAttribute("offer",ofr);
+
+
+		referentService.saveReferent(referent);
+		*/
+		return new ModelAndView("offers/gestionOffers");
 	}
 
 
@@ -406,6 +469,31 @@ public class OfferController {
 		}
 
 	}
+	
+	@RequestMapping(value= "/manageOffer",method=RequestMethod.GET)
+	public ModelAndView manageOffer(Model model, HttpSession session,@RequestParam(value = "id", required = true) long id){
+
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		if(isModerator(staffLille1)){
+			Moderator moderator=moderatorRepository.findByName(staffLille1.getName());
+			model.addAttribute("user",moderator);
+		}	
+		AbstractOffer offer = offerRepository.findById(id);
+		responsible=new Responsible();
+		model.addAttribute("responsible", responsible);
+		model.addAttribute("offer",offer);
+		Iterable<Mission> missions = missionRepository.findAll();
+		model.addAttribute("listMission", missions);
+
+		if(offer.getClass().getName().equals("glp.digiteam.entity.offer.GenericOffer")){
+
+			return new ModelAndView("offers/newGenericOffer");
+		}else {
+
+			return new ModelAndView("offers/newStandardOffer");
+		}
+
+	}
 
 
 	@RequestMapping(value = "/offerShow", method = RequestMethod.GET)
@@ -452,6 +540,54 @@ public class OfferController {
 
 		Iterable<AbstractOffer> offers = offerRepository.findAll();
 		model.addAttribute("offers",offers);
+		return new ModelAndView("offers/gestionOffers");
+	}
+	
+	@RequestMapping(value = "/validateGenericOffer", method = RequestMethod.GET)
+	public ModelAndView validateOffer(Model model,@RequestParam(value = "offer", required = true) GenericOffer offer, HttpSession session) {
+		
+		if(offer.getClass().getName().equals("glp.digiteam.entity.offer.GenericOffer")){
+			GenericOffer go=(GenericOffer) offerRepository.findById(offer.getId());
+			System.out.println(go.getId());
+			
+		}
+		else if(offer.getClass().getName().equals("glp.digiteam.entity.offer.StandardOffer")){
+			StandardOffer so=(StandardOffer) offerRepository.findById(offer.getId());
+			System.out.println(so.getId());
+		}
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		if(isModerator(staffLille1)){
+			Moderator moderator=moderatorRepository.findByName(staffLille1.getName());
+			model.addAttribute("user",moderator);
+		}	
+		return new ModelAndView("redirect:offers/gestionOffers");
+	}
+	
+	@RequestMapping(value = "/validateStandardOffer", method = RequestMethod.GET)
+	public ModelAndView validateStandardOffer(Model model,@RequestParam(value = "offer", required = true) StandardOffer offer, HttpSession session) {
+		
+		
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		if(isModerator(staffLille1)){
+			Moderator moderator=moderatorRepository.findByName(staffLille1.getName());
+			model.addAttribute("user",moderator);
+		}	
+		System.out.println(offer.getId());
+		return new ModelAndView("redirect:offers/gestionOffers");
+	}
+	
+	@RequestMapping(value = "/refuseOffer", method = RequestMethod.GET)
+	public ModelAndView refuseOffer(Model model,@RequestParam(value = "id", required = true) long id, HttpSession session) {
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		if(isModerator(staffLille1)){
+			Moderator moderator=moderatorRepository.findByName(staffLille1.getName());
+			model.addAttribute("user",moderator);
+		}	
+		AbstractOffer offer = offerRepository.findById(id);
+		offer.setStatus("Refused");
+		
+		offerService.saveOffer(offer);
+		
 		return new ModelAndView("offers/gestionOffers");
 	}
 

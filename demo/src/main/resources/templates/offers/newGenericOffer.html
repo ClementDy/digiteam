@@ -57,7 +57,7 @@
 
 			<div class="row service">
 				<div class="form-group">
-					<p class="control-label">Cette offre est proposée par le service : <span th:text="${user.service.libelle}"></span>
+					<p class="control-label">Cette offre est proposée par le service : <span th:if="${user.class.name}=='glp.digiteam.entity.offer.Referent'" th:text="${user.service.libelle}"></span><span th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'" th:text="${offer.service.libelle}"></span>
 				</div>
 			</div>
 
@@ -192,14 +192,12 @@
 
 
 			<br> <br>
-			<div th:if="${user.class.name}=='glp.digiteam.entity.offer.Referent'" class="row save">
+			<div class="row save">
 				<article class="col-md-12 col-sm-12">
-					<input type="submit" class="btn btn-lille1" value="Enregistrer">
-				</article>
-			</div>
-			<div th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'" class="row save">
-				<article class="col-md-12 col-sm-12">
-					<input type="submit" class="btn btn-lille1" value="Accepter">
+					<input th:if="${user.class.name}=='glp.digiteam.entity.offer.Referent'"   name="action" type="submit" class="btn btn-lille1" value="Enregistrer">
+					<input th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'"   name="action" type="submit" class="btn btn-success" value="Accepter" >
+					<a th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'" type="submit" class="btn btn-danger" th:href="@{/refuseOffer(id=${offer.id})}" >Refuser</a>
+				
 				</article>
 			</div>
 
