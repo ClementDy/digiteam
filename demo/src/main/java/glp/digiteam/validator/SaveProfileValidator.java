@@ -8,6 +8,8 @@ import java.util.regex.Pattern;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.Validator;
+import org.thymeleaf.util.StringUtils;
+
 import glp.digiteam.entity.student.Student;
 
 public class SaveProfileValidator implements Validator {
@@ -22,15 +24,21 @@ public class SaveProfileValidator implements Validator {
 		Student student = (Student) target;
 
 		// form_infos
-		if (!validateEmailAddress(student.getEmail())) {
+		if (!StringUtils.isEmpty(student.getEmail()) &&
+			!validateEmailAddress(student.getEmail())
+		) {
 			errors.rejectValue("email", "field.invalid");
 		}
 
-		if (!validatePhoneNumber(student.getPhone())) {
+		if (!StringUtils.isEmpty(student.getPhone()) &&
+			!validatePhoneNumber(student.getPhone())
+		) {
 			errors.rejectValue("phone", "field.invalid");
 		}
 		
-		if (!validatePostalCode(student.getAddress().getPostalCode())) {
+		if (!StringUtils.isEmpty(student.getAddress().getPostalCode()) &&
+			!validatePostalCode(student.getAddress().getPostalCode())
+		) {
 			errors.rejectValue("address.postalCode", "field.invalid");
 		}
 		

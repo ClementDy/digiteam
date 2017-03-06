@@ -192,9 +192,14 @@
 
 
 			<br> <br>
-			<div class="row save">
+			<div th:if="${user.class.name}=='glp.digiteam.entity.offer.Referent'" class="row save">
 				<article class="col-md-12 col-sm-12">
 					<input type="submit" class="btn btn-lille1" value="Enregistrer">
+				</article>
+			</div>
+			<div th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'" class="row save">
+				<article class="col-md-12 col-sm-12">
+					<input type="submit" class="btn btn-lille1" value="Accepter">
 				</article>
 			</div>
 

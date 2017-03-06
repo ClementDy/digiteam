@@ -25,7 +25,7 @@
 </head>
 
 <body onload="activeNav('candidatures');initializeMyMission();countChars(document.getElementById('motivations').value);">
-	<div th:include="headerStaffLille1::headerStaffLille1"></div>
+	<div th:include="header::header"></div>
 	<div style="text-align: center" class="container">
 		<h1>Formulaire de candidature</h1>
 		<br>
@@ -66,7 +66,7 @@
 		</ul>
 
 		<form accept-charset="UTF-8" th:action="@{/candidature}"
-			th:object="${user}" method="post" enctype="multipart/form-data">
+			th:object="${student}" method="post" enctype="multipart/form-data">
 
 			<div class="tab-content clearfix">
 				<div th:class="tab-pane" th:classappend="${activeTab == 'intro'} ? 'active'" id="intro">

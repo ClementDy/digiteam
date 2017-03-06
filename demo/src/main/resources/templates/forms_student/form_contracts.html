@@ -29,31 +29,31 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="externalContract, stat : ${user.externalContracts}">
+					<tr th:each="externalContract, stat : ${student.externalContracts}">
 					
-                        <td><input type="text" class="form-control" th:value="${user.externalContracts[__${stat.index}__].employer}" th:field="${user.externalContracts[__${stat.index}__].employer}"></td>
+                        <td><input type="text" class="form-control" th:value="${student.externalContracts[__${stat.index}__].employer}" th:field="${student.externalContracts[__${stat.index}__].employer}"></td>
 					
 						<td>
 					    <div class="input-group input-daterange">
 						    <div class="input-group-addon">Du</div>
-						    <input type="text" class="form-control" th:value="${user.externalContracts[__${stat.index}__].startDate}" th:field="${user.externalContracts[__${stat.index}__].startDate}"
+						    <input type="text" class="form-control" th:value="${student.externalContracts[__${stat.index}__].startDate}" th:field="${student.externalContracts[__${stat.index}__].startDate}"
 						    readonly="readonly" style="cursor:text; background:white;">
 						    <div class="input-group-addon" style="border-left:none; border-right:none">au</div>
-						    <input type="text" class="form-control" th:value="${user.externalContracts[__${stat.index}__].endDate}" th:field="${user.externalContracts[__${stat.index}__].endDate}"
+						    <input type="text" class="form-control" th:value="${student.externalContracts[__${stat.index}__].endDate}" th:field="${student.externalContracts[__${stat.index}__].endDate}"
 						    readonly="readonly" style="cursor:text; background:white;">
 						</div>
 						</td>
 					    
                        	<td>
                        	<div class="form-group" style="margin-bottom:0" th:classappend="${#fields.hasErrors('externalContracts[__${stat.index}__].hours')}? 'has-error has-feedback'">
-                       		<input type="text" class="form-control input-integer" th:value="${user.externalContracts[__${stat.index}__].hours}" th:field="${user.externalContracts[__${stat.index}__].hours}"
+                       		<input type="text" class="form-control input-integer" th:value="${student.externalContracts[__${stat.index}__].hours}" th:field="${student.externalContracts[__${stat.index}__].hours}"
                        		data-toggle="tooltip" data-placement="bottom" th:title="${#strings.listJoin(#fields.errors('externalContracts[__${stat.index}__].hours'), ',')}">
                        		<span th:if="${#fields.hasErrors('externalContracts[__${stat.index}__].hours')}"
                        		class="form-control-feedback glyphicon glyphicon-remove" aria-hidden="true"></span>
 						</div>
 						</td>
                         
-                        <td><input type="text" class="form-control" th:value="${user.externalContracts[__${stat.index}__].missions}" th:field="${user.externalContracts[__${stat.index}__].missions}"></td>
+                        <td><input type="text" class="form-control" th:value="${student.externalContracts[__${stat.index}__].missions}" th:field="${student.externalContracts[__${stat.index}__].missions}"></td>
 					
 					</tr>
 				</tbody>

@@ -65,8 +65,8 @@ public class StudentController {
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public String profile(Model model, HttpSession session) {
 		student=studentService.getStudentByNip(student.getNip());
-		model.addAttribute("user", student);
 		model.addAttribute("student", student);
+		model.addAttribute("user", student);
 		String pathCV = "http://172.28.2.17/"+student.getNip();
 		model.addAttribute("pathCV", pathCV);
 		return "profile";
@@ -98,7 +98,7 @@ public class StudentController {
 
 		} 
 
-		model.addAttribute("user", student);
+		model.addAttribute("student", student);
 
 		
 		Iterable<AbstractOffer> abstractOffers = offerRepository.findLastOffers(new PageRequest(0, 5));
@@ -128,7 +128,7 @@ public class StudentController {
 		} 
 
 		student=studentService.getStudentByNip(student.getNip());
-		model.addAttribute("user", student);
+		model.addAttribute("student", student);
 		
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
@@ -227,13 +227,13 @@ public class StudentController {
 			if (action.equals("Publier")) {
 
 				std.setStatut("published");
-				model.addAttribute("user", std);
+				model.addAttribute("student", std);
 				studentService.saveStudentProfile(std);
 				return new ModelAndView("redirect:home");
 
 			} 
 			std.setStatut("register");
-			model.addAttribute("user", std);
+			model.addAttribute("student", std);
 			studentService.saveStudentProfile(std);
 		}
 
@@ -254,7 +254,7 @@ public class StudentController {
 
 		AbstractOffer offer = offerRepository.findById(id);
 		System.out.println(student);
-		model.addAttribute("user", student);
+		model.addAttribute("student", student);
 		
 		if(offer!=null){
 			model.addAttribute("offer", offer);

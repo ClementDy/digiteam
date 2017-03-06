@@ -361,7 +361,7 @@ public class OfferController {
 			System.out.println(referent.getClass().getName());
 			model.addAttribute("user",referent);
 		}	
-		model.addAttribute("user", studentService.getStudentByNip(nip));
+		model.addAttribute("student", studentService.getStudentByNip(nip));
 		return "profile";
 	}
 
@@ -429,7 +429,7 @@ public class OfferController {
 		}
 		else{
 			Student student=(Student) session.getAttribute("student");
-			model.addAttribute("user",student);
+			model.addAttribute("student",student);
 		}
 		AbstractOffer offer = offerRepository.findById(id);
 
