@@ -24,11 +24,14 @@
 	background-color: #ae2573;
 	color: white;
 	border-radius: 5px;
+	
 }
 
 #searchTitle{
 	margin-left: 1%;
 	font-style: italic;
+	text-align: center;
+	margin-top: 1%;
 }
 
 .searchPart{

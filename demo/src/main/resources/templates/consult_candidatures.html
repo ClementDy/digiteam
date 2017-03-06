@@ -23,23 +23,28 @@
 	
 		
 		<div class="searchPart">
-			<div id="searchTitle">Recherche de candidature(s)</div>
+			<div id="searchTitle">Recherche de candidature(s)</div><br/>
 			<form class="navbar-form" method="post" role="search">
 			
 	    		<div class="row">
-	    			<div class="col-md-2 ">
-	      				<input class="form-control" name="name" id="srch-term" type="text" placeholder="Pr&eacute;nom Nom ">
+	    		
+	    			<div class="col-md-4 col-md-offset-2">
+		    			<div class="input-group">
+						      <span class="input-group-addon">Pr&eacute;nom Nom</span>
+		      				   <input type="text" class="form-control" name="name" id="name" type="text">
+		      			</div>
 	      			</div>
+	    			<div class="col-md-4">
+		    			<div class="input-group">
+						      <span class="input-group-addon">Formation</span>
+		      				   <input type="text" class="form-control" name="formation" id="formation" type="text">
+		      			</div>
+	      			</div>
+	      			
 	      		</div>
-	      		<br/>
-	      		<div class="row">
-	      			<div class="col-md-2">
-						<input class="form-control" name="formation" id="srch-term" type="text" placeholder="Formation">
-	    			</div>
-				</div>
 				<br/>
 				<div class="row">
-					<div class="col-xs-12 col-sm-12 input-group-btn">
+					<div class="col-xs-6 col-sm-6 col-xs-offset-5 input-group-btn">
 		        			<button class="btn btn-default" type="submit">Recherche <i class="glyphicon glyphicon-search"></i></button>
 		     		</div>
 	     		</div>

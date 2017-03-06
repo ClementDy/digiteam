@@ -5,10 +5,11 @@
 
 
 <link type="text/css" href="/css/showOffer.css" rel="stylesheet" />
-
+<script src="js/jquery-1.9.1.min.js"></script>
 <script src="js/header.js"></script>
 
-<script src="js/inputs.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
 <!-- Latest compiled and minified CSS -->
@@ -17,11 +18,10 @@
 
 <link rel="stylesheet" href="css/header.css">
 
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 
-<body>
+<body  onload="activeNav('consult_offers');">
 	
 	<div th:include="headerStaffLille1::headerStaffLille1"></div>
 	<div class="container">
@@ -53,6 +53,14 @@
 		</div>
 		<br />
 		
+		<div class="row" th:if="${offer.startDate != null}">
+			<label class="title">P&eacute;riode</label>
+
+		</div>
+		<div class="row" th:if="${offer.startDate != null}">
+			Du <span th:text="${offer.startDate}"></span> au <span th:text="${offer.endDate}"></span>
+		</div><br/>
+		
 		<div class="row">
 			<label class="title">Comp&eacute;tences n&eacute;cessaires :</label>
 
@@ -72,7 +80,7 @@
 		<br/>
 		<br/>
 
-		<div class="row">
+		<div class="row" th:if="${offer.startDate == null}">
 				<p><span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;Cette offre disponible jusqu'au <span th:text="${offer.validityDate}"></span></p>
 		</div>
 		<br>
