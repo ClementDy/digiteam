@@ -53,11 +53,11 @@
 		</div>
 		<br />
 		
-		<div class="row" th:if="${offer.startDate != null}">
+		<div class="row" th:if="${offer.class.name}=='glp.digiteam.entity.offer.StandardOffer'">
 			<label class="title">P&eacute;riode</label>
 
 		</div>
-		<div class="row" th:if="${offer.startDate != null}">
+		<div class="row" th:if="${offer.class.name}=='glp.digiteam.entity.offer.StandardOffer' ">
 			Du <span th:text="${offer.startDate}"></span> au <span th:text="${offer.endDate}"></span>
 		</div><br/>
 		
@@ -80,7 +80,7 @@
 		<br/>
 		<br/>
 
-		<div class="row" th:if="${offer.startDate == null}">
+		<div class="row" th:if="${offer.class.name}=='glp.digiteam.entity.offer.StandardOffer'">
 				<p><span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;Cette offre disponible jusqu'au <span th:text="${offer.validityDate}"></span></p>
 		</div>
 		<br>
