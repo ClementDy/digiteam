@@ -19,7 +19,7 @@ public class ResponsibleService {
 		return responsibleRepository.save(responsible);
 	}
 	
-	public Responsible getResponisibleByEmail(String email){
+	public Responsible getResponsibleByEmail(String email){
 		if(responsibleRepository.findByEmail(email)!=null){
 			return responsibleRepository.findByEmail(email);
 		}

@@ -38,6 +38,7 @@ import glp.digiteam.repository.MissionRepository;
 import glp.digiteam.repository.ModeratorRepository;
 import glp.digiteam.repository.OfferRepository;
 import glp.digiteam.repository.ReferentRepository;
+import glp.digiteam.repository.ResponsibleRepository;
 import glp.digiteam.repository.StudentRepository;
 import glp.digiteam.services.OfferService;
 import glp.digiteam.services.ReferentService;
@@ -67,7 +68,7 @@ public class OfferController {
 	@Autowired
 	private ResponsibleService responsibleService;
 
-	
+
 	@Autowired
 	private ReferentRepository referentRepository;
 
@@ -153,33 +154,41 @@ public class OfferController {
 		referentService.saveReferent(referent);
 		return new ModelAndView("redirect:offers");
 	}
-	
+
 	@RequestMapping(value = "/newGenericOffer", method = RequestMethod.POST,params="action=Accepter")
 	public ModelAndView acceptGenericOffer(@ModelAttribute GenericOffer ofr,Model model,HttpSession session) {
-		/*
-		Referent referent = new Referent();
+		GenericOffer offre=(GenericOffer) offerRepository.findById(ofr.getId());
+		Referent referent=(Referent) referentRepository.findByName(offre.getResponsible().getReferent().getName());
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		if(isReferent(staffLille1)){
-			referent=referentRepository.findByName(staffLille1.getName());
-			System.out.println(referent.getClass().getName());
-			model.addAttribute("user",referent);
+		if(isModerator(staffLille1)){
+			Moderator moderator=moderatorRepository.findByName(staffLille1.getName());
+			model.addAttribute("user",moderator);
 		}
 
+		offre.setTitle(ofr.getTitle());
+		offre.setComment(ofr.getComment());
+		offre.setMission(ofr.getMission());
+		offre.setModerationDate(new java.util.Date());
+		offre.setRemuneration(ofr.getRemuneration());
+		offre.setRemunerationInfo(ofr.getRemunerationInfo());
 		responsible.setEmail(ofr.getResponsible().getEmail());
-		responsible.setFirstName(ofr.getResponsible().getFirstName());
 		responsible.setLastName(ofr.getResponsible().getLastName());
+		responsible.setFirstName(ofr.getResponsible().getFirstName());
 		responsible.setPhone(ofr.getResponsible().getPhone());
+
 		referent.addResponsible(responsible);
 		responsible.setReferent(referent);
-		responsible.addOffer(ofr);
-		ofr.setService(referent.getService());
-		ofr.setResponsible(responsible);
-		ofr.setStatus("Waiting");
-		model.addAttribute("offer",ofr);
+		responsibleService.saveResponsible(responsible);
+		
+
+		offre.setResponsible(responsible);
+		offre.setSkills(ofr.getSkills());
+		offre.setValidityDate(ofr.getValidityDate());
+		offre.setStatus("Validated");
 
 
-		referentService.saveReferent(referent);*/
-		return new ModelAndView("redirect:offers");
+		referentService.saveReferent(referent);
+		return new ModelAndView("redirect:gestionOffers");
 	}
 
 	@RequestMapping(value = "/newStandardOffer", method = RequestMethod.GET)
@@ -229,34 +238,46 @@ public class OfferController {
 		referentService.saveReferent(referent);
 		return new ModelAndView("redirect:offers");
 	}
-	
+
 
 	@RequestMapping(value = "/newStandardOffer", method = RequestMethod.POST,params="action=Accepter")
 	public ModelAndView acceptStandardOffer(@ModelAttribute StandardOffer ofr,Model model,HttpSession session) {
-/*
-		Responsible responsible=responsibleService.getResponisibleByEmail(ofr.getResponsible().getEmail());
-		Referent referent = referentService.getReferentByName(responsible.getReferent().getName());
+
+		StandardOffer offre=(StandardOffer) offerRepository.findById(ofr.getId());
+		Referent referent=(Referent) referentRepository.findByName(offre.getResponsible().getReferent().getName());
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		if(isModerator(staffLille1)){
 			Moderator moderator=moderatorRepository.findByName(staffLille1.getName());
 			model.addAttribute("user",moderator);
 		}
-	//	responsible.setEmail(ofr.getResponsible().getEmail());
-	//	responsible.setFirstName(ofr.getResponsible().getFirstName());
-	//	responsible.setLastName(ofr.getResponsible().getLastName());
-	//	responsible.setPhone(ofr.getResponsible().getPhone());
-	//	referent.addResponsible(responsible);
-	//	responsible.setReferent(referent);
-	//	responsible.addOffer(ofr);
-	//	ofr.setResponsible(responsible);
-	//	ofr.setService(referent.getService());
-		ofr.setStatus("Validated");
-		model.addAttribute("offer",ofr);
+
+		offre.setTitle(ofr.getTitle());
+		offre.setComment(ofr.getComment());
+		offre.setEndDate(ofr.getEndDate());
+		offre.setHoursPerWeek(ofr.getHoursPerWeek());
+		offre.setMission(ofr.getMission());
+		offre.setModerationDate(new java.util.Date());
+		offre.setRemuneration(ofr.getRemuneration());
+		offre.setRemunerationInfo(ofr.getRemunerationInfo());
+		responsible.setEmail(ofr.getResponsible().getEmail());
+		responsible.setLastName(ofr.getResponsible().getLastName());
+		responsible.setFirstName(ofr.getResponsible().getFirstName());
+		responsible.setPhone(ofr.getResponsible().getPhone());
+
+		referent.addResponsible(responsible);
+		responsible.setReferent(referent);
+		responsibleService.saveResponsible(responsible);
+		
+
+		offre.setResponsible(responsible);
+		offre.setSkills(ofr.getSkills());
+		offre.setStartDate(ofr.getStartDate());
+		offre.setValidityDate(ofr.getValidityDate());
+		offre.setStatus("Validated");
 
 
 		referentService.saveReferent(referent);
-		*/
-		return new ModelAndView("offers/gestionOffers");
+		return new ModelAndView("redirect:gestionOffers");
 	}
 
 
@@ -469,7 +490,7 @@ public class OfferController {
 		}
 
 	}
-	
+
 	@RequestMapping(value= "/manageOffer",method=RequestMethod.GET)
 	public ModelAndView manageOffer(Model model, HttpSession session,@RequestParam(value = "id", required = true) long id){
 
@@ -517,7 +538,7 @@ public class OfferController {
 		}
 		else{
 			Student student=(Student) session.getAttribute("student");
-		    model.addAttribute("user",student);
+			model.addAttribute("user",student);
 		}
 		AbstractOffer offer = offerRepository.findById(id);
 
@@ -542,14 +563,14 @@ public class OfferController {
 		model.addAttribute("offers",offers);
 		return new ModelAndView("offers/gestionOffers");
 	}
-	
+
 	@RequestMapping(value = "/validateGenericOffer", method = RequestMethod.GET)
 	public ModelAndView validateOffer(Model model,@RequestParam(value = "offer", required = true) GenericOffer offer, HttpSession session) {
-		
+
 		if(offer.getClass().getName().equals("glp.digiteam.entity.offer.GenericOffer")){
 			GenericOffer go=(GenericOffer) offerRepository.findById(offer.getId());
 			System.out.println(go.getId());
-			
+
 		}
 		else if(offer.getClass().getName().equals("glp.digiteam.entity.offer.StandardOffer")){
 			StandardOffer so=(StandardOffer) offerRepository.findById(offer.getId());
@@ -562,11 +583,11 @@ public class OfferController {
 		}	
 		return new ModelAndView("redirect:offers/gestionOffers");
 	}
-	
+
 	@RequestMapping(value = "/validateStandardOffer", method = RequestMethod.GET)
 	public ModelAndView validateStandardOffer(Model model,@RequestParam(value = "offer", required = true) StandardOffer offer, HttpSession session) {
-		
-		
+
+
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		if(isModerator(staffLille1)){
 			Moderator moderator=moderatorRepository.findByName(staffLille1.getName());
@@ -575,7 +596,7 @@ public class OfferController {
 		System.out.println(offer.getId());
 		return new ModelAndView("redirect:offers/gestionOffers");
 	}
-	
+
 	@RequestMapping(value = "/refuseOffer", method = RequestMethod.GET)
 	public ModelAndView refuseOffer(Model model,@RequestParam(value = "id", required = true) long id, HttpSession session) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
@@ -585,10 +606,10 @@ public class OfferController {
 		}	
 		AbstractOffer offer = offerRepository.findById(id);
 		offer.setStatus("Refused");
-		
+
 		offerService.saveOffer(offer);
-		
-		return new ModelAndView("offers/gestionOffers");
+
+		return new ModelAndView("redirect:gestionOffers");
 	}
 
 	public boolean isAdministrator(StaffLille1 staffLille1){

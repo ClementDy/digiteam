@@ -41,9 +41,10 @@
 
 
 
-		<form accept-charset="UTF-8" data-toggle="validator" name="formgeneric"
-			role="form" th:action="@{/newGenericOffer}" th:object="${offer}"
-			method="post" enctype="multipart/form-data" onsubmit="return validateFormGeneric()">
+		<form accept-charset="UTF-8" data-toggle="validator"
+			name="formgeneric" role="form" th:action="@{/newGenericOffer}"
+			th:object="${offer}" method="post" enctype="multipart/form-data"
+			onsubmit="return validateFormGeneric()">
 
 
 			<br>
@@ -57,10 +58,23 @@
 
 			<div class="row service">
 				<div class="form-group">
-					<p class="control-label">Cette offre est proposée par le service : <span th:if="${user.class.name}=='glp.digiteam.entity.offer.Referent'" th:text="${user.service.libelle}"></span><span th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'" th:text="${offer.service.libelle}"></span>
+					<p class="control-label">
+						Cette offre est proposée par le service : <span
+							th:if="${user.class.name}=='glp.digiteam.entity.offer.Referent'"
+							th:text="${user.service.libelle}"></span><span
+							th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'"
+							th:text="${offer.service.libelle}"></span>
 				</div>
 			</div>
 
+
+			<div class="row" style="display: none">
+				<div class="form-group">
+					<div class="col-md-6">
+						<input th:field="${offer.id}" type="text" class="form-control">
+					</div>
+				</div>
+			</div>
 			<br>
 
 			<div class="row">
@@ -130,12 +144,14 @@
 
 			<br>
 
-			<div class="row" >
+			<div class="row">
 				<div class="form-group col-md-3">
 					<label>Date de validit&eacute; : </label> <input type="text"
-						class="form-control input-date validityOffer"   th:field="${offer.validityDate}"
-						readonly="readonly" style="cursor: text; background: white;" data-date-start-date="0d" data-date-end-date="+6m" required>
-					
+						class="form-control input-date validityOffer"
+						th:field="${offer.validityDate}" readonly="readonly"
+						style="cursor: text; background: white;" data-date-start-date="0d"
+						data-date-end-date="+6m" required>
+
 				</div>
 			</div>
 
@@ -194,16 +210,23 @@
 			<br> <br>
 			<div class="row save">
 				<article class="col-md-12 col-sm-12">
-					<input th:if="${user.class.name}=='glp.digiteam.entity.offer.Referent'"   name="action" type="submit" class="btn btn-lille1" value="Enregistrer">
-					<input th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'"   name="action" type="submit" class="btn btn-success" value="Accepter" >
-					<a th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'" type="submit" class="btn btn-danger" th:href="@{/refuseOffer(id=${offer.id})}" >Refuser</a>
-				
+					<input
+						th:if="${user.class.name}=='glp.digiteam.entity.offer.Referent'"
+						name="action" type="submit" class="btn btn-lille1"
+						value="Enregistrer"> <input
+						th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'"
+						name="action" type="submit" class="btn btn-success"
+						value="Accepter"> <a
+						th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'"
+						type="submit" class="btn btn-danger"
+						th:href="@{/refuseOffer(id=${offer.id})}">Refuser</a>
+
 				</article>
 			</div>
 
 
 
-			
+
 
 
 		</form>
