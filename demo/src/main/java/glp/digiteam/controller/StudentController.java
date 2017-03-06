@@ -1,7 +1,5 @@
 package glp.digiteam.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -144,7 +141,7 @@ public class StudentController {
 		
 		studentService.saveStudentProfile(student);
 
-		return new ModelAndView("candidature::tab(activeTab='intro')");
+		return new ModelAndView("candidature::tab(activeTab='intro', saved='false')");
 	}
 
 	@RequestMapping(value = "/candidature", method = RequestMethod.POST)
@@ -167,9 +164,10 @@ public class StudentController {
 					model.addAttribute("errorTabs", errorTabs);
 					
 					return new ModelAndView(
-							"candidature::tab(activeTab='"
-									+ saveValidator.getFirstErrorTab(bindingResult)
-									+ "')");
+							"candidature::tab("
+									+ "activeTab='" + saveValidator.getFirstErrorTab(bindingResult) + "'"
+									+ ", saved='false'"
+									+ ")");
 				}
 			}
 			
@@ -185,9 +183,10 @@ public class StudentController {
 					model.addAttribute("errorTabs", errorTabs);
 					
 					return new ModelAndView(
-							"candidature::tab(activeTab='"
-							+ publishValidator.getFirstErrorTab(bindingResult)
-							+ "')");
+							"candidature::tab("
+									+ "activeTab='" + publishValidator.getFirstErrorTab(bindingResult) + "'"
+									+ ", saved='false'"
+									+ ")");
 				}
 			}
 
@@ -248,9 +247,10 @@ public class StudentController {
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
 		return new ModelAndView(
-				"candidature::tab(activeTab='"+
-				currentTab+
-				"')");
+				"candidature::tab("
+						+ "activeTab='"+ currentTab + "'"
+						+ ", saved='true'"
+						+ ")");
 	}
 
 	

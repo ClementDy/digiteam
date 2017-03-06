@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="tab(activeTab)">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="tab(activeTab, saved)">
 <head>
 
 <link type="text/css" href="/css/form.css" rel="stylesheet" />
@@ -24,8 +24,10 @@
 
 </head>
 
-<body onload="activeNav('candidatures');initializeMyMission();countChars(document.getElementById('motivations').value);">
-		<div  th:include="headerStaffLille1::headerStaffLille1"></div>
+<body onload="activeNav('candidatures');initializeMyMission();countChars(document.getElementById('motivations').value);"
+	th:attrappend="onload=${saved == 'true'} ? 'displaySavedDialog();'">
+	
+	<div  th:include="header::header"></div>
 	<div style="text-align: center" class="container">
 		<h1>Formulaire de candidature</h1>
 		<br>
@@ -116,16 +118,33 @@
 				<article class="col-md-12 col-sm-12">
 					<input id="currentTab" type="hidden" name="currentTab" th:value="${activeTab}">
 					<input type="submit" class="btn btn-lille1" name="action" value="Enregistrer" 
-					onclick="selectMission();setCurrentTab();alert('Profil enregistré');">
+					onclick="selectMission();setCurrentTab();">
 				</article>
 			</div>
-		
+			
+			<div class="modal fade" id="confirm-save" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">Profil enregistré</h4>
+						</div>
+						<div class="modal-body">
+							<a class="btn btn-lille1" data-dismiss="modal">Ok</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			
 		</form>
 	</div>
 	<br>
 	<br>
 	
 	<script>
+		function displaySavedDialog() {
+			$('#confirm-save').modal('show');
+		}
+
 		function setCurrentTab() {
 			$('#currentTab').val( $('.tab-content').find('.active').attr('id') );
 		}
