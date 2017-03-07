@@ -53,17 +53,17 @@ public class StudentController {
 	private final StorageService storageService;
 
 	private Student student;
-	
+
 
 	@Autowired
 	private StudentService studentService;
 
 	@Autowired
 	private MissionRepository missionRepository;
-	
+
 	@Autowired
 	private OfferRepository offerRepository;
-	
+
 
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public String profile(Model model, HttpSession session) {
@@ -106,9 +106,9 @@ public class StudentController {
 			model.addAttribute("user", student);
 		}
 
-		
 
-		
+
+
 		Iterable<AbstractOffer> abstractOffers = offerRepository.findLastOffers(new PageRequest(0, 5));
 
 		model.addAttribute("abstractOffers",abstractOffers);
@@ -138,13 +138,13 @@ public class StudentController {
 		student=studentService.getStudentByNip(student.getNip());
 		model.addAttribute("student", student);
 		model.addAttribute("user", student);
-		
+
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
-		
+
 		String pathCV = "http://172.28.2.17/"+student.getNip();
 		model.addAttribute("pathCV", pathCV);
-		
+
 		studentService.saveStudentProfile(student);
 
 		return new ModelAndView("candidature::tab(activeTab='intro', saved='false')");
@@ -155,20 +155,20 @@ public class StudentController {
 			@RequestParam("file") MultipartFile file, @RequestParam(value = "action", required = true) String action,
 			@RequestParam(value="currentTab", required=false, defaultValue="intro") String currentTab,
 			RedirectAttributes redirectAttributes, Model model, Errors e, HttpSession session) {
-		
+
 		if (action.equals("Enregistrer") || action.equals("Publier")) {
 
 			if (action.equals("Enregistrer")) {
 				SaveProfileValidator saveValidator = new SaveProfileValidator();
 				saveValidator.validate(std, bindingResult);
-				
+
 				if (bindingResult.hasErrors()) {
 					Iterable<Mission> missions = missionRepository.findAll();
 					model.addAttribute("listMission", missions);
-					
+
 					Iterable<String> errorTabs = saveValidator.getErrorTabs(bindingResult);
 					model.addAttribute("errorTabs", errorTabs);
-					
+
 					return new ModelAndView(
 							"candidature::tab("
 									+ "activeTab='" + saveValidator.getFirstErrorTab(bindingResult) + "'"
@@ -176,7 +176,7 @@ public class StudentController {
 									+ ")");
 				}
 			}
-			
+
 			if (action.equals("Publier")) {
 				PublishProfileValidator publishValidator = new PublishProfileValidator();
 				publishValidator.validate(std, bindingResult);
@@ -187,7 +187,7 @@ public class StudentController {
 
 					Iterable<String> errorTabs = publishValidator.getErrorTabs(bindingResult);
 					model.addAttribute("errorTabs", errorTabs);
-					
+
 					return new ModelAndView(
 							"candidature::tab("
 									+ "activeTab='" + publishValidator.getFirstErrorTab(bindingResult) + "'"
@@ -233,7 +233,7 @@ public class StudentController {
 				redirectAttributes.addFlashAttribute("message",
 						"You successfully uploaded " + file.getOriginalFilename() + "!");
 			}
-			
+
 
 			if (action.equals("Publier")) {
 
@@ -259,7 +259,7 @@ public class StudentController {
 						+ ")");
 	}
 
-	
+
 	@RequestMapping(value = "/offer", method = RequestMethod.GET)
 	public ModelAndView showOffer(Model model, HttpSession session,@RequestParam(value = "id", required = true) long id) {
 		if (session.getAttribute("student") == null) {
@@ -274,49 +274,29 @@ public class StudentController {
 			model.addAttribute("offer", offer);
 			return new ModelAndView("offers/offerAbstract");
 		}
-		
+
 		return new ModelAndView("homeStudent");
 	}
-	
-	
+
+
 	@RequestMapping(value = "/deconnexionStudent", method = RequestMethod.GET)
 	public ModelAndView deconnexion(Model model, HttpSession session,final ServletRequest servletRequest, HttpServletResponse response) {
 		if (session.getAttribute("student") == null) {
 			return new ModelAndView("redirect:authentication");
 		}
 
-		
-session.invalidate();
-		
-		/*final HttpServletRequest request = (HttpServletRequest) servletRequest;
-		session=request.getSession();  
-		request.getSession(false);
-        session.invalidate();
-        
-/*AttributePrincipal principal = (AttributePrincipal)request.getUserPrincipal();
-		
-		Map<String,Object> attributes = principal.getAttributes();
-		 
-		Iterator attributeNames = attributes.keySet().iterator();
-		 
-		
-		 
-		while( attributeNames.hasNext()) {
-	
-		String attributeName = (String) attributeNames.next();
-		System.out.print(attributeName+ "2 : ");
-		       Object attributeValue = attributes.get(attributeName);
-		      System.out.println(attributeValue);
-		    
-		}*/
+
+		session.invalidate();
+
+
 		return new ModelAndView("redirect:https://sso-cas.univ-lille1.fr/logout");
 	}
-	
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
-	    binder.registerCustomEditor(String.class, new StringTrimmerEditor(false));
+		binder.registerCustomEditor(String.class, new StringTrimmerEditor(false));
 	}
-	
+
 	/*
 	 * @InitBinder private void dateBinder(WebDataBinder binder) {
 	 * SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
