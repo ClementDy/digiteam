@@ -36,6 +36,18 @@ public class OfferService {
 		return offerRepository.save(offer);
 	}
 	
+	public boolean dispublish(long id, Referent ref){
+		AbstractOffer offer = offerRepository.findById(id);
+		System.out.println(offer.getResponsible().getReferent().getName());
+		if(offer.getResponsible().getReferent()==ref){
+			System.out.println("testttt");
+			offer.setStatus("Expired");
+			offerRepository.save(offer);
+			return true;
+		}
+		return false;
+	}
+	
 	public List<AbstractOffer> findLastOffers(Pageable pageable){
 		return  offerRepository.findLastOffers(pageable);
 	}
