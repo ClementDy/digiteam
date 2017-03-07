@@ -1,0 +1,31 @@
+
+body,html{
+	height:100%;
+	text-align:center;
+}
+
+.haut{
+	height:50%;
+	background:white;
+	text-align:center;
+}
+
+.bas{
+	height:50%;
+	color:white;
+	background:#ae2573;
+	text-align:center;
+	font-size:300%;
+}
+
+.bas button{
+	color:#ae2573;
+}
+
+.numError{
+	text-align:center;
+	font-size:1000%;
+ 	position:absolute;
+    bottom: 50%;
+    left:43%;
+}

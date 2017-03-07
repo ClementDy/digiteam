@@ -83,6 +83,8 @@ public class AdministratorController {
 		
 		return "administrator/gestionReferent";
 	}
+	
+
 
 	@RequestMapping(value = "/homeStaffLille1", method = RequestMethod.GET)
 	public String getHomeStaffLille1(Model model,HttpSession session) {
