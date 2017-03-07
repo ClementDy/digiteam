@@ -71,7 +71,7 @@
 			<div class="row" style="display: none">
 				<div class="form-group">
 					<div class="col-md-6">
-						<input th:field="${offer.id}" type="text" class="form-control">
+						<input th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'" th:field="${offer.id}" type="text" class="form-control">
 					</div>
 				</div>
 			</div>
