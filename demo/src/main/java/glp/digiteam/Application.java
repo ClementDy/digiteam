@@ -9,8 +9,9 @@ import org.springframework.context.annotation.Bean;
 import glp.digiteam.uploadFile.StorageProperties;
 import glp.digiteam.uploadFile.StorageService;
 //import net.unicon.cas.client.configuration.EnableCasClient;
+import net.unicon.cas.client.configuration.EnableCasClient;
 
-//@EnableCasClient
+@EnableCasClient
 @SpringBootApplication
 @EnableConfigurationProperties(StorageProperties.class)
 public class Application {

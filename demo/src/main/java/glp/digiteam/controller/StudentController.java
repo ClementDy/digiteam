@@ -1,5 +1,11 @@
 package glp.digiteam.controller;
 
+
+import java.util.List;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -274,14 +280,36 @@ public class StudentController {
 	
 	
 	@RequestMapping(value = "/deconnexionStudent", method = RequestMethod.GET)
-	public ModelAndView deconnexion(Model model, HttpSession session) {
+	public ModelAndView deconnexion(Model model, HttpSession session,final ServletRequest servletRequest, HttpServletResponse response) {
 		if (session.getAttribute("student") == null) {
 			return new ModelAndView("redirect:authentication");
 		}
 
-		this.student = null;
+		
+session.invalidate();
+		
+		/*final HttpServletRequest request = (HttpServletRequest) servletRequest;
+		session=request.getSession();  
+		request.getSession(false);
+        session.invalidate();
+        
+/*AttributePrincipal principal = (AttributePrincipal)request.getUserPrincipal();
+		
+		Map<String,Object> attributes = principal.getAttributes();
+		 
+		Iterator attributeNames = attributes.keySet().iterator();
+		 
+		
+		 
+		while( attributeNames.hasNext()) {
 	
-		return new ModelAndView("redirect:authentication");
+		String attributeName = (String) attributeNames.next();
+		System.out.print(attributeName+ "2 : ");
+		       Object attributeValue = attributes.get(attributeName);
+		      System.out.println(attributeValue);
+		    
+		}*/
+		return new ModelAndView("redirect:https://sso-cas.univ-lille1.fr/logout");
 	}
 	
 	@InitBinder
