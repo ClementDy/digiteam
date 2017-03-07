@@ -1,6 +1,12 @@
 package glp.digiteam.controller;
 
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 import javax.servlet.ServletRequest;
@@ -280,15 +286,46 @@ public class StudentController {
 
 
 	@RequestMapping(value = "/deconnexionStudent", method = RequestMethod.GET)
-	public ModelAndView deconnexion(Model model, HttpSession session,final ServletRequest servletRequest, HttpServletResponse response) {
-		return new ModelAndView("http://sso-cas.univ-lille1.fr/logout");
+	public ModelAndView deconnexion(Model model, HttpSession session,final ServletRequest servletRequest, HttpServletResponse response) throws IOException {
+		System.out.println("*************************************************************************");
 		/*if (session.getAttribute("student") == null) {
 			return new ModelAndView("redirect:authentication");
 		}
 
 
 		session.invalidate();*/
+		String url = "https://sso-cas.univ-lille1.fr/logout";
+		System.out.println(url);
+		URL obj = new URL(url);
+		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+		// optional default is GET
+		con.setRequestMethod("GET");
+
+		//add request header
+		con.setRequestProperty("http.agent", "");
+		con.setRequestProperty("", "");
+		int responseCode = con.getResponseCode();
+		System.out.println("\nSending 'GET' request to URL : " + url);
+		System.out.println("Response Code : " + responseCode);
+		
+		BufferedReader in = new BufferedReader(
+		        new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		StringBuffer responsebuf = new StringBuffer();
+		System.out.println(responsebuf.toString());
+		while ((inputLine = in.readLine()) != null) {
+			responsebuf.append(inputLine);
+		}
+		in.close();
+		session.invalidate();
+		
+		//print result
+		
+		return new ModelAndView("redirect:https://sso-cas.univ-lille1.fr/logout");
 	}
+
+	
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
