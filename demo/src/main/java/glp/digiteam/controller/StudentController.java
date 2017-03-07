@@ -281,15 +281,13 @@ public class StudentController {
 
 	@RequestMapping(value = "/deconnexionStudent", method = RequestMethod.GET)
 	public ModelAndView deconnexion(Model model, HttpSession session,final ServletRequest servletRequest, HttpServletResponse response) {
-		if (session.getAttribute("student") == null) {
+		return new ModelAndView("http://sso-cas.univ-lille1.fr/logout");
+		/*if (session.getAttribute("student") == null) {
 			return new ModelAndView("redirect:authentication");
 		}
 
 
-		session.invalidate();
-
-
-		return new ModelAndView("redirect:https://sso-cas.univ-lille1.fr/logout");
+		session.invalidate();*/
 	}
 
 	@InitBinder
