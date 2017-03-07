@@ -34,7 +34,8 @@
 	<div class="container containerOffer">
 
 		<div>
-			<h3>Cr&eacute;ation d'une nouvelle offre standard</h3>
+			<h3 th:if="${user.class.name}=='glp.digiteam.entity.offer.Referent'">Cr&eacute;ation d'une nouvelle offre standard</h3>
+			<h3 th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'">Mod&eacute;ration d'une offre Standard</h3>
 		</div>
 
 		<br> <br>
@@ -235,8 +236,26 @@
 					</div>
 				</div>
 			</div>
-
-
+			
+			<div class="titreOffre">
+				<h4>Mod&eacute;ration</h4>
+			</div>
+			
+			<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-2"> Commentaires :</label>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="form-group">
+						<div class="col-md-6">
+						<input th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'" th:field="${offer.comment}" type="text"
+							class="form-control">
+					</div>
+				</div>
+			</div>
+			
 			<br> <br>
 			<div class="row save">
 				<article class="col-md-12 col-sm-12">

@@ -205,7 +205,28 @@
 					</div>
 				</div>
 			</div>
+			
+			<br>
+			<br>
 
+			<div class="titreOffre">
+				<h4>Mod&eacute;ration</h4>
+			</div>
+			
+			<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-2"> Commentaires :</label>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="form-group">
+						<div class="col-md-12">
+						<input th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'" th:field="${offer.comment}" type="text"
+							class="form-control">
+					</div>
+				</div>
+			</div>
 
 			<br> <br>
 			<div class="row save">
