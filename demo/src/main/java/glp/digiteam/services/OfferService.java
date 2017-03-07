@@ -36,16 +36,23 @@ public class OfferService {
 		return offerRepository.save(offer);
 	}
 	
-	public boolean dispublish(long id, Referent ref){
+	public void dispublish(long id, Referent ref){
 		AbstractOffer offer = offerRepository.findById(id);
-		System.out.println(offer.getResponsible().getReferent().getName());
-		if(offer.getResponsible().getReferent()==ref){
-			System.out.println("testttt");
-			offer.setStatus("Expired");
-			offerRepository.save(offer);
-			return true;
+		if(offer!=null){
+			if(offer.getResponsible().getReferent()==ref){
+				offer.setStatus("Expired");
+				offerRepository.save(offer);	
+			}
 		}
-		return false;
+	}
+	
+	public void removeOffer(long id, Referent ref){
+		AbstractOffer offer = offerRepository.findById(id);
+		if(offer!=null){
+			if(offer.getResponsible().getReferent()==ref){
+				offerRepository.delete(offer);
+			}
+		}
 	}
 	
 	public List<AbstractOffer> findLastOffers(Pageable pageable){
