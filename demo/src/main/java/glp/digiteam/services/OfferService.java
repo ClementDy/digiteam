@@ -36,6 +36,25 @@ public class OfferService {
 		return offerRepository.save(offer);
 	}
 	
+	public void dispublish(long id, Referent ref){
+		AbstractOffer offer = offerRepository.findById(id);
+		if(offer!=null){
+			if(offer.getResponsible().getReferent()==ref){
+				offer.setStatus("Expired");
+				offerRepository.save(offer);	
+			}
+		}
+	}
+	
+	public void removeOffer(long id, Referent ref){
+		AbstractOffer offer = offerRepository.findById(id);
+		if(offer!=null){
+			if(offer.getResponsible().getReferent()==ref){
+				offerRepository.delete(offer);
+			}
+		}
+	}
+	
 	public List<AbstractOffer> findLastOffers(Pageable pageable){
 		return  offerRepository.findLastOffers(pageable);
 	}

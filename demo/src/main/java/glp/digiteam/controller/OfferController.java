@@ -240,6 +240,35 @@ public class OfferController {
 	}
 
 
+	@RequestMapping(value = "/dispublish", method = RequestMethod.GET)
+	public String dispublish(Model model,@RequestParam(value = "", required = true) long id, HttpSession session) {
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		if(isReferent(staffLille1)){
+			Referent ref=referentRepository.findByName(staffLille1.getName());
+			System.out.println(ref.getClass().getName());
+			model.addAttribute("user",ref);
+			offerService.dispublish(id, ref);
+		}
+		model.addAttribute("referent", referent);
+		
+		return "offers/offersHome";
+		
+	}
+	
+	@RequestMapping(value = "/removeOffer", method = RequestMethod.GET)
+	public String removeOffer(Model model,@RequestParam(value = "", required = true) long id, HttpSession session) {
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		if(isReferent(staffLille1)){
+			Referent ref=referentRepository.findByName(staffLille1.getName());
+			System.out.println(ref.getClass().getName());
+			model.addAttribute("user",ref);
+			offerService.removeOffer(id, ref);
+		}
+		model.addAttribute("referent", referent);
+		
+		return "offers/offersHome";
+		
+	}
 	@RequestMapping(value = "/newStandardOffer", method = RequestMethod.POST,params="action=Accepter")
 	public ModelAndView acceptStandardOffer(@ModelAttribute StandardOffer ofr,Model model,HttpSession session) {
 
