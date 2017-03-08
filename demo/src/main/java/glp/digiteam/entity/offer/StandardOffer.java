@@ -3,8 +3,11 @@ package glp.digiteam.entity.offer;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 
+import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
+
 
 
 @Entity
@@ -27,8 +30,12 @@ public class StandardOffer extends AbstractOffer implements Offer{
 
 
 
-
+	@Lob
+	@Type(type="org.hibernate.type.TextType")
 	private String mission;
+	
+	@Lob
+	@Type(type="org.hibernate.type.TextType")
 	private String skills;
 	
 	

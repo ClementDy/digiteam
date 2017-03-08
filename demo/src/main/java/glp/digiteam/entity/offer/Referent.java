@@ -16,30 +16,17 @@ public class Referent extends StaffLille1{
 
 
 
-	@OneToMany(mappedBy="referent", cascade=CascadeType.ALL)
-	private List<Responsible> responsible = new ArrayList<Responsible>();
 
 	@ManyToOne
 	private ServiceEntity service ;
 	
+	
+	@OneToMany(mappedBy="referent", cascade=CascadeType.ALL,targetEntity=AbstractOffer.class)
+	private List<AbstractOffer> offers = new ArrayList<AbstractOffer>();
+
 
 	public Referent(){
 		
-	}
-
-
-
-
-	public List<Responsible> getResponsible() {
-		return responsible;
-	}
-
-	public void setResponsible(List<Responsible> responsible) {
-		this.responsible = responsible;
-	}
-	
-	public void addResponsible(Responsible responsible){
-		this.responsible.add(responsible);
 	}
 
 
@@ -53,5 +40,23 @@ public class Referent extends StaffLille1{
 	public void setService(ServiceEntity service) {
 		this.service = service;
 	}
+
+
+
+	public List<AbstractOffer> getOffers() {
+		return offers;
+	}
+	
+	public void addOffer(AbstractOffer offer){
+		this.offers.add(offer);
+	}
+
+
+
+	public void setOffers(List<AbstractOffer> offers) {
+		this.offers = offers;
+	}
+	
+	
 
 }

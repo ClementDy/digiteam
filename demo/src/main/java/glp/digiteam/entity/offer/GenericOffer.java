@@ -1,6 +1,9 @@
 package glp.digiteam.entity.offer;
 
 import javax.persistence.Entity;
+import javax.persistence.Lob;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 public class GenericOffer extends AbstractOffer implements Offer {
@@ -8,7 +11,13 @@ public class GenericOffer extends AbstractOffer implements Offer {
 	private double remuneration;
 	private String remunerationInfo;
 	private String type;
+	
+	@Lob
+	@Type(type="org.hibernate.type.TextType")
 	private String mission;
+	
+	@Lob
+	@Type(type="org.hibernate.type.TextType")
 	private String skills;
 
 	public GenericOffer() {

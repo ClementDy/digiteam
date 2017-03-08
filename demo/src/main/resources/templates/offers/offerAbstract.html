@@ -49,7 +49,7 @@
 		</div>
 		
 		<div class="row">
-			<span th:text="${offer.mission}"></span>
+			<p th:text="${offer.mission}"></p>
 		</div>
 		<br />
 		
@@ -66,7 +66,7 @@
 
 		</div>
 		<div class="row">
-			<span th:text="${offer.skills}"></span>
+			<p th:text="${offer.skills}"></p>
 		</div><br/>
 		
 		<div class="row">
@@ -94,14 +94,14 @@
 
 		<div class="row">
 				<p>Resonsable de l'offre &agrave contacter :
-				 <b><span th:text="${offer.responsible.lastName}"></span>&nbsp;
-				 <span th:text="${offer.responsible.firstName}"></span></b></p>
+				 <b><span th:text="${offer.lastNameResponsible}"></span>&nbsp;
+				 <span th:text="${offer.firstNameResponsible}"></span></b></p>
 		</div>
 		<div class="row">
-		     <p>Email : <b><span th:text="${offer.responsible.email}"></span></b></p>
+		     <p>Email : <b><span th:text="${offer.emailResponsible}"></span></b></p>
 		</div>
 		<div class="row">
-		     <p>T&eacutel&eacutephone : <b><span th:text="${offer.responsible.phone}"></span></b></p>
+		     <p>T&eacutel&eacutephone : <b><span th:text="${offer.phoneResponsible}"></span></b></p>
 		</div>
 
 

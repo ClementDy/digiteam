@@ -45,13 +45,7 @@
 							<input type="text" class="form-control" name="num_offer" id="num_offer" type="text">
 	    				</div>
 	    			</div>
-	    		
-	    			<div class="col-md-4">
-		    			<div class="input-group">
-						      <span class="input-group-addon">Responsable</span>
-		      				   <input type="text" class="form-control" name="responsive" id="responsive" type="text">
-		      			</div>
-	      			</div>
+	    	
 	      			
 	      		</div>
 				<br/>
@@ -93,8 +87,8 @@
 					<tr th:each="offer: ${listOffers}"">
 						<td><label th:text="${offer.id}"></label></td>
 						<td th:text="${offer.title}"></td>
-						<td><span th:text="${offer.responsible.firstName}"></span><span></span>
-							<span th:text="${offer.responsible.lastName}"></span></td>
+						<td><span th:text="${offer.firstNameResponsible}"></span><span></span>
+							<span th:text="${offer.lastNameResponsible}"></span></td>
 						<td th:text="${offer.validityDate}"></td>
 
 

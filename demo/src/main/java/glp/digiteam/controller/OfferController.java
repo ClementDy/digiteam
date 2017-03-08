@@ -3,21 +3,16 @@ package glp.digiteam.controller;
 import java.util.Calendar;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.MultiValueMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,9 +21,7 @@ import glp.digiteam.entity.offer.AbstractOffer;
 import glp.digiteam.entity.offer.Administrator;
 import glp.digiteam.entity.offer.GenericOffer;
 import glp.digiteam.entity.offer.Moderator;
-import glp.digiteam.entity.offer.Offer;
 import glp.digiteam.entity.offer.Referent;
-import glp.digiteam.entity.offer.Responsible;
 import glp.digiteam.entity.offer.StaffLille1;
 import glp.digiteam.entity.offer.StandardOffer;
 import glp.digiteam.entity.student.Mission;
@@ -38,11 +31,8 @@ import glp.digiteam.repository.MissionRepository;
 import glp.digiteam.repository.ModeratorRepository;
 import glp.digiteam.repository.OfferRepository;
 import glp.digiteam.repository.ReferentRepository;
-import glp.digiteam.repository.ResponsibleRepository;
-import glp.digiteam.repository.StudentRepository;
 import glp.digiteam.services.OfferService;
 import glp.digiteam.services.ReferentService;
-import glp.digiteam.services.ResponsibleService;
 import glp.digiteam.services.StudentService;
 
 
@@ -66,16 +56,11 @@ public class OfferController {
 	private ReferentService referentService;
 
 	@Autowired
-	private ResponsibleService responsibleService;
-
-
-	@Autowired
 	private ReferentRepository referentRepository;
 
 	@Autowired
 	private StudentService studentService;
 
-	private Responsible responsible;
 
 	@Autowired
 	private OfferRepository offerRepository;
@@ -120,7 +105,6 @@ public class OfferController {
 		}
 
 		GenericOffer offer=new GenericOffer();
-		responsible=new Responsible();	
 		model.addAttribute("offer", offer);
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
@@ -138,15 +122,11 @@ public class OfferController {
 			model.addAttribute("user",referent);
 		}
 
-		responsible.setEmail(ofr.getResponsible().getEmail());
-		responsible.setFirstName(ofr.getResponsible().getFirstName());
-		responsible.setLastName(ofr.getResponsible().getLastName());
-		responsible.setPhone(ofr.getResponsible().getPhone());
-		referent.addResponsible(responsible);
-		responsible.setReferent(referent);
-		responsible.addOffer(ofr);
+		
+		referent.addOffer(ofr);
 		ofr.setService(referent.getService());
-		ofr.setResponsible(responsible);
+		ofr.setReferent(referent);
+
 		ofr.setStatus("Waiting");
 		model.addAttribute("offer",ofr);
 
@@ -158,7 +138,7 @@ public class OfferController {
 	@RequestMapping(value = "/newGenericOffer", method = RequestMethod.POST,params="action=Accepter")
 	public ModelAndView acceptGenericOffer(@ModelAttribute GenericOffer ofr,Model model,HttpSession session) {
 		GenericOffer offre=(GenericOffer) offerRepository.findById(ofr.getId());
-		Referent referent=(Referent) referentRepository.findByName(offre.getResponsible().getReferent().getName());
+	//	Referent referent=(Referent) referentRepository.findByName(offre.getResponsible().getReferent().getName());
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		if(isModerator(staffLille1)){
 			Moderator moderator=moderatorRepository.findByName(staffLille1.getName());
@@ -171,17 +151,10 @@ public class OfferController {
 		offre.setModerationDate(new java.util.Date());
 		offre.setRemuneration(ofr.getRemuneration());
 		offre.setRemunerationInfo(ofr.getRemunerationInfo());
-		responsible.setEmail(ofr.getResponsible().getEmail());
-		responsible.setLastName(ofr.getResponsible().getLastName());
-		responsible.setFirstName(ofr.getResponsible().getFirstName());
-		responsible.setPhone(ofr.getResponsible().getPhone());
+	
 
-		referent.addResponsible(responsible);
-		responsible.setReferent(referent);
-		responsibleService.saveResponsible(responsible);
 		
 
-		offre.setResponsible(responsible);
 		offre.setSkills(ofr.getSkills());
 		offre.setValidityDate(ofr.getValidityDate());
 		offre.setStatus("Validated");
@@ -202,7 +175,6 @@ public class OfferController {
 		}
 
 		StandardOffer offer=new StandardOffer();
-		responsible=new Responsible();
 
 
 		model.addAttribute("offer", offer);
@@ -222,14 +194,8 @@ public class OfferController {
 			model.addAttribute("user",referent);
 		}
 
-		responsible.setEmail(ofr.getResponsible().getEmail());
-		responsible.setFirstName(ofr.getResponsible().getFirstName());
-		responsible.setLastName(ofr.getResponsible().getLastName());
-		responsible.setPhone(ofr.getResponsible().getPhone());
-		referent.addResponsible(responsible);
-		responsible.setReferent(referent);
-		responsible.addOffer(ofr);
-		ofr.setResponsible(responsible);
+		referent.addOffer(ofr);
+		ofr.setReferent(referent);
 		ofr.setService(referent.getService());
 		ofr.setStatus("Waiting");
 		model.addAttribute("offer",ofr);
@@ -273,7 +239,7 @@ public class OfferController {
 	public ModelAndView acceptStandardOffer(@ModelAttribute StandardOffer ofr,Model model,HttpSession session) {
 
 		StandardOffer offre=(StandardOffer) offerRepository.findById(ofr.getId());
-		Referent referent=(Referent) referentRepository.findByName(offre.getResponsible().getReferent().getName());
+		//Referent referent=(Referent) referentRepository.findByName(offre.getResponsible().getReferent().getName());
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		if(isModerator(staffLille1)){
 			Moderator moderator=moderatorRepository.findByName(staffLille1.getName());
@@ -288,17 +254,15 @@ public class OfferController {
 		offre.setModerationDate(new java.util.Date());
 		offre.setRemuneration(ofr.getRemuneration());
 		offre.setRemunerationInfo(ofr.getRemunerationInfo());
-		responsible.setEmail(ofr.getResponsible().getEmail());
+		/*responsible.setEmail(ofr.getResponsible().getEmail());
 		responsible.setLastName(ofr.getResponsible().getLastName());
 		responsible.setFirstName(ofr.getResponsible().getFirstName());
 		responsible.setPhone(ofr.getResponsible().getPhone());
 
-		referent.addResponsible(responsible);
-		responsible.setReferent(referent);
-		responsibleService.saveResponsible(responsible);
+		referent.addResponsible(responsible);*/
 		
 
-		offre.setResponsible(responsible);
+		//offre.setResponsible(responsible);
 		offre.setSkills(ofr.getSkills());
 		offre.setStartDate(ofr.getStartDate());
 		offre.setValidityDate(ofr.getValidityDate());
@@ -444,7 +408,7 @@ public class OfferController {
 			model.addAttribute("user",student);
 		}
 
-		List<AbstractOffer> listOffers = offerService.searchOffers(libelle,num_offer,responsive);
+		List<AbstractOffer> listOffers = offerService.searchOffers(libelle,num_offer);
 		model.addAttribute("listOffers",listOffers);
 
 		if(listOffers==null){
@@ -479,7 +443,7 @@ public class OfferController {
 	}
 
 	public void checkOffer(Referent referent){
-		for(int i=0;i<referent.getResponsible().size();i++){
+/*		for(int i=0;i<referent.getResponsible().size();i++){
 			for(int j=0;j<referent.getResponsible().get(i).getOffers().size();j++){
 				if(referent.getResponsible().
 						get(i).getOffers().get(j).getValidityDate().
@@ -488,7 +452,7 @@ public class OfferController {
 					referentService.saveReferent(referent);
 				}
 			}
-		}
+		}*/
 	}
 
 	@RequestMapping(value= "/newOffer",method=RequestMethod.GET)
@@ -501,8 +465,6 @@ public class OfferController {
 			model.addAttribute("user",referent);
 		}	
 		AbstractOffer offer = offerRepository.findById(id);
-		responsible=new Responsible();
-		model.addAttribute("responsible", responsible);
 		offer.setStatus("Waiting");
 		offer.setCreationDate(Calendar.getInstance().getTime());
 		offer.setValidityDate(null);
@@ -529,8 +491,6 @@ public class OfferController {
 			model.addAttribute("user",moderator);
 		}	
 		AbstractOffer offer = offerRepository.findById(id);
-		responsible=new Responsible();
-		model.addAttribute("responsible", responsible);
 		model.addAttribute("offer",offer);
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);

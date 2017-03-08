@@ -9,7 +9,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import glp.digiteam.entity.offer.AbstractOffer;
-import glp.digiteam.entity.offer.Responsible;
 
 public interface OfferRepository extends CrudRepository<AbstractOffer, String>{
 	
@@ -19,29 +18,24 @@ public interface OfferRepository extends CrudRepository<AbstractOffer, String>{
 	  @Query("select o from AbstractOffer o where o.status = 'Validated' and o.title  LIKE CONCAT('%',:param1,'%') "
 	  		+ "order by o.moderationDate desc")
 	  List<AbstractOffer> findOfferWithLib(@Param("param1") String param1);
-
-	  @Query("select o from AbstractOffer o where o.status = 'Validated' and o.responsible in :param1)")
-	  List<AbstractOffer> findOfferWithMResponsive(@Param("param1") List<Responsible> param1);
 	  
 	  @Query("select o from AbstractOffer o where o.status = 'Validated' and o.title  "
 	  		+ "LIKE CONCAT('%',:param1,'%') and o.id=:param2 order by o.moderationDate desc")
 	  List<AbstractOffer> findOfferWithLibOffer (@Param("param1") String param1,@Param("param2") Long  param2);
 	  
 	  @Query(" select o from AbstractOffer o where o.status = 'Validated' and o.title  "
-	  		+ "LIKE CONCAT('%',:param1,'%') and o.id=:param2 and o.responsible in :param3 order by o.moderationDate desc")
+	  		+ "LIKE CONCAT('%',:param1,'%') and o.id=:param2 order by o.moderationDate desc")
 	  List<AbstractOffer> findOfferWithAllParam(@Param("param1") String param1,
-			  @Param("param2") Long  param2,
-			  @Param("param3") List<Responsible> param3);
+			  @Param("param2") Long  param2);
 	  
 	  @Query(" select o from AbstractOffer o where o.status = 'Validated' and o.title  "
-		  		+ "LIKE CONCAT('%',:param1,'%') and o.responsible in :param2 order by o.moderationDate desc")
-		  List<AbstractOffer> findOfferWithResLib(@Param("param1") String param1, @Param("param2") List<Responsible> param2);
+		  		+ "LIKE CONCAT('%',:param1,'%') order by o.moderationDate desc")
+		  List<AbstractOffer> findOfferWithResLib(@Param("param1") String param1);
 	  
 	  
-	  @Query(" select o from AbstractOffer o where o.status = 'Validated' and o.id=:param2 and o.responsible in :param3 order by o.moderationDate desc")
+	  @Query(" select o from AbstractOffer o where o.status = 'Validated' and o.id=:param2 order by o.moderationDate desc")
 		  List<AbstractOffer> findOfferWithResOffer( 
-				  @Param("param2") Long  param2,
-				  @Param("param3") List<Responsible> param3);
+				  @Param("param2") Long  param2);
 		  
 	  AbstractOffer findById(long id);
 }

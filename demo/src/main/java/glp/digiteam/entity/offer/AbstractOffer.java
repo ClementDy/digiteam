@@ -23,7 +23,7 @@ public class AbstractOffer {
 	
 
 	@ManyToOne
-	private Responsible responsible;
+	private Referent referent;
 
 	@ManyToOne
 	private ServiceEntity service;
@@ -45,6 +45,14 @@ public class AbstractOffer {
 	
 	private String title;
 	
+	private String lastNameResponsible;
+	
+	private String firstNameResponsible;
+	
+	private String phoneResponsible;
+	
+	private String emailResponsible;
+	
 	public AbstractOffer(){
 		
 		
@@ -60,12 +68,12 @@ public class AbstractOffer {
 	}
 	
 	
-	public Responsible getResponsible() {
-		return responsible;
+	public Referent getReferent() {
+		return referent;
 	}
 
-	public void setResponsible(Responsible responsible) {
-		this.responsible = responsible;
+	public void setResponsible(Referent referent) {
+		this.referent = referent;
 	}
 	
 
@@ -136,6 +144,53 @@ public class AbstractOffer {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+
+
+	public String getLastNameResponsible() {
+		return lastNameResponsible;
+	}
+
+
+	public void setLastNameResponsible(String lastNameResponsible) {
+		this.lastNameResponsible = lastNameResponsible;
+	}
+
+
+	public String getFirstNameResponsible() {
+		return firstNameResponsible;
+	}
+
+
+	public void setFirstNameResponsible(String firstNameResponsible) {
+		this.firstNameResponsible = firstNameResponsible;
+	}
+
+
+	public String getPhoneResponsible() {
+		return phoneResponsible;
+	}
+
+
+	public void setPhoneResponsible(String phoneResponsible) {
+		this.phoneResponsible = phoneResponsible;
+	}
+
+
+	public String getEmailResponsible() {
+		return emailResponsible;
+	}
+
+
+	public void setEmailResponsible(String emailResponsible) {
+		this.emailResponsible = emailResponsible;
+	}
+
+
+	public void setReferent(Referent referent) {
+		this.referent = referent;
+	}
+	
+	
 
 
 }

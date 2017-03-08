@@ -50,8 +50,8 @@
 					<tr th:each="offer: ${offers}" th:if="${offer.status}=='Waiting'">
 						<td><label th:text="${offer.id}"></label></td>
 						<td th:text="${offer.title}"></td>
-						<td><span th:text="${offer.responsible.firstName}"></span><span></span>
-							<span th:text="${offer.responsible.lastName}"></span></td>
+						<td><span th:text="${offer.firstNameResponsible}"></span><span></span>
+							<span th:text="${offer.lastNameResponsible}"></span></td>
 						<td th:text="${offer.validityDate}"></td>
 
 

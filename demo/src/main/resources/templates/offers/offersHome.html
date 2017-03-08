@@ -84,14 +84,13 @@
 
 							</thead>
 							
-								 <span th:each="responsible : ${user.responsible}">
-		     					<tr th:each="offer: ${responsible.offers}" th:if="${offer.status}=='Validated'">
+		     					<tr th:each="offer: ${user.offers}"  th:if="${offer.status}=='Validated'">
 		     						<td>
 						                <label th:text="${offer.id}"></label>
 						        	</td>
 						        	<td   th:text="${offer.title}">
 						        	</td>
-						       		<td> <span  th:text="${responsible.firstName}"></span><span></span> <span  th:text="${responsible.lastName}"></span>
+						       		<td> <span  th:text="${offer.firstNameResponsible}"></span><span></span> <span  th:text="${offer.lastNameResponsible}"></span>
 						        	</td>
 						       		<td  th:text="${offer.validityDate}"></td>
 						        
@@ -150,14 +149,14 @@
 							</thead>
 							
 							
-							 <span th:each="responsible : ${user.responsible}">
-		     					<tr th:each="offer: ${responsible.offers}" th:if="${offer.status}=='Waiting'">
+							
+		     					<tr th:each="offer: ${user.offers}" th:if="${offer.status}=='Waiting'">
 		     						<td>
 						                <label th:text="${offer.id}"></label>
 						        	</td>
 						        	<td   th:text="${offer.title}">
 						        	</td>
-						       		<td> <span  th:text="${responsible.firstName}"></span><span></span> <span  th:text="${responsible.lastName}"></span>
+						       		<td> <span  th:text="${offer.firstNameResponsible}"></span><span></span> <span  th:text="${offer.lastNameResponsible}"></span>
 						        	</td>
 						       		<td  th:text="${offer.creationDate}"></td>
 						        
@@ -200,20 +199,20 @@
 									<td><strong>N° de l'offre</strong></td>
 									<td><strong>Titre</strong></td>
 									<td><strong>Responsable</strong></td>
-									<td><strong>Commentaire</strong></td>
+									<td><strong>Motif</strong></td>
 									<td></td>
 								</tr>
 
 							</thead>
 							
-								 <span th:each="responsible : ${user.responsible}">
-		     					<tr th:each="offer: ${responsible.offers}" th:if="${offer.status}=='Refused'">
+								
+		     					<tr th:each="offer: ${user.offers}" th:if="${offer.status}=='Refused'">
 		     						<td>
 						                <label th:text="${offer.id}"></label>
 						        	</td>
 						        	<td   th:text="${offer.title}">
 						        	</td>
-						       		<td> <span  th:text="${responsible.firstName}"></span><span></span> <span  th:text="${responsible.lastName}"></span>
+						       		<td> <span  th:text="${offer.firstNameResponsible}"></span><span></span> <span  th:text="${offer.lastNameResponsible}"></span>
 						        	</td>
 						       		<td  th:text="${offer.comment}"></td>
 						        
@@ -266,14 +265,14 @@
 	
 						</thead>
 						
-						 <span th:each="responsible : ${user.responsible}">
-		     					<tr th:each="offer: ${responsible.offers}" th:if="${offer.status}=='Expired'">
+						
+		     					<tr th:each="offer: ${user.offers}" th:if="${offer.status}=='Expired'">
 		     						<td>
 						                <label th:text="${offer.id}"></label>
 						        	</td>
 						        	<td  th:text="${offer.title}">
 						        	</td>
-						       		<td> <span  th:text="${responsible.firstName}"></span><span></span> <span  th:text="${responsible.lastName}"></span>
+						       		<td> <span  th:text="${offer.firstNameResponsible}"></span><span></span> <span  th:text="${offer.lastNameResponsible}"></span>
 						        	</td>
 						       		<td  th:text="${offer.validityDate}"></td>
 						        
