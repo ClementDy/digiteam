@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -70,6 +71,8 @@ public class StudentController {
 	@Autowired
 	private OfferRepository offerRepository;
 
+	@Value("${cas.client-host-url}")
+	String urlredirect;
 
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public String profile(Model model, HttpSession session) {
@@ -287,6 +290,7 @@ public class StudentController {
 
 	@RequestMapping(value = "/deconnexionStudent", method = RequestMethod.GET)
 	public ModelAndView deconnexion(Model model, HttpSession session,final ServletRequest servletRequest, HttpServletResponse response) throws IOException {
+		
 		System.out.println("*************************************************************************");
 		/*if (session.getAttribute("student") == null) {
 			return new ModelAndView("redirect:authentication");
@@ -294,7 +298,7 @@ public class StudentController {
 
 
 		session.invalidate();*/
-		String url = "https://sso-cas.univ-lille1.fr/logout";
+		/*String url = "https://sso-cas.univ-lille1.fr/logout";
 		System.out.println(url);
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -317,12 +321,12 @@ public class StudentController {
 		while ((inputLine = in.readLine()) != null) {
 			responsebuf.append(inputLine);
 		}
-		in.close();
+		in.close();*/
 		session.invalidate();
 		
-		//print result
 		
-		return new ModelAndView("redirect:https://sso-cas.univ-lille1.fr/logout");
+		
+		return new ModelAndView("redirect:https://sso-cas.univ-lille1.fr/logout?service="+urlredirect);
 	}
 
 	
