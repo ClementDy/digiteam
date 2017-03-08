@@ -237,10 +237,9 @@
 						value="Enregistrer"> <input
 						th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'"
 						name="action" type="submit" class="btn btn-success"
-						value="Accepter"> <a
-						th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'"
-						type="submit" class="btn btn-danger"
-						th:href="@{/refuseOffer(id=${offer.id})}">Refuser</a>
+						value="Accepter"> 
+						<input th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'" name="action" type="submit" class="btn btn-danger" value="Refuser" >
+				
 
 				</article>
 			</div>

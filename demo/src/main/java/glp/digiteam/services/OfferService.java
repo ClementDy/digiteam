@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import glp.digiteam.entity.offer.AbstractOffer;
 import glp.digiteam.entity.offer.GenericOffer;
-import glp.digiteam.entity.offer.Referent;
+import glp.digiteam.entity.offer.StaffLille1;
 import glp.digiteam.repository.OfferRepository;
 
 
@@ -30,7 +30,7 @@ public class OfferService {
 		return offerRepository.save(offer);
 	}
 	
-	public void dispublish(long id, Referent ref){
+	public void dispublish(long id, StaffLille1 ref){
 		AbstractOffer offer = offerRepository.findById(id);
 		if(offer!=null){
 			if(offer.getReferent()==ref){
@@ -40,7 +40,7 @@ public class OfferService {
 		}
 	}
 	
-	public void removeOffer(long id, Referent ref){
+	public void removeOffer(long id, StaffLille1 ref){
 		AbstractOffer offer = offerRepository.findById(id);
 		if(offer!=null){
 			if(offer.getReferent()==ref){

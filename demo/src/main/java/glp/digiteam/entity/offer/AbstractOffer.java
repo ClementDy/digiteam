@@ -23,7 +23,7 @@ public class AbstractOffer {
 	
 
 	@ManyToOne
-	private Referent referent;
+	private StaffLille1 referent;
 
 	@ManyToOne
 	private ServiceEntity service;
@@ -68,11 +68,11 @@ public class AbstractOffer {
 	}
 	
 	
-	public Referent getReferent() {
+	public StaffLille1 getReferent() {
 		return referent;
 	}
 
-	public void setResponsible(Referent referent) {
+	public void setResponsible(StaffLille1 referent) {
 		this.referent = referent;
 	}
 	
@@ -186,7 +186,7 @@ public class AbstractOffer {
 	}
 
 
-	public void setReferent(Referent referent) {
+	public void setReferent(StaffLille1 referent) {
 		this.referent = referent;
 	}
 	

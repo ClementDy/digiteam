@@ -10,11 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import glp.digiteam.entity.offer.Referent;
 import glp.digiteam.entity.offer.StaffLille1;
-import glp.digiteam.repository.ReferentRepository;
+import glp.digiteam.repository.StaffLille1Repository;
 import glp.digiteam.services.OfferService;
-import glp.digiteam.services.ReferentService;
 import glp.digiteam.services.StudentService;
 
 @EnableAutoConfiguration
@@ -26,31 +24,22 @@ public class ContractController {
 	private OfferService offerService;
 
 	@Autowired
-	private ReferentService referentService;
+	private StaffLille1Repository staffLille1Repository;
 
 	@Autowired
 	private StudentService studentService;
 	
-	@Autowired
-	private ReferentRepository referentRepository;
+	StaffLille1 user;
 
 	@RequestMapping(value = "/newContract", method = RequestMethod.GET)
 	public String contract(Model model, HttpSession session) {
 		StaffLille1 staffLille1 = (StaffLille1) session.getAttribute("staffLille1");
+		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		model.addAttribute("user", user);
 
-		if (isReferent(staffLille1)) {
-			Referent referent = referentRepository.findByName(staffLille1.getName());
-			model.addAttribute("user", referent);
-		}
 		return "contract/new_contract";
 	}
 	
 	
-	public boolean isReferent(StaffLille1 staffLille1){
-		if(referentRepository.findByName(staffLille1.getName())!=null){
-			System.out.println("Referent!");
-			return true;
-		}
-		return false;
-	}
+
 }

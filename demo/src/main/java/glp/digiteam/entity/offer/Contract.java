@@ -22,7 +22,7 @@ public class Contract {
 	private Student student;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	private Referent referent;
+	private StaffLille1 staffLille1;
 	
 	private String useName;
 
@@ -57,14 +57,23 @@ public class Contract {
 	}
 	
 	
-	public Referent getReferent() {
-		return referent;
+	
+
+
+	public StaffLille1 getStaffLille1() {
+		return staffLille1;
 	}
 
 
-	public void setReferent(Referent referent) {
-		this.referent = referent;
+
+
+
+	public void setStaffLille1(StaffLille1 staffLille1) {
+		this.staffLille1 = staffLille1;
 	}
+
+
+
 
 
 	public String getResponsable() {

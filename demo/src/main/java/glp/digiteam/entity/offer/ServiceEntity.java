@@ -23,7 +23,7 @@ public class ServiceEntity {
 
 
 	@OneToMany(mappedBy="service", cascade=CascadeType.ALL,targetEntity=AbstractOffer.class)
-	private List<Referent> referents = new ArrayList<>();
+	private List<StaffLille1> referents = new ArrayList<>();
 	
 	public ServiceEntity(){
 		
@@ -62,13 +62,13 @@ public class ServiceEntity {
 
 
 
-	public List<Referent> getReferents() {
+	public List<StaffLille1> getReferents() {
 		return referents;
 	}
 
 
 
-	public void setReferents(List<Referent> referents) {
+	public void setReferents(List<StaffLille1> referents) {
 		this.referents = referents;
 	}
 

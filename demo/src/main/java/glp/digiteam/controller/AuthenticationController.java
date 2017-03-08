@@ -29,7 +29,6 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import glp.digiteam.entity.offer.Referent;
 import glp.digiteam.entity.offer.ServiceEntity;
 import glp.digiteam.entity.offer.StaffLille1;
 import glp.digiteam.entity.student.Student;
@@ -85,7 +84,6 @@ public class AuthenticationController {
 		
 		Student student = new Student();
 		student.setNip(Integer.parseInt((String) attributes.get("nip")));
-		Referent referent = new Referent();
 		StaffLille1 staffLille1 = new StaffLille1();
 		///*
 		List<ServiceWebService> services = servicewebsrviceservice.getServicesWS();
@@ -97,7 +95,6 @@ public class AuthenticationController {
 		//*/
 		model.addAttribute("student",student);
 
-		model.addAttribute("referent",referent);
 
 
 		model.addAttribute("staffLille1",staffLille1);

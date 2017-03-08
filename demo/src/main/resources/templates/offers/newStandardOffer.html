@@ -261,8 +261,7 @@
 				<article class="col-md-12 col-sm-12">
 					<input th:if="${user.class.name}=='glp.digiteam.entity.offer.Referent'"   name="action" type="submit" class="btn btn-lille1" value="Enregistrer">
 					<input th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'"   name="action" type="submit" class="btn btn-success" value="Accepter" >
-					<a th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'" type="submit" class="btn btn-danger" th:href="@{/refuseOffer(id=${offer.id})}" >Refuser</a>
-				
+					 
 				</article>
 			</div>
 
