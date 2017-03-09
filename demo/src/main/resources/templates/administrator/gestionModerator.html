@@ -30,7 +30,7 @@
 
 	<div class="container containerWhite">
 		<form accept-charset="UTF-8" th:action="@{/newModerator}"
-			th:object="${moderator}" method="post">
+			th:object="${newModerator}" method="post">
 
 			<div class="row">
 
@@ -42,15 +42,15 @@
 			<div class="row">
 				<div class="col-md-4"></div>
 				<div class="col-md-4">
-					<label>Nom du mod&eacute;rateur :</label>
+					<label>Email du mod&eacute;rateur :</label>
 				</div>
 			</div>
 			<div class="row">
 			
 				<div class="col-md-4"></div>
 				<div class="col-md-4">
-					<input class="form-control" th:field="${moderator.name}"
-						type="text" placeholder="Nom" required>
+					<input class="form-control" th:field="${newModerator.email}"
+						type="email" placeholder="Email" required>
 				</div>
 			</div>
 			<br>
@@ -70,22 +70,23 @@
 
 	<div class="container containerWhite">
 
-		<div class="row">
+	  	<div class="row">
 
 			<div class="col-md-12">
 				<h4 class="titreFormulaire">Les gestionnaires de l'application</h4>
 			</div>
 		</div>
 			<div class="row">
-			<span th:each="moderator : ${user.moderators}">
+			<span th:each="moderator : ${gestionnaires}" th:if="${moderator.isModerator}==true">
 				
 					<div class="col-sm-6 col-md-3">
 						<div class="thumbnail">
 							<img src="img/profil.png" alt="...">
 							<div class="caption">
-								<p><strong>Nom : </strong><span  th:text="${moderator.name}"></span></p>
+								<p><strong>Nom : </strong><span  th:text="${moderator.lastName}"></span> <span  th:text="${moderator.firstName}"></span></p>
+								<p><strong>Email : </strong><span  th:text="${moderator.email}"></span></p>
 									
-									<a  th:href="@{/deleteModerator(name=${moderator.name},admin=${user.name})}" class="btn btn-danger" role="button">Supprimer</a> 
+								<a  th:href="@{/deleteModerator(name=${moderator.email},mode=${user.email})}" class="btn btn-danger" role="button">Supprimer</a> 
 							
 							</div>
 						</div>

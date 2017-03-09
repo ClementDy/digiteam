@@ -28,13 +28,13 @@ public class AdministratorController {
 
 	@Autowired 
 	private ServiceRepository serviceRepository;
-	
+
 	@Autowired
 	StaffLille1Repository staffLille1Service;
-	
+
 	@Autowired 
 	private StaffLille1Repository staffLille1Repository;
-	
+
 	StaffLille1 user;
 
 
@@ -42,16 +42,25 @@ public class AdministratorController {
 	public String gestionModerator(Model model,HttpSession session) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+
+		Iterable<StaffLille1> gestionnaires = staffLille1Repository.findAll();
+		Iterable<ServiceEntity> services = serviceRepository.findAll();
+		model.addAttribute("gestionnaires",gestionnaires);
+
+		StaffLille1 gestionnaire=new StaffLille1();
+		model.addAttribute("newModerator",gestionnaire);
+		model.addAttribute("service",services);
 		model.addAttribute("user",user);
+
 		return "administrator/gestionModerator";
 	}
-	
-	
+
+
 	@RequestMapping(value = "/gestionReferent", method = RequestMethod.GET)
 	public String gestionReferent(Model model,HttpSession session) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
-		
+
 		Iterable<StaffLille1> referents = staffLille1Repository.findAll();
 		Iterable<ServiceEntity> services = serviceRepository.findAll();
 		model.addAttribute("referents",referents);
@@ -60,10 +69,10 @@ public class AdministratorController {
 		model.addAttribute("newReferent",referent);
 		model.addAttribute("service",services);
 		model.addAttribute("user",user);
-		
+
 		return "administrator/gestionReferent";
 	}
-	
+
 
 
 	@RequestMapping(value = "/homeStaffLille1", method = RequestMethod.GET)
@@ -75,42 +84,51 @@ public class AdministratorController {
 		model.addAttribute("user",user);
 		return "homeStaffLille1";
 	}
-	
+
 	@RequestMapping(value = "/deleteModerator", method = RequestMethod.GET)
-	public ModelAndView deleteModerator(Model model,HttpSession session,@RequestParam(value="admin",required=true)String admin,@RequestParam(value="name",required=true)String name) {
-	
-		/*
-		Administrator administrator=administratorRepository.findByName(admin);
-	
-		administrator.removeModerator(name);
-		moderatorRepository.deleteByName(name);
-		administratorService.saveAdministrator(administrator);*/
-		
+	public ModelAndView deleteModerator(Model model,HttpSession session,@RequestParam(value="name",required=true)String name,@RequestParam(value="mode",required=true)String mode) {
+
+		StaffLille1 user= staffLille1Service.findByEmail(mode);
+		StaffLille1 gestionnaire= staffLille1Service.findByEmail(name);
+		System.out.println("GGGG"+gestionnaire.getEmail());
+
+		gestionnaire.setModerator(false);
+		model.addAttribute("user",user);
+		staffLille1Service.save(gestionnaire);
+
 		return new ModelAndView("redirect:gestionModerator");
 	}
-	
+
 	@RequestMapping(value = "/deleteReferent", method = RequestMethod.GET)
 	public ModelAndView deleteReferent(Model model,HttpSession session,@RequestParam(value="mode",required=true)String mode,@RequestParam(value="name",required=true)String name) {
 		StaffLille1 user= staffLille1Service.findByEmail(mode);
 		StaffLille1 referent= staffLille1Service.findByEmail(name);
-		
+
 		referent.setReferent(false);
 		model.addAttribute("user",user);
 		staffLille1Service.save(referent);
 		return new ModelAndView("redirect:gestionReferent");
 	}
-	
+
 	@RequestMapping(value = "/newModerator", method = RequestMethod.POST)
-	public ModelAndView newModerator(/*@ModelAttribute Moderator mode*/) {
-		/*administrator.addModerator(mode);
-		mode.setAdministrator(administrator);
-		
-		administratorService.saveAdministrator(administrator);*/
-		
-		
+	public ModelAndView newModerator(@ModelAttribute StaffLille1 staffLille1) {
+		StaffLille1 gestionnaire;
+		if(staffLille1Service.findByEmail(staffLille1.getEmail())!=null){
+			gestionnaire=staffLille1Service.findByEmail(staffLille1.getEmail());
+			System.out.println(gestionnaire.getFirstName());
+			gestionnaire.setModerator(true);
+			staffLille1Service.save(gestionnaire);
+		}
+		else{
+			gestionnaire=new StaffLille1();
+			gestionnaire.setEmail(staffLille1.getEmail());
+			gestionnaire.setModerator(true);
+			staffLille1Service.save(gestionnaire);
+		}
+
 		return new ModelAndView("redirect:gestionModerator");
 	}
-	
+
 	@RequestMapping(value = "/newReferent", method = RequestMethod.POST)
 	public ModelAndView newReferent(@ModelAttribute StaffLille1 staffLille1) {
 		StaffLille1 referent;
@@ -120,14 +138,16 @@ public class AdministratorController {
 			referent.setReferent(true);
 			staffLille1Service.save(referent);
 		}
-		referent=new StaffLille1();
-		referent.setEmail(staffLille1.getEmail());
-		referent.setReferent(true);
-		staffLille1Service.save(referent);
-		
+		else{
+
+			referent=new StaffLille1();
+			referent.setEmail(staffLille1.getEmail());
+			referent.setReferent(true);
+			staffLille1Service.save(referent);
+		}		
 
 		return new ModelAndView("redirect:gestionReferent");
 	}
-	
-	
+
+
 }
