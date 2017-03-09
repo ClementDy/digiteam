@@ -411,6 +411,28 @@ public class OfferController {
 		}
 
 	}
+	
+	@RequestMapping(value= "/modifyOffer",method=RequestMethod.GET)
+	public ModelAndView modifyOffer(Model model, HttpSession session,@RequestParam(value = "id", required = true) long id){
+
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		model.addAttribute("user",user);
+		
+		AbstractOffer offer = offerRepository.findById(id);
+		offer.setStatus("Waiting");
+		offer.setCreationDate(Calendar.getInstance().getTime());
+		model.addAttribute("offer",offer);
+		Iterable<Mission> missions = missionRepository.findAll();
+		model.addAttribute("listMission", missions);
+
+		if(offer.getClass().getName().equals("glp.digiteam.entity.offer.GenericOffer")){
+			return new ModelAndView("offers/newGenericOffer");
+		}else {
+			return new ModelAndView("offers/newStandardOffer");
+		}
+
+	}
 
 	@RequestMapping(value= "/manageOffer",method=RequestMethod.GET)
 	public ModelAndView manageOffer(Model model, HttpSession session,@RequestParam(value = "id", required = true) long id){
