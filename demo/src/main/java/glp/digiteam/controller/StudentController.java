@@ -59,7 +59,6 @@ public class StudentController {
 
 	private final StorageService storageService;
 
-	private Student student;
 
 
 	@Autowired
@@ -76,6 +75,8 @@ public class StudentController {
 
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public String profile(Model model, HttpSession session) {
+
+		Student student = (Student) session.getAttribute("student");
 		student=studentService.getStudentByNip(student.getNip());
 		model.addAttribute("student", student);
 		model.addAttribute("user", student);
@@ -98,7 +99,7 @@ public class StudentController {
 			return new ModelAndView("redirect:authentication");
 		}
 
-		student = (Student) session.getAttribute("student");
+		Student student = (Student) session.getAttribute("student");
 		if (studentService.getStudentByNip(student.getNip()) != null) {
 			model.addAttribute("student", (studentService.getStudentByNip(student.getNip())));
 			model.addAttribute("user", (studentService.getStudentByNip(student.getNip())));
@@ -132,7 +133,7 @@ public class StudentController {
 			return new ModelAndView("redirect:authentication");
 		}
 
-		student = (Student) session.getAttribute("student");
+		Student student = (Student) session.getAttribute("student");
 		if (studentService.getStudentByNip(student.getNip()) != null) {
 			try {
 				Resource cvStudent = storageService.loadAsResource(student.getNip().toString());
@@ -165,6 +166,7 @@ public class StudentController {
 			@RequestParam(value="currentTab", required=false, defaultValue="intro") String currentTab,
 			RedirectAttributes redirectAttributes, Model model, Errors e, HttpSession session) {
 
+		Student student = (Student) session.getAttribute("student");
 		if (action.equals("Enregistrer") || action.equals("Publier")) {
 
 			if (action.equals("Enregistrer")) {
@@ -207,9 +209,9 @@ public class StudentController {
 
 			Student realStudent;
 
-			if (studentService.getStudentByNip(this.student.getNip()) != null) {
+			if (studentService.getStudentByNip(student.getNip()) != null) {
 
-				realStudent = studentService.getStudentByNip(this.student.getNip());
+				realStudent = studentService.getStudentByNip(student.getNip());
 
 				std.getAddress().setId(realStudent.getAddress().getId());
 				std.getAddress().setStudent(realStudent);
@@ -234,7 +236,7 @@ public class StudentController {
 
 			}
 
-			std.setNip(this.student.getNip());
+			std.setNip(student.getNip());
 			std.setCv(file.getOriginalFilename());
 
 			if (!file.isEmpty()) {
@@ -271,6 +273,8 @@ public class StudentController {
 
 	@RequestMapping(value = "/offer", method = RequestMethod.GET)
 	public ModelAndView showOffer(Model model, HttpSession session,@RequestParam(value = "id", required = true) long id) {
+
+		Student student = (Student) session.getAttribute("student");
 		if (session.getAttribute("student") == null) {
 			return new ModelAndView("redirect:authentication");
 		}
@@ -358,7 +362,9 @@ public class StudentController {
 
 	@GetMapping("/files/{filename:.+}")
 	@ResponseBody
-	public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
+	public ResponseEntity<Resource> serveFile(@PathVariable String filename,HttpSession session) {
+
+		Student student = (Student) session.getAttribute("student");
 		student.setCv(filename);
 		Resource file = storageService.loadAsResource(filename);
 		return ResponseEntity.ok()
