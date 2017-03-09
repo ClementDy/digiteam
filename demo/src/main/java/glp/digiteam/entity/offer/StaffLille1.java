@@ -32,9 +32,9 @@ public class StaffLille1 {
 	private List<AbstractOffer> offers = new ArrayList<AbstractOffer>();
 
 	
-	public boolean isModerator;
-	public boolean isAdministrator;
-	public boolean isReferent;
+	public boolean isModerator=false;
+	public boolean isAdministrator=false;
+	public boolean isReferent=false;
 
 	public StaffLille1(){
 		

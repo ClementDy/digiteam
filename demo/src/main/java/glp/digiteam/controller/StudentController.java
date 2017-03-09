@@ -288,7 +288,7 @@ public class StudentController {
 	}
 
 
-	@RequestMapping(value = "/deconnexionStudent", method = RequestMethod.GET)
+	@RequestMapping(value = "/deconnexion", method = RequestMethod.GET)
 	public ModelAndView deconnexion(Model model, HttpSession session,final ServletRequest servletRequest, HttpServletResponse response) throws IOException {
 		
 		System.out.println("*************************************************************************");
