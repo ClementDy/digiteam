@@ -137,6 +137,7 @@ public class StudentController {
 		if (studentService.getStudentByNip(student.getNip()) != null) {
 			try {
 				Resource cvStudent = storageService.loadAsResource(student.getNip().toString());
+				student.setCv(cvStudent.getFilename());
 				model.addAttribute("file", cvStudent);
 			} catch (Exception e) {
 				System.out.println("No CV found");
@@ -222,6 +223,8 @@ public class StudentController {
 				std.getAvailability().setId(realStudent.getAvailability().getId());
 				std.getAvailability().setStudent(realStudent);
 
+				std.setCv(realStudent.getCv());
+
 				std.getMisc().setId(realStudent.getMisc().getId());
 				std.getMisc().setStudent(realStudent);
 
@@ -237,7 +240,10 @@ public class StudentController {
 			}
 
 			std.setNip(student.getNip());
-			std.setCv(file.getOriginalFilename());
+			if(!file.getOriginalFilename().equals("")){
+				std.setCv(file.getOriginalFilename());
+			}
+
 
 			if (!file.isEmpty()) {
 				storageService.store(file, student.getNip());
@@ -294,7 +300,7 @@ public class StudentController {
 
 	@RequestMapping(value = "/deconnexion", method = RequestMethod.GET)
 	public ModelAndView deconnexion(Model model, HttpSession session,final ServletRequest servletRequest, HttpServletResponse response) throws IOException {
-		
+
 		System.out.println("*************************************************************************");
 		/*if (session.getAttribute("student") == null) {
 			return new ModelAndView("redirect:authentication");
@@ -316,7 +322,7 @@ public class StudentController {
 		int responseCode = con.getResponseCode();
 		System.out.println("\nSending 'GET' request to URL : " + url);
 		System.out.println("Response Code : " + responseCode);
-		
+
 		BufferedReader in = new BufferedReader(
 		        new InputStreamReader(con.getInputStream()));
 		String inputLine;
@@ -327,13 +333,13 @@ public class StudentController {
 		}
 		in.close();*/
 		session.invalidate();
-		
-		
-		
+
+
+
 		return new ModelAndView("redirect:https://sso-cas.univ-lille1.fr/logout?service="+urlredirect);
 	}
 
-	
+
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {

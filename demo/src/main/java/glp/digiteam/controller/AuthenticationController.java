@@ -109,6 +109,7 @@ public class AuthenticationController {
 			student.setEmail((String) attributes.get("mail"));
 			student.setFirstName((String) attributes.get("givenname"));
 			student.setLastName((String) attributes.get("sn"));
+			
 			StudentWebService studentLDAP = studentLDAPService.getStudentLDAP(student.getNip());
 			TrainingWebService trainingLDAP = trainingLDAPService.getTrainingLDAP(2017, student.getNip());
 
