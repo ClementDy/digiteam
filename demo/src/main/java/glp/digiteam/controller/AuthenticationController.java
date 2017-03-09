@@ -95,7 +95,7 @@ public class AuthenticationController {
 					StaffLille1 staffLille1 = new StaffLille1();
 					staffLille1.setEmail((String) attributes.get("mail"));
 					staffLille1.setFirstName((String) attributes.get("givenname"));
-					staffLille1.setFirstName((String) attributes.get("sn"));
+					staffLille1.setLastName((String) attributes.get("sn"));
 					session.setAttribute("staffLille1", staffLille1);
 					if(staffLille1Service.getStaffLille1ByEmail(staffLille1.getEmail())==null){
 					staffLille1Service.saveStaffLille1(staffLille1);
