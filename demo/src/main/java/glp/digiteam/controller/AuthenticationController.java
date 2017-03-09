@@ -29,6 +29,7 @@ import glp.digiteam.entity.offer.ServiceEntity;
 import glp.digiteam.entity.offer.StaffLille1;
 import glp.digiteam.entity.student.Student;
 import glp.digiteam.services.ServiceService;
+import glp.digiteam.services.StaffLille1Service;
 import glp.digiteam.services.StudentService;
 import glp.digiteam.webServices.ServiceWebService;
 import glp.digiteam.webServices.ServiceWebServiceService;
@@ -56,6 +57,9 @@ public class AuthenticationController {
 
 	@Autowired
 	private StudentWebServiceService studentLDAPService;
+	
+	@Autowired
+	private StaffLille1Service staffLille1Service;
 
 	boolean notGoodNip = false;
 
@@ -87,7 +91,18 @@ public class AuthenticationController {
 				}
 
 				// */
-		if (attributes.get("nip") != null) {
+				if(attributes.get("nip") == null|| attributes.get("nip").equals("11602419")){
+					StaffLille1 staffLille1 = new StaffLille1();
+					staffLille1.setEmail((String) attributes.get("mail"));
+					staffLille1.setFirstName((String) attributes.get("givenname"));
+					staffLille1.setFirstName((String) attributes.get("sn"));
+					session.setAttribute("staffLille1", staffLille1);
+					if(staffLille1Service.getStaffLille1ByEmail(staffLille1.getEmail())==null){
+					staffLille1Service.saveStaffLille1(staffLille1);
+					}
+					return new ModelAndView("redirect:homeStaffLille1");
+				}else{
+		
 
 			Student student = new Student();
 			student.setNip(Integer.parseInt((String) attributes.get("nip")));
@@ -114,12 +129,7 @@ public class AuthenticationController {
 			
 			return new ModelAndView("redirect:home");
 			
-		} else {
-			StaffLille1 staffLille1 = new StaffLille1();
-			staffLille1.setEmail((String) attributes.get("mail"));
-			model.addAttribute("staffLille1", staffLille1);
-			return new ModelAndView("/homeStaffLille1");
-		}
+		} 
 		
 
 		/*if (attributes.get("nip").equals("11302480")) {
