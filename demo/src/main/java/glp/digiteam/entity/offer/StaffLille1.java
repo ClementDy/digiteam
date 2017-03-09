@@ -19,7 +19,7 @@ public class StaffLille1 {
 	private String email;
 	
 	private String lastName;
-	private String fistName;
+	private String firstName;
 	
 	private String phone;
 	
@@ -97,14 +97,14 @@ public class StaffLille1 {
 
 
 
-	public String getFistName() {
-		return fistName;
+	public String getFirstName() {
+		return firstName;
 	}
 
 
 
-	public void setFistName(String fistName) {
-		this.fistName = fistName;
+	public void setFirstName(String fistName) {
+		this.firstName = fistName;
 	}
 
 

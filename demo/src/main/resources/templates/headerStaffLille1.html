@@ -42,8 +42,9 @@
 						<!-- Onglets STUDENT -->
 						<li id="candidatures" th:if="${user.class.name}=='glp.digiteam.entity.student.Student'"><a th:href="@{/candidature}">Candidature</a></li>
 						
+						
 						<!-- Onglets REFERENT -->
-						<li id="offers" th:if="${user.class.name}=='glp.digiteam.entity.offer.Referent'"><a th:href="@{/offers}" >Offres</a></li>	
+						<li id="offers" th:if="${user.class.name}!='glp.digiteam.entity.student.Student' and ${user.isReferent}==true"><a th:href="@{/offers}" >Offres</a></li>	
 						<li id="consult_offers"><a th:href="@{/consult_offers}">Consulter les offres</a></li>
 						<li id="consult" th:if="${user.class.name}=='glp.digiteam.entity.offer.Referent'"><a th:href="@{/consult_candidatures}">Consulter les candidatures</a></li>
 						
