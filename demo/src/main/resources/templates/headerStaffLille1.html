@@ -46,7 +46,7 @@
 						<!-- Onglets REFERENT -->
 						<li id="offers" th:if="${user.class.name}!='glp.digiteam.entity.student.Student' and ${user.isReferent}==true"><a th:href="@{/offers}" >Offres</a></li>	
 						<li id="consult_offers"><a th:href="@{/consult_offers}">Consulter les offres</a></li>
-						<li id="consult" th:if="${user.class.name}!='glp.digiteam.entity.student.Student' and ${user.isReferent}==true"><a th:href="@{/consult_candidatures}">Consulter les candidatures</a></li>
+						<li id="consult" th:if="${user.class.name}!='glp.digiteam.entity.student.Student'"><a th:href="@{/consult_candidatures}">Consulter les candidatures</a></li>
 						
 						<!-- Onglets ADMINISTRATOR -->
 						<li id="gestionModerator" th:if="${user.class.name}!='glp.digiteam.entity.student.Student' and ${user.isAdministrator}==true"><a th:href="@{/gestionModerator}">Gestion des mod&eacute;rateurs</a></li>
