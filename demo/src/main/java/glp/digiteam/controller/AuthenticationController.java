@@ -153,6 +153,7 @@ public class AuthenticationController {
 	@RequestMapping(value = "/authenticationStaff", method = RequestMethod.POST)
 	public ModelAndView getStaff(@ModelAttribute StaffLille1 staffLille1, BindingResult bindingresult, Model model,
 			HttpSession session) {
+		System.out.println(staffLille1.getEmail());
 		session.setAttribute("staffLille1", staffLille1);
 		return new ModelAndView("redirect:/homeStaffLille1");
 	}

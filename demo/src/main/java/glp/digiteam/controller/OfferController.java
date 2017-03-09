@@ -78,6 +78,7 @@ public class OfferController {
 
 
 		GenericOffer offer=new GenericOffer();
+		model.addAttribute("user",user);
 		model.addAttribute("offer", offer);
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
@@ -152,7 +153,7 @@ public class OfferController {
 		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 
 		StandardOffer offer=new StandardOffer();
-
+		model.addAttribute("user",user);
 
 		model.addAttribute("offer", offer);
 		Iterable<Mission> missions = missionRepository.findAll();

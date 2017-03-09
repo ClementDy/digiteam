@@ -34,7 +34,10 @@
 	<div class="container containerOffer">
 
 		<div>
-			<h3>Cr&eacute;ation d'une nouvelle offre g&eacute;n&eacute;rique</h3>
+			<h3 th:if="${user.isReferent}==true">Cr&eacute;ation
+				d'une nouvelle offre standard</h3>
+			<h3 th:if="${user.isModerator}==true">Mod&eacute;ration
+				d'une offre Standard</h3>
 		</div>
 
 		<br> <br>
@@ -60,9 +63,9 @@
 				<div class="form-group">
 					<p class="control-label">
 						Cette offre est proposée par le service : <span
-							th:if="${user.class.name}=='glp.digiteam.entity.offer.Referent'"
+							th:if="${user.isReferent}==true"
 							th:text="${user.service.libelle}"></span><span
-							th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'"
+							th:if="${user.isModerator}==true"
 							th:text="${offer.service.libelle}"></span>
 				</div>
 			</div>
@@ -71,7 +74,7 @@
 			<div class="row" style="display: none">
 				<div class="form-group">
 					<div class="col-md-6">
-						<input th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'" th:field="${offer.id}" type="text" class="form-control">
+						<input th:if="${user.isModerator}==true" th:field="${offer.id}" type="text" class="form-control">
 					</div>
 				</div>
 			</div>
@@ -210,19 +213,19 @@
 			<br>
 
 			<div class="titreOffre">
-				<h4>Mod&eacute;ration</h4>
+				<h4 th:if="${user.isModerator}==true" >Mod&eacute;ration</h4>
 			</div>
 			
 			<div class="row">
 				<div class="form-group">
-					<label class="control-label col-md-2"> Commentaires :</label>
+					<label th:if="${user.isModerator}==true" class="control-label col-md-2"> Commentaires :</label>
 				</div>
 			</div>
 			
 			<div class="row">
 				<div class="form-group">
 						<div class="col-md-12">
-						<input th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'" th:field="${offer.comment}" type="text"
+						<input th:if="${user.isModerator}==true" th:field="${offer.comment}" type="text"
 							class="form-control">
 					</div>
 				</div>
@@ -232,13 +235,13 @@
 			<div class="row save">
 				<article class="col-md-12 col-sm-12">
 					<input
-						th:if="${user.class.name}=='glp.digiteam.entity.offer.Referent'"
+						th:if="${user.isReferent}==true"
 						name="action" type="submit" class="btn btn-lille1"
 						value="Enregistrer"> <input
-						th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'"
+						th:if="${user.isModerator}==true"
 						name="action" type="submit" class="btn btn-success"
 						value="Accepter"> 
-						<input th:if="${user.class.name}=='glp.digiteam.entity.offer.Moderator'" name="action" type="submit" class="btn btn-danger" value="Refuser" >
+						<input th:if="${user.isModerator}==true" name="action" type="submit" class="btn btn-danger" value="Refuser" >
 				
 
 				</article>
