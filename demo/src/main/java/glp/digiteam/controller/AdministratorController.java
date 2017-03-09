@@ -136,6 +136,7 @@ public class AdministratorController {
 		if(staffLille1Service.findByEmail(staffLille1.getEmail())!=null){
 			referent=staffLille1Service.findByEmail(staffLille1.getEmail());
 			referent.setReferent(true);
+			referent.setService(staffLille1.getService());
 			staffLille1Service.save(referent);
 		}
 		else{
@@ -143,6 +144,7 @@ public class AdministratorController {
 			referent=new StaffLille1();
 			referent.setEmail(staffLille1.getEmail());
 			referent.setReferent(true);
+			referent.setService(staffLille1.getService());
 			staffLille1Service.save(referent);
 		}		
 

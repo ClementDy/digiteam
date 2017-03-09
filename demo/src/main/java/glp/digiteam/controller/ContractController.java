@@ -34,9 +34,9 @@ public class ContractController {
 	@RequestMapping(value = "/newContract", method = RequestMethod.GET)
 	public String contract(Model model, HttpSession session) {
 		StaffLille1 staffLille1 = (StaffLille1) session.getAttribute("staffLille1");
+		
 		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user", user);
-
 		return "contract/new_contract";
 	}
 	

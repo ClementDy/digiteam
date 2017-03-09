@@ -1,35 +1,291 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head  xmlns:th="http://www.thymeleaf.org">
+<head xmlns:th="http://www.thymeleaf.org">
 
 <link type="text/css" href="/css/form.css" rel="stylesheet" />
-<script src="js/wish.js"></script>
-<script src="js/miscellaneous.js"></script>
+<link type="text/css" href="/css/offer.css" rel="stylesheet" />
+
 <script src="js/header.js"></script>
+
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/bootstrap-datepicker.fr.min.js"></script>
+
+
+<link rel="stylesheet" href="css/bootstrap-datepicker3.css">
+
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
 <link rel="stylesheet" href="css/header.css">
 
-<link rel="stylesheet" href="css/offer.css">
-	
-	
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<script src="js/inputs.js"></script>
 </head>
 
-<body onload="activeNav('offers')">
+
+<body>
 
 	<div th:include="headerStaffLille1::headerStaffLille1"></div>
-
+		
+			
+	<div class="container containerOffer">
 	
+		<div>
+			<h3>Saisie d'un contrat</h3>
+		</div><br/><br/>
+
+
+
+
+		<form accept-charset="UTF-8" th:action="@{/newStandardOffer}"
+			name="formstandard" th:object="${contract}" method="post"
+			enctype="multipart/form-data">
+			
+			<div class="titreOffre">
+				<h4>Coordonn&eacute;es de l'&eacute;tudiant</h4>
+			</div>
+			
+			<br/>
+			<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-12"> Nom d'usage </label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<div class="col-md-6">
+						<input type="text" class="form-control" placeholder="">
+					</div>
+				</div>
+			</div>
+			
+			<br/>
+			
+			<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-12"> Nom de famille *</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<div class="col-md-6">
+						<input type="text" class="form-control" placeholder="" required>
+					</div>
+				</div>
+			</div>
+			
+			<br/>
+			
+			<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-2"> Pr&eacute;nom  * </label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<div class="col-md-6">
+						<input type="text" class="form-control" placeholder="" required>
+					</div>
+				</div>
+			</div>
+			
+			<br/>
+			
+			<div class="row">
+				<div class="form-group">
+					<div class="col-md-3">
+						<label>Date de naissance * </label> <input type="text"
+						class="form-control input-date" type="text"
+						style="cursor: text; background: white;" data-date-start-date="0d"
+						data-date-end-date="+6m"  readonly="readonly" required>
+					</div>
+					<div class="col-md-5">
+						<label> Lieu de naissance *</label> <input type="text" class="form-control" placeholder="">
+					</div>
+				</div>
+			</div>
+			
+			<br/>
+			
+			<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-12"> Nationalit&eacute; *</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<div class="col-md-6">
+						<input type="text" class="form-control" placeholder="" required>
+					</div>
+				</div>
+			</div>
+	
+			<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-12"> N°S&eacute;curit&eacute; Sociale *</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<div class="col-md-6">
+						<input type="text" class="form-control" placeholder="" required>
+					</div>
+				</div>
+			</div>
+			
+
+			<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-12">Adresse personnelle *</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<div class="col-md-6">
+						<input type="text" class="form-control" placeholder="Rue" required>
+					</div>
+					<div class="col-md-6">
+						<input type="text" class="form-control" placeholder="étage, bat ...">
+					</div>
+				</div>
+			</div>
+			<br/>
+			<div class="row">
+				<div class="form-group">
+					<div class="col-md-6">
+						<input type="text" class="form-control" placeholder="Ville" required>
+					</div>
+					<div class="col-md-6">
+						<input type="text" class="form-control" placeholder="Code Postal" required>
+					</div>
+				</div>
+			</div>
+			<br/><br/>
+			<div class="titreOffre">
+				<h4>Information sur la mission</h4>
+			</div>
+			<br/>
+			
+			<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-12"> Service d'accueil *</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<div class="col-md-6">
+						<input type="text" class="form-control" placeholder="" required>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="form-group col-md-12">
+					<label>D&eacute;tails de la mission * </label>
+					<textarea class="form-control" rows="5"></textarea>
+				</div>
+			</div>
+			
+		<div class="row">
+				<div class="form-inline col-md-12">
+					<label">Nombre d'heures par semaine :</label>
+					<input class="col-md-2" type="number" class="form-control" required>
+				</div>
+		</div>
+		<br/>
+		
+		<div class="row">
+				<div class="form-group">
+					<label class="col-md-4">Taux horaire brut de r&eacute;mun&eacute;ration  * </label>
+				</div>
+			</div>
+
+			<div class="row">
+					<div class="col-md-2">
+							<input class="form-control"required>
+					</div>
+			</div>
+		
+		<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-12"> Dates prévues des interventions *</label>
+				</div>
+		</div>
+		<br/>
+		
+		<div class="row">
+				<div class="input-daterange" id="datepicker">
+					<article class="col-md-3">
+						<div class="input-group">
+							<span class="input-group-addon" id="sizing-addon3">Du</span> <input
+								type="text" class="form-control" placeholder="jj/mm/aaaa"
+								name="start"  readonly="readonly"
+								style="cursor: text; background: white;" required>
+						</div>
+					</article>
+					<article class="col-md-3">
+						<div class="input-group">
+							<span class="input-group-addon" id="sizing-addon3">Au</span> <input
+								type="text" class="form-control" placeholder="jj/mm/aaaa"
+								name="end" readonly="readonly"
+								style="cursor: text; background: white;" required>
+						</div>
+					</article>
+				</div>
+			</div>
+		<br/>
+		<div class="row">
+				<div class="form-group">
+					<label class="control-label col-md-12"> Imputation bud&eacute;taire *</label>
+				</div>
+		</div><br/>
+		<div class="row">
+				<div class="form-inline col-md-12">
+					<label">Centre de cout </label>
+					<input class="col-md-6" class="form-control" required>
+				</div>
+		</div>
+		<div class="row">
+				<div class="form-inline col-md-12">
+					<label">Domaine fonctionnel </label>
+					<input class="col-md-6"class="form-control" required>
+				</div>
+		</div>
+		<div class="row">
+				<div class="form-inline col-md-12">
+					<label">Convention eOtp </label>
+					<input class="col-md-6" class="form-control" required>
+				</div>
+		</div>
+		<br> <br>
+			<div class="row save">
+				<article class="col-md-12 col-sm-12">
+					<input
+						name="action" type="submit" class="btn btn-lille1"
+						value="Enregistrer">
+
+
+				</article>
+			</div>
+		</form>
+
+		<br>
 
 	</div>
+
+	<br>
+
+
 </body>
 
+<style>
+.row {
+	margin-left: 10%;
+	margin-right: 10%;
+}
+</style>
 
 </html>
