@@ -1,11 +1,9 @@
 package glp.digiteam.controller;
 
-import java.security.Principal;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,8 +15,6 @@ import org.jasig.cas.client.authentication.AttributePrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -61,77 +57,112 @@ public class AuthenticationController {
 	@Autowired
 	private StudentWebServiceService studentLDAPService;
 
-
-
 	boolean notGoodNip = false;
 
 	@RequestMapping(value = "/authentication", method = RequestMethod.GET)
-	public String authenficationStudent(Model model,final ServletRequest servletRequest, HttpServletResponse response) throws JSONException {
-		
+	public ModelAndView authenficationStudent(Model model, final ServletRequest servletRequest,
+			HttpServletResponse response, HttpSession session) throws JSONException {
+		System.out.println("**********************************************************************************");
 		final HttpServletRequest request = (HttpServletRequest) servletRequest;
-		 
-		AttributePrincipal principal = (AttributePrincipal)request.getUserPrincipal();
-		
-		Map<String,Object> attributes = principal.getAttributes();
-		 
-		//Iterator attributeNames = attributes.keySet().iterator();
-		 
-		
-		 
-		
-		System.out.println(attributes.get("nip"));
-		
-		
-		Student student = new Student();
-		student.setNip(Integer.parseInt((String) attributes.get("nip")));
-		StaffLille1 staffLille1 = new StaffLille1();
-		///*
-		List<ServiceWebService> services = servicewebsrviceservice.getServicesWS();
 
-		for (ServiceWebService serviceWebService : services) {
-			ServiceEntity servicentity = new ServiceEntity(serviceWebService.getCode(), serviceWebService.getLibelle());
-			serviceservice.saveService(servicentity);
+		AttributePrincipal principal = (AttributePrincipal) request.getUserPrincipal();
+
+		Map<String, Object> attributes = principal.getAttributes();
+
+		Iterator attributeNames = attributes.keySet().iterator();
+
+		while (attributeNames.hasNext()) {
+			String currentAttribute = (String) attributeNames.next();
+			System.out.print(currentAttribute);
+			System.out.println(attributes.get(currentAttribute));
 		}
-		//*/
-		model.addAttribute("student",student);
 
+		System.out.println(attributes.get("nip"));
+		/// *
+				List<ServiceWebService> services = servicewebsrviceservice.getServicesWS();
 
+				for (ServiceWebService serviceWebService : services) {
+					ServiceEntity servicentity = new ServiceEntity(serviceWebService.getCode(), serviceWebService.getLibelle());
+					serviceservice.saveService(servicentity);
+				}
 
-		model.addAttribute("staffLille1",staffLille1);
-		model.addAttribute("notGoodNip",notGoodNip);
-		System.out.println(notGoodNip);
-		return "authentication";
+				// */
+		if (attributes.get("nip") != null) {
+
+			Student student = new Student();
+			student.setNip(Integer.parseInt((String) attributes.get("nip")));
+			student.setEmail((String) attributes.get("mail"));
+			student.setFirstName((String) attributes.get("givenname"));
+			student.setLastName((String) attributes.get("sn"));
+			StudentWebService studentLDAP = studentLDAPService.getStudentLDAP(student.getNip());
+			TrainingWebService trainingLDAP = trainingLDAPService.getTrainingLDAP(2017, student.getNip());
+
+			student.setCivilite(studentLDAP.getEtu_civilite());
+			/*
+			 * student.setFirstName(studentLDAP.getEtu_prenom());
+			 * student.setLastName(studentLDAP.getEtu_nom());
+			 * student.setEmail(studentLDAP.getEtu_email());
+			 */
+			student.setNationality(studentLDAP.getEtu_libnationalite());
+			student.getTrainings().get(0).setDate(trainingLDAP.getIns_ANNEE());
+			student.getTrainings().get(0).setName(trainingLDAP.getIns_LIBDIPLOME());
+			student.getTrainings().get(0).setPlace("Lille");
+			session.setAttribute("student", student);
+			if(studentService.getStudentByNip(student.getNip())==null){
+				studentService.saveStudentProfile(student);
+			}
+			
+			return new ModelAndView("redirect:home");
+			
+		} else {
+			StaffLille1 staffLille1 = new StaffLille1();
+			staffLille1.setEmail((String) attributes.get("mail"));
+			model.addAttribute("staffLille1", staffLille1);
+			return new ModelAndView("/homeStaffLille1");
+		}
+		
+
+		/*if (attributes.get("nip").equals("11302480")) {
+
+			
+		}*/
+		
 	}
 
-	
-	@RequestMapping(value ="/authentication", method = RequestMethod.POST)
-	public ModelAndView getStudent(@Valid @ModelAttribute Student student, WebRequest request,BindingResult bindingresult, Model model, HttpSession session,SessionStatus status) {
+	@RequestMapping(value = "/authentication", method = RequestMethod.POST)
+	public ModelAndView getStudent(@Valid @ModelAttribute Student student, WebRequest request,
+			BindingResult bindingresult, Model model, HttpSession session, SessionStatus status) {
 
-		if (student.getNip()!=null) {
+		if (student.getNip() != null) {
 
-			if (studentService.getStudentByNip(student.getNip())!=null){
-				student= studentService.getStudentByNip(student.getNip());
+			if (studentService.getStudentByNip(student.getNip()) != null) {
+				student = studentService.getStudentByNip(student.getNip());
 				model.addAttribute("student", student);
 				session.setAttribute("student", student);
 				request.removeAttribute("staffLille1", WebRequest.SCOPE_SESSION);
-				notGoodNip=false;
-				return new ModelAndView("redirect:/home");			
-			}else {
-				try{
-				///*
-
-					StudentWebService studentLDAP = studentLDAPService.getStudentLDAP(student.getNip());
-					TrainingWebService trainingLDAP = trainingLDAPService.getTrainingLDAP(2017, student.getNip());
-
-					student.setCivilite(studentLDAP.getEtu_civilite());
-					student.setFirstName(studentLDAP.getEtu_prenom());
-					student.setLastName(studentLDAP.getEtu_nom());
-					student.setEmail(studentLDAP.getEtu_email());
-					student.setNationality(studentLDAP.getEtu_libnationalite());
-					student.getTrainings().get(0).setDate(trainingLDAP.getIns_ANNEE());
-					student.getTrainings().get(0).setName(trainingLDAP.getIns_LIBDIPLOME());
-					student.getTrainings().get(0).setPlace("Lille");
-					// */
+				notGoodNip = false;
+				return new ModelAndView("redirect:/home");
+			} else {
+				try {
+					/*
+					 * 
+					 * StudentWebService studentLDAP =
+					 * studentLDAPService.getStudentLDAP(student.getNip());
+					 * TrainingWebService trainingLDAP =
+					 * trainingLDAPService.getTrainingLDAP(2017,
+					 * student.getNip());
+					 * 
+					 * student.setCivilite(studentLDAP.getEtu_civilite());
+					 * /*student.setFirstName(studentLDAP.getEtu_prenom());
+					 * student.setLastName(studentLDAP.getEtu_nom());
+					 * student.setEmail(studentLDAP.getEtu_email());
+					 * student.setNationality(studentLDAP.getEtu_libnationalite(
+					 * )); student.getTrainings().get(0).setDate(trainingLDAP.
+					 * getIns_ANNEE());
+					 * student.getTrainings().get(0).setName(trainingLDAP.
+					 * getIns_LIBDIPLOME());
+					 * student.getTrainings().get(0).setPlace("Lille");
+					 */
 				} catch (Exception e) {
 					notGoodNip = true;
 					return new ModelAndView("redirect:/authentication");
@@ -140,7 +171,7 @@ public class AuthenticationController {
 				model.addAttribute("student", student);
 				session.setAttribute("student", student);
 				studentService.saveStudentProfile(student);
-			    request.removeAttribute("staffLille1", WebRequest.SCOPE_SESSION);
+				request.removeAttribute("staffLille1", WebRequest.SCOPE_SESSION);
 
 				return new ModelAndView("redirect:/home");
 			}
@@ -149,7 +180,6 @@ public class AuthenticationController {
 		return null;
 	}
 
-
 	@RequestMapping(value = "/authenticationStaff", method = RequestMethod.POST)
 	public ModelAndView getStaff(@ModelAttribute StaffLille1 staffLille1, BindingResult bindingresult, Model model,
 			HttpSession session) {
@@ -157,6 +187,5 @@ public class AuthenticationController {
 		session.setAttribute("staffLille1", staffLille1);
 		return new ModelAndView("redirect:/homeStaffLille1");
 	}
-	
-	
+
 }
