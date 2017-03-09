@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,10 +52,12 @@ public class AdministratorController {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 		
-	//	Iterable<Referent> referents = referentRepository.findAll();
+		Iterable<StaffLille1> referents = staffLille1Repository.findAll();
 		Iterable<ServiceEntity> services = serviceRepository.findAll();
-   //	model.addAttribute("referents",referents);
+		model.addAttribute("referents",referents);
 
+		StaffLille1 referent=new StaffLille1();
+		model.addAttribute("newReferent",referent);
 		model.addAttribute("service",services);
 		model.addAttribute("user",user);
 		
@@ -88,12 +91,12 @@ public class AdministratorController {
 	
 	@RequestMapping(value = "/deleteReferent", method = RequestMethod.GET)
 	public ModelAndView deleteReferent(Model model,HttpSession session,@RequestParam(value="mode",required=true)String mode,@RequestParam(value="name",required=true)String name) {
-	
-		/*Moderator moderator=moderatorRepository.findByName(mode);
-	
-		referentRepository.deleteByName(name);
-		moderatorService.saveModerator(moderator);*/
+		StaffLille1 user= staffLille1Service.findByEmail(mode);
+		StaffLille1 referent= staffLille1Service.findByEmail(name);
 		
+		referent.setReferent(false);
+		model.addAttribute("user",user);
+		staffLille1Service.save(referent);
 		return new ModelAndView("redirect:gestionReferent");
 	}
 	
@@ -109,9 +112,18 @@ public class AdministratorController {
 	}
 	
 	@RequestMapping(value = "/newReferent", method = RequestMethod.POST)
-	public ModelAndView newReferent(/*@ModelAttribute Referent referent*/) {
-		
-	//	referentService.saveReferent(referent);
+	public ModelAndView newReferent(@ModelAttribute StaffLille1 staffLille1) {
+		StaffLille1 referent;
+		System.out.println(staffLille1.getEmail());
+		if(staffLille1Service.findByEmail(staffLille1.getEmail())!=null){
+			referent=staffLille1Service.findByEmail(staffLille1.getEmail());
+			referent.setReferent(true);
+			staffLille1Service.save(referent);
+		}
+		referent=new StaffLille1();
+		referent.setEmail(staffLille1.getEmail());
+		referent.setReferent(true);
+		staffLille1Service.save(referent);
 		
 
 		return new ModelAndView("redirect:gestionReferent");

@@ -107,10 +107,12 @@ public class OfferController {
 	@RequestMapping(value = "/newGenericOffer", method = RequestMethod.POST,params="action=Accepter")
 	public ModelAndView acceptGenericOffer(@ModelAttribute GenericOffer ofr,Model model,HttpSession session) {
 		GenericOffer offre=(GenericOffer) offerRepository.findById(ofr.getId());
-		StaffLille1 referent=staffLille1Repository.findByEmail(ofr.getReferent().getEmail());
+		StaffLille1 referent=staffLille1Service.getStaffLille1ByEmail(offre.getReferent().getEmail());
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 
+		model.addAttribute("user",user);
+		model.addAttribute("referent",referent);
 		offre.setTitle(ofr.getTitle());
 		offre.setComment(ofr.getComment());
 		offre.setMission(ofr.getMission());
@@ -215,6 +217,8 @@ public class OfferController {
 		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 
 
+		model.addAttribute("user",user);
+		model.addAttribute("referent",referent);
 		offre.setTitle(ofr.getTitle());
 		offre.setComment(ofr.getComment());
 		offre.setEndDate(ofr.getEndDate());

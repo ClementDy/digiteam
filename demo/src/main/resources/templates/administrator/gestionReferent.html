@@ -29,7 +29,7 @@
 
 	<div class="container containerWhite">
 		<form accept-charset="UTF-8" th:action="@{/newReferent}"
-			th:object="${referent}" method="post">
+			th:object="${newReferent}" method="post">
 
 			<div class="row">
 
@@ -41,13 +41,13 @@
 			<div class="row">
 			<div class="col-md-4"></div>
 				<div class="col-md-4">
-					<label>Nom du r&eacute;f&eacute;rent</label>
+					<label>Email du r&eacute;f&eacute;rent</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-4"></div>
 				<div class="col-md-4">
-					<input class="form-control" th:field="${referent.name}" type="text"
+					<input class="form-control" th:field="${newReferent.email}" type="email"
 						placeholder="Nom" required>
 				</div>
 			</div>
@@ -57,7 +57,7 @@
 				<div class="col-md-4"></div>
 				<div class="form-group col-md-4">
 					<label class="">Service :</label> <select size="1"
-						th:field="${referent.service}" class="form-control" id="allMissions">
+						th:field="${newReferent.service}" class="form-control" id="allMissions">
 						<option th:each="services : ${service}"
 							th:value="${services.code}" th:text="${services.libelle}"></option>
 					</select>
@@ -90,15 +90,17 @@
 			</div>
 		</div>
 			<div class="row">
-			<span th:each="referent : ${referents}">
+			<span th:each="referent : ${referents}" th:if="${referent.isReferent}==true">
 				
 					<div class="col-sm-6 col-md-3">
 						<div class="thumbnail">
 							<img src="img/profil.png" alt="...">
 							<div class="caption">
-								<p><strong>Nom : </strong><span  th:text="${referent.name}"></span></p>
+								<p><strong>Nom : </strong><span  th:text="${referent.lastName}"></span> <span  th:text="${referent.firstName}"></span></p>
+								<p><strong>Email : </strong><span  th:text="${referent.email}"></span></p>
+								<p><strong>Service : </strong><span  th:text="${referent.service.libelle}"></span></p>
 									
-								<a  th:href="@{/deleteReferent(name=${referent.name},mode=${user.name})}" class="btn btn-danger" role="button">Supprimer</a> 
+								<a  th:href="@{/deleteReferent(name=${referent.email},mode=${user.email})}" class="btn btn-danger" role="button">Supprimer</a> 
 							
 							</div>
 						</div>
