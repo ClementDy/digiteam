@@ -31,7 +31,11 @@
 	<div class="container containerWhite">
 		<br>
   		<article>
-  			<p> Bonjour <span th:text="${user.firstName}"></span> <span th:text="${user.lastName}"></span>,</p>
+  			<p> Bonjour <span th:text="${user.firstName}"></span> <span th:text="${user.lastName}"></span> (<b><span th:if="${user.isReferent}==true">Réferent</span>
+  			<span th:if="${user.isModerator}==true">-Gestionnaire</span><span th:if="${user.isAdministrator}==true">-Administrateur</span>
+  			<span th:if="${user.isAdministrator}==false and ${user.isModerator}==false and ${user.isReferent}==false">Personnel</span></b>),</p>
+  			<p></p>
+  			<h3> Référent</h3>
   			<p>En tant que r&eacute;f&eacute;rent vous avez accès à plusieurs fonctionnalités.</p>
   			<p>Premièrement, vous avez accès à vos offres en cliquant sur l'onglet "Offre" du menu ci-dessus. Cette page vous permettra
   			de consulter vos offres validées, en attente de validation, refusées et expirées.</p>
@@ -43,8 +47,10 @@
   			<p><a class="btn btn-success" aria-label="Left Align">
 									<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
 								    </a> Celui ci, vous permet de consulter votre offre.</p>
-  			
-  			
+  			<h3> Gestionnaire</h3>
+  			<p>En tant que r&eacute;f&eacute;rent vous avez accès à plusieurs fonctionnalités.</p>
+  			<h3> Administrateur</h3>
+  			<p>En tant que r&eacute;f&eacute;rent vous avez accès à plusieurs fonctionnalités.</p>
    			
  		</article>
 	</div>

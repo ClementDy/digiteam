@@ -116,6 +116,9 @@ public class AdministratorController {
 			gestionnaire=staffLille1Service.findByEmail(staffLille1.getEmail());
 			System.out.println(gestionnaire.getFirstName());
 			gestionnaire.setModerator(true);
+			if(gestionnaire.isReferent==true){
+				gestionnaire.setReferent(false);
+			}
 			staffLille1Service.save(gestionnaire);
 		}
 		else{
@@ -136,6 +139,9 @@ public class AdministratorController {
 			referent=staffLille1Service.findByEmail(staffLille1.getEmail());
 			referent.setReferent(true);
 			referent.setService(staffLille1.getService());
+			if(referent.isModerator==true){
+				referent.setModerator(false);
+			}
 			staffLille1Service.save(referent);
 		}
 		else{
