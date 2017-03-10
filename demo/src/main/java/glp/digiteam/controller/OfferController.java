@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.mail.MailException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,6 +27,7 @@ import glp.digiteam.entity.student.Student;
 import glp.digiteam.repository.MissionRepository;
 import glp.digiteam.repository.OfferRepository;
 import glp.digiteam.repository.StaffLille1Repository;
+import glp.digiteam.services.NotificationService;
 import glp.digiteam.services.OfferService;
 import glp.digiteam.services.StaffLille1Service;
 import glp.digiteam.services.StudentService;
@@ -40,6 +42,9 @@ public class OfferController {
 	private MissionRepository missionRepository;
 
 
+	@Autowired
+	private NotificationService notificationService;
+	
 	@Autowired
 	private StaffLille1Repository staffLille1Repository;
 
@@ -101,6 +106,13 @@ public class OfferController {
 
 
 		staffLille1Service.saveStaffLille1(user);
+		
+		try{
+			notificationService.sendNotification();
+		}
+		catch(MailException e){
+			e.printStackTrace();
+		}
 		return new ModelAndView("redirect:offers");
 	}
 
