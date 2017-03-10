@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="tab(activeTab, saved)">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="tab(activeTab, error, saved)">
 <head>
 
 <link type="text/css" href="/css/form.css" rel="stylesheet" />
@@ -26,9 +25,9 @@
 </head>
 
 <body onload="activeNav('candidatures');initializeMyMission();countChars(document.getElementById('motivations').value);"
-	th:attrappend="onload=${saved == 'true'} ? 'displaySavedDialog();'">
+	th:attrappend="onload=${error == 'true'} ? 'displayErrorPopup();' : (${saved == 'true'} ? 'displaySavedPopup();')">
 	
-	<div  th:include="header::header"></div>
+	<div th:include="header::header"></div>
 	<div style="text-align: center" class="container">
 		<h1>Formulaire de candidature</h1>
 		<br>
@@ -123,7 +122,21 @@
 				</article>
 			</div>
 			
-			<div class="modal fade" id="confirm-save" role="dialog">
+			<div class="modal fade" id="error-popup" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">Erreur de saisie</h4>
+						</div>
+						<div class="modal-body">
+							<p>Veuillez corriger les erreurs indiquées</p>
+							<a class="btn btn-lille1" data-dismiss="modal">Ok</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="modal fade" id="saved-popup" role="dialog">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -142,10 +155,14 @@
 	<br>
 	
 	<script>
-		function displaySavedDialog() {
-			$('#confirm-save').modal('show');
+		function displayErrorPopup() {
+			$('#error-popup').modal('show');
 		}
-
+		
+		function displaySavedPopup() {
+			$('#saved-popup').modal('show');
+		}
+		
 		function setCurrentTab() {
 			$('#currentTab').val( $('.tab-content').find('.active').attr('id') );
 		}
