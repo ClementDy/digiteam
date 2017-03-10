@@ -296,12 +296,15 @@
 			<h4 class="titreFormulaire">Divers</h4>
 			
 			<label>Associations (noms, rôles, missions) :</label> <br> 
-			<input type="text" class="form-control"  			
-			th:field="${student.misc.nameAssociation}" readonly/>
+			<textarea class="form-control" rows="3" id="nameAssociation"
+				style="resize: none" th:field="${student.misc.nameAssociation}"readonly></textarea>
 			
-			<br> <label>Connaissances informatiques :</label> <br> <input type="text" class="form-control" th:field="${student.misc.itKnowledge}" readonly/>
-			<br> <label>Connaissances linguistiques :</label> <br> <input type="text" class="form-control" th:field="${student.misc.languages}" readonly/> <br>
-			<label>Autres formations :</label> <br> <input type="text" class="form-control" th:field="${student.misc.otherFormations}" readonly/>
+			<br> <label>Connaissances informatiques :</label> <br> <textarea class="form-control" rows="3" id="itKnowledge"
+				style="resize: none" th:field="${student.misc.itKnowledge}" readonly></textarea>
+			<br> <label>Connaissances linguistiques :</label> <br> <textarea class="form-control" rows="3" id="languages"
+				style="resize: none" th:field="${student.misc.languages}"readonly></textarea> <br>
+			<label>Autres formations :</label> <br> <textarea class="form-control" rows="3" id="otherFormations"
+				style="resize: none" th:field="${student.misc.otherFormations}"readonly></textarea>
 			<br>
 		</div>
 
