@@ -18,45 +18,61 @@
 </head>
 
 <body onload="activeNav('consult');">
-	<div  th:include="headerStaffLille1::headerStaffLille1"></div>
+	<div th:include="headerStaffLille1::headerStaffLille1"></div>
 	<div class="container">
-	
-		
+
+
 		<div class="searchPart">
-			<div id="searchTitle">Recherche de candidature(s)</div><br/>
+			<div id="searchTitle">Recherche de candidature(s)</div>
+			<br />
 			<form class="navbar-form" method="post" role="search">
-			
-	    		<div class="row">
-	    		
-	    			<div class="col-md-4 col-md-offset-2">
-		    			<div class="input-group">
-						      <span class="input-group-addon">Pr&eacute;nom Nom</span>
-		      				   <input type="text" class="form-control" name="name" id="name" type="text">
-		      			</div>
-	      			</div>
-	    			<div class="col-md-4">
-		    			<div class="input-group">
-						      <span class="input-group-addon">Formation</span>
-		      				   <input type="text" class="form-control" name="formation" id="formation" type="text">
-		      			</div>
-	      			</div>
-	      			
-	      		</div>
-				<br/>
+
+				<div class="row">
+
+					<div class="col-md-4 col-md-offset-2">
+						<div class="input-group">
+							<span class="input-group-addon">Pr&eacute;nom Nom</span> <input
+								type="text" class="form-control" name="name" id="name"
+								type="text">
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="input-group">
+							<span class="input-group-addon">Formation</span> <input
+								type="text" class="form-control" name="formation" id="formation"
+								type="text">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4 col-md-offset-2">
+						<div class="input-group">
+							<span class="input-group-addon">Missions</span> <select
+								class="form-control" id="allMissions">
+								<option th:each="mission : ${listMission}"
+									th:value="${mission.id}" th:text="${mission.title}"></option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<br />
 				<div class="row">
 					<div class="col-xs-6 col-sm-6 col-xs-offset-5 input-group-btn">
-		        			<button class="btn btn-default" type="submit">Recherche <i class="glyphicon glyphicon-search"></i></button>
-		     		</div>
-	     		</div>
- 			 </form>
+						<button class="btn btn-default" type="submit">
+							Recherche <i class="glyphicon glyphicon-search"></i>
+						</button>
+					</div>
+				</div>
+			</form>
 		</div>
-		
+
 		<div class="row" th:if="${size !=null }">
 			<div class="alert alert-info">
-			  <strong>Resultat trouv&eacute; : </strong> <span th:text="${size}"></span> candidature<span th:if="${size > 1}">s</span>
+				<strong>Resultat trouv&eacute; : </strong> <span th:text="${size}"></span>
+				candidature<span th:if="${size > 1}">s</span>
 			</div>
 		</div>
-		
+
 		<div class="row">
 			<div class="list-group">
 				<div th:each="student : ${listCandidature}"
@@ -64,15 +80,17 @@
 					<div class="thumbnail">
 
 						<div class="studentName">
-							<br> <b>	<span th:if="${student.civilite}==0">M. </span> <span th:if="${student.civilite}==1">
-							Mme. </span><span th:text="${student.firstName}"></span>&nbsp;
-							<span th:text="${student.lastName}"></span></b>
+							<br> <b> <span th:if="${student.civilite}==0">M.
+							</span> <span th:if="${student.civilite}==1"> Mme. </span><span
+								th:text="${student.firstName}"></span>&nbsp; <span
+								th:text="${student.lastName}"></span></b>
 						</div>
 						<br>
 
 						<p class="text">
-							<b>Formation : </b> 
-							<span th:text="${student.trainings[__${0}__].name}">&nbsp;<span th:text="${student.trainings[__${0}__].date}"></span>
+							<b>Formation : </b> <span
+								th:text="${student.trainings[__${0}__].name}">&nbsp;<span
+								th:text="${student.trainings[__${0}__].date}"></span>
 						</p>
 
 						<p class="text">
@@ -80,15 +98,17 @@
 						</p>
 
 						<p class=" text centered-text">
-							<a th:href="@{profil(nip=${student.nip})}" class="btn btn-info" role="button">
-							<span class="glyphicon glyphicon-search"></span> Voir le profil compl&egrave;te</a>
+							<a th:href="@{profil(nip=${student.nip})}" class="btn btn-info"
+								role="button"> <span class="glyphicon glyphicon-search"></span>
+								Voir le profil compl&egrave;te
+							</a>
 						</p>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		</div>
+	</div>
 
 </body>
 
