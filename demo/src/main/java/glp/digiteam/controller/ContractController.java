@@ -34,8 +34,7 @@ public class ContractController {
 
 	@Autowired
 	private StudentService studentService;
-	
-	StaffLille1 user;
+
 
 	@RequestMapping(value = "/newContract", method = RequestMethod.GET)
 	public String contract(Model model, HttpSession session) {
@@ -59,7 +58,7 @@ public class ContractController {
 	public ModelAndView saveContract(@ModelAttribute Contract contract,Model model,HttpSession session) {
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 		
 		
 		contractService.saveContract(contract);
