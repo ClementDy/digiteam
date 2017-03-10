@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import glp.digiteam.entity.offer.AbstractOffer;
 import glp.digiteam.entity.offer.GenericOffer;
@@ -42,9 +43,7 @@ public class OfferController {
 	private MissionRepository missionRepository;
 
 
-	@Autowired
-	private NotificationService notificationService;
-	
+
 	@Autowired
 	private StaffLille1Repository staffLille1Repository;
 
@@ -107,13 +106,8 @@ public class OfferController {
 
 		staffLille1Service.saveStaffLille1(user);
 		
-		try{
-			notificationService.sendNotification();
-		}
-		catch(MailException e){
-			e.printStackTrace();
-		}
-		return new ModelAndView("redirect:offers");
+	
+		return new ModelAndView("redirect:mail");
 	}
 
 	@RequestMapping(value = "/newGenericOffer", method = RequestMethod.POST,params="action=Accepter")
