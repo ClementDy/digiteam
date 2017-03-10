@@ -20,8 +20,8 @@ public class NotificationService {
 	public void sendNotification() throws MailException{
 		//send email
 		SimpleMailMessage mail= new SimpleMailMessage();
-		mail.setTo("dilly.clement@gmail.com");
-		mail.setFrom("projetglp2017@gmail.com");
+		mail.setTo("clement.dilly@etudiant.univ-lille1.fr");
+		mail.setFrom("alexandre3.lefebvre@etudiant.univ-lille1.fr");
 		mail.setSubject("Projet GLP");
 		mail.setText("Bonjour Clément, je suis ton test");
 		

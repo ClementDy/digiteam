@@ -35,13 +35,13 @@ public class AdministratorController {
 	@Autowired 
 	private StaffLille1Repository staffLille1Repository;
 
-	StaffLille1 user;
 
 
 	@RequestMapping(value = "/gestionModerator", method = RequestMethod.GET)
 	public String gestionModerator(Model model,HttpSession session) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		
+		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 
 		Iterable<StaffLille1> gestionnaires = staffLille1Repository.findAll();
 		Iterable<ServiceEntity> services = serviceRepository.findAll();
@@ -59,7 +59,7 @@ public class AdministratorController {
 	@RequestMapping(value = "/gestionReferent", method = RequestMethod.GET)
 	public String gestionReferent(Model model,HttpSession session) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 
 		Iterable<StaffLille1> referents = staffLille1Repository.findAll();
 		Iterable<ServiceEntity> services = serviceRepository.findAll();
@@ -78,8 +78,7 @@ public class AdministratorController {
 	@RequestMapping(value = "/homeStaffLille1", method = RequestMethod.GET)
 	public String getHomeStaffLille1(Model model,HttpSession session) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		System.out.println(staffLille1.getEmail());
-		user=staffLille1Service.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 		System.out.println(user.getFirstName());
 		model.addAttribute("user",user);
 		return "homeStaffLille1";

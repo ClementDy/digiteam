@@ -61,12 +61,11 @@ public class OfferController {
 	@Autowired
 	private StaffLille1Service staffLille1Service;
 
-	private StaffLille1 user;
 
 	@RequestMapping(value = "/offers", method = RequestMethod.GET)
 	public String homeContracts(Model model,HttpSession session) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 
 		checkOffer(user);
 		model.addAttribute("user",user);
@@ -78,7 +77,7 @@ public class OfferController {
 	public String newGeneriqueOffer(Model model,HttpSession session) {
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 
 
 		GenericOffer offer=new GenericOffer();
@@ -93,7 +92,7 @@ public class OfferController {
 	public ModelAndView saveGenericOffer(@ModelAttribute GenericOffer ofr,Model model,HttpSession session) {
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 
 
 		user.addOffer(ofr);
@@ -115,7 +114,7 @@ public class OfferController {
 		GenericOffer offre=(GenericOffer) offerRepository.findById(ofr.getId());
 		StaffLille1 referent=staffLille1Service.getStaffLille1ByEmail(offre.getReferent().getEmail());
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 
 		model.addAttribute("user",user);
 		model.addAttribute("referent",referent);
@@ -143,7 +142,7 @@ public class OfferController {
 		GenericOffer offre=(GenericOffer) offerRepository.findById(ofr.getId());
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 		offre.setStatus("Refused");
 
 		offre.setComment(ofr.getComment());
@@ -158,7 +157,7 @@ public class OfferController {
 	public String newStandardOffer(Model model,HttpSession session) {
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 
 		StandardOffer offer=new StandardOffer();
 		model.addAttribute("user",user);
@@ -174,7 +173,7 @@ public class OfferController {
 
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 
 		user.addOffer(ofr);
 		ofr.setReferent(user);
@@ -191,7 +190,7 @@ public class OfferController {
 	@RequestMapping(value = "/dispublish", method = RequestMethod.GET)
 	public String dispublish(Model model,@RequestParam(value = "", required = true) long id, HttpSession session) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 
 		model.addAttribute("user",user);
 		offerService.dispublish(id, user);
@@ -205,7 +204,7 @@ public class OfferController {
 	@RequestMapping(value = "/removeOffer", method = RequestMethod.GET)
 	public String removeOffer(Model model,@RequestParam(value = "", required = true) long id, HttpSession session) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
 		offerService.removeOffer(id, user);
 
@@ -220,7 +219,7 @@ public class OfferController {
 		StandardOffer offre=(StandardOffer) offerRepository.findById(ofr.getId());
 		StaffLille1 referent=(StaffLille1) staffLille1Repository.findByEmail(offre.getReferent().getEmail());
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 
 
 		model.addAttribute("user",user);
@@ -251,7 +250,7 @@ public class OfferController {
 		StandardOffer offre=(StandardOffer) offerRepository.findById(ofr.getId());
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 
 		offre.setStatus("Refused");
 
@@ -269,7 +268,7 @@ public class OfferController {
 	public String consult(Model model,HttpSession session) {
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 
 		model.addAttribute("user",user);
 
@@ -287,7 +286,7 @@ public class OfferController {
 			@RequestParam(value="formation", required=true,defaultValue="") String formation,Model model, HttpSession session) {
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
 
 
@@ -326,7 +325,7 @@ public class OfferController {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 
 		if(staffLille1!=null){
-			user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+			StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 			model.addAttribute("user",user);
 
 		}
@@ -351,7 +350,7 @@ public class OfferController {
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		if(staffLille1!=null){
-			user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+			StaffLille1	user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 			model.addAttribute("user",user);	
 		}
 		else{
@@ -375,7 +374,7 @@ public class OfferController {
 	@RequestMapping(value = "/profil", method = RequestMethod.GET)
 	public String profil(Model model,HttpSession session,@RequestParam(value="nip", required=true) Integer nip) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
 
 		model.addAttribute("student", studentService.getStudentByNip(nip));
@@ -397,7 +396,7 @@ public class OfferController {
 	public ModelAndView newOffer(Model model, HttpSession session,@RequestParam(value = "id", required = true) long id){
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
 		
 		AbstractOffer offer = offerRepository.findById(id);
@@ -422,7 +421,7 @@ public class OfferController {
 	public ModelAndView modifyOffer(Model model, HttpSession session,@RequestParam(value = "id", required = true) long id){
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
 		
 		AbstractOffer offer = offerRepository.findById(id);
@@ -444,7 +443,7 @@ public class OfferController {
 	public ModelAndView manageOffer(Model model, HttpSession session,@RequestParam(value = "id", required = true) long id){
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
 	
 		AbstractOffer offer = offerRepository.findById(id);
@@ -469,7 +468,7 @@ public class OfferController {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 
 		if(staffLille1!=null){
-			user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+			StaffLille1	user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 			model.addAttribute("user",user);
 		
 		}
@@ -490,7 +489,7 @@ public class OfferController {
 	@RequestMapping(value = "/gestionOffers", method = RequestMethod.GET)
 	public ModelAndView gestionOffers(Model model, HttpSession session) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1	user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
 
 		Iterable<AbstractOffer> offers = offerRepository.findAll();
@@ -511,7 +510,7 @@ public class OfferController {
 			System.out.println(so.getId());
 		}
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
 		
 		return new ModelAndView("redirect:offers/gestionOffers");
@@ -522,7 +521,7 @@ public class OfferController {
 
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
 		System.out.println(offer.getId());
 		return new ModelAndView("redirect:offers/gestionOffers");

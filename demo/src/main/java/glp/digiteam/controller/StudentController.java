@@ -1,7 +1,14 @@
 package glp.digiteam.controller;
 
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
+
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -65,6 +72,9 @@ public class StudentController {
 
 	@Value("${cas.client-host-url}")
 	String urlredirect;
+	
+	@Value("${IPCV}")
+	String IPCV;
 
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public String profile(Model model, HttpSession session) {
@@ -73,7 +83,9 @@ public class StudentController {
 		student=studentService.getStudentByNip(student.getNip());
 		model.addAttribute("student", student);
 		model.addAttribute("user", student);
-		String pathCV = "http://172.28.2.17/"+student.getNip();
+		
+		String pathCV = IPCV+"/"+student.getNip();
+		System.out.println("************************* "+pathCV);
 		model.addAttribute("pathCV", pathCV);
 		return "profile";
 	}
@@ -146,12 +158,12 @@ public class StudentController {
 		Iterable<Mission> missions = missionRepository.findAll();
 		model.addAttribute("listMission", missions);
 
-		String pathCV = "http://172.28.2.17/"+student.getNip();
+		String pathCV = IPCV+"/"+student.getNip();
 		model.addAttribute("pathCV", pathCV);
 
 		studentService.saveStudentProfile(student);
 
-		return new ModelAndView("candidature::tab(activeTab='intro', error='false', saved='false')");
+		return new ModelAndView("candidature::tab(activeTab='intro', saved='false')");
 	}
 
 	@RequestMapping(value = "/candidature", method = RequestMethod.POST)
@@ -177,7 +189,6 @@ public class StudentController {
 					return new ModelAndView(
 							"candidature::tab("
 									+ "activeTab='" + saveValidator.getFirstErrorTab(bindingResult) + "'"
-									+ ", error='true'"
 									+ ", saved='false'"
 									+ ")");
 				}
@@ -197,7 +208,6 @@ public class StudentController {
 					return new ModelAndView(
 							"candidature::tab("
 									+ "activeTab='" + publishValidator.getFirstErrorTab(bindingResult) + "'"
-									+ ", error='true'"
 									+ ", saved='false'"
 									+ ")");
 				}
@@ -267,7 +277,6 @@ public class StudentController {
 		return new ModelAndView(
 				"candidature::tab("
 						+ "activeTab='"+ currentTab + "'"
-						+ ", error='false'"
 						+ ", saved='true'"
 						+ ")");
 	}

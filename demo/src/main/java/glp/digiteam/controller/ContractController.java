@@ -39,17 +39,15 @@ public class ContractController {
 	@Autowired
 	private StudentService studentService;
 
-	StaffLille1 user;
 
 	@RequestMapping(value = "/newContract", method = RequestMethod.GET)
 	public String contract(Model model, HttpSession session,
 			@RequestParam(value = "nip", required = true, defaultValue = "") Integer nip) {
 		StaffLille1 staffLille1 = (StaffLille1) session.getAttribute("staffLille1");
-		user = staffLille1Repository.findByEmail(staffLille1.getEmail());
 
 		Student student = studentService.getStudentByNip(nip);
 
-		model.addAttribute("user", user);
+		model.addAttribute("user", staffLille1);
 
 		Contract contract = new Contract();
 
@@ -63,10 +61,10 @@ public class ContractController {
 	@RequestMapping(value = "/newContract", method = RequestMethod.POST)
 	public ModelAndView saveContract(@ModelAttribute Contract contract, Model model, HttpSession session) {
 
+
 		StaffLille1 staffLille1 = (StaffLille1) session.getAttribute("staffLille1");
-		user = staffLille1Repository.findByEmail(staffLille1.getEmail());
-		
-		contract.setReferent(user);
+
+		contract.setReferent(staffLille1);
 
 		contractService.saveContract(contract);
 		
@@ -77,9 +75,8 @@ public class ContractController {
 	@RequestMapping(value = "/homeContract", method = RequestMethod.GET)
 	public String homeContact(Model model, HttpSession session) {
 		StaffLille1 staffLille1 = (StaffLille1) session.getAttribute("staffLille1");
-		user = staffLille1Repository.findByEmail(staffLille1.getEmail());
 
-		model.addAttribute("user", user);
+		model.addAttribute("user", staffLille1);
 
 		List<Student> listCandidatures = studentService.getAllCandidature();
 		model.addAttribute("listCandidature", listCandidatures);
@@ -93,8 +90,8 @@ public class ContractController {
 			@RequestParam(value="formation", required=true,defaultValue="") String formation,Model model, HttpSession session) {
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		user=staffLille1Repository.findByEmail(staffLille1.getEmail());
-		model.addAttribute("user",user);
+		
+		model.addAttribute("user",staffLille1);
 
 
 		if(!name.isEmpty() && formation.isEmpty() ){
