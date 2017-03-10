@@ -42,4 +42,11 @@ function activeNav(id) {
 		$('#gestionModerator').removeClass("active");
 		$('#consult').removeClass("active");
 	}
+	
+	else if(id=='contract'){
+		$('#contract').addClass("active");
+		$('#offers').removeClass("active");
+		$('#candidatures').removeClass("active");
+		$('#consult').removeClass("active");
+	}
 }

@@ -58,6 +58,9 @@ public class Student {
 	@OneToMany(fetch = FetchType.EAGER,mappedBy = "student", cascade = CascadeType.ALL)
 	List<Training> trainings = new ArrayList<Training>();
 	
+	@OneToMany
+	List<Contract> contract = new ArrayList<Contract>();
+	
 	public Student() {
 		this.address = new Address(this);
 		this.availability = new Availability(this);
@@ -226,6 +229,15 @@ public class Student {
 
 	public void setCv(String cv) {
 		this.cv = cv;
+	}
+
+	
+	public List<Contract> getContract() {
+		return contract;
+	}
+
+	public void setContract(List<Contract> contract) {
+		contract = contract;
 	}
 
 	@Override

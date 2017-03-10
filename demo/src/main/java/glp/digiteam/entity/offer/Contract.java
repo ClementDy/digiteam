@@ -4,9 +4,13 @@ import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import glp.digiteam.entity.student.Student;
@@ -15,6 +19,7 @@ import glp.digiteam.entity.student.Student;
 public class Contract {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.TABLE)
 	private long id;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
@@ -30,7 +35,9 @@ public class Contract {
 	private String nature;
 
 	private String service;
-
+	
+	@Lob
+	@Type(type="org.hibernate.type.TextType")
 	private String mission;
 
 	private int hours;

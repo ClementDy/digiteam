@@ -78,7 +78,7 @@
 				<div class="form-group">
 					<div class="col-md-6">
 						<input type="text" class="form-control"
-							th:value="${contract.student.lastName}" readonly>
+							th:value="${student.lastName}" readonly>
 					</div>
 				</div>
 			</div>
@@ -94,7 +94,7 @@
 				<div class="form-group">
 					<div class="col-md-6">
 						<input type="text" class="form-control"
-							th:value="${contract.student.firstName}" readonly>
+							th:value="${student.firstName}" readonly>
 					</div>
 				</div>
 			</div>
@@ -107,7 +107,7 @@
 						<label>Date de naissance * </label> <input type="text"th:field="${contract.bornDate}" 
 							class="form-control input-date" 
 							style="cursor: text; background: white;"
-							data-date-start-date="0d" data-date-end-date="+6m">
+							data-date-start-date="0d" data-date-end-date="+6m" required>
 					</div>
 					<div class="col-md-5">
 						<label> Lieu de naissance *</label> <input type="text"
@@ -128,7 +128,7 @@
 				<div class="form-group">
 					<div class="col-md-6">
 						<input type="text" class="form-control"
-							th:value="${contract.student.nationality}" readonly>
+							th:value="${student.nationality}" readonly>
 					</div>
 				</div>
 			</div>
@@ -159,12 +159,12 @@
 				<div class="form-group">
 					<div class="col-md-6">
 						<input type="text" class="form-control" placeholder="Rue"
-							th:value="${contract.student.address.street}" readonly>
+							th:value="${student.address.street}" readonly>
 					</div>
 					<div class="col-md-6">
 						<input type="text" class="form-control"
 							placeholder="étage, bat ..."
-							th:value="${contract.student.address.complement}" readonly>
+							th:value="${student.address.complement}" readonly>
 					</div>
 				</div>
 			</div>
@@ -173,11 +173,11 @@
 				<div class="form-group">
 					<div class="col-md-6">
 						<input type="text" class="form-control" placeholder="Ville"
-							th:value="${contract.student.address.city}" readonly>
+							th:value="${student.address.city}" readonly>
 					</div>
 					<div class="col-md-6">
 						<input type="text" class="form-control" placeholder="Code Postal"
-							th:value="${contract.student.address.postalCode}" readonly>
+							th:value="${student.address.postalCode}" readonly>
 					</div>
 				</div>
 			</div>
