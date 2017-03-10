@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 import glp.digiteam.entity.student.Student;
@@ -17,124 +16,132 @@ public class Contract {
 
 	@Id
 	private long id;
-	
+
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Student student;
-	
+
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	private StaffLille1 staffLille1;
-	
+	private StaffLille1 referent;
+
 	private String useName;
 
 	private String numSecuriteSociale;
-	
-	private String title;
-	
+
+	private String nature;
+
 	private String service;
-	
+
 	private String mission;
-	
+
 	private int hours;
-	
-	private int taux;
-	
-	@DateTimeFormat(pattern="dd/MM/yyyy")
+
+	private int rate;
+
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date bornDate;
+
+	private String bornPlace;
+
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date startDate;
-	
-	@DateTimeFormat(pattern="dd/MM/yyyy")
+
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date endDate;
-	
+
 	private String responsable;
-	
-	private  String centreCout;
-	
+
+	private String costCenter;
+
 	private String domaineFonctionel;
-	
+
 	private String convention_eOTP;
+
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date dateSaisie;
 
 	public Contract() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
 
-
-	public StaffLille1 getStaffLille1() {
-		return staffLille1;
+	public StaffLille1 getReferent() {
+		return referent;
 	}
 
-
-
-
-
-	public void setStaffLille1(StaffLille1 staffLille1) {
-		this.staffLille1 = staffLille1;
+	public String getBornPlace() {
+		return bornPlace;
 	}
 
+	public void setBornPlace(String bornPlace) {
+		this.bornPlace = bornPlace;
+	}
 
+	public void setReferent(StaffLille1 referent) {
+		this.referent = referent;
+	}
 
+	public Date getBornDate() {
+		return bornDate;
+	}
 
+	public void setBornDate(Date bornDate) {
+		this.bornDate = bornDate;
+	}
+
+	public Date getDateSaisie() {
+		return dateSaisie;
+	}
+
+	public void setDateSaisie(Date dateSaisie) {
+		this.dateSaisie = dateSaisie;
+	}
 
 	public String getResponsable() {
 		return responsable;
 	}
 
-
 	public void setResponsable(String responsable) {
 		this.responsable = responsable;
 	}
 
-
-	public String getTitle() {
-		return title;
+	public String getNature() {
+		return nature;
 	}
 
-
-	public void setTitle(String title) {
-		this.title = title;
+	public void setNature(String title) {
+		this.nature = title;
 	}
-
 
 	public String getService() {
 		return service;
 	}
 
-
 	public void setService(String service) {
 		this.service = service;
 	}
-
 
 	public String getMission() {
 		return mission;
 	}
 
-
 	public void setMission(String mission) {
 		this.mission = mission;
 	}
-
 
 	public int getHours() {
 		return hours;
 	}
 
-
 	public void setHours(int hours) {
 		this.hours = hours;
 	}
 
-
-	public int getTaux() {
-		return taux;
+	public int getRate() {
+		return rate;
 	}
 
-
-	public void setTaux(int taux) {
-		this.taux = taux;
+	public void setRate(int rate) {
+		this.rate = rate;
 	}
-
 
 	public String getUseName() {
 		return useName;
@@ -176,12 +183,12 @@ public class Contract {
 		this.endDate = endDate;
 	}
 
-	public String getCentreCout() {
-		return centreCout;
+	public String getCostCenter() {
+		return costCenter;
 	}
 
-	public void setCentreCout(String centreCout) {
-		this.centreCout = centreCout;
+	public void setCostCenter(String costCenter) {
+		this.costCenter = costCenter;
 	}
 
 	public String getDomaineFonctionel() {
@@ -199,7 +206,5 @@ public class Contract {
 	public void setConvention_eOTP(String convention_eOTP) {
 		this.convention_eOTP = convention_eOTP;
 	}
-	
-	
-}
 
+}

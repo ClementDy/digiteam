@@ -57,9 +57,6 @@ public class Student {
 
 	@OneToMany(fetch = FetchType.EAGER,mappedBy = "student", cascade = CascadeType.ALL)
 	List<Training> trainings = new ArrayList<Training>();
-
-	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
-	List<Contract> contracts = new ArrayList<Contract>();
 	
 	public Student() {
 		this.address = new Address(this);
@@ -85,15 +82,6 @@ public class Student {
 		this.nationality = nationality;
 		this.motivation = motivation;
 		this.wish = wish;
-	}
-
-	
-	public List<Contract> getContracts() {
-		return contracts;
-	}
-
-	public void setContracts(List<Contract> contracts) {
-		this.contracts = contracts;
 	}
 
 	public Address getAddress() {
