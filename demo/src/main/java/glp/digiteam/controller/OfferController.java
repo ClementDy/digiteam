@@ -283,39 +283,42 @@ public class OfferController {
 	@RequestMapping(value = "/consult_candidatures", method = RequestMethod.POST)
 	public String consultCandidatures(
 			@RequestParam(value="name", required=true, defaultValue="") String name,
-			@RequestParam(value="formation", required=true,defaultValue="") String formation,Model model, HttpSession session) {
+			@RequestParam(value="formation", required=true,defaultValue="") String formation,
+			@RequestParam(value="mission", required=true,defaultValue="") String mission,
+			Model model, HttpSession session) {
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
 
-
-		if(!name.isEmpty() && formation.isEmpty() ){
-			List<Student> listCandidatures = studentService.findByName(name);;
+		
+		/*if(!name.isEmpty() && formation.isEmpty() ){
+			List<Student> listCandidatures = studentService.findByName(name);
 			model.addAttribute("listCandidature", listCandidatures);
 			model.addAttribute("size", listCandidatures.size());
 			return "consult_candidatures";
 
-		}
-		if(!name.isEmpty()  && !formation.isEmpty()){
-			List<Student> listCandidatures = studentService.findWithParameter(name,formation);
+		}*/
+		if(name.isEmpty() && mission.isEmpty() && formation.isEmpty()){
+			List<Student> listCandidatures = studentService.getAllCandidature();
 			model.addAttribute("listCandidature", listCandidatures);
 			model.addAttribute("size", listCandidatures.size());
 			return "consult_candidatures";
-
-		}
-		if(name.isEmpty()  && !formation.isEmpty() ){
+		}else{
+		
+		/*if(name.isEmpty()  && !formation.isEmpty()){
 			List<Student> listCandidatures = studentService.findWithTraining(formation);
 			model.addAttribute("listCandidature", listCandidatures);
 			model.addAttribute("size", listCandidatures.size());
 			return "consult_candidatures";
 
+		}*/
+			List<Student> listCandidatures = studentService.findWithParameter(name,formation,mission);
+			model.addAttribute("listCandidature", listCandidatures);
+			model.addAttribute("size", listCandidatures.size());
+			return "consult_candidatures";
+		
 		}
-
-		List<Student> listCandidatures = studentService.getAllCandidature();
-		model.addAttribute("listCandidature", listCandidatures);
-		model.addAttribute("size", listCandidatures.size());
-		return "consult_candidatures";
 
 	}
 

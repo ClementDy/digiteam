@@ -38,7 +38,15 @@ public class StudentService {
 		return allStudent;
 	}
 
-	public List<Student> findWithParameter(String name, String formation) {
+	public List<Student> findWithParameter(String name, String formation,String mission) {
+		if(!name.isEmpty() && formation.isEmpty() ){
+			List<Student> listCandidatures = findByName(name);
+			return listCandidatures;
+		}
+		if(name.isEmpty()  && !formation.isEmpty()){
+			List<Student> listCandidatures = findWithTraining(formation);
+			return listCandidatures;
+		}
 		String[] splited = name.split("\\s+");
 		List<Student> allStudent;
 		if (splited.length > 1) {
@@ -50,7 +58,7 @@ public class StudentService {
 			for (Student student : allStudent) {
 				List<Training> t = student.getTrainings();
 				for (Training training : t) {
-					if (training.getName().contains(formation.toUpperCase())) {
+					if (training.getName().contains(formation.toUpperCase())&&student.getWish().getMissions().contains(mission)) {
 						students.add(student);
 					}
 				}
