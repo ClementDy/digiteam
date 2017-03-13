@@ -112,7 +112,7 @@ public class OfferController {
 	@RequestMapping(value = "/newGenericOffer", method = RequestMethod.POST,params="action=Accepter")
 	public ModelAndView acceptGenericOffer(@ModelAttribute GenericOffer ofr,Model model,HttpSession session) {
 		GenericOffer offre=(GenericOffer) offerRepository.findById(ofr.getId());
-		StaffLille1 referent=staffLille1Service.getStaffLille1ByEmail(offre.getReferent().getEmail());
+		StaffLille1 referent=staffLille1Service.findByEmail(offre.getReferent().getEmail());
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 
