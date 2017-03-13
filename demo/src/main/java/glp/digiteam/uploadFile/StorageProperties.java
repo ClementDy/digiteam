@@ -9,8 +9,8 @@ public class StorageProperties {
     /**
      * Folder location for storing files
      */
-	private String location = "/home/m2miage/lefebvrea/Bureau";
-   //private String location = "/var/www/html";
+	//private String location = "/home/m2miage/lefebvrea/Bureau";
+   private String location = "/var/www/html";
 	
 	
     public String getLocation() {
