@@ -13,7 +13,6 @@ import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.io.Resource;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -37,8 +36,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import glp.digiteam.entity.offer.AbstractOffer;
 import glp.digiteam.entity.student.Mission;
 import glp.digiteam.entity.student.Student;
-import glp.digiteam.repository.MissionRepository;
-import glp.digiteam.repository.OfferRepository;
+import glp.digiteam.services.MissionService;
+import glp.digiteam.services.OfferService;
 import glp.digiteam.services.StudentService;
 import glp.digiteam.uploadFile.StorageFileNotFoundException;
 import glp.digiteam.uploadFile.StorageService;
@@ -52,16 +51,14 @@ public class StudentController {
 
 	private final StorageService storageService;
 
+	@Autowired
+	private MissionService missionService;
 
+	@Autowired
+	private OfferService offerService;
 
 	@Autowired
 	private StudentService studentService;
-
-	@Autowired
-	private MissionRepository missionRepository;
-
-	@Autowired
-	private OfferRepository offerRepository;
 
 	@Value("${cas.client-host-url}")
 	String urlredirect;
@@ -117,7 +114,7 @@ public class StudentController {
 
 
 
-		Iterable<AbstractOffer> abstractOffers = offerRepository.findLastOffers(new PageRequest(0, 5));
+		Iterable<AbstractOffer> abstractOffers = offerService.findLastOffers(0, 5);
 
 		model.addAttribute("abstractOffers",abstractOffers);
 
@@ -148,7 +145,7 @@ public class StudentController {
 		model.addAttribute("student", student);
 		model.addAttribute("user", student);
 
-		Iterable<Mission> missions = missionRepository.findAll();
+		Iterable<Mission> missions = missionService.findAll();
 		model.addAttribute("listMission", missions);
 
 		String pathCV = IPCV+"/"+student.getNip();
@@ -173,7 +170,7 @@ public class StudentController {
 				saveValidator.validate(std, bindingResult);
 
 				if (bindingResult.hasErrors()) {
-					Iterable<Mission> missions = missionRepository.findAll();
+					Iterable<Mission> missions = missionService.findAll();
 					model.addAttribute("listMission", missions);
 
 					Iterable<String> errorTabs = saveValidator.getErrorTabs(bindingResult);
@@ -193,7 +190,7 @@ public class StudentController {
 				publishValidator.validate(std, bindingResult);
 
 				if (bindingResult.hasErrors()) {
-					Iterable<Mission> missions = missionRepository.findAll();
+					Iterable<Mission> missions = missionService.findAll();
 					model.addAttribute("listMission", missions);
 
 					Iterable<String> errorTabs = publishValidator.getErrorTabs(bindingResult);
@@ -267,7 +264,7 @@ public class StudentController {
 			studentService.saveStudentProfile(std);
 		}
 
-		Iterable<Mission> missions = missionRepository.findAll();
+		Iterable<Mission> missions = missionService.findAll();
 		model.addAttribute("listMission", missions);
 		return new ModelAndView(
 				"candidature::tab("
@@ -286,7 +283,7 @@ public class StudentController {
 			return new ModelAndView("redirect:authentication");
 		}
 
-		AbstractOffer offer = offerRepository.findById(id);
+		AbstractOffer offer = offerService.findById(id);
 		System.out.println(student);
 		model.addAttribute("student", student);
 		model.addAttribute("user", student);
