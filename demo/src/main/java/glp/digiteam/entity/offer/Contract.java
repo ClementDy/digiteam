@@ -42,7 +42,7 @@ public class Contract {
 
 	private int hours;
 
-	private int rate;
+	private double rate;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date bornDate;
@@ -142,11 +142,11 @@ public class Contract {
 		this.hours = hours;
 	}
 
-	public int getRate() {
+	public double getRate() {
 		return rate;
 	}
 
-	public void setRate(int rate) {
+	public void setRate(double rate) {
 		this.rate = rate;
 	}
 

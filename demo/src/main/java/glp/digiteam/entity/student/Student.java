@@ -58,7 +58,7 @@ public class Student {
 	@OneToMany(fetch = FetchType.EAGER,mappedBy = "student", cascade = CascadeType.ALL)
 	List<Training> trainings = new ArrayList<Training>();
 	
-	@OneToMany
+	@OneToMany(mappedBy="student", cascade=CascadeType.ALL,targetEntity=Contract.class)
 	List<Contract> contract = new ArrayList<Contract>();
 	
 	public Student() {

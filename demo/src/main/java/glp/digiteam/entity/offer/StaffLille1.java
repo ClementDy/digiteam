@@ -31,6 +31,9 @@ public class StaffLille1 {
 	@OneToMany(mappedBy="referent", cascade=CascadeType.ALL,targetEntity=AbstractOffer.class)
 	private List<AbstractOffer> offers = new ArrayList<AbstractOffer>();
 
+	@OneToMany(mappedBy="referent", cascade=CascadeType.ALL,targetEntity=Contract.class)
+	private List<Contract> contracts = new ArrayList<Contract>();
+
 	
 	public boolean isModerator=false;
 	public boolean isAdministrator=false;
@@ -141,6 +144,18 @@ public class StaffLille1 {
 
 	public void setOffers(List<AbstractOffer> offers) {
 		this.offers = offers;
+	}
+
+
+
+	public List<Contract> getContracts() {
+		return contracts;
+	}
+
+
+
+	public void setContracts(List<Contract> contracts) {
+		this.contracts = contracts;
 	}
 
 
