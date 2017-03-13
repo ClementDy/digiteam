@@ -9,15 +9,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.mail.MailException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import glp.digiteam.entity.offer.AbstractOffer;
 import glp.digiteam.entity.offer.GenericOffer;
@@ -25,10 +22,7 @@ import glp.digiteam.entity.offer.StaffLille1;
 import glp.digiteam.entity.offer.StandardOffer;
 import glp.digiteam.entity.student.Mission;
 import glp.digiteam.entity.student.Student;
-import glp.digiteam.repository.MissionRepository;
-import glp.digiteam.repository.OfferRepository;
-import glp.digiteam.repository.StaffLille1Repository;
-import glp.digiteam.services.NotificationService;
+import glp.digiteam.services.MissionService;
 import glp.digiteam.services.OfferService;
 import glp.digiteam.services.StaffLille1Service;
 import glp.digiteam.services.StudentService;
@@ -40,20 +34,7 @@ import glp.digiteam.services.StudentService;
 public class OfferController {
 
 	@Autowired
-	private MissionRepository missionRepository;
-
-
-
-	@Autowired
-	private StaffLille1Repository staffLille1Repository;
-
-
-	@Autowired
-	private StudentService studentService;
-
-
-	@Autowired
-	private OfferRepository offerRepository;
+	private MissionService missionService;
 
 	@Autowired
 	private OfferService offerService;
@@ -61,11 +42,14 @@ public class OfferController {
 	@Autowired
 	private StaffLille1Service staffLille1Service;
 
+	@Autowired
+	private StudentService studentService;
+
 
 	@RequestMapping(value = "/offers", method = RequestMethod.GET)
 	public String homeContracts(Model model,HttpSession session) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 
 		checkOffer(user);
 		model.addAttribute("user",user);
@@ -77,13 +61,13 @@ public class OfferController {
 	public String newGeneriqueOffer(Model model,HttpSession session) {
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 
 
 		GenericOffer offer=new GenericOffer();
 		model.addAttribute("user",user);
 		model.addAttribute("offer", offer);
-		Iterable<Mission> missions = missionRepository.findAll();
+		Iterable<Mission> missions = missionService.findAll();
 		model.addAttribute("listMission", missions);
 		return "offers/newGenericOffer";
 	}
@@ -92,7 +76,7 @@ public class OfferController {
 	public ModelAndView saveGenericOffer(@ModelAttribute GenericOffer ofr,Model model,HttpSession session) {
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 
 
 		user.addOffer(ofr);
@@ -111,10 +95,10 @@ public class OfferController {
 
 	@RequestMapping(value = "/newGenericOffer", method = RequestMethod.POST,params="action=Accepter")
 	public ModelAndView acceptGenericOffer(@ModelAttribute GenericOffer ofr,Model model,HttpSession session) {
-		GenericOffer offre=(GenericOffer) offerRepository.findById(ofr.getId());
-		StaffLille1 referent=staffLille1Service.getStaffLille1ByEmail(offre.getReferent().getEmail());
+		GenericOffer offre=(GenericOffer) offerService.findById(ofr.getId());
+		StaffLille1 referent=staffLille1Service.findByEmail(offre.getReferent().getEmail());
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 
 		model.addAttribute("user",user);
 		model.addAttribute("referent",referent);
@@ -139,10 +123,10 @@ public class OfferController {
 
 	@RequestMapping(value = "/newGenericOffer", method = RequestMethod.POST,params="action=Refuser")
 	public ModelAndView refuseGenericOffer(@ModelAttribute GenericOffer ofr,Model model,HttpSession session) {
-		GenericOffer offre=(GenericOffer) offerRepository.findById(ofr.getId());
+		GenericOffer offre=(GenericOffer) offerService.findById(ofr.getId());
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 		offre.setStatus("Refused");
 
 		offre.setComment(ofr.getComment());
@@ -157,13 +141,13 @@ public class OfferController {
 	public String newStandardOffer(Model model,HttpSession session) {
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 
 		StandardOffer offer=new StandardOffer();
 		model.addAttribute("user",user);
 
 		model.addAttribute("offer", offer);
-		Iterable<Mission> missions = missionRepository.findAll();
+		Iterable<Mission> missions = missionService.findAll();
 		model.addAttribute("listMission", missions);
 		return "offers/newStandardOffer";
 	}
@@ -173,7 +157,7 @@ public class OfferController {
 
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 
 		user.addOffer(ofr);
 		ofr.setReferent(user);
@@ -190,7 +174,7 @@ public class OfferController {
 	@RequestMapping(value = "/dispublish", method = RequestMethod.GET)
 	public String dispublish(Model model,@RequestParam(value = "", required = true) long id, HttpSession session) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 
 		model.addAttribute("user",user);
 		offerService.dispublish(id, user);
@@ -204,7 +188,7 @@ public class OfferController {
 	@RequestMapping(value = "/removeOffer", method = RequestMethod.GET)
 	public String removeOffer(Model model,@RequestParam(value = "", required = true) long id, HttpSession session) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
 		offerService.removeOffer(id, user);
 
@@ -216,10 +200,10 @@ public class OfferController {
 	@RequestMapping(value = "/newStandardOffer", method = RequestMethod.POST,params="action=Accepter")
 	public ModelAndView acceptStandardOffer(@ModelAttribute StandardOffer ofr,Model model,HttpSession session) {
 
-		StandardOffer offre=(StandardOffer) offerRepository.findById(ofr.getId());
-		StaffLille1 referent=(StaffLille1) staffLille1Repository.findByEmail(offre.getReferent().getEmail());
+		StandardOffer offre=(StandardOffer) offerService.findById(ofr.getId());
+		StaffLille1 referent=(StaffLille1) staffLille1Service.findByEmail(offre.getReferent().getEmail());
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 
 
 		model.addAttribute("user",user);
@@ -247,10 +231,10 @@ public class OfferController {
 	@RequestMapping(value = "/newStandardOffer", method = RequestMethod.POST,params="action=Refuser")
 	public ModelAndView refuseStandardOffer(@ModelAttribute StandardOffer ofr,Model model,HttpSession session) {
 
-		StandardOffer offre=(StandardOffer) offerRepository.findById(ofr.getId());
+		StandardOffer offre=(StandardOffer) offerService.findById(ofr.getId());
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 
 		offre.setStatus("Refused");
 
@@ -268,11 +252,11 @@ public class OfferController {
 	public String consult(Model model,HttpSession session) {
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 
 		model.addAttribute("user",user);
 
-		Iterable<Mission> missions = missionRepository.findAll();
+		Iterable<Mission> missions = missionService.findAll();
 		model.addAttribute("listMission", missions);
 
 		List<Student> listCandidatures = studentService.getAllCandidature();
@@ -286,10 +270,10 @@ public class OfferController {
 			@RequestParam(value="formation", required=true,defaultValue="") String formation,
 			@RequestParam(value="mission", required=true,defaultValue="") String mission,
 			Model model, HttpSession session) {
-		Iterable<Mission> missions = missionRepository.findAll();
+		Iterable<Mission> missions = missionService.findAll();
 		model.addAttribute("listMission", missions);
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
 
 		
@@ -329,7 +313,7 @@ public class OfferController {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 
 		if(staffLille1!=null){
-			StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+			StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 			model.addAttribute("user",user);
 
 		}
@@ -339,7 +323,7 @@ public class OfferController {
 		}
 
 
-		Iterable<AbstractOffer> listOffers = offerRepository.findLastOffers(new PageRequest(0, 30));
+		Iterable<AbstractOffer> listOffers = offerService.findLastOffers(0, 30);
 		model.addAttribute("listOffers",listOffers);
 
 		return "offers/consult_offers";
@@ -354,7 +338,7 @@ public class OfferController {
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		if(staffLille1!=null){
-			StaffLille1	user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+			StaffLille1	user=staffLille1Service.findByEmail(staffLille1.getEmail());
 			model.addAttribute("user",user);	
 		}
 		else{
@@ -378,7 +362,7 @@ public class OfferController {
 	@RequestMapping(value = "/profil", method = RequestMethod.GET)
 	public String profil(Model model,HttpSession session,@RequestParam(value="nip", required=true) Integer nip) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
 
 		model.addAttribute("student", studentService.getStudentByNip(nip));
@@ -400,15 +384,15 @@ public class OfferController {
 	public ModelAndView newOffer(Model model, HttpSession session,@RequestParam(value = "id", required = true) long id){
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
 		
-		AbstractOffer offer = offerRepository.findById(id);
+		AbstractOffer offer = offerService.findById(id);
 		offer.setStatus("Waiting");
 		offer.setCreationDate(Calendar.getInstance().getTime());
 		offer.setValidityDate(null);
 		model.addAttribute("offer",offer);
-		Iterable<Mission> missions = missionRepository.findAll();
+		Iterable<Mission> missions = missionService.findAll();
 		model.addAttribute("listMission", missions);
 
 		if(offer.getClass().getName().equals("glp.digiteam.entity.offer.GenericOffer")){
@@ -425,14 +409,14 @@ public class OfferController {
 	public ModelAndView modifyOffer(Model model, HttpSession session,@RequestParam(value = "id", required = true) long id){
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
 		
-		AbstractOffer offer = offerRepository.findById(id);
+		AbstractOffer offer = offerService.findById(id);
 		offer.setStatus("Waiting");
 		offer.setCreationDate(Calendar.getInstance().getTime());
 		model.addAttribute("offer",offer);
-		Iterable<Mission> missions = missionRepository.findAll();
+		Iterable<Mission> missions = missionService.findAll();
 		model.addAttribute("listMission", missions);
 
 		if(offer.getClass().getName().equals("glp.digiteam.entity.offer.GenericOffer")){
@@ -447,12 +431,12 @@ public class OfferController {
 	public ModelAndView manageOffer(Model model, HttpSession session,@RequestParam(value = "id", required = true) long id){
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
 	
-		AbstractOffer offer = offerRepository.findById(id);
+		AbstractOffer offer = offerService.findById(id);
 		model.addAttribute("offer",offer);
-		Iterable<Mission> missions = missionRepository.findAll();
+		Iterable<Mission> missions = missionService.findAll();
 		model.addAttribute("listMission", missions);
 
 		if(offer.getClass().getName().equals("glp.digiteam.entity.offer.GenericOffer")){
@@ -472,7 +456,7 @@ public class OfferController {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 
 		if(staffLille1!=null){
-			StaffLille1	user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+			StaffLille1	user=staffLille1Service.findByEmail(staffLille1.getEmail());
 			model.addAttribute("user",user);
 		
 		}
@@ -480,7 +464,7 @@ public class OfferController {
 			Student student=(Student) session.getAttribute("student");
 			model.addAttribute("user",student);
 		}
-		AbstractOffer offer = offerRepository.findById(id);
+		AbstractOffer offer = offerService.findById(id);
 
 		if(offer!=null){
 			model.addAttribute("offer", offer);
@@ -493,10 +477,10 @@ public class OfferController {
 	@RequestMapping(value = "/gestionOffers", method = RequestMethod.GET)
 	public ModelAndView gestionOffers(Model model, HttpSession session) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		StaffLille1	user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1	user=staffLille1Service.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
 
-		Iterable<AbstractOffer> offers = offerRepository.findAll();
+		Iterable<AbstractOffer> offers = offerService.findAll();
 		model.addAttribute("offers",offers);
 		return new ModelAndView("offers/gestionOffers");
 	}
@@ -505,16 +489,16 @@ public class OfferController {
 	public ModelAndView validateOffer(Model model,@RequestParam(value = "offer", required = true) GenericOffer offer, HttpSession session) {
 
 		if(offer.getClass().getName().equals("glp.digiteam.entity.offer.GenericOffer")){
-			GenericOffer go=(GenericOffer) offerRepository.findById(offer.getId());
+			GenericOffer go=(GenericOffer) offerService.findById(offer.getId());
 			System.out.println(go.getId());
 
 		}
 		else if(offer.getClass().getName().equals("glp.digiteam.entity.offer.StandardOffer")){
-			StandardOffer so=(StandardOffer) offerRepository.findById(offer.getId());
+			StandardOffer so=(StandardOffer) offerService.findById(offer.getId());
 			System.out.println(so.getId());
 		}
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
 		
 		return new ModelAndView("redirect:offers/gestionOffers");
@@ -525,7 +509,7 @@ public class OfferController {
 
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
 		System.out.println(offer.getId());
 		return new ModelAndView("redirect:offers/gestionOffers");

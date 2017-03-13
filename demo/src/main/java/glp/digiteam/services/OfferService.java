@@ -21,6 +21,10 @@ public class OfferService {
 	OfferRepository offerRepository;
 		
 	
+	public Iterable<AbstractOffer> findAll() {
+		return offerRepository.findAll();
+	}
+	
 	public AbstractOffer findById(long id) {
 		return offerRepository.findById(id);
 	}
