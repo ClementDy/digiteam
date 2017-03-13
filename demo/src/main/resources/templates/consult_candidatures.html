@@ -45,11 +45,12 @@
 					</div>
 					<div class="col-md-4 ">
 						<div class="input-group">
-							<span class="input-group-addon">Missions</span> <select
-								class="form-control" id="allMissions">
-								<option th:each="mission : ${listMission}"
-									th:value="${mission.id}" th:text="${mission.title}"></option>
-							</select>
+							<span class="input-group-addon">Missions</span> <select size="1"
+						th:field="${mission.title}" class="form-control" id="allMissions">
+						<option th:each="missionl : ${listMission}"
+							th:value="${missionl.id}" th:text="${missionl.title}"></option>
+					</select>
+							
 						</div>
 					</div>
 				</div>
@@ -59,9 +60,11 @@
 				<br />
 				<div class="row">
 					<div class="col-xs-6 col-sm-6 col-xs-offset-5 input-group-btn">
-						<button class="btn btn-default" type="submit">
-							Recherche <i class="glyphicon glyphicon-search"></i>
+						<button class="btn btn-default" type="submit" >
+							Recherche <i class="glyphicon glyphicon-search" ></i>
+							
 						</button>
+						<a th:href="@{/consult_candidatures(mission=${mission.title})}">Alex</a>
 					</div>
 				</div>
 			</form>
