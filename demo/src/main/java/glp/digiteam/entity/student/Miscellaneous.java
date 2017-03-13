@@ -4,7 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 public class Miscellaneous {
@@ -17,9 +20,19 @@ public class Miscellaneous {
 	private Student student;
 	
 	private boolean association;
+	
+	@Lob
+	@Type(type = "org.hibernate.type.TextType")
 	private String nameAssociation;
+	
+	@Lob
+	@Type(type = "org.hibernate.type.TextType")
 	private String itKnowledge;
+	@Lob
+	@Type(type = "org.hibernate.type.TextType")
 	private String languages;
+	@Lob
+	@Type(type = "org.hibernate.type.TextType")
 	private String otherFormations;
 	
 	
