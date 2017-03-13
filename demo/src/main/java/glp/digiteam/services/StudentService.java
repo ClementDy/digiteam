@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import glp.digiteam.entity.student.Mission;
 import glp.digiteam.entity.student.Student;
 import glp.digiteam.entity.student.Training;
 import glp.digiteam.repository.StudentRepository;
@@ -41,11 +42,17 @@ public class StudentService {
 	}
 
 	public List<Student> findWithParameter(String name, String formation,String mission) {
+		System.out.println("training "+formation);
+		System.out.println("nom "+name);
+		System.out.println("mission "+mission);
+		
 		if(!name.isEmpty() && formation.isEmpty() ){
+			
 			List<Student> listCandidatures = findByName(name);
 			return listCandidatures;
 		}
 		if(name.isEmpty()  && !formation.isEmpty()){
+			
 			List<Student> listCandidatures = findWithTraining(formation);
 			return listCandidatures;
 		}
@@ -53,19 +60,27 @@ public class StudentService {
 		List<Student> allStudent;
 		if (splited.length > 1) {
 			allStudent = studentRepository.findWithFirstNameLastName(splited[0], splited[1]);
-		} else {
+		} else if(!name.isEmpty()){
 			allStudent = studentRepository.findWithName(splited[0]);
+		}else{
+			allStudent=studentRepository.findPublishedCandidature();
 		}
+		
 		List<Student> students = new ArrayList<>();
 			for (Student student : allStudent) {
+				System.out.println("*****");
 				List<Training> t = student.getTrainings();
 				for (Training training : t) {
-					if (training.getName().contains(formation.toUpperCase())&&student.getWish().getMissions().contains(mission)) {
-						System.out.println("training "+formation);
-						System.out.println("nom "+name);
-						System.out.println("mission "+mission);
-						System.out.println("mission etudiant "+student.getWish().getMissions().toString());
-						students.add(student);
+					System.out.println(training.getName().contains(formation.toUpperCase()));
+					if (training.getName().contains(formation.toUpperCase())) {
+						for (Mission missionl : student.getWish().getMissions()) {
+							System.out.println("missionl "+missionl.getId());
+							System.out.println("mission"+mission);
+							if (Long.toString(missionl.getId()).equals(mission)&&!students.contains(student)) {
+								students.add(student);
+							}
+						}
+						
 						
 					
 					}
