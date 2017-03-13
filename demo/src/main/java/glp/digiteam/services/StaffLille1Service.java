@@ -10,7 +10,11 @@ import glp.digiteam.repository.StaffLille1Repository;
 public class StaffLille1Service {
 
 	@Autowired
-	StaffLille1Repository staffLille1Repository;
+	private StaffLille1Repository staffLille1Repository;
+	
+	public Iterable<StaffLille1> findAll() {
+		return staffLille1Repository.findAll();
+	}
 	
 	public StaffLille1 findByEmail(String email) {
 		return staffLille1Repository.findByEmail(email);

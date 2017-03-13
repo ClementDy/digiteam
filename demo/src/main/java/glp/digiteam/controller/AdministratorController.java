@@ -16,8 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import glp.digiteam.entity.offer.ServiceEntity;
 import glp.digiteam.entity.offer.StaffLille1;
-import glp.digiteam.repository.ServiceRepository;
-import glp.digiteam.repository.StaffLille1Repository;
+import glp.digiteam.services.ServiceService;
+import glp.digiteam.services.StaffLille1Service;
 
 
 @EnableAutoConfiguration
@@ -25,26 +25,21 @@ import glp.digiteam.repository.StaffLille1Repository;
 @ComponentScan(basePackages = "glp.digiteam.services")
 public class AdministratorController {
 
-
 	@Autowired 
-	private ServiceRepository serviceRepository;
+	private ServiceService serviceService;
 
 	@Autowired
-	StaffLille1Repository staffLille1Service;
-
-	@Autowired 
-	private StaffLille1Repository staffLille1Repository;
-
+	private StaffLille1Service staffLille1Service;
 
 
 	@RequestMapping(value = "/gestionModerator", method = RequestMethod.GET)
 	public String gestionModerator(Model model,HttpSession session) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		
-		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 
-		Iterable<StaffLille1> gestionnaires = staffLille1Repository.findAll();
-		Iterable<ServiceEntity> services = serviceRepository.findAll();
+		Iterable<StaffLille1> gestionnaires = staffLille1Service.findAll();
+		Iterable<ServiceEntity> services = serviceService.findAll();
 		model.addAttribute("gestionnaires",gestionnaires);
 
 		StaffLille1 gestionnaire=new StaffLille1();
@@ -59,10 +54,10 @@ public class AdministratorController {
 	@RequestMapping(value = "/gestionReferent", method = RequestMethod.GET)
 	public String gestionReferent(Model model,HttpSession session) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 
-		Iterable<StaffLille1> referents = staffLille1Repository.findAll();
-		Iterable<ServiceEntity> services = serviceRepository.findAll();
+		Iterable<StaffLille1> referents = staffLille1Service.findAll();
+		Iterable<ServiceEntity> services = serviceService.findAll();
 		model.addAttribute("referents",referents);
 
 		StaffLille1 referent=new StaffLille1();
@@ -93,7 +88,7 @@ public class AdministratorController {
 
 		gestionnaire.setModerator(false);
 		model.addAttribute("user",user);
-		staffLille1Service.save(gestionnaire);
+		staffLille1Service.saveStaffLille1(gestionnaire);
 
 		return new ModelAndView("redirect:gestionModerator");
 	}
@@ -105,7 +100,7 @@ public class AdministratorController {
 
 		referent.setReferent(false);
 		model.addAttribute("user",user);
-		staffLille1Service.save(referent);
+		staffLille1Service.saveStaffLille1(referent);
 		return new ModelAndView("redirect:gestionReferent");
 	}
 
@@ -119,13 +114,13 @@ public class AdministratorController {
 			if(gestionnaire.isReferent==true){
 				gestionnaire.setReferent(false);
 			}
-			staffLille1Service.save(gestionnaire);
+			staffLille1Service.saveStaffLille1(gestionnaire);
 		}
 		else{
 			gestionnaire=new StaffLille1();
 			gestionnaire.setEmail(staffLille1.getEmail());
 			gestionnaire.setModerator(true);
-			staffLille1Service.save(gestionnaire);
+			staffLille1Service.saveStaffLille1(gestionnaire);
 		}
 
 		return new ModelAndView("redirect:gestionModerator");
@@ -142,7 +137,7 @@ public class AdministratorController {
 			if(referent.isModerator==true){
 				referent.setModerator(false);
 			}
-			staffLille1Service.save(referent);
+			staffLille1Service.saveStaffLille1(referent);
 		}
 		else{
 
@@ -150,7 +145,7 @@ public class AdministratorController {
 			referent.setEmail(staffLille1.getEmail());
 			referent.setReferent(true);
 			referent.setService(staffLille1.getService());
-			staffLille1Service.save(referent);
+			staffLille1Service.saveStaffLille1(referent);
 		}		
 
 		return new ModelAndView("redirect:gestionReferent");

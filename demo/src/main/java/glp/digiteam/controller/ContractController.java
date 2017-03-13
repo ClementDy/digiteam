@@ -16,14 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import glp.digiteam.entity.offer.Contract;
-import glp.digiteam.entity.offer.GenericOffer;
 import glp.digiteam.entity.offer.StaffLille1;
 import glp.digiteam.entity.student.Mission;
 import glp.digiteam.entity.student.Student;
-import glp.digiteam.repository.MissionRepository;
-import glp.digiteam.repository.StaffLille1Repository;
 import glp.digiteam.services.ContractService;
-import glp.digiteam.services.OfferService;
+import glp.digiteam.services.MissionService;
 import glp.digiteam.services.StudentService;
 
 @EnableAutoConfiguration
@@ -35,10 +32,7 @@ public class ContractController {
 	private ContractService contractService;
 
 	@Autowired
-	private StaffLille1Repository staffLille1Repository;
-	
-	@Autowired
-	private MissionRepository missionRepository;
+	private MissionService missionService;
 
 	@Autowired
 	private StudentService studentService;
@@ -79,7 +73,7 @@ public class ContractController {
 	@RequestMapping(value = "/homeContract", method = RequestMethod.GET)
 	public String homeContact(Model model, HttpSession session) {
 		StaffLille1 staffLille1 = (StaffLille1) session.getAttribute("staffLille1");
-		Iterable<Mission> missions = missionRepository.findAll();
+		Iterable<Mission> missions = missionService.findAll();
 		model.addAttribute("listMission", missions);
 		model.addAttribute("user", staffLille1);
 
@@ -95,7 +89,7 @@ public class ContractController {
 			@RequestParam(value="formation", required=true,defaultValue="") String formation,
 			@RequestParam(value="mission", required=true,defaultValue="") String mission,Model model, HttpSession session) {
 		
-		Iterable<Mission> missions = missionRepository.findAll();
+		Iterable<Mission> missions = missionService.findAll();
 		model.addAttribute("listMission", missions);
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		

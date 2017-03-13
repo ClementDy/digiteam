@@ -13,7 +13,11 @@ public class ServiceService {
 	ServiceRepository serviceRepository;
 	
 	
+	public Iterable<ServiceEntity> findAll() {
+		return serviceRepository.findAll();
+	}
+	
 	public ServiceEntity saveService(ServiceEntity service){
-		return serviceRepository.save( service);
+		return serviceRepository.save(service);
 	}
 }
