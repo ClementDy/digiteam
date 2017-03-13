@@ -28,7 +28,7 @@
 			
 	    		<div class="row">
 	    		
-	    			<div class="col-md-4 col-md-offset-2">
+	    			<div class="col-md-4 ">
 		    			<div class="input-group">
 						      <span class="input-group-addon">Pr&eacute;nom Nom</span>
 		      				   <input type="text" class="form-control" name="name" id="name" type="text">
@@ -40,7 +40,15 @@
 		      				   <input type="text" class="form-control" name="formation" id="formation" type="text">
 		      			</div>
 	      			</div>
-	      			
+	      			<div class="col-md-4 ">
+						<div class="input-group">
+							<span class="input-group-addon">Missions</span> <select
+								class="form-control" id="allMissions">
+								<option th:each="mission : ${listMission}"
+									th:value="${mission.id}" th:text="${mission.title}"></option>
+							</select>
+						</div>
+					</div>
 	      		</div>
 				<br/>
 				<div class="row">

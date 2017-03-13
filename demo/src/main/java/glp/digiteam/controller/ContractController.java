@@ -20,6 +20,7 @@ import glp.digiteam.entity.offer.GenericOffer;
 import glp.digiteam.entity.offer.StaffLille1;
 import glp.digiteam.entity.student.Mission;
 import glp.digiteam.entity.student.Student;
+import glp.digiteam.repository.MissionRepository;
 import glp.digiteam.repository.StaffLille1Repository;
 import glp.digiteam.services.ContractService;
 import glp.digiteam.services.OfferService;
@@ -35,6 +36,9 @@ public class ContractController {
 
 	@Autowired
 	private StaffLille1Repository staffLille1Repository;
+	
+	@Autowired
+	private MissionRepository missionRepository;
 
 	@Autowired
 	private StudentService studentService;
@@ -75,7 +79,8 @@ public class ContractController {
 	@RequestMapping(value = "/homeContract", method = RequestMethod.GET)
 	public String homeContact(Model model, HttpSession session) {
 		StaffLille1 staffLille1 = (StaffLille1) session.getAttribute("staffLille1");
-
+		Iterable<Mission> missions = missionRepository.findAll();
+		model.addAttribute("listMission", missions);
 		model.addAttribute("user", staffLille1);
 
 		List<Student> listCandidatures = studentService.getAllCandidature();
@@ -87,13 +92,35 @@ public class ContractController {
 	@RequestMapping(value = "/homeContract", method = RequestMethod.POST)
 	public String consultCandidatures(
 			@RequestParam(value="name", required=true, defaultValue="") String name,
-			@RequestParam(value="formation", required=true,defaultValue="") String formation,Model model, HttpSession session) {
-
+			@RequestParam(value="formation", required=true,defaultValue="") String formation,
+			@RequestParam(value="mission", required=true,defaultValue="") String mission,Model model, HttpSession session) {
+		
+		Iterable<Mission> missions = missionRepository.findAll();
+		model.addAttribute("listMission", missions);
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		
 		model.addAttribute("user",staffLille1);
 
+		if(name.isEmpty() && mission.isEmpty() && formation.isEmpty()){
+			List<Student> listCandidatures = studentService.getAllCandidature();
+			model.addAttribute("listCandidature", listCandidatures);
+			model.addAttribute("size", listCandidatures.size());
+			return "consult_candidatures";
+		}else{
+		
+		/*if(name.isEmpty()  && !formation.isEmpty()){
+			List<Student> listCandidatures = studentService.findWithTraining(formation);
+			model.addAttribute("listCandidature", listCandidatures);
+			model.addAttribute("size", listCandidatures.size());
+			return "consult_candidatures";
 
+		}*/
+			List<Student> listCandidatures = studentService.findWithParameter(name,formation,mission);
+			model.addAttribute("listCandidature", listCandidatures);
+			model.addAttribute("size", listCandidatures.size());
+			return "consult_candidatures";
+		
+		}/*
 		if(!name.isEmpty() && formation.isEmpty() ){
 			List<Student> listCandidatures = studentService.findByName(name);;
 			model.addAttribute("listCandidature", listCandidatures);
@@ -119,7 +146,7 @@ public class ContractController {
 		List<Student> listCandidatures = studentService.getAllCandidature();
 		model.addAttribute("listCandidature", listCandidatures);
 		model.addAttribute("size", listCandidatures.size());
-		return "contract/homeContract";
+		return "contract/homeContract";*/
 
 	}
 }

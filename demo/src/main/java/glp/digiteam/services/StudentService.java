@@ -1,5 +1,7 @@
 package glp.digiteam.services;
 
+import static org.mockito.Matchers.startsWith;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -59,7 +61,13 @@ public class StudentService {
 				List<Training> t = student.getTrainings();
 				for (Training training : t) {
 					if (training.getName().contains(formation.toUpperCase())&&student.getWish().getMissions().contains(mission)) {
+						System.out.println("training "+formation);
+						System.out.println("nom "+name);
+						System.out.println("mission "+mission);
+						System.out.println("mission etudiant "+student.getWish().getMissions().toString());
 						students.add(student);
+						
+					
 					}
 				}
 			return students;

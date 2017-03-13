@@ -286,7 +286,8 @@ public class OfferController {
 			@RequestParam(value="formation", required=true,defaultValue="") String formation,
 			@RequestParam(value="mission", required=true,defaultValue="") String mission,
 			Model model, HttpSession session) {
-
+		Iterable<Mission> missions = missionRepository.findAll();
+		model.addAttribute("listMission", missions);
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		StaffLille1 user=staffLille1Repository.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);

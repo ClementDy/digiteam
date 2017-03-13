@@ -75,13 +75,9 @@ public class AuthenticationController {
 
 		Iterator attributeNames = attributes.keySet().iterator();
 
-		while (attributeNames.hasNext()) {
-			String currentAttribute = (String) attributeNames.next();
-			System.out.print(currentAttribute);
-			System.out.println(attributes.get(currentAttribute));
-		}
+		
 
-		System.out.println(attributes.get("nip"));
+		
 		/// *
 				List<ServiceWebService> services = servicewebsrviceservice.getServicesWS();
 
