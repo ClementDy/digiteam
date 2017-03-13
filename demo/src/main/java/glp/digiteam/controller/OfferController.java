@@ -90,7 +90,7 @@ public class OfferController {
 		staffLille1Service.saveStaffLille1(user);
 		
 	
-		return new ModelAndView("redirect:mail");
+		return new ModelAndView("redirect:offers");
 	}
 
 	@RequestMapping(value = "/newGenericOffer", method = RequestMethod.POST,params="action=Accepter")
@@ -129,6 +129,7 @@ public class OfferController {
 		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 		offre.setStatus("Refused");
 
+		model.addAttribute("user",user);
 		offre.setComment(ofr.getComment());
 
 		offerService.saveOffer(offre);
@@ -239,7 +240,7 @@ public class OfferController {
 		offre.setStatus("Refused");
 
 		offre.setComment(ofr.getComment());
-
+		model.addAttribute("user",user);
 		offerService.saveOffer(offre);
 
 		return new ModelAndView("redirect:gestionOffers");
