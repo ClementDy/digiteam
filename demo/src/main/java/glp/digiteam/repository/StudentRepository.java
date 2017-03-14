@@ -15,7 +15,7 @@ public interface StudentRepository extends CrudRepository<Student, Integer> {
     
     List<Student> findByLastName(String lastName);
     
-    @Query("select s from Student s where (s.firstName=:param1 or s.lastName=:param1) and s.statut='published' ")
+    @Query("select s from Student s where (s.firstName=:param1 or s.lastName=:param1 or s.nip=:param1) and s.statut='published' ")
     List<Student> findWithName(@Param("param1") String param1);
     
     

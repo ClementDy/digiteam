@@ -31,7 +31,7 @@
 
 					<div class="col-md-4 ">
 						<div class="input-group">
-							<span class="input-group-addon">Pr&eacute;nom Nom</span> <input
+							<span class="input-group-addon">Pr&eacute;nom Nom / nip</span> <input
 								type="text" class="form-control" name="name" id="name"
 								type="text">
 						</div>
@@ -46,7 +46,8 @@
 					<div class="col-md-4 ">
 						<div class="input-group">
 							<span class="input-group-addon">Missions</span> <select size="1"
-						th:field="${mission.title}" class="form-control" id="allMissions">
+						 class="form-control" id="allMissions" name="mission">
+						<option>  </option>
 						<option th:each="missionl : ${listMission}"
 							th:value="${missionl.id}" th:text="${missionl.title}"></option>
 					</select>
@@ -64,7 +65,7 @@
 							Recherche <i class="glyphicon glyphicon-search" ></i>
 							
 						</button>
-						<a th:href="@{/consult_candidatures(mission=${mission.title})}">Alex</a>
+						<a th:href="@{/consult_candidatures}">Alex</a>
 					</div>
 				</div>
 			</form>

@@ -267,9 +267,9 @@ public class OfferController {
 
 	@RequestMapping(value = "/consult_candidatures", method = RequestMethod.POST)
 	public String consultCandidatures(
-			@ModelAttribute Mission mission,
 			@RequestParam(value="name", required=true, defaultValue="") String name,
 			@RequestParam(value="formation", required=true,defaultValue="") String formation,
+			@RequestParam(value="mission", required=true,defaultValue="") String mission,
 			Model model, HttpSession session) {
 		
 		Iterable<Mission> missions = missionService.findAll();
@@ -280,13 +280,13 @@ public class OfferController {
 
 		
 		
-		if(name.isEmpty() && mission.getTitle().isEmpty() && formation.isEmpty()){
+		if(name.isEmpty() && mission.isEmpty() && formation.isEmpty()){
 			List<Student> listCandidatures = studentService.getAllCandidature();
 			model.addAttribute("listCandidature", listCandidatures);
 			model.addAttribute("size", listCandidatures.size());
 			return "consult_candidatures";
 		}else{
-			List<Student> listCandidatures = studentService.findWithParameter(name,formation,mission.getTitle());
+			List<Student> listCandidatures = studentService.findWithParameter(name,formation,mission);
 			model.addAttribute("listCandidature", listCandidatures);
 			model.addAttribute("size", listCandidatures.size());
 			return "consult_candidatures";
