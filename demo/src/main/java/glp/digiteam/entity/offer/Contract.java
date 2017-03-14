@@ -33,8 +33,6 @@ public class Contract {
 	private String numSecuriteSociale;
 
 	private String nature;
-
-	private String service;
 	
 	@Lob
 	@Type(type="org.hibernate.type.TextType")
@@ -116,14 +114,6 @@ public class Contract {
 
 	public void setNature(String title) {
 		this.nature = title;
-	}
-
-	public String getService() {
-		return service;
-	}
-
-	public void setService(String service) {
-		this.service = service;
 	}
 
 	public String getMission() {

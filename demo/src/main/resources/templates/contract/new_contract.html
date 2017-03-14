@@ -106,8 +106,7 @@
 					<div class="col-md-3">
 						<label>Date de naissance * </label> <input type="text"th:field="${contract.bornDate}" 
 							class="form-control input-date" 
-							style="cursor: text; background: white;"
-							data-date-start-date="0d" data-date-end-date="+6m" required>
+							style="cursor: text; background: white;" required>
 					</div>
 					<div class="col-md-5">
 						<label> Lieu de naissance *</label> <input type="text"
@@ -197,7 +196,7 @@
 				<div class="form-group">
 					<div class="col-md-6">
 						<input type="text" class="form-control"
-							th:field="${contract.service}" required>
+							th:value="${user.service.libelle}" readonly="readonly" required>
 					</div>
 				</div>
 			</div>

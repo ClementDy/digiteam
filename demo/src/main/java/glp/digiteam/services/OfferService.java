@@ -40,7 +40,7 @@ public class OfferService {
 	public void dispublish(long id, StaffLille1 ref){
 		AbstractOffer offer = offerRepository.findById(id);
 		if(offer!=null){
-			if(offer.getReferent()==ref){
+			if(offer.getReferent()==ref && offer.getStatus().equals("Validated") ){
 				offer.setStatus("Expired");
 				offerRepository.save(offer);	
 			}
@@ -50,7 +50,7 @@ public class OfferService {
 	public void removeOffer(long id, StaffLille1 ref){
 		AbstractOffer offer = offerRepository.findById(id);
 		if(offer!=null){
-			if(offer.getReferent()==ref){
+			if(offer.getReferent()==ref && offer.getStatus().equals("Refused")){
 				offerRepository.delete(offer);
 			}
 		}
