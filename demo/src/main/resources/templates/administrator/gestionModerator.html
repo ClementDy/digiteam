@@ -33,13 +33,9 @@
 			th:object="${newModerator}" method="post">
 
 			<div class="row">
-.isReferent}==true"
-						name="action" type="submit" class="btn btn-lille1"
-						value="Enregistrer"> <input
-						th:if="${user.isModerator}==true"
-						name="action" type="submit" class="btn btn-success"
-						value="Accepter"> 
-						<input th:if="${user
+				<input th:if="${user.isReferent}==true" name="action" type="submit"
+					class="btn btn-lille1" value="Enregistrer">
+
 				<div class="col-md-12">
 					<h4 class="titreFormulaire">Ajouter un gestionnaire</h4>
 				</div>
@@ -52,7 +48,7 @@
 				</div>
 			</div>
 			<div class="row">
-			
+
 				<div class="col-md-4"></div>
 				<div class="col-md-4">
 					<input class="form-control" th:field="${newModerator.email}"
@@ -61,7 +57,7 @@
 			</div>
 			<br>
 			<div class="row">
-			
+
 				<div class="col-md-4"></div>
 				<div class="col-md-4">
 					<button class="btn btn-lille1">Valider</button>
@@ -76,30 +72,38 @@
 
 	<div class="container containerWhite">
 
-	  	<div class="row">
+		<div class="row">
 
 			<div class="col-md-12">
 				<h4 class="titreFormulaire">Les gestionnaires de l'application</h4>
 			</div>
 		</div>
-			<div class="row">
-			<span th:each="moderator : ${gestionnaires}" th:if="${moderator.isModerator}==true">
-				
-					<div class="col-sm-6 col-md-3">
-						<div class="thumbnail">
-							<img src="img/profil.png" alt="...">
-							<div class="caption">
-								<p><strong>Nom : </strong><span  th:text="${moderator.lastName}"></span> <span  th:text="${moderator.firstName}"></span></p>
-								<p><strong>Email : </strong><span  th:text="${moderator.email}"></span></p>
-									
-								<a  th:href="@{/deleteModerator(name=${moderator.email},mode=${user.email})}" class="btn btn-danger" role="button">Supprimer</a> 
-							
-							</div>
+		<div class="row">
+			<span th:each="moderator : ${gestionnaires}"
+				th:if="${moderator.isModerator}==true">
+
+				<div class="col-sm-6 col-md-3">
+					<div class="thumbnail">
+						<img src="img/profil.png" alt="...">
+						<div class="caption">
+							<p>
+								<strong>Nom : </strong><span th:text="${moderator.lastName}"></span>
+								<span th:text="${moderator.firstName}"></span>
+							</p>
+							<p>
+								<strong>Email : </strong><span th:text="${moderator.email}"></span>
+							</p>
+
+							<a
+								th:href="@{/deleteModerator(name=${moderator.email},mode=${user.email})}"
+								class="btn btn-danger" role="button">Supprimer</a>
+
 						</div>
 					</div>
 				</div>
-			</span>
-			</div>
+		</div>
+		</span>
+	</div>
 	</div>
 
 </body>

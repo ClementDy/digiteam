@@ -30,9 +30,7 @@
 	<div class="container">
   		<div class="jumbotron">
   		<article>
-  			<p> Bonjour <span th:text="${user.firstName}"></span> <span th:text="${user.lastName}"></span> (<b><span th:if="${user.isReferent}==true">Réferent</span>
-  			<span th:if="${user.isModerator}==true">-Gestionnaire</span><span th:if="${user.isAdministrator}==true">-Administrateur</span>
-  			<span th:if="${user.isAdministrator}==false and ${user.isModerator}==false and ${user.isReferent}==false">Personnel</span></b>),</p>
+  			<p> Bonjour <span th:text="${user.firstName}"></span> <span th:text="${user.lastName}"></span> </p>
   			<p></p>
   			
   			<article th:if="${user.isReferent}!=true and ${user.isModerator}!=true and ${user.isAdministrator}!=true">
