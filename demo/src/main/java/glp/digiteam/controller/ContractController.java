@@ -37,136 +37,83 @@ public class ContractController {
 
 	@Autowired
 	private StudentService studentService;
-
+	
 	@Autowired
-	private StaffLille1Service staffLilleService;
+	private StaffLille1Service staffLille1Service;
+
 
 	@RequestMapping(value = "/newContract", method = RequestMethod.GET)
 	public String contract(Model model, HttpSession session,
 			@RequestParam(value = "nip", required = true, defaultValue = "") Integer nip) {
 		StaffLille1 staffLille1 = (StaffLille1) session.getAttribute("staffLille1");
-		StaffLille1 user = staffLilleService.findByEmail(staffLille1.getEmail());
-		model.addAttribute("user", user);
-		
-		if(user.isReferent==true){
-	
-			Student student = studentService.getStudentByNip(nip);
-	
 
-			session.setAttribute("student_contract", student.getNip());
-			Contract contract = new Contract();
-	
-			model.addAttribute("student", student);
-			model.addAttribute("contract", contract);
-	
-			return "contract/new_contract";
-		}
-		return "homeStaffLille1";
+		Student student = studentService.getStudentByNip(nip);
+
+		model.addAttribute("user", staffLille1);
+
+		Contract contract = new Contract();
+
+		model.addAttribute("student", student);
+		model.addAttribute("contract", contract);
+
+		return "contract/new_contract";
 	}
+
 
 	@RequestMapping(value = "/newContract", method = RequestMethod.POST)
 	public ModelAndView saveContract(@ModelAttribute Contract contract, Model model, HttpSession session) {
 
+
 		StaffLille1 staffLille1 = (StaffLille1) session.getAttribute("staffLille1");
-		StaffLille1 user = staffLilleService.findByEmail(staffLille1.getEmail());
+
+		contract.setReferent(staffLille1);
+
+		contractService.saveContract(contract);
 		
-		if(user.isReferent==true){
-			
-			Student student = studentService.getStudentByNip((Integer) session.getAttribute("student_contract"));
-			contract.setReferent(user);
-	
-			contract.setStudent(student);
-	
-			contractService.saveContract(contract);
-	
-			return new ModelAndView("redirect:homeContract");
-		
-		}
-		return new ModelAndView("redirect:homeStaffLille1");
+		return new ModelAndView("redirect:homeContract");
 
 	}
-
+	
 	@RequestMapping(value = "/homeContract", method = RequestMethod.GET)
 	public String homeContact(Model model, HttpSession session) {
 		StaffLille1 staffLille1 = (StaffLille1) session.getAttribute("staffLille1");
-		StaffLille1 user = staffLilleService.findByEmail(staffLille1.getEmail());
-		model.addAttribute("user", user);
-		
-		if(user.isReferent==true){
-			Iterable<Mission> missions = missionService.findAll();
-			model.addAttribute("listMission", missions);
-	
-			List<Student> listCandidatures = studentService.getAllCandidature();
-			model.addAttribute("listCandidature", listCandidatures);
-	
-			return "contract/homeContract";
-		}
-		
-		return "homeStaffLille1";
-	}
-
-	@RequestMapping(value = "/homeContract", method = RequestMethod.POST)
-	public String consultCandidatures(@RequestParam(value = "name", required = true, defaultValue = "") String name,
-			@RequestParam(value = "formation", required = true, defaultValue = "") String formation,
-			@RequestParam(value = "mission", required = true, defaultValue = "") String mission, Model model,
-			HttpSession session) {
-
 		Iterable<Mission> missions = missionService.findAll();
 		model.addAttribute("listMission", missions);
-		StaffLille1 staffLille1 = (StaffLille1) session.getAttribute("staffLille1");
-		StaffLille1 user = staffLilleService.findByEmail(staffLille1.getEmail());
+		model.addAttribute("user", staffLille1);
 
-		model.addAttribute("user", user);
+		List<Student> listCandidatures = studentService.getAllCandidature();
+		model.addAttribute("listCandidature", listCandidatures);
 
-		if (name.isEmpty() && mission.isEmpty() && formation.isEmpty()) {
+		return "contract/homeContract";
+	}
+	
+	@RequestMapping(value = "/homeContract", method = RequestMethod.POST)
+	public String consultCandidatures(
+			@ModelAttribute Mission mission,
+			@RequestParam(value="name", required=true, defaultValue="") String name,
+			@RequestParam(value="formation", required=true,defaultValue="") String formation,
+			Model model, HttpSession session) {
+		
+		Iterable<Mission> missions = missionService.findAll();
+		model.addAttribute("listMission", missions);
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
+		model.addAttribute("user",user);
+
+		
+		
+		if(name.isEmpty() && mission.getTitle().isEmpty() && formation.isEmpty()){
 			List<Student> listCandidatures = studentService.getAllCandidature();
 			model.addAttribute("listCandidature", listCandidatures);
 			model.addAttribute("size", listCandidatures.size());
-			return "contract/homeContract";
-		} else {
-
-			/*
-			 * if(name.isEmpty() && !formation.isEmpty()){ List<Student>
-			 * listCandidatures = studentService.findWithTraining(formation);
-			 * model.addAttribute("listCandidature", listCandidatures);
-			 * model.addAttribute("size", listCandidatures.size()); return
-			 * "consult_candidatures";
-			 * 
-			 * }
-			 */
-			List<Student> listCandidatures = studentService.findWithParameter(name, formation, mission);
+			return "consult_candidatures";
+		}else{
+			List<Student> listCandidatures = studentService.findWithParameter(name,formation,mission.getTitle());
 			model.addAttribute("listCandidature", listCandidatures);
 			model.addAttribute("size", listCandidatures.size());
-			return "contract/homeContract";
-
-		} /*
-			 * if(!name.isEmpty() && formation.isEmpty() ){ List<Student>
-			 * listCandidatures = studentService.findByName(name);;
-			 * model.addAttribute("listCandidature", listCandidatures);
-			 * model.addAttribute("size", listCandidatures.size()); return
-			 * "contract/homeContract";
-			 * 
-			 * } if(!name.isEmpty() && !formation.isEmpty()){ List<Student>
-			 * listCandidatures =
-			 * studentService.findWithParameter(name,formation);
-			 * model.addAttribute("listCandidature", listCandidatures);
-			 * model.addAttribute("size", listCandidatures.size()); return
-			 * "contract/homeContract";
-			 * 
-			 * } if(name.isEmpty() && !formation.isEmpty() ){ List<Student>
-			 * listCandidatures = studentService.findWithTraining(formation);
-			 * model.addAttribute("listCandidature", listCandidatures);
-			 * model.addAttribute("size", listCandidatures.size()); return
-			 * "contract/homeContract";
-			 * 
-			 * }
-			 * 
-			 * List<Student> listCandidatures =
-			 * studentService.getAllCandidature();
-			 * model.addAttribute("listCandidature", listCandidatures);
-			 * model.addAttribute("size", listCandidatures.size()); return
-			 * "contract/homeContract";
-			 */
+			return "consult_candidatures";
+		
+		}
 
 	}
 }
