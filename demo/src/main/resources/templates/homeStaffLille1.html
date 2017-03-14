@@ -12,7 +12,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="css/header.css">
-<link rel="stylesheet" href="css/offer.css">
 
 
 	
@@ -28,14 +27,23 @@
 
 	<div th:include="headerStaffLille1::headerStaffLille1"></div>
 	
-	<div class="container containerWhite">
-		<br>
+	<div class="container">
+  		<div class="jumbotron">
   		<article>
   			<p> Bonjour <span th:text="${user.firstName}"></span> <span th:text="${user.lastName}"></span> (<b><span th:if="${user.isReferent}==true">Réferent</span>
   			<span th:if="${user.isModerator}==true">-Gestionnaire</span><span th:if="${user.isAdministrator}==true">-Administrateur</span>
   			<span th:if="${user.isAdministrator}==false and ${user.isModerator}==false and ${user.isReferent}==false">Personnel</span></b>),</p>
   			<p></p>
-  			<h3> Référent</h3>
+  			
+  			<article th:if="${user.isReferent}!=true and ${user.isModerator}!=true and ${user.isAdministrator}!=true">
+  			<h4><b>Personnel de l'Universite de Lille 1</b></h4>
+  			<p>En tant membre du personnel de l'université de Lille 1, vous pouvez :  </p>
+  			<p>- Consulter les offres en cours.</p>
+  			<p>- Consulter les candidatures publiées.</p>
+   			</article>
+  			
+  			<article th:if="${user.isReferent}==true">
+  			<h4><b> Référent </b></h4>
   			<p>En tant que r&eacute;f&eacute;rent vous avez accès à plusieurs fonctionnalités.</p>
   			<p>Premièrement, vous avez accès à vos offres en cliquant sur l'onglet "Offre" du menu ci-dessus. Cette page vous permettra
   			de consulter vos offres validées, en attente de validation, refusées et expirées.</p>
@@ -47,14 +55,27 @@
   			<p><a class="btn btn-success" aria-label="Left Align">
 									<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
 								    </a> Celui ci, vous permet de consulter votre offre.</p>
-  			<h3> Gestionnaire</h3>
-  			<p>En tant que r&eacute;f&eacute;rent vous avez accès à plusieurs fonctionnalités.</p>
-  			<h3> Administrateur</h3>
-  			<p>En tant que r&eacute;f&eacute;rent vous avez accès à plusieurs fonctionnalités.</p>
-   			
+  			</article>
+  			<article th:if="${user.isModerator}==true">
+  			<h4> <b>Gestionnaire</b></h4>
+  			<p>En tant que gestionnaire vous avez accès à plusieurs fonctionnalités.</p>
+  			<p>Vous pouvez en plus des fonctionnalités accordées à un utilisateur lambda, modérer les offres.</p>
+  			<p>Vous avez également la possibilité de gérer les référents des différents services, c'est à dire : En ajouter et en supprimer.</p>
+  			</article>
+  		
+  			<article th:if="${user.isAdministrator}==true">
+  			<h4><b>Administrateur</b></h4>
+  			<p>En tant qu'Administrateur vous pouvez, ajouter des gestionnaires et en retirer.</p>
+  			<p>Vous pouvez également consulter les offres et les candidatures en cours.</p>
+   			</article>
  		</article>
+ 		</div>
 	</div>
 	
 	
 </body>
+<style>
+h4{
+text-align:center
+}</style>
 </html>

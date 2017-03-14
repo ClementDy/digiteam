@@ -88,9 +88,8 @@ public class OfferController {
 
 
 		staffLille1Service.saveStaffLille1(user);
-		
 	
-		return new ModelAndView("redirect:mail");
+		return new ModelAndView("redirect:offers");
 	}
 
 	@RequestMapping(value = "/newGenericOffer", method = RequestMethod.POST,params="action=Accepter")
