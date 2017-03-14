@@ -1,4 +1,4 @@
-package glp.digiteam.services;
+/*package glp.digiteam.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
@@ -28,3 +28,4 @@ public class NotificationService {
 		javaMailSender.send(mail);
 	}
 }
+*/
