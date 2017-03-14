@@ -19,7 +19,7 @@ import glp.digiteam.entity.student.Student;
 public class Contract {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	private long id;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
@@ -28,24 +28,13 @@ public class Contract {
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private StaffLille1 referent;
 
-	private String useName;
-
-	private String numSecuriteSociale;
-
-	private String nature;
-	
 	@Lob
-	@Type(type="org.hibernate.type.TextType")
+	@Type(type = "org.hibernate.type.TextType")
 	private String mission;
 
 	private int hours;
 
 	private double rate;
-
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date bornDate;
-
-	private String bornPlace;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date startDate;
@@ -72,24 +61,8 @@ public class Contract {
 		return referent;
 	}
 
-	public String getBornPlace() {
-		return bornPlace;
-	}
-
-	public void setBornPlace(String bornPlace) {
-		this.bornPlace = bornPlace;
-	}
-
 	public void setReferent(StaffLille1 referent) {
 		this.referent = referent;
-	}
-
-	public Date getBornDate() {
-		return bornDate;
-	}
-
-	public void setBornDate(Date bornDate) {
-		this.bornDate = bornDate;
 	}
 
 	public Date getDateSaisie() {
@@ -106,14 +79,6 @@ public class Contract {
 
 	public void setResponsable(String responsable) {
 		this.responsable = responsable;
-	}
-
-	public String getNature() {
-		return nature;
-	}
-
-	public void setNature(String title) {
-		this.nature = title;
 	}
 
 	public String getMission() {
@@ -140,28 +105,12 @@ public class Contract {
 		this.rate = rate;
 	}
 
-	public String getUseName() {
-		return useName;
-	}
-
-	public void setUseName(String useName) {
-		this.useName = useName;
-	}
-
 	public Student getStudent() {
 		return student;
 	}
 
 	public void setStudent(Student student) {
 		this.student = student;
-	}
-
-	public String getNumSecuriteSociale() {
-		return numSecuriteSociale;
-	}
-
-	public void setNumSecuriteSociale(String numSecuriteSociale) {
-		this.numSecuriteSociale = numSecuriteSociale;
 	}
 
 	public Date getStartDate() {

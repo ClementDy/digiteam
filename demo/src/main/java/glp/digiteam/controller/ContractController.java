@@ -49,7 +49,8 @@ public class ContractController {
 
 		Student student = studentService.getStudentByNip(nip);
 
-		model.addAttribute("user", staffLille1);
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
+		model.addAttribute("user",user);
 
 		Contract contract = new Contract();
 
@@ -65,7 +66,7 @@ public class ContractController {
 
 
 		StaffLille1 staffLille1 = (StaffLille1) session.getAttribute("staffLille1");
-
+		
 		contract.setReferent(staffLille1);
 
 		contractService.saveContract(contract);
@@ -77,9 +78,11 @@ public class ContractController {
 	@RequestMapping(value = "/homeContract", method = RequestMethod.GET)
 	public String homeContact(Model model, HttpSession session) {
 		StaffLille1 staffLille1 = (StaffLille1) session.getAttribute("staffLille1");
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
+		model.addAttribute("user",user);
+		
 		Iterable<Mission> missions = missionService.findAll();
 		model.addAttribute("listMission", missions);
-		model.addAttribute("user", staffLille1);
 
 		List<Student> listCandidatures = studentService.getAllCandidature();
 		model.addAttribute("listCandidature", listCandidatures);

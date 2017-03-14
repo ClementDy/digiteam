@@ -49,137 +49,36 @@
 			enctype="multipart/form-data">
 
 			<div class="titreOffre">
-				<h4>Coordonn&eacute;es de l'&eacute;tudiant</h4>
+				<h4>Informations de l'&eacute;tudiant</h4>
 			</div>
 
-			<br />
+			<br/>
+			
 			<div class="row">
-				<div class="form-group">
-					<label class="control-label col-md-12"> Nom d'usage </label>
+				<div class="col-md-3">
+				<label>Nom : </label><span th:text="${student.lastName}" ></span>
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group">
-					<div class="col-md-6">
-						<input type="text" class="form-control"
-							th:field="${contract.useName}">
-					</div>
-				</div>
-			</div>
-
-			<br />
-
-			<div class="row">
-				<div class="form-group">
-					<label class="control-label col-md-12"> Nom de famille *</label>
+				<div class="col-md-3">
+				<label>Pr&eacute;nom : </label><span th:text="${student.firstName}" ></span>
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group">
-					<div class="col-md-6">
-						<input type="text" class="form-control"
-							th:value="${student.lastName}" readonly>
-					</div>
-				</div>
-			</div>
-
-			<br />
-
-			<div class="row">
-				<div class="form-group">
-					<label class="control-label col-md-2"> Pr&eacute;nom * </label>
+				<div class="col-md-3">
+				<label>NIP : </label><span th:text="${student.nip}" ></span>
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group">
-					<div class="col-md-6">
-						<input type="text" class="form-control"
-							th:value="${student.firstName}" readonly>
-					</div>
+				<div class="col-md-3">
+					<label> Nationalit&eacute; : </label><span th:text="${student.nationality}"></span>
 				</div>
-			</div>
-
-			<br />
-
-			<div class="row">
-				<div class="form-group">
-					<div class="col-md-3">
-						<label>Date de naissance * </label> <input type="text"th:field="${contract.bornDate}" 
-							class="form-control input-date" 
-							style="cursor: text; background: white;" required>
-					</div>
-					<div class="col-md-5">
-						<label> Lieu de naissance *</label> <input type="text"
-							th:field="${contract.bornPlace}" class="form-control" required>
-					</div>
+				<div class=" col-md-8" th:if="${student.nationality!='FRANCAISE'}" >
+					<label > Titre de s&eacute;jour :</label>  <span th:text="${student.dateVisa}"></span>
 				</div>
+				
 			</div>
-
-			<br />
-
-			<div class="row">
-				<div class="form-group">
-					<label class="control-label col-md-12"> Nationalit&eacute;
-						*</label>
-				</div>
-			</div>
-			<div class="row">
-				<div class="form-group">
-					<div class="col-md-6">
-						<input type="text" class="form-control"
-							th:value="${student.nationality}" readonly>
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="form-group">
-					<label class="control-label col-md-12">
-						N°S&eacute;curit&eacute; Sociale *</label>
-				</div>
-			</div>
-			<div class="row">
-				<div class="form-group">
-					<div class="col-md-6">
-						<input type="text" class="form-control"
-							th:field="${contract.numSecuriteSociale}" placeholder="" required>
-					</div>
-				</div>
-			</div>
-
-
-			<div class="row">
-				<div class="form-group">
-					<label class="control-label col-md-12">Adresse personnelle
-						*</label>
-				</div>
-			</div>
-			<div class="row">
-				<div class="form-group">
-					<div class="col-md-6">
-						<input type="text" class="form-control" placeholder="Rue"
-							th:value="${student.address.street}" readonly>
-					</div>
-					<div class="col-md-6">
-						<input type="text" class="form-control"
-							placeholder="étage, bat ..."
-							th:value="${student.address.complement}" readonly>
-					</div>
-				</div>
-			</div>
-			<br />
-			<div class="row">
-				<div class="form-group">
-					<div class="col-md-6">
-						<input type="text" class="form-control" placeholder="Ville"
-							th:value="${student.address.city}" readonly>
-					</div>
-					<div class="col-md-6">
-						<input type="text" class="form-control" placeholder="Code Postal"
-							th:value="${student.address.postalCode}" readonly>
-					</div>
-				</div>
-			</div>
+			
 			<br />
 			<br />
 			<div class="titreOffre">
@@ -195,8 +94,7 @@
 			<div class="row">
 				<div class="form-group">
 					<div class="col-md-6">
-						<input type="text" class="form-control"
-							th:value="${user.service.libelle}" readonly="readonly" required>
+						<input type="text" class="form-control" readonly="readonly" required>
 					</div>
 				</div>
 			</div>
@@ -208,20 +106,7 @@
 						rows="5" required></textarea>
 				</div>
 			</div>
-			<div class="row">
-				<div class="form-group">
-					<label class="control-label col-md-12"> Nature des
-						activitées *</label>
-				</div>
-			</div>
-			<div class="row">
-				<div class="form-group">
-					<div class="col-md-6">
-						<input type="text" class="form-control"
-							th:field="${contract.nature}" required>
-					</div>
-				</div>
-			</div>
+
 			<div class="row">
 				<div class="form-inline col-md-12">
 					<label">Nombre d'heures effectives :</label> <input
