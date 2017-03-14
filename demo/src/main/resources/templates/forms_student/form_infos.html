@@ -209,9 +209,9 @@
 		<div class="row">
 
 			<div class="col-md-12 cv" th:if="${!#strings.isEmpty(student.cv)}">
-			   <object th:attr="data=${pathCV}" type="application/pdf">
-        		<embed th:attr="src=${pathCV}" type="application/pdf" />
-    			</object>
+			   <!--<object data="http://172.28.2.17//11203333" width="500" height="200">
+    			</object>-->
+				 <iframe id ="cvIframe" class="cvIframe" th:attr="src=${pathCV}"></iframe>
 				<br>
 			</div>
 		</div>

@@ -168,6 +168,8 @@ public class StudentController {
 			if (action.equals("Enregistrer")) {
 				SaveProfileValidator saveValidator = new SaveProfileValidator();
 				saveValidator.validate(std, bindingResult);
+				String pathCV = IPCV+"/"+student.getNip();
+				model.addAttribute("pathCV", pathCV);
 
 				if (bindingResult.hasErrors()) {
 					Iterable<Mission> missions = missionService.findAll();
