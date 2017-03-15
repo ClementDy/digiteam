@@ -74,7 +74,7 @@
 					<label> Nationalit&eacute; : </label><span th:text="${student.nationality}"></span>
 				</div>
 				<div class=" col-md-8" th:if="${student.nationality!='FRANCAISE'}" >
-					<label > Titre de s&eacute;jour :</label>  <span th:text="${student.dateVisa}"></span>
+					<label > Titre de s&eacute;jour :</label>  <span th:text="${{student.dateVisa}}"></span>
 				</div>
 				
 			</div>
@@ -94,7 +94,7 @@
 			<div class="row">
 				<div class="form-group">
 					<div class="col-md-6">
-						<input type="text" class="form-control" readonly="readonly" required>
+						<input type="text" th:value="${user.service.libelle}" class="form-control" readonly="readonly" required>
 					</div>
 				</div>
 			</div>

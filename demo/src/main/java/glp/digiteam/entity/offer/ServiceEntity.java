@@ -19,7 +19,7 @@ public class ServiceEntity {
 	@Id
 	private String code;
 	
-	String libelle;
+	private String libelle;
 
 
 	@OneToMany(mappedBy="service", cascade=CascadeType.ALL,targetEntity=AbstractOffer.class)

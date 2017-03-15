@@ -22,22 +22,17 @@
 		<div class="tab-pane">
 			<h4 class="titreFormulaire">Informations personnelles</h4>
 
-			<label th:if="${student.civilite}==0">Monsieur</label> <label
-				th:if="${student.civilite}==1">Madame</label> <label
-				th:text="${student.lastName}" id="lastName"></label> <label
-				th:text="${student.firstName}" id="firstName"></label> <br> <label
-				th:text="${student.email}" id="email"></label> <br>
-				 <label
-				for="selectbasic">Nationalité </label>
-				<label
-				th:text="${student.nationality}" id="nationality"></label> <br>
-				<label th:text="${student.phone}" id="phone"></label> <br> 
+			<label th:if="${student.civilite}==0">Monsieur</label> 
+			<label
+				th:if="${student.civilite}==1">Madame</label> 
+				<label th:text="${student.lastName}" id="lastName"></label> <label th:text="${student.firstName}" id="firstName"></label> <br> 
+				Email : <label th:text="${student.email}" id="email"></label> <br> 
+				Nationalité : <label th:text="${student.nationality}" id="nationality"></label> <br>
+				T&eacute;l&eacute;phone : <label th:text="${student.phone}" id="phone"></label> <br> 
 			
 			 
-			<label th:if="${student.nationality}!='FRANCAISE'"
-				th:text="${student.dateVisa}" id="dateVISA"></label> <br>
-			<label th:if="${student.dateVisa}!=NULL"
-				th:text="${student.dateVisa}" id="dateVISA"></label> <br>
+			<div th:if="${student.nationality}!='FRANCAISE'">Date de visa : <label th:text="${{student.dateVisa}}" id="dateVISA"></label> <br></div>
+
 				
 			
 			<div th:if="${!#strings.isEmpty(student.cv)}">
