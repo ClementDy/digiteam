@@ -30,10 +30,7 @@ public class StandardOffer extends AbstractOffer implements Offer{
 
 
 
-	@Lob
-	@Type(type="org.hibernate.type.TextType")
-	private String mission;
-	
+
 	@Lob
 	@Type(type="org.hibernate.type.TextType")
 	private String skills;
@@ -58,14 +55,6 @@ public class StandardOffer extends AbstractOffer implements Offer{
 	}
 
 
-
-	public String getMission() {
-		return mission;
-	}
-
-	public void setMission(String mission) {
-		this.mission = mission;
-	}
 
 	public String getRemunerationInfo() {
 		return remunerationInfo;
@@ -144,7 +133,7 @@ public class StandardOffer extends AbstractOffer implements Offer{
 
 	@Override
 	public String toString() {
-		return "GenericOffer [remuneration=" + remuneration + ", remunerationInfo=" + remunerationInfo 	+ ", mission=" + mission + ", skills=" + skills + "]";
+		return "GenericOffer [remuneration=" + remuneration + ", remunerationInfo=" + remunerationInfo 	+ ", mission="  + ", skills=" + skills + "]";
 	}
 
 

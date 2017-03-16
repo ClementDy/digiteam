@@ -23,6 +23,7 @@ import glp.digiteam.entity.offer.StandardOffer;
 import glp.digiteam.entity.student.Mission;
 import glp.digiteam.entity.student.Student;
 import glp.digiteam.services.MissionService;
+import glp.digiteam.services.NotificationService;
 import glp.digiteam.services.OfferService;
 import glp.digiteam.services.StaffLille1Service;
 import glp.digiteam.services.StudentService;
@@ -36,6 +37,9 @@ public class OfferController {
 	@Autowired
 	private MissionService missionService;
 
+	@Autowired 
+	private NotificationService notificationService;
+	
 	@Autowired
 	private OfferService offerService;
 
@@ -88,7 +92,7 @@ public class OfferController {
 
 
 		staffLille1Service.saveStaffLille1(user);
-	
+		notificationService.sendNotificationNewOffer(ofr);
 		return new ModelAndView("redirect:offers");
 	}
 
@@ -115,7 +119,7 @@ public class OfferController {
 		offre.setValidityDate(ofr.getValidityDate());
 		offre.setStatus("Validated");
 
-
+		notificationService.sendNotificationAcceptOffer(offre);
 		staffLille1Service.saveStaffLille1(referent);
 		return new ModelAndView("redirect:gestionOffers");
 	}
@@ -131,7 +135,7 @@ public class OfferController {
 		offre.setComment(ofr.getComment());
 
 		offerService.saveOffer(offre);
-
+		notificationService.sendNotificationAcceptOffer(offre);
 		return new ModelAndView("redirect:gestionOffers");
 
 	}
@@ -166,6 +170,7 @@ public class OfferController {
 
 
 		staffLille1Service.saveStaffLille1(user);
+		notificationService.sendNotificationNewOffer(ofr);
 		return new ModelAndView("redirect:offers");
 	}
 
@@ -222,7 +227,8 @@ public class OfferController {
 		offre.setComment(ofr.getComment());
 		offre.setStatus("Validated");
 
-
+		
+		notificationService.sendNotificationAcceptOffer(offre);
 		staffLille1Service.saveStaffLille1(referent);
 		return new ModelAndView("redirect:gestionOffers");
 	}
@@ -240,7 +246,7 @@ public class OfferController {
 		offre.setComment(ofr.getComment());
 
 		offerService.saveOffer(offre);
-
+		notificationService.sendNotificationRefuseOffer(offre, offre.getReferent());
 		return new ModelAndView("redirect:gestionOffers");
 
 	}

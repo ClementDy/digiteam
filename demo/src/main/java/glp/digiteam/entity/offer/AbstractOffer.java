@@ -8,8 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -20,7 +22,9 @@ public class AbstractOffer {
 	@GeneratedValue(strategy=GenerationType.TABLE)
 	private long id;
 	
-	
+	@Lob
+	@Type(type="org.hibernate.type.TextType")
+	private String mission;
 
 	@ManyToOne
 	private StaffLille1 referent;
@@ -52,6 +56,18 @@ public class AbstractOffer {
 	private String phoneResponsible;
 	
 	private String emailResponsible;
+	
+	
+	private double remuneration;
+	private String remunerationInfo;
+	private String type;
+	
+
+	
+	@Lob
+	@Type(type="org.hibernate.type.TextType")
+	private String skills;
+	
 	
 	public AbstractOffer(){
 		
@@ -91,6 +107,41 @@ public class AbstractOffer {
 		return service;
 	}
 
+	public double getRemuneration() {
+		return remuneration;
+	}
+
+	public void setRemuneration(double remuneration) {
+		this.remuneration = remuneration;
+	}
+
+
+
+	public String getRemunerationInfo() {
+		return remunerationInfo;
+	}
+
+	public void setRemunerationInfo(String remunerationInfo) {
+		this.remunerationInfo = remunerationInfo;
+	}
+
+	public String getSkills() {
+		return skills;
+	}
+
+	public void setSkills(String skills) {
+		this.skills = skills;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	
 	public void setService(ServiceEntity service) {
 		this.service = service;
 	}
@@ -115,7 +166,14 @@ public class AbstractOffer {
 		this.creationDate = creationDate;
 	}
 
+	public String getMission() {
+		return mission;
+	}
 
+	public void setMission(String mission) {
+		this.mission = mission;
+	}
+	
 	public String getStatus() {
 		return status;
 	}

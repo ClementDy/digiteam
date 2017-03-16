@@ -1,4 +1,4 @@
-/*package glp.digiteam.controller;
+package glp.digiteam.controller;
 
 import javax.servlet.http.HttpSession;
 
@@ -33,4 +33,4 @@ public class MailController {
 		return new ModelAndView("redirect:offers");
 
 	}
-}*/
+}
