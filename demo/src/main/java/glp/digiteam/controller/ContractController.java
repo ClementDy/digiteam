@@ -92,12 +92,19 @@ public class ContractController {
 
 		if (user.isReferent == true) {
 			Student student = studentService.getStudentByNip(nip);
-			if(student==null){
+			
+			if(student==null || !student.getStatut().equals("published")){
 				return "contract/homeContract";
 			}
 			
 			session.setAttribute("student_contract", student.getNip());
 			Contract contract = new Contract();
+			if(type==1){
+				contract.setType("Vacation");
+			}else{
+				contract.setType("Etudiant");
+			}
+			
 
 			model.addAttribute("student", student);
 			model.addAttribute("contract", contract);

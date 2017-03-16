@@ -120,6 +120,7 @@
 			
 			
 		<h4 class="titreFormulaire">Contrats Lille 1</h4>
+			<div class="table-responsive"">
 			<table th:if="${!student.contract.empty}"  class="table table-striped table-bordered table-hover" align="center">
 				<thead>
 					<tr>
@@ -130,7 +131,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="contract : ${student.contract}">
+					<tr th:each="contract : ${student.contract}" th:if="${contract.status}==true">
 						<td>
 						<span th:text="${contract.referent.service.libelle}"></span>
 						</td>
@@ -151,6 +152,7 @@
 					</tr>
 				</tbody>
 			</table>
+			</div>
 			<div th:if="${student.contract.empty}" class="alert alert-info">
 			  Aucun contrat passé avec l'universitée Lille 1 trouvée
 			</div>
@@ -173,19 +175,19 @@
 							th:if="${student.externalContracts[__${stat.index}__].employer}!=''">
 							<td><input type="text" class="form-control"
 								th:value="${student.externalContracts[__${stat.index}__].employer}"
-								th:field="${student.externalContracts[__${stat.index}__].employer}"></td>
+								th:field="${student.externalContracts[__${stat.index}__].employer}" readonly></td>
 							<td><input type="text" class="form-control"
 								th:value="${student.externalContracts[__${stat.index}__].startDate}"
-								th:field="${student.externalContracts[__${stat.index}__].startDate}"></td>
+								th:field="${student.externalContracts[__${stat.index}__].startDate}"readonly></td>
 							<td><input type="text" class="form-control"
 								th:value="${student.externalContracts[__${stat.index}__].endDate}"
-								th:field="${student.externalContracts[__${stat.index}__].endDate}"></td>
+								th:field="${student.externalContracts[__${stat.index}__].endDate}"readonly></td>
 							<td><input type="text" class="form-control"
 								th:value="${student.externalContracts[__${stat.index}__].hours}"
-								th:field="${student.externalContracts[__${stat.index}__].hours}"></td>
+								th:field="${student.externalContracts[__${stat.index}__].hours}"readonly></td>
 							<td><input type="text" class="form-control"
 								th:value="${student.externalContracts[__${stat.index}__].missions}"
-								th:field="${student.externalContracts[__${stat.index}__].missions}"></td>
+								th:field="${student.externalContracts[__${stat.index}__].missions}"readonly></td>
 						</tr>
 					</tbody>
 				</table>

@@ -38,8 +38,7 @@
 		<div>
 			<h3>Saisie d'un contrat</h3>
 		</div>
-		<br />
-		<br />
+		<br /> <br />
 
 
 
@@ -47,40 +46,125 @@
 		<form accept-charset="UTF-8" th:action="@{/newContract}"
 			name="formstandard" th:object="${contract}" method="post"
 			enctype="multipart/form-data">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="input-group">
+						<span class="input-group-addon">Type de contrat</span> <input
+							type="text" class="form-control" th:field="${contract.type}"
+							th:value="${contract.type}"></input>
+					</div>
+				</div>
+			</div>
 
 			<div class="titreOffre">
 				<h4>Informations de l'&eacute;tudiant</h4>
 			</div>
 
-			<br/>
-			
-			<div class="row">
-				<div class="col-md-3">
-				<label>Nom : </label><span th:text="${student.lastName}" ></span>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-3">
-				<label>Pr&eacute;nom : </label><span th:text="${student.firstName}" ></span>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-3">
-				<label>NIP : </label><span th:text="${student.nip}" ></span>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-3">
-					<label> Nationalit&eacute; : </label><span th:text="${student.nationality}"></span>
-				</div>
-				<div class=" col-md-8" th:if="${student.nationality!='FRANCAISE'}" >
-					<label > Titre de s&eacute;jour :</label>  <span th:text="${{student.dateVisa}}"></span>
-				</div>
-				
-			</div>
-			
 			<br />
+
+			<div class="row">
+				<div class="col-md-3">
+					<label>Nom : </label><span th:text="${student.lastName}"></span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<label>Pr&eacute;nom : </label><span th:text="${student.firstName}"></span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<label>NIP : </label><span th:text="${student.nip}"></span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<label> Nationalit&eacute; : </label><span
+						th:text="${student.nationality}"></span>
+				</div>
+				<div class=" col-md-8" th:if="${student.nationality!='FRANCAISE'}">
+					<label> Titre de s&eacute;jour :</label> <span
+						th:text="${{student.dateVisa}}"></span>
+				</div>
+			</div>
 			<br />
+			
+			<div class="titreOffre">
+				<h4>Contrats de d'Etudiant</h4>
+			</div>
+			
+			<div class="table-responsive"">
+				<table th:if="${!student.contract.empty}"
+					class="table table-striped table-bordered table-hover"
+					align="center">
+					<thead>
+						<tr>
+							<th>Service</th>
+							<th>Période</th>
+							<th>Nombre d'heures total</th>
+							<th>Mission</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="contract : ${student.contract}"
+							th:if="${contract.status}==true">
+							<td><span th:text="${contract.referent.service.libelle}"></span>
+							</td>
+
+							<td>Du <span th:text="${{contract.startDate}}"></span> Au <span
+								th:text="${{contract.endDate}}"></span>
+							</td>
+
+							<td><span th:text="${contract.hours}"></span></td>
+
+							<td><span th:text="${contract.mission}"></span></td>
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div th:if="${student.externalContracts[__${0}__].employer}!=''"
+				class="table-responsive">
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>Employeur</th>
+							<th>Date de d&eacute;but</th>
+							<th>Date de fin</th>
+							<th>Nombre d'heures total</th>
+							<th>Missions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr
+							th:each="externalContract, stat : ${student.externalContracts}"
+							th:if="${student.externalContracts[__${stat.index}__].employer}!=''">
+							<td><input type="text" class="form-control"
+								th:value="${student.externalContracts[__${stat.index}__].employer}"
+								th:field="${student.externalContracts[__${stat.index}__].employer}"
+								readonly></td>
+							<td><input type="text" class="form-control"
+								th:value="${student.externalContracts[__${stat.index}__].startDate}"
+								th:field="${student.externalContracts[__${stat.index}__].startDate}"
+								readonly></td>
+							<td><input type="text" class="form-control"
+								th:value="${student.externalContracts[__${stat.index}__].endDate}"
+								th:field="${student.externalContracts[__${stat.index}__].endDate}"
+								readonly></td>
+							<td><input type="text" class="form-control"
+								th:value="${student.externalContracts[__${stat.index}__].hours}"
+								th:field="${student.externalContracts[__${stat.index}__].hours}"
+								readonly></td>
+							<td><input type="text" class="form-control"
+								th:value="${student.externalContracts[__${stat.index}__].missions}"
+								th:field="${student.externalContracts[__${stat.index}__].missions}"
+								readonly></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<br /> <br />
 			<div class="titreOffre">
 				<h4>Information sur la mission</h4>
 			</div>
@@ -94,7 +178,8 @@
 			<div class="row">
 				<div class="form-group">
 					<div class="col-md-6">
-						<input type="text" th:value="${user.service.libelle}" class="form-control" readonly="readonly" required>
+						<input type="text" th:value="${user.service.libelle}"
+							class="form-control" readonly="readonly" required>
 					</div>
 				</div>
 			</div>
@@ -222,11 +307,5 @@
 
 </body>
 
-<style>
-.row {
-	margin-left: 10%;
-	margin-right: 10%;
-}
-</style>
 
 </html>

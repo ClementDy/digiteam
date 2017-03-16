@@ -23,7 +23,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="contract : ${student.contract}">
+					<tr th:each="contract : ${student.contract}" th:if="${contract.status}==true">
 						<td>
 						<span th:text="${contract.referent.service.libelle}"></span>
 						</td>
