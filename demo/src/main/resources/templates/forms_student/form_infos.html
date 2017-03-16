@@ -210,7 +210,7 @@
 
 			<div class="col-md-12 cv" th:if="${student.cv}">
 			<p>
-				<a href="http://172.28.2.17//11203333" title ="Télécharger votre CV">Télécharger Votre CV</a>			
+				<a th:href="${pathCV}" id = "acv" title ="Télécharger ou visualiser votre CV"  target="_BLANK" >Télécharger Votre CV</a>			
 				</p>	
 				<br>
 			</div>
@@ -221,8 +221,13 @@
 		<p>* champs obligatoires
 		<p>
 
-
+	<style>
+		#acv {
+				color:#ae2573;				
+				}
+	</style>
 			<script>
+						
 				function test() {
 					var x = document
 							.getElementsByClassName("divExpiryDateVISA");

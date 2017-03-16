@@ -149,8 +149,8 @@ public class StudentController {
 		Iterable<Mission> missions = missionService.findAll();
 		model.addAttribute("listMission", missions);
 		
-		//String pathCV = IPCV+"/"+student.getNip();
-		//model.addAttribute("pathCV", pathCV);
+		String pathCV = IPCV + student.getNip();
+		model.addAttribute("pathCV", pathCV);
 		
 		studentService.saveStudentProfile(student);
 
