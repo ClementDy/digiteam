@@ -35,7 +35,7 @@
 
 				
 			
-			<div th:if="${!#strings.isEmpty(student.cv)}">
+			<div th:if="${(student.cv)}">
 			<h4 class="titreFormulaire">CV</h4>
 			
 				<iframe th:attr="src=${pathCV}" ></iframe><br><br>
