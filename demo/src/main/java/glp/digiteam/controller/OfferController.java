@@ -127,7 +127,7 @@ public class OfferController {
 	}
 
 	@RequestMapping(value = "/newGenericOffer", method = RequestMethod.POST,params="action=Refuser")
-	public ModelAndView refuseGenericOffer(@ModelAttribute GenericOffer ofr,Model model,HttpSession session) {
+	public ModelAndView refuseGenericOffer(@ModelAttribute GenericOffer ofr,Model model,HttpSession session) throws MailException, MessagingException {
 		GenericOffer offre=(GenericOffer) offerService.findById(ofr.getId());
 
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
@@ -137,7 +137,8 @@ public class OfferController {
 		offre.setComment(ofr.getComment());
 
 		offerService.saveOffer(offre);
-		notificationService.sendNotificationAcceptOffer(offre);
+
+		notificationService.sendNotificationRefuseOffer(offre, offre.getReferent());
 		return new ModelAndView("redirect:gestionOffers");
 
 	}

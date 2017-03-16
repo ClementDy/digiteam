@@ -2,6 +2,7 @@ package glp.digiteam.services;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -90,7 +91,7 @@ public class NotificationService {
 	}
 
 	public void sendNotificationRefuseOffer(AbstractOffer offre,StaffLille1 referent) throws MailException, MessagingException{
-
+		System.out.println("Refus d'une offre");
 		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
 		ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
 
@@ -106,7 +107,7 @@ public class NotificationService {
 		//SimpleMailMessage mail= new SimpleMailMessage();
 
 
-	
+
 		//mail.setText("Bonjour"+referent.getFirstName()+", \n\nNous avons le regret de vous informer que votre offre a été refusée.");
 
 		final MimeMessage mimeMessage = this.javaMailSender.createMimeMessage();
@@ -115,11 +116,11 @@ public class NotificationService {
 		message.setSubject("Refus de votre offre n°"+ offre.getId());
 		//javaMailSender.send(mail);
 
-		Context ctx = new Context();
+		Context ctx = new Context(locale);
 		ctx.setVariable("name", offre.getFirstNameResponsible());
 
-		String htmlContent = templateEngine.process("mail/templateMail.html", ctx);
-		  message.setText(htmlContent, true); // true = isHtml
-		  javaMailSender.send(mimeMessage);
+		String htmlContent = templateEngine.process("templateMail.html", ctx);
+		message.setText(htmlContent, true); // true = isHtml
+		javaMailSender.send(mimeMessage);
 	}
 }

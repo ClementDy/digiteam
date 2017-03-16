@@ -175,9 +175,8 @@
 			<br>
 			<div class="row">
 				<div class="form-inline col-md-12">
-					<label">Nombre d'heures par semaine :</label> <input
-						class="col-md-2" th:field="${offer.hoursPerWeek}" type="number"
-						class="form-control" required>
+					<label>Nombre d'heures par semaine :</label> 
+					<input class="col-md-2 form-control" th:field="${offer.hoursPerWeek}" type="number"	 required>
 				</div>
 			</div>
 
@@ -189,7 +188,7 @@
 			<div class="row">
 				<div class="form-group col-md-3">
 					<label>Date de validit&eacute; : </label> <input type="text"
-						class="form-control input-date" type="text"
+						class="form-control input-date"
 						th:field="${offer.validityDate}" readonly="readonly"
 						style="cursor: text; background: white;" data-date-start-date="0d"
 						data-date-end-date="+6m" required>
