@@ -151,7 +151,7 @@ public class StudentController {
 		
 		String pathCV = IPCV + student.getNip();
 		model.addAttribute("pathCV", pathCV);
-		
+		System.out.println(pathCV);
 		studentService.saveStudentProfile(student);
 
 		return new ModelAndView("candidature::tab(activeTab='intro', error='false', saved='false')");
