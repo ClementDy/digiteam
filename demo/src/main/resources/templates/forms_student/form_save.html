@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
@@ -13,7 +14,13 @@
 		<br>
 		<h2>Publication de la candidature</h2>
 		<br>
-
+		<div>
+		<p>Recevoir un mail à chaque fois qu'une offre est crée ?  
+		<input type="radio" th:field="${student.emailSubscribe}" th:value="1" />Oui
+  		<input type="radio" th:field="${student.emailSubscribe}" th:value="0" checked/>Non
+  		</p>
+		</div>
+		
 		<p>Vous pouvez finaliser votre candidature en cliquant sur le bouton "Publier" ci-dessous.</p>
 		<input type="submit" class="btn btn-lille1" name="action" value="Publier" onclick="selectMission()">
 	

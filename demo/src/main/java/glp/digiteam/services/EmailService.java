@@ -1,83 +1,233 @@
-/*package glp.digiteam.services;
-import java.util.Properties;
+package glp.digiteam.services;
 
-import javax.mail.BodyPart;
-import javax.mail.Message;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Locale;
+
 import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 
-import org.junit.Test;
+import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.InputStreamSource;
+import org.springframework.core.io.Resource;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Service;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+
+@Service
 public class EmailService {
 
+    private static final String EMAIL_TEXT_TEMPLATE_NAME = "text/email-text";
+    private static final String EMAIL_SIMPLE_TEMPLATE_NAME = "html/email-simple";
+    private static final String EMAIL_WITHATTACHMENT_TEMPLATE_NAME = "html/email-withattachment";
+    private static final String EMAIL_INLINEIMAGE_TEMPLATE_NAME = "html/email-inlineimage";
+    private static final String EMAIL_EDITABLE_TEMPLATE_CLASSPATH_RES = "classpath:mail/editablehtml/email-editable.html";
+
+    private static final String BACKGROUND_IMAGE = "mail/editablehtml/images/background.png";
+    private static final String LOGO_BACKGROUND_IMAGE = "mail/editablehtml/images/logo-background.png";
+    private static final String THYMELEAF_BANNER_IMAGE = "mail/editablehtml/images/thymeleaf-banner.png";
+    private static final String THYMELEAF_LOGO_IMAGE = "mail/editablehtml/images/thymeleaf-logo.png";
+
+    private static final String PNG_MIME = "image/png";
+
+    @Autowired
+    private ApplicationContext applicationContext;
+
+    @Autowired
+    private JavaMailSender mailSender;
+
+    @Autowired
+    private TemplateEngine htmlTemplateEngine;
+
+    @Autowired
+    private TemplateEngine textTemplateEngine;
+
+    @Autowired
+    private TemplateEngine stringTemplateEngine;
 
 
-	@Test
-	public void test(){
-		Properties props = System.getProperties();
-		props.put("mail.smtp.starttls.enable", true); // added this line
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.user", "username");
-		props.put("mail.smtp.password", "password");
-		props.put("mail.smtp.port", "587");
-		props.put("mail.smtp.auth", true);
+
+    /* 
+     * Send plain TEXT mail 
+     */
+    public void sendTextMail(
+        final String recipientName, final String recipientEmail, final Locale locale)
+        throws MessagingException {
+
+        // Prepare the evaluation context
+        final Context ctx = new Context(locale);
+        ctx.setVariable("name", recipientName);
+        ctx.setVariable("subscriptionDate", new Date());
+        ctx.setVariable("hobbies", Arrays.asList("Cinema", "Sports", "Music"));
+
+        // Prepare message using a Spring helper
+        final MimeMessage mimeMessage = this.mailSender.createMimeMessage();
+        final MimeMessageHelper message = new MimeMessageHelper(mimeMessage, "UTF-8");
+        message.setSubject("Example plain TEXT email");
+        message.setFrom("thymeleaf@example.com");
+        message.setTo(recipientEmail);
+
+        // Create the plain TEXT body using Thymeleaf
+        final String textContent = this.textTemplateEngine.process(EMAIL_TEXT_TEMPLATE_NAME, ctx);
+        message.setText(textContent);
+
+        // Send email
+        this.mailSender.send(mimeMessage);
+    }
 
 
+    /* 
+     * Send HTML mail (simple) 
+     */
+    public void sendSimpleMail(
+        final String recipientName, final String recipientEmail, final Locale locale)
+        throws MessagingException {
 
-		Session session = Session.getInstance(props,null);
-		MimeMessage message = new MimeMessage(session);
+        // Prepare the evaluation context
+        final Context ctx = new Context(locale);
+        ctx.setVariable("name", recipientName);
+        ctx.setVariable("subscriptionDate", new Date());
+        ctx.setVariable("hobbies", Arrays.asList("Cinema", "Sports", "Music"));
 
-		System.out.println("Port: "+session.getProperty("mail.smtp.port"));
+        // Prepare message using a Spring helper
+        final MimeMessage mimeMessage = this.mailSender.createMimeMessage();
+        final MimeMessageHelper message = new MimeMessageHelper(mimeMessage, "UTF-8");
+        message.setSubject("Example HTML email (simple)");
+        message.setFrom("thymeleaf@example.com");
+        message.setTo(recipientEmail);
 
-		// Create the email addresses involved
-		try {
-			InternetAddress from = new InternetAddress("username");
-			message.setSubject("Yes we can");
-			message.setFrom(from);
-			message.addRecipients(Message.RecipientType.TO, InternetAddress.parse("receivermail"));
+        // Create the HTML body using Thymeleaf
+        final String htmlContent = this.htmlTemplateEngine.process(EMAIL_SIMPLE_TEMPLATE_NAME, ctx);
+        message.setText(htmlContent, true /* isHtml */);
 
-			// Create a multi-part to combine the parts
-			Multipart multipart = new MimeMultipart("alternative");
-
-			// Create your text message part
-			BodyPart messageBodyPart = new MimeBodyPart();
-			messageBodyPart.setText("some text to send");
-
-			// Add the text part to the multipart
-			multipart.addBodyPart(messageBodyPart);
-
-			// Create the html part
-			messageBodyPart = new MimeBodyPart();
-			String htmlMessage = "Our html text";
-			messageBodyPart.setContent(htmlMessage, "text/html");
-
-
-			// Add html part to multi part
-			multipart.addBodyPart(messageBodyPart);
-
-			// Associate multi-part with message
-			message.setContent(multipart);
-
-			// Send message
-			Transport transport = session.getTransport("smtp");
-			transport.connect("smtp.gmail.com", "username", "password");
-			System.out.println("Transport: "+transport.toString());
-			transport.sendMessage(message, message.getAllRecipients());
+        // Send email
+        this.mailSender.send(mimeMessage);
+    }
 
 
-		} catch (AddressException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+    /* 
+     * Send HTML mail with attachment. 
+     */
+    public void sendMailWithAttachment(
+        final String recipientName, final String recipientEmail, final String attachmentFileName,
+        final byte[] attachmentBytes, final String attachmentContentType, final Locale locale)
+        throws MessagingException {
+
+        // Prepare the evaluation context
+        final Context ctx = new Context(locale);
+        ctx.setVariable("name", recipientName);
+        ctx.setVariable("subscriptionDate", new Date());
+        ctx.setVariable("hobbies", Arrays.asList("Cinema", "Sports", "Music"));
+
+        // Prepare message using a Spring helper
+        final MimeMessage mimeMessage = this.mailSender.createMimeMessage();
+        final MimeMessageHelper message
+            = new MimeMessageHelper(mimeMessage, true /* multipart */, "UTF-8");
+        message.setSubject("Example HTML email with attachment");
+        message.setFrom("thymeleaf@example.com");
+        message.setTo(recipientEmail);
+
+        // Create the HTML body using Thymeleaf
+        final String htmlContent = this.htmlTemplateEngine.process(EMAIL_WITHATTACHMENT_TEMPLATE_NAME, ctx);
+        message.setText(htmlContent, true /* isHtml */);
+
+        // Add the attachment
+        final InputStreamSource attachmentSource = new ByteArrayResource(attachmentBytes);
+        message.addAttachment(
+            attachmentFileName, attachmentSource, attachmentContentType);
+
+        // Send mail
+        this.mailSender.send(mimeMessage);
+    }
+
+
+    /* 
+     * Send HTML mail with inline image
+     */
+    public void sendMailWithInline(
+        final String recipientName, final String recipientEmail, final String imageResourceName,
+        final byte[] imageBytes, final String imageContentType, final Locale locale)
+        throws MessagingException {
+
+        // Prepare the evaluation context
+        final Context ctx = new Context(locale);
+        ctx.setVariable("name", recipientName);
+        ctx.setVariable("subscriptionDate", new Date());
+        ctx.setVariable("hobbies", Arrays.asList("Cinema", "Sports", "Music"));
+        ctx.setVariable("imageResourceName", imageResourceName); // so that we can reference it from HTML
+
+        // Prepare message using a Spring helper
+        final MimeMessage mimeMessage = this.mailSender.createMimeMessage();
+        final MimeMessageHelper message
+            = new MimeMessageHelper(mimeMessage, true /* multipart */, "UTF-8");
+        message.setSubject("Example HTML email with inline image");
+        message.setFrom("thymeleaf@example.com");
+        message.setTo(recipientEmail);
+
+        // Create the HTML body using Thymeleaf
+        final String htmlContent = this.htmlTemplateEngine.process(EMAIL_INLINEIMAGE_TEMPLATE_NAME, ctx);
+        message.setText(htmlContent, true /* isHtml */);
+
+        // Add the inline image, referenced from the HTML code as "cid:${imageResourceName}"
+        final InputStreamSource imageSource = new ByteArrayResource(imageBytes);
+        message.addInline(imageResourceName, imageSource, imageContentType);
+
+        // Send mail
+        this.mailSender.send(mimeMessage);
+    }
+
+
+    /* 
+     * Send HTML mail with inline image
+     */
+    public String getEditableMailTemplate() throws IOException {
+        final Resource templateResource = this.applicationContext.getResource(EMAIL_EDITABLE_TEMPLATE_CLASSPATH_RES);
+        final InputStream inputStream = templateResource.getInputStream();
+        return IOUtils.toString(inputStream, SpringMailConfig.EMAIL_TEMPLATE_ENCODING);
+    }
+
+
+    /*
+     * Send HTML mail with inline image
+     */
+    public void sendEditableMail(
+            final String recipientName, final String recipientEmail, final String htmlContent,
+            final Locale locale)
+            throws MessagingException {
+
+        // Prepare message using a Spring helper
+        final MimeMessage mimeMessage = this.mailSender.createMimeMessage();
+        final MimeMessageHelper message
+                = new MimeMessageHelper(mimeMessage, true /* multipart */, "UTF-8");
+        message.setSubject("Example editable HTML email");
+        message.setFrom("thymeleaf@example.com");
+        message.setTo(recipientEmail);
+
+        // Prepare the evaluation context
+        final Context ctx = new Context(locale);
+        ctx.setVariable("name", recipientName);
+        ctx.setVariable("subscriptionDate", new Date());
+        ctx.setVariable("hobbies", Arrays.asList("Cinema", "Sports", "Music"));
+
+        // Create the HTML body using Thymeleaf
+        final String output = stringTemplateEngine.process(htmlContent, ctx);
+        message.setText(output, true /* isHtml */);
+
+        // Add the inline images, referenced from the HTML code as "cid:image-name"
+        message.addInline("background", new ClassPathResource(BACKGROUND_IMAGE), PNG_MIME);
+        message.addInline("logo-background", new ClassPathResource(LOGO_BACKGROUND_IMAGE), PNG_MIME);
+        message.addInline("thymeleaf-banner", new ClassPathResource(THYMELEAF_BANNER_IMAGE), PNG_MIME);
+        message.addInline("thymeleaf-logo", new ClassPathResource(THYMELEAF_LOGO_IMAGE), PNG_MIME);
+
+        // Send mail
+        this.mailSender.send(mimeMessage);
+    }
 }
-*/

@@ -30,6 +30,7 @@ public class Student {
 	private String nationality;
 	private String cv;
 	private String statut;
+	private int emailSubscribe;
 
 	@Lob
 	@Type(type = "org.hibernate.type.TextType")
@@ -145,6 +146,14 @@ public class Student {
 
 	public String getLastName() {
 		return lastName;
+	}
+
+	public int getEmailSubscribe() {
+		return emailSubscribe;
+	}
+
+	public void setEmailSubscribe(int emailSubscribe) {
+		this.emailSubscribe = emailSubscribe;
 	}
 
 	public void setLastName(String lastName) {
