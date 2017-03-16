@@ -21,6 +21,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 import glp.digiteam.entity.offer.AbstractOffer;
 import glp.digiteam.entity.offer.StaffLille1;
+import glp.digiteam.entity.student.Mission;
 import glp.digiteam.entity.student.Student;
 
 @Service
@@ -51,21 +52,26 @@ public class NotificationService {
 	public void sendNotificationNewOffer(AbstractOffer offre) throws MailException{
 		List<Student> students=studentService.getAllCandidature();
 		for(Student student:students){
-			if(student.getEmail().equals("clement.dilly@etudiant.univ-lille1.fr") || student.getEmail().equals("willy.pezant@etudiant.univ-lille1.fr") ){
-				System.out.println("send mail to "+ student.getEmail());
-				SimpleMailMessage mail= new SimpleMailMessage();
-				mail.setTo(student.getEmail());
-				mail.setSubject("Nouvelle offre en ligne ["+offre.getTitle()+"]");
-				mail.setText("Bonjour "+student.getFirstName()+",\n\nToujours à la recherche d'un contrat étudiant?\nBonne nouvelle, une nouvelle offre vient d'être "
-						+ "publiée par le service : "+offre.getReferent().getService().getLibelle()+".\n\nTitre : "+offre.getTitle()+"\nMission : "+offre.getMission()
-						+ "\nRémuneration : "+offre.getRemuneration()+" € de l'heure\nCompétences : "+offre.getSkills() 
-						+ "\n\nSi cette offre t'intéresse, tu peux contacter:\n"+offre.getFirstNameResponsible()+" "+offre.getLastNameResponsible()+ " à l'adresse suivante "
-						+ offre.getEmailResponsible()+" ou par téléphone au : "+offre.getPhoneResponsible()+"\n\nCette offre expire le "+offre.getValidityDate()
-						+"\n\nCordialement,\n\nL'équipe Digiteam.\n\nCeci est un message automatique, merci de ne pas y répondre.\n"
-						+ "Pour ne plus recevoir ses notifications, veuillez vous désinscrire de l'abonnement par mail sur le site : http://172.28.2.17:8585");
+
+			if(student.getEmail().equals("clement.dilly@etudiant.univ-lille1.fr") || student.getEmail().equals("willy.pezant@etudiant.univ-lille1.fr")||student.getEmailSubscribe()==1){
+				for (Mission mission : student.getWish().getMissions()) {
+					if(mission.getId()==Long.parseLong(offre.getType())){
+						SimpleMailMessage mail= new SimpleMailMessage();
+						mail.setTo(student.getEmail());
+						mail.setSubject("Nouvelle offre en ligne ["+offre.getTitle()+"]");
+						mail.setText("Bonjour "+student.getFirstName()+",\n\nToujours à la recherche d'un contrat étudiant?\nBonne nouvelle, une nouvelle offre vient d'être "
+								+ "publiée par le service : "+offre.getReferent().getService().getLibelle()+".\n\nTitre : "+offre.getTitle()+"\nMission : "+offre.getMission()
+								+ "\nRémuneration : "+offre.getRemuneration()+" € de l'heure\nCompétences : "+offre.getSkills() 
+								+ "\n\nSi cette offre t'intéresse, tu peux contacter:\n"+offre.getFirstNameResponsible()+" "+offre.getLastNameResponsible()+ " à l'adresse suivante "
+								+ offre.getEmailResponsible()+" ou par téléphone au : "+offre.getPhoneResponsible()+"\n\nCette offre expire le "+offre.getValidityDate()
+								+"\n\nCordialement,\n\nL'équipe Digiteam.\n\nCeci est un message automatique, merci de ne pas y répondre.\n"
+								+ "Pour ne plus recevoir ces notifications, veuillez vous désinscrire de l'abonnement par mail sur le site : http://172.28.2.17:8585");
 
 
-				javaMailSender.send(mail);
+						javaMailSender.send(mail);
+					}
+				}
+
 			}
 		}
 	}
