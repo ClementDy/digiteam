@@ -116,7 +116,7 @@ public class NotificationService {
 		message.setSubject("Refus de votre offre n°"+ offre.getId());
 		//javaMailSender.send(mail);
 
-		Context ctx = new Context(locale);
+		Context ctx = new Context();
 		ctx.setVariable("name", offre.getFirstNameResponsible());
 
 		String htmlContent = templateEngine.process("templateMail.html", ctx);
