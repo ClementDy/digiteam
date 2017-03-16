@@ -45,8 +45,8 @@ function activeNav(id) {
 	
 	else if(id=='contract'){
 		$('#contract').addClass("active");
-		$('#offers').removeClass("active");
-		$('#candidatures').removeClass("active");
-		$('#consult').removeClass("active");
+	}
+	else if(id=='accueil'){
+		$('#accueil').addClass("active");
 	}
 }

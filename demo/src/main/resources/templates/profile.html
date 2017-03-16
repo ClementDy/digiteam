@@ -49,7 +49,7 @@
 						<div class="col-md-3">
 							<p>Rue :</p>
 						</div>
-						<div class="col-md-6">
+						<div class="cth:if="${student.contract.empty}"ol-md-6">
 							<label th:text="${student.address.street}" id="street"></label>
 						</div>
 					</div>
@@ -117,10 +117,45 @@
 				</table>
 
 			</div>
-			<h4 class="titreFormulaire">Contrats</h4>
-			<div th:if="${student.externalContracts[__${0}__].employer}==''" style="text-align:center">
-			<label >Vous n'avez pas de contrats</label>
+			
+			
+		<h4 class="titreFormulaire">Contrats Lille 1</h4>
+			<table th:if="${!student.contract.empty}"  class="table table-striped table-bordered table-hover" align="center">
+				<thead>
+					<tr>
+						<th>Service</th>
+						<th>Période</th>
+						<th>Nombre d'heures total</th>
+						<th>Mission</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="contract : ${student.contract}">
+						<td>
+						<span th:text="${contract.referent.service.libelle}"></span>
+						</td>
+
+						<td>
+							Du <span th:text="${{contract.startDate}}"></span> 
+							Au <span th:text="${{contract.endDate}}"></span>
+						</td>
+
+						<td>
+						<span th:text="${contract.hours}"></span>
+						</td>
+
+						<td>
+						<span th:text="${contract.mission}"></span>
+						</td>
+
+					</tr>
+				</tbody>
+			</table>
+			<div th:if="${student.contract.empty}" class="alert alert-info">
+			  Aucun contrat passé avec l'universitée Lille 1 trouvée
 			</div>
+			
+			<h4 class="titreFormulaire">Contrats externes</h4>
 			<div th:if="${student.externalContracts[__${0}__].employer}!=''" class="table-responsive">
 				<table class="table table-striped table-bordered table-hover">
 					<thead>

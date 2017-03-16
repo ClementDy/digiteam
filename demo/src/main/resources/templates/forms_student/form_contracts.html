@@ -13,8 +13,7 @@
 		<br> <br>
 
 		<h4 class="titreFormulaire">Vos contrats Lille 1</h4>
-			<div th:if="${!student.contract.empty}" class="table-responsive">
-			<table class="table table-striped table-bordered table-hover" align="center">
+			<table th:if="${!student.contract.empty}"  class="table table-striped table-bordered table-hover" align="center">
 				<thead>
 					<tr>
 						<th>Service</th>
@@ -45,7 +44,9 @@
 					</tr>
 				</tbody>
 			</table>
-
+			<div th:if="${student.contract.empty}" class="alert alert-info">
+			  Aucun contrat passé avec l'universitée Lille 1 trouvée
+			</div>
 
 		<br> <br>
 		<h4 class="titreFormulaire">Vos autres contrats (hors Lille 1)</h4>
