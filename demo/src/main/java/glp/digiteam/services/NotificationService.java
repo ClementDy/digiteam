@@ -1,18 +1,30 @@
 package glp.digiteam.services;
 
+import java.util.Collections;
 import java.util.List;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 import glp.digiteam.entity.offer.AbstractOffer;
 import glp.digiteam.entity.offer.StaffLille1;
 import glp.digiteam.entity.student.Student;
 
 @Service
+@ComponentScan({ "glp.digiteam.services", "glp.digiteam.entity.offer" })
 public class NotificationService {
 
 	@Autowired
@@ -46,18 +58,18 @@ public class NotificationService {
 				mail.setSubject("Nouvelle offre en ligne ["+offre.getTitle()+"]");
 				mail.setText("Bonjour "+student.getFirstName()+",\n\nToujours à la recherche d'un contrat étudiant?\nBonne nouvelle, une nouvelle offre vient d'être "
 						+ "publiée par le service : "+offre.getReferent().getService().getLibelle()+".\n\nTitre : "+offre.getTitle()+"\nMission : "+offre.getMission()
-								+ "\nRémuneration : "+offre.getRemuneration()+" € de l'heure\nCompétences : "+offre.getSkills() 
-								+ "\n\nSi cette offre t'intéresse, tu peux contacter:\n"+offre.getFirstNameResponsible()+" "+offre.getLastNameResponsible()+ " à l'adresse suivante "
-								+ offre.getEmailResponsible()+" ou par téléphone au : "+offre.getPhoneResponsible()+"\n\nCette offre expire le "+offre.getValidityDate()
-								+"\n\nCordialement,\n\nL'équipe Digiteam.\n\nCeci est un message automatique, merci de ne pas y répondre.\n"
-								+ "Pour ne plus recevoir ses notifications, veuillez vous désinscrire de l'abonnement par mail sur le site : http://172.28.2.17:8585");
-						
+						+ "\nRémuneration : "+offre.getRemuneration()+" € de l'heure\nCompétences : "+offre.getSkills() 
+						+ "\n\nSi cette offre t'intéresse, tu peux contacter:\n"+offre.getFirstNameResponsible()+" "+offre.getLastNameResponsible()+ " à l'adresse suivante "
+						+ offre.getEmailResponsible()+" ou par téléphone au : "+offre.getPhoneResponsible()+"\n\nCette offre expire le "+offre.getValidityDate()
+						+"\n\nCordialement,\n\nL'équipe Digiteam.\n\nCeci est un message automatique, merci de ne pas y répondre.\n"
+						+ "Pour ne plus recevoir ses notifications, veuillez vous désinscrire de l'abonnement par mail sur le site : http://172.28.2.17:8585");
+
 
 				javaMailSender.send(mail);
 			}
 		}
 	}
-	
+
 	public void sendNotificationAcceptOffer(AbstractOffer offre) throws MailException{
 
 		SimpleMailMessage mail= new SimpleMailMessage();
@@ -70,13 +82,38 @@ public class NotificationService {
 
 		javaMailSender.send(mail);
 	}
-	
-	public void sendNotificationRefuseOffer(AbstractOffer offre,StaffLille1 referent) throws MailException{
-		SimpleMailMessage mail= new SimpleMailMessage();
-		mail.setTo(referent.getEmail());
-		mail.setSubject("Refus de votre offre n°"+ offre.getId());
-		mail.setText("Bonjour"+referent.getFirstName()+", \n\nNous avons le regret de vous informer que votre offre a été refusée.");
 
-		javaMailSender.send(mail);
+	public void sendNotificationRefuseOffer(AbstractOffer offre,StaffLille1 referent) throws MailException, MessagingException{
+
+		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+		ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+
+		templateResolver.setOrder(Integer.valueOf(2));
+		templateResolver.setResolvablePatterns(Collections.singleton("html/*"));
+		templateResolver.setPrefix("/mail/");
+		templateResolver.setSuffix(".html");
+		templateResolver.setTemplateMode(TemplateMode.HTML);
+		templateResolver.setCharacterEncoding("UTF-8");
+		templateResolver.setCacheable(false);
+
+		templateEngine.addTemplateResolver(templateResolver);
+		//SimpleMailMessage mail= new SimpleMailMessage();
+
+
+	
+		//mail.setText("Bonjour"+referent.getFirstName()+", \n\nNous avons le regret de vous informer que votre offre a été refusée.");
+
+		final MimeMessage mimeMessage = this.javaMailSender.createMimeMessage();
+		final MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true, "UTF-8"); 
+		message.setTo(referent.getEmail());
+		message.setSubject("Refus de votre offre n°"+ offre.getId());
+		//javaMailSender.send(mail);
+
+		Context ctx = new Context();
+		ctx.setVariable("name", offre.getFirstNameResponsible());
+
+		String htmlContent = templateEngine.process("mail/templateMail.html", ctx);
+		  message.setText(htmlContent, true); // true = isHtml
+		  javaMailSender.send(mimeMessage);
 	}
 }

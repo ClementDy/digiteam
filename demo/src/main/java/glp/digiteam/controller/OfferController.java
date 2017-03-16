@@ -4,11 +4,13 @@ import java.util.Calendar;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.mail.MailException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -234,7 +236,7 @@ public class OfferController {
 	}
 
 	@RequestMapping(value = "/newStandardOffer", method = RequestMethod.POST,params="action=Refuser")
-	public ModelAndView refuseStandardOffer(@ModelAttribute StandardOffer ofr,Model model,HttpSession session) {
+	public ModelAndView refuseStandardOffer(@ModelAttribute StandardOffer ofr,Model model,HttpSession session) throws MailException, MessagingException {
 
 		StandardOffer offre=(StandardOffer) offerService.findById(ofr.getId());
 
