@@ -302,58 +302,43 @@ public class OfferController {
 
 	}
 
-	@RequestMapping(value = "/consult_offers", method = RequestMethod.GET)
-	public String consult_offers(Model model,HttpSession session) {
+	@RequestMapping(value="/consult_offers", method=RequestMethod.GET)
+	public String consult_offers(Model model, HttpSession session,
+			@RequestParam(value="libelle", required=false, defaultValue="") String libelle,
+			@RequestParam(value="num_offer", required=false, defaultValue="") String num_offer) {
 
-		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-
-		if(staffLille1!=null){
-			StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
-			model.addAttribute("user",user);
-
+		StaffLille1 staffLille1 = (StaffLille1)session.getAttribute("staffLille1");
+		if (staffLille1 != null) {
+			StaffLille1	user = staffLille1Service.findByEmail(staffLille1.getEmail());
+			model.addAttribute("user", user);	
 		}
-		else{
-			Student student=(Student) session.getAttribute("student");
-			model.addAttribute("user",student);
+		else {
+			Student student = (Student)session.getAttribute("student");
+			model.addAttribute("user", student);
 		}
 
-
-		Iterable<AbstractOffer> listOffers = offerService.findLastOffers(0, 30);
+		List<AbstractOffer> listOffers;
+		if (!libelle.isEmpty() || !num_offer.isEmpty()) {
+			listOffers = offerService.searchOffers(libelle,num_offer);
+		}
+		else {
+			listOffers = offerService.findLastOffers(0, 30);
+		}
 		model.addAttribute("listOffers",listOffers);
 
-		return "offers/consult_offers";
-	}
-
-	@RequestMapping(value = "/consult_offers", method = RequestMethod.POST)
-	public String consult_offers_search(
-			@RequestParam(value="libelle", required=true, defaultValue="") String libelle,
-			@RequestParam(value="num_offer", required=true,defaultValue="") String num_offer,
-			@RequestParam(value="responsive", required=true,defaultValue="") String responsive,
-			Model model,HttpSession session) {
-
-		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		if(staffLille1!=null){
-			StaffLille1	user=staffLille1Service.findByEmail(staffLille1.getEmail());
-			model.addAttribute("user",user);	
-		}
-		else{
-			Student student=(Student) session.getAttribute("student");
-			model.addAttribute("user",student);
-		}
-
-		List<AbstractOffer> listOffers = offerService.searchOffers(libelle,num_offer);
-		model.addAttribute("listOffers",listOffers);
-
-		if(listOffers==null){
+		if (listOffers == null) {
 			model.addAttribute("size", 0);
 		}
 		else{
 			model.addAttribute("size", listOffers.size());
 		}
 
+		model.addAttribute("libelle", libelle);
+		model.addAttribute("num_offer", num_offer);
+		
 		return "offers/consult_offers";
 	}
-
+	
 	@RequestMapping(value = "/profil", method = RequestMethod.GET)
 	public String profil(Model model,HttpSession session,@RequestParam(value="nip", required=true) Integer nip) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
@@ -444,24 +429,22 @@ public class OfferController {
 
 	}
 
+	@RequestMapping(value="/offerShow", method=RequestMethod.GET)
+	public ModelAndView showOffer(Model model, HttpSession session,
+			@RequestParam(value="id", required=true) long id) {
 
-	@RequestMapping(value = "/offerShow", method = RequestMethod.GET)
-	public ModelAndView showOffer(Model model, HttpSession session,@RequestParam(value = "id", required = true) long id) {
-
-		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-
-		if(staffLille1!=null){
-			StaffLille1	user=staffLille1Service.findByEmail(staffLille1.getEmail());
-			model.addAttribute("user",user);
-		
+		StaffLille1 staffLille1 = (StaffLille1)session.getAttribute("staffLille1");
+		if (staffLille1 != null) {
+			StaffLille1	user = staffLille1Service.findByEmail(staffLille1.getEmail());
+			model.addAttribute("user", user);
 		}
-		else{
-			Student student=(Student) session.getAttribute("student");
-			model.addAttribute("user",student);
+		else {
+			Student student = (Student) session.getAttribute("student");
+			model.addAttribute("user", student);
 		}
+
 		AbstractOffer offer = offerService.findById(id);
-
-		if(offer!=null){
+		if (offer != null) {
 			model.addAttribute("offer", offer);
 			return new ModelAndView("offers/offerAbstract");
 		}
