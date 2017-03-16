@@ -210,8 +210,7 @@
 
 			<div class="col-md-12 cv" th:if="${student.cv}">
 				 <!--<iframe id ="cvIframe" class="cvIframe" height="50" width="50" th:attr="src=${pathCV}"></iframe>-->
-				 <a href="${pathCV}"
-   					>Télécharger Le CV</a>
+				<input type="button" value="Télécharger votre CV" onclick="${pathCV}">
 				<br>
 			</div>
 		</div>
