@@ -76,7 +76,13 @@ public class AuthenticationController {
 		Iterator attributeNames = attributes.keySet().iterator();
 
 		
+		while (attributeNames.hasNext()) {
+			   String attributeName = (String) attributeNames.next();
 
+	            System.out.print(attributeName + " : ");
+	            System.out.println(attributes.get(attributeName));
+	            
+		}
 		
 		/// *
 				List<ServiceWebService> services = servicewebsrviceservice.getServicesWS();
@@ -87,7 +93,7 @@ public class AuthenticationController {
 				}
 
 				// */
-				if(attributes.get("nip") == null|| attributes.get("nip").equals("11602419")|| attributes.get("nip").equals("11202572")|| attributes.get("nip").equals("11302480")){
+				if(attributes.get("nip") == null|| attributes.get("nip").equals("11602419")|| attributes.get("nip").equals("11202572")/*|| attributes.get("nip").equals("11302480")*/){
 					StaffLille1 staffLille1 = new StaffLille1();
 					staffLille1.setEmail((String) attributes.get("mail"));
 					staffLille1.setFirstName((String) attributes.get("givenname"));

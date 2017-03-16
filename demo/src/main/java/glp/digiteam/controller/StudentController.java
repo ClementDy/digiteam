@@ -71,6 +71,7 @@ public class StudentController {
 
 		Student student = (Student) session.getAttribute("student");
 		student=studentService.getStudentByNip(student.getNip());
+		
 		model.addAttribute("student", student);
 		model.addAttribute("user", student);
 		
@@ -94,6 +95,7 @@ public class StudentController {
 		}
 
 		Student student = (Student) session.getAttribute("student");
+		
 		if (studentService.getStudentByNip(student.getNip()) != null) {
 			model.addAttribute("student", (studentService.getStudentByNip(student.getNip())));
 			model.addAttribute("user", (studentService.getStudentByNip(student.getNip())));
@@ -149,7 +151,7 @@ public class StudentController {
 		
 		//String pathCV = IPCV+"/"+student.getNip();
 		//model.addAttribute("pathCV", pathCV);
-
+		
 		studentService.saveStudentProfile(student);
 
 		return new ModelAndView("candidature::tab(activeTab='intro', error='false', saved='false')");
@@ -214,6 +216,7 @@ public class StudentController {
 
 				std.getAddress().setId(realStudent.getAddress().getId());
 				std.getAddress().setStudent(realStudent);
+				
 
 				std.getWish().setId(realStudent.getWish().getId());
 				std.getWish().setStudent(realStudent);
