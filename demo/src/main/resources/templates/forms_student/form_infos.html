@@ -208,7 +208,7 @@
 		</div>
 		<div class="row">
 
-			<div class="col-md-12 cv" th:if="${!!#strings.isEmpty(pathCV)}">
+			<div class="col-md-12 cv" th:if="${!#strings.isEmpty(student.cv)}">
 				 <iframe id ="cvIframe" class="cvIframe" height="50" width="50" th:attr="src=${pathCV}"></iframe>
 				<br>
 			</div>
