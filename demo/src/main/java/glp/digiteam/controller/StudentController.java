@@ -75,7 +75,6 @@ public class StudentController {
 		model.addAttribute("user", student);
 		
 		String pathCV = IPCV+"/"+student.getNip();
-		System.out.println("************************* "+pathCV);
 		model.addAttribute("pathCV", pathCV);
 		return "profile";
 	}
@@ -135,7 +134,7 @@ public class StudentController {
 				student.setCv(cvStudent.getFilename());
 				model.addAttribute("file", cvStudent);
 			} catch (Exception e) {
-				System.out.println("No CV found");
+				e.printStackTrace();
 			}
 
 
