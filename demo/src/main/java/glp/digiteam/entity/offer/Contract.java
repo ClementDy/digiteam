@@ -32,6 +32,10 @@ public class Contract {
 	@Type(type = "org.hibernate.type.TextType")
 	private String mission;
 
+	private String type;
+	
+	private boolean status =false;
+	
 	private int hours;
 
 	private double rate;
@@ -50,8 +54,6 @@ public class Contract {
 
 	private String convention_eOTP;
 
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date dateSaisie;
 
 	public Contract() {
 		// TODO Auto-generated constructor stub
@@ -65,12 +67,24 @@ public class Contract {
 		this.referent = referent;
 	}
 
-	public Date getDateSaisie() {
-		return dateSaisie;
+	public String getType() {
+		return type;
 	}
 
-	public void setDateSaisie(Date dateSaisie) {
-		this.dateSaisie = dateSaisie;
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public long getId() {
+		return id;
+	}
+	
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
 
 	public String getResponsable() {
