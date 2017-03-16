@@ -91,7 +91,7 @@ public class NotificationService {
 	}
 
 	public void sendNotificationRefuseOffer(AbstractOffer offre,StaffLille1 referent) throws MailException, MessagingException{
-		System.out.println("Refus d'une offre");
+		/*System.out.println("Refus d'une offre");
 		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
 		ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
 
@@ -119,8 +119,8 @@ public class NotificationService {
 		Context ctx = new Context();
 		ctx.setVariable("name", offre.getFirstNameResponsible());
 
-		String htmlContent = templateEngine.process("templateMail.html", ctx);
+		String htmlContent = templateEngine.process("templateMail", ctx);
 		message.setText(htmlContent, true); // true = isHtml
-		javaMailSender.send(mimeMessage);
+		javaMailSender.send(mimeMessage);*/
 	}
 }
