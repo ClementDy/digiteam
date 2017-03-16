@@ -35,7 +35,7 @@
 						<div class="input-group">
 							<span class="input-group-addon">NIP de l'étudiant </span> <input
 								type="text" class="form-control" name="nip" id="nip"
-								type="text">
+								>
 						</div>
 					</div>
 					
@@ -82,7 +82,7 @@
 
 					</thead>
 
-					<tr th:each="contract : ${user.contracts}"">
+					<tr th:each="contract : ${user.contracts}">
 						<td th:text="${contract.id}"></td>
 						<td>
 						<span th:text="${contract.student.firstName}"></span> <span th:text="${contract.student.LastName}"></span>
