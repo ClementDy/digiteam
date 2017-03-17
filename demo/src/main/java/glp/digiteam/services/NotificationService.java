@@ -1,8 +1,6 @@
 package glp.digiteam.services;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -14,11 +12,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
-import org.thymeleaf.spring4.SpringTemplateEngine;
-import org.thymeleaf.templatemode.TemplateMode;
-import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+
 
 import glp.digiteam.entity.offer.AbstractOffer;
 import glp.digiteam.entity.offer.StaffLille1;
@@ -54,7 +48,7 @@ public class NotificationService {
 		List<Student> students=studentService.getAllCandidature();
 		for(Student student:students){
 
-			if(student.getEmail().equals("clement.dilly@etudiant.univ-lille1.fr") || student.getEmail().equals("willy.pezant@etudiant.univ-lille1.fr")||student.getEmailSubscribe()==1){
+			if(student.getEmailSubscribe()==1){
 				for (Mission mission : student.getWish().getMissions()) {
 					if(mission.getId()==Long.parseLong(offre.getType())){
 						SimpleMailMessage mail= new SimpleMailMessage();
@@ -81,7 +75,7 @@ public class NotificationService {
 
 		SimpleMailMessage mail= new SimpleMailMessage();
 		mail.setTo(offre.getEmailResponsible());
-		mail.setSubject("Acception de votre offre n°"+ offre.getId());
+		mail.setSubject("Offre n°"+ offre.getId()+" acceptée!");
 		mail.setText("Bonjour "+offre.getFirstNameResponsible()+", \n\nNous avons le plaisir de vous informer que votre offre n° "+offre.getId()+" - "+offre.getTitle()+" a été acceptée."
 				+ "\n\n Elle est désormais en ligne, si vous souhaitez retirer cette offre du marché de l'université, merci de vous rendre sur "
 				+ "cette page : http://172.28.2.17:8585/offers\n\nPour rappel, cette offre expire le "+offre.getValidityDate().getDay()+"/"+offre.getValidityDate().getMonth()+"."
@@ -91,7 +85,26 @@ public class NotificationService {
 	}
 
 	public void sendNotificationRefuseOffer(AbstractOffer offre,StaffLille1 referent) throws MailException, MessagingException{
-		/*System.out.println("Refus d'une offre");
+		System.out.println("Refus d'une offre");
+		
+		SimpleMailMessage mail= new SimpleMailMessage();
+		mail.setTo(offre.getEmailResponsible());
+		mail.setSubject("Offre n°"+ offre.getId()+" refusée!");
+		mail.setText("Bonjour"+referent.getFirstName()+", \n\nNous avons le regret de vous informer que votre offre a été refusée."
+				+"\n\nLa raison de ce refus est la suivante : "+offre.getComment()+"."
+				+ "\n\nCordialement,\n\nL'équipe Digiteam.\n\nCeci est un message automatique, merci de ne pas y répondre.\n");
+
+		javaMailSender.send(mail);
+
+
+
+
+
+	
+	}
+
+	/*
+		templateEngine.addTemplateResolver(templateResolver);
 		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
 		ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
 
@@ -102,25 +115,17 @@ public class NotificationService {
 		templateResolver.setTemplateMode(TemplateMode.HTML);
 		templateResolver.setCharacterEncoding("UTF-8");
 		templateResolver.setCacheable(false);
-
-		templateEngine.addTemplateResolver(templateResolver);
-		//SimpleMailMessage mail= new SimpleMailMessage();
-
-
-
-		//mail.setText("Bonjour"+referent.getFirstName()+", \n\nNous avons le regret de vous informer que votre offre a été refusée.");
-
-		final MimeMessage mimeMessage = this.javaMailSender.createMimeMessage();
-		final MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true, "UTF-8"); 
-		message.setTo(referent.getEmail());
-		message.setSubject("Refus de votre offre n°"+ offre.getId());
-		//javaMailSender.send(mail);
-
 		Context ctx = new Context();
 		ctx.setVariable("name", offre.getFirstNameResponsible());
 
 		String htmlContent = templateEngine.process("templateMail", ctx);
-		message.setText(htmlContent, true); // true = isHtml
-		javaMailSender.send(mimeMessage);*/
-	}
+	
+		javaMailSender.send(mimeMessage);
+		
+				final MimeMessage mimeMessage = this.javaMailSender.createMimeMessage();
+		final MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true, "UTF-8"); 
+		message.setTo(referent.getEmail());
+		message.setSubject("Refus de votre offre n°"+ offre.getId());
+		//javaMailSender.send(mail);
+	 */
 }
