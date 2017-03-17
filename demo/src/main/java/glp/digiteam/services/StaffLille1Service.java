@@ -1,5 +1,7 @@
 package glp.digiteam.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,5 +24,9 @@ public class StaffLille1Service {
 	
 	public StaffLille1 saveStaffLille1(StaffLille1 staffLille1){
 		return staffLille1Repository.save(staffLille1);
+	}
+	
+	public List<StaffLille1> findByService(String service){
+		return staffLille1Repository.findByService(service);
 	}
 }

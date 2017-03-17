@@ -1,5 +1,8 @@
 package glp.digiteam.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +38,7 @@ public class AdministratorController {
 	@RequestMapping(value = "/gestionModerator", method = RequestMethod.GET)
 	public String gestionModerator(Model model,HttpSession session) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		
+
 		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 
 		Iterable<StaffLille1> gestionnaires = staffLille1Service.findAll();
@@ -68,6 +71,32 @@ public class AdministratorController {
 		return "administrator/gestionReferent";
 	}
 
+	@RequestMapping(value = "/gestionReferent", method = RequestMethod.POST)
+	public String gestionReferent(
+			@RequestParam(value="service", required=true,defaultValue="") String service,
+			Model model, HttpSession session) {
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
+		ArrayList<StaffLille1> referents;
+		if(service.equals(" ")){
+			referents= (ArrayList<StaffLille1>) staffLille1Service.findAll();
+		}
+		else{
+			 referents = (ArrayList<StaffLille1>) staffLille1Service.findByService(service);
+		}
+		model.addAttribute("referents",referents);
+
+		Iterable<ServiceEntity> services = serviceService.findAll();
+		model.addAttribute("referents",referents);
+
+		StaffLille1 referent=new StaffLille1();
+		model.addAttribute("size",referents.size()/2);
+		model.addAttribute("newReferent",referent);
+		model.addAttribute("service",services);
+		model.addAttribute("user",user);
+		return "administrator/gestionReferent";
+		
+	}
 
 
 	@RequestMapping(value = "/homeStaffLille1", method = RequestMethod.GET)
