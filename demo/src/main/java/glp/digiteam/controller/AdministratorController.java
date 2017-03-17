@@ -85,7 +85,7 @@ public class AdministratorController {
 		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
 
-		Iterable<Student> students=studentRepository.findAll();
+		Iterable<Student> students=studentRepository.findPublishedCandidature();
 		for(Student student:students){
 			SimpleMailMessage mail= new SimpleMailMessage();
 			mail.setTo(student.getEmail());
