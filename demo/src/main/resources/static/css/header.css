@@ -116,6 +116,15 @@ a {
 	text-align: left;
 }
 
+.emailProfil{
+	color:#23527c;
+}
+
+.emailProfil:hover{
+	color:#ae2573;
+}
+
+
 .right {
 	text-align: right;
 }

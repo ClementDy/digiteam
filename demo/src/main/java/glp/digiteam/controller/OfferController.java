@@ -1,5 +1,6 @@
 package glp.digiteam.controller;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import java.util.List;
@@ -302,7 +303,7 @@ public class OfferController {
 	@RequestMapping(value="/consult_offers", method=RequestMethod.GET)
 	public String consult_offers(Model model, HttpSession session,
 			@RequestParam(value="libelle", required=false, defaultValue="") String libelle,
-			@RequestParam(value="num_offer", required=false, defaultValue="") String num_offer) {
+			@RequestParam(value="mission", required=false, defaultValue="") String mission) {
 
 		StaffLille1 staffLille1 = (StaffLille1)session.getAttribute("staffLille1");
 		if (staffLille1 != null) {
@@ -313,14 +314,9 @@ public class OfferController {
 			Student student = (Student)session.getAttribute("student");
 			model.addAttribute("user", student);
 		}
-
-		List<AbstractOffer> listOffers;
-		if (!libelle.isEmpty() || !num_offer.isEmpty()) {
-			listOffers = offerService.searchOffers(libelle,num_offer);
-		}
-		else {
-			listOffers = offerService.findLastOffers(0, 30);
-		}
+		Iterable<Mission> missions = missionService.findAll();
+		model.addAttribute("listMission", missions);
+		List<AbstractOffer> listOffers =  offerService.searchOffers(libelle,mission);
 		model.addAttribute("listOffers",listOffers);
 
 		if (listOffers == null) {
@@ -329,9 +325,9 @@ public class OfferController {
 		else{
 			model.addAttribute("size", listOffers.size());
 		}
-
+		model.addAttribute("mission", mission);
 		model.addAttribute("libelle", libelle);
-		model.addAttribute("num_offer", num_offer);
+		
 		
 		return "offers/consult_offers";
 	}

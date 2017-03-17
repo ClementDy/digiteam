@@ -60,34 +60,33 @@ public class OfferService {
 		return  offerRepository.findLastOffers(pageable);
 	}
 	
-	public List<AbstractOffer> searchOffers(String libelle,String num_offer){
-		
-		if(libelle.isEmpty() && num_offer.isEmpty()){
+	public List<AbstractOffer> searchOffers(String libelle,String mission){
+		List<AbstractOffer> offers=null;
+		List<AbstractOffer>returnedOffers=new ArrayList<AbstractOffer>();
+		if(libelle.isEmpty()&&mission.isEmpty()){
 			return offerRepository.findLastOffers(new PageRequest(0, 40));
 		}
 		
-		if(!libelle.isEmpty() && num_offer.isEmpty() ){
+		if(!libelle.isEmpty()&&mission.isEmpty()){
 			return offerRepository.findOfferWithLib(libelle.toLowerCase());
 		}
-		
-		if(!libelle.isEmpty() &&  !num_offer.isEmpty()  && isNumeric(num_offer)){
-			return offerRepository.findOfferWithLibOffer(libelle.toLowerCase(),Long.parseLong(num_offer));
-		}
-		
-		if(!libelle.isEmpty() &&  !num_offer.isEmpty()  && isNumeric(num_offer)){
-		
-			
-				return offerRepository.findOfferWithAllParam(libelle.toLowerCase(),Long.parseLong(num_offer));
-			
-		}
-		
-		if(libelle.isEmpty() && !num_offer.isEmpty() && isNumeric(num_offer)){
-			List<AbstractOffer> offer = new ArrayList<>();
-			AbstractOffer offerFind = offerRepository.findById(Long.parseLong(num_offer));
-			if(offerFind!=null){
-				offer.add(offerFind);
+		if(libelle.isEmpty()&&!mission.isEmpty()){
+			offers=offerRepository.findLastOffers(new PageRequest(0, 40));
+			for (AbstractOffer abstractOffer : offers) {
+				if(abstractOffer.getType().equals(mission)){
+					returnedOffers.add(abstractOffer);
+				}
 			}
-			return (offer);
+			return returnedOffers;
+		}
+		if(!libelle.isEmpty()&&!mission.isEmpty()){
+			offers=offerRepository.findOfferWithLib(libelle.toLowerCase());
+			for (AbstractOffer abstractOffer : offers) {
+				if(abstractOffer.getType().equals(mission)){
+					returnedOffers.add(abstractOffer);
+				}
+			}
+			return returnedOffers;
 		}
 		
 		return null;
