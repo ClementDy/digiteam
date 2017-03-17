@@ -99,7 +99,7 @@
 					align="center">
 					<thead>
 						<tr>
-							<th>Service</th>
+							<th>Emplyer / Service</th>
 							<th>Période</th>
 							<th>Nombre d'heures total</th>
 							<th>Mission</th>
@@ -108,7 +108,7 @@
 					<tbody>
 						<tr th:each="contract : ${student.contract}"
 							th:if="${contract.status}==true">
-							<td><span th:text="${contract.referent.service.libelle}"></span>
+							<td>Lille 1 - <span th:text="${contract.referent.service.libelle}"></span>
 							</td>
 
 							<td>Du <span th:text="${{contract.startDate}}"></span> Au <span
@@ -120,50 +120,30 @@
 							<td><span th:text="${contract.mission}"></span></td>
 
 						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div th:if="${student.externalContracts[__${0}__].employer}!=''"
-				class="table-responsive">
-				<table class="table table-striped table-bordered table-hover">
-					<thead>
-						<tr>
-							<th>Employeur</th>
-							<th>Date de d&eacute;but</th>
-							<th>Date de fin</th>
-							<th>Nombre d'heures total</th>
-							<th>Missions</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr
-							th:each="externalContract, stat : ${student.externalContracts}"
-							th:if="${student.externalContracts[__${stat.index}__].employer}!=''">
-							<td><input type="text" class="form-control"
-								th:value="${student.externalContracts[__${stat.index}__].employer}"
-								th:field="${student.externalContracts[__${stat.index}__].employer}"
-								readonly></td>
-							<td><input type="text" class="form-control"
-								th:value="${student.externalContracts[__${stat.index}__].startDate}"
-								th:field="${student.externalContracts[__${stat.index}__].startDate}"
-								readonly></td>
-							<td><input type="text" class="form-control"
-								th:value="${student.externalContracts[__${stat.index}__].endDate}"
-								th:field="${student.externalContracts[__${stat.index}__].endDate}"
-								readonly></td>
-							<td><input type="text" class="form-control"
-								th:value="${student.externalContracts[__${stat.index}__].hours}"
-								th:field="${student.externalContracts[__${stat.index}__].hours}"
-								readonly></td>
-							<td><input type="text" class="form-control"
-								th:value="${student.externalContracts[__${stat.index}__].missions}"
-								th:field="${student.externalContracts[__${stat.index}__].missions}"
-								readonly></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+						<tr th:each="contract : ${student.externalContracts}" th:if="${!#strings.isEmpty(contract.employer)}">
+							<td><span th:text="${contract.employer}"></span>
+							</td>
 
+							<td>Du <span th:text="${{contract.startDate}}"></span> Au <span
+								th:text="${{contract.endDate}}"></span>
+							</td>
+
+							<td><span th:text="${contract.hours}"></span></td>
+
+							<td><span th:text="${contract.missions}"></span></td>
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-12">
+					<label> Nombre d'heures total travaillées : </label><span th:text="${nbHours}"></span> heures
+				</div>
+			</div>
+			
+			
 			<br /> <br />
 			<div class="titreOffre">
 				<h4>Information sur la mission</h4>
@@ -194,9 +174,8 @@
 
 			<div class="row">
 				<div class="form-inline col-md-12">
-					<label">Nombre d'heures effectives :</label> <input
-						class="col-md-2" type="number" th:field="${contract.hours}"
-						class="form-control" required>
+					<label>Nombre d'heures effectives :</label> <input
+						class="col-md-2 form-control" type="number" th:field="${contract.hours}" required>
 				</div>
 			</div>
 			<br />
@@ -220,7 +199,7 @@
 						interventions *</label>
 				</div>
 			</div>
-			<br />
+			<br>
 
 			<div class="row">
 				<div class="input-daterange" id="datepicker">
@@ -243,7 +222,7 @@
 					</article>
 				</div>
 			</div>
-			<br />
+			<br>
 			<div class="row">
 				<div class="form-group">
 					<label class="control-label col-md-12"> Imputation
@@ -253,23 +232,20 @@
 			<br />
 			<div class="row">
 				<div class="form-inline col-md-12">
-					<label">Centre de cout </label> <input
-						th:field="${contract.costCenter}" class="col-md-6"
-						class="form-control" required>
+					<label>Centre de cout </label> <input
+						th:field="${contract.costCenter}" class="col-md-6 form-control" required>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-inline col-md-12">
-					<label">Domaine fonctionnel </label> <input
-						th:field="${contract.domaineFonctionel}" class="col-md-6"
-						class="form-control" required>
+					<label>Domaine fonctionnel </label> <input
+						th:field="${contract.domaineFonctionel}" class="col-md-6 form-control" required>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-inline col-md-12">
-					<label">Convention eOtp </label> <input
-						th:field="${contract.convention_eOTP}" class="col-md-6"
-						class="form-control" required>
+					<label>Convention eOtp </label> <input
+						th:field="${contract.convention_eOTP}" class="col-md-6 form-control" required>
 				</div>
 			</div>
 			<br />

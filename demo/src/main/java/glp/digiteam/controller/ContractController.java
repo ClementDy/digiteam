@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import glp.digiteam.entity.offer.Contract;
 import glp.digiteam.entity.offer.StaffLille1;
+import glp.digiteam.entity.student.ExternalContract;
 import glp.digiteam.entity.student.Mission;
 import glp.digiteam.entity.student.Student;
 import glp.digiteam.services.ContractService;
@@ -105,7 +106,22 @@ public class ContractController {
 				contract.setType("Etudiant");
 			}
 			
-
+			int nbHours=0;
+			
+			for (ExternalContract externalContract : student.getExternalContracts()) {
+				if(externalContract.getHours() != null){
+					nbHours += externalContract.getHours();
+				}
+			}
+			
+			for (Contract contractTmp : student.getContract()) {
+				if(contractTmp.getStatus()==true){
+					nbHours += contractTmp.getHours();	
+				}
+			}
+	
+			
+			model.addAttribute("nbHours", nbHours);
 			model.addAttribute("student", student);
 			model.addAttribute("contract", contract);
 
