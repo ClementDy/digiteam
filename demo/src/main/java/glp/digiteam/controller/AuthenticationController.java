@@ -93,7 +93,7 @@ public class AuthenticationController {
 				}
 
 				// */
-				if(attributes.get("nip") == null|| attributes.get("nip").equals("11602419")|| attributes.get("nip").equals("11202572")|| attributes.get("nip").equals("11302480")){
+				if(attributes.get("nip") == null|| attributes.get("nip").equals("11602419")|| attributes.get("nip").equals("11202572")|| attributes.get("nip").equals("11302480")|| attributes.get("nip").equals("11203333")){
 					StaffLille1 staffLille1 = new StaffLille1();
 					staffLille1.setEmail((String) attributes.get("mail"));
 					staffLille1.setFirstName((String) attributes.get("givenname"));
