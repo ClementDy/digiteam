@@ -9,6 +9,7 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.mail.MailException;
@@ -52,7 +53,9 @@ public class OfferController {
 	@Autowired
 	private StudentService studentService;
 
-
+	@Value("${IPCV}")
+	String IPCV;
+	
 	@RequestMapping(value = "/offers", method = RequestMethod.GET)
 	public String homeContracts(Model model,HttpSession session) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
@@ -336,9 +339,11 @@ public class OfferController {
 	public String profil(Model model,HttpSession session,@RequestParam(value="nip", required=true) Integer nip) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
+		Student student=  studentService.getStudentByNip(nip);
 		model.addAttribute("user",user);
-
-		model.addAttribute("student", studentService.getStudentByNip(nip));
+		String pathCV = IPCV+student.getNip();
+		model.addAttribute("pathCV", pathCV);
+		model.addAttribute("student",student);
 		return "profile";
 	}
 

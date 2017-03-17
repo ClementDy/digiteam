@@ -77,6 +77,7 @@ public class StudentController {
 		
 		String pathCV = IPCV+"/"+student.getNip();
 		model.addAttribute("pathCV", pathCV);
+		System.out.println("Le chemin est : " + pathCV);
 		return "profile";
 	}
 

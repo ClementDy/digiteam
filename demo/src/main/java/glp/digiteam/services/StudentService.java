@@ -1,14 +1,9 @@
 package glp.digiteam.services;
 
-import static org.mockito.Matchers.startsWith;
-
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import glp.digiteam.entity.student.Mission;
 import glp.digiteam.entity.student.Student;
 import glp.digiteam.entity.student.Training;
@@ -23,7 +18,7 @@ public class StudentService {
 
 	@Autowired
 	MissionRepository missionRepository;
-
+	
 	public Student saveStudentProfile(Student student) {
 		return studentRepository.save(student);
 	}
@@ -112,6 +107,10 @@ public class StudentService {
 			return students;
 		}
 		return students;
+	}
+	
+	public Iterable<Student> findAll() {
+		return studentRepository.findAll();
 	}
 
 	public List<Student> findByName(String name) {

@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,10 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-
 import glp.digiteam.entity.offer.ServiceEntity;
 import glp.digiteam.entity.offer.StaffLille1;
+import glp.digiteam.entity.student.Mission;
+import glp.digiteam.entity.student.Student;
+import glp.digiteam.repository.StudentRepository;
 import glp.digiteam.services.ServiceService;
 import glp.digiteam.services.StaffLille1Service;
 
@@ -33,6 +35,12 @@ public class AdministratorController {
 
 	@Autowired
 	private StaffLille1Service staffLille1Service;
+
+	@Autowired
+	private StudentRepository studentRepository;
+
+	@Autowired
+	private JavaMailSender javaMailSender;
 
 
 	@RequestMapping(value = "/gestionModerator", method = RequestMethod.GET)
@@ -70,7 +78,7 @@ public class AdministratorController {
 
 		return "administrator/gestionReferent";
 	}
-	
+
 	@RequestMapping(value = "/nextYear", method = RequestMethod.GET)
 	public String nextYear(Model model,HttpSession session) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");		
@@ -78,7 +86,7 @@ public class AdministratorController {
 		model.addAttribute("user",user);
 		return "administrator/nextYear";
 	}
-	
+
 	@RequestMapping(value = "/nextYear", method = RequestMethod.POST)
 	public ModelAndView nextYears(Model model,HttpSession session) {
 		/*StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");		
@@ -106,7 +114,7 @@ public class AdministratorController {
 			referents= (ArrayList<StaffLille1>) staffLille1Service.findAll();
 		}
 		else{
-			 referents = (ArrayList<StaffLille1>) staffLille1Service.findByService(service);
+			referents = (ArrayList<StaffLille1>) staffLille1Service.findByService(service);
 		}
 		model.addAttribute("referents",referents);
 
@@ -119,7 +127,7 @@ public class AdministratorController {
 		model.addAttribute("service",services);
 		model.addAttribute("user",user);
 		return "administrator/gestionReferent";
-		
+
 	}
 
 
@@ -204,5 +212,16 @@ public class AdministratorController {
 		return new ModelAndView("redirect:gestionReferent");
 	}
 
+	@RequestMapping(value = "/newYear", method = RequestMethod.GET)
+	public void newYear() {
 
+		Iterable<Student> students=studentRepository.findAll();
+		for(Student student:students){
+			SimpleMailMessage mail= new SimpleMailMessage();
+			mail.setTo(student.getEmail());
+			mail.setSubject("Nouvelle année scolaire, mettez votre profil à jour");
+			mail.setText("Bonjour "+student.getFirstName()+", veuillez actualiser votre candidature sur le site : http://172.28.2.17:8585 ou celle-ci sera dépubliée");
+			javaMailSender.send(mail);
+		}
+	}
 }
