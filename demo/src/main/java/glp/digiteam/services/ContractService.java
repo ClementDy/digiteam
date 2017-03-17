@@ -17,4 +17,14 @@ public class ContractService {
 	public Contract saveContract(Contract contract){
 		return contractRepository.save( contract);
 	}
+	
+	public Contract getContractByID(Long id){
+		return contractRepository.findOne(id);
+	}
+	
+	public void validateContract(Contract contract){
+		contract.setStatus(true);
+		contractRepository.save( contract);
+	}
+	
 }

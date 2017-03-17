@@ -114,4 +114,21 @@ public class ContractController {
 		}
 		return "homeStaffLille1";
 	}
+	
+	@RequestMapping(value = "/validateContract", method = RequestMethod.GET)
+	public ModelAndView consultCandidatures(Model model, HttpSession session,
+			@RequestParam(value = "id", required = true, defaultValue = "") Long id) {
+		StaffLille1 staffLille1 = (StaffLille1) session.getAttribute("staffLille1");
+
+		StaffLille1 user = staffLille1Service.findByEmail(staffLille1.getEmail());
+		model.addAttribute("user", user);
+		Contract contract = contractService.getContractByID(id);
+		
+		if (user.isReferent == true && contract!=null && contract.getReferent()==user) {
+			contractService.validateContract(contract);
+			return new ModelAndView("redirect:homeContract");
+		}
+		
+		return new ModelAndView("homeStaffLille1");
+	}
 }
