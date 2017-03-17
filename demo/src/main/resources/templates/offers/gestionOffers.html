@@ -8,7 +8,7 @@
 <script src="js/header.js"></script>
 
 <script src="js/jquery-1.9.1.min.js"></script>
-
+<script src="js/inputs.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/header.css">
@@ -56,7 +56,8 @@
 
 
 						<td><a class="btn btn-primary" aria-label="Left Align"
-							th:href="@{/manageOffer(id=${offer.id})}"> <span
+							th:href="@{/manageOffer(id=${offer.id})}"
+							data-toggle="tooltip" data-placement="bottom" title="Modérer cette offre"> <span
 								class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
 						</a></td>
 					</tr>
