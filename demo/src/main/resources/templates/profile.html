@@ -37,11 +37,18 @@
 				
 			
 			<div th:if="${(student.cv)}">
-			<h4 class="titreFormulaire">CV</h4>
-			
-				<iframe th:attr="src=${pathCV}" ></iframe><br><br>
-				
+			<h4 class="titreFormulaire">CV</h4>			
+				<p>
+					<a th:href="${pathCV}" id = "acv" title ="Télécharger ou visualiser votre CV"  target="_BLANK" >Télécharger le CV</a>			
+				</p>	
+				<br>
 			</div>
+			
+				<style>
+					#acv {
+						color:#ae2573;				
+				}
+				</style>
 			
 			<h4 class="titreFormulaire">Adresse</h4>
 			<div class="row" style="text-align:center">
