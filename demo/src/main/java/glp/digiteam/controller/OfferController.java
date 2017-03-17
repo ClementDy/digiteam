@@ -124,9 +124,11 @@ public class OfferController {
 		offre.setRemuneration(ofr.getRemuneration());
 		offre.setRemunerationInfo(ofr.getRemunerationInfo());
 
-
-
-
+		offre.setFirstNameResponsible(ofr.getFirstNameResponsible());
+		offre.setLastNameResponsible(ofr.getLastNameResponsible());
+		offre.setEmailResponsible(ofr.getEmailResponsible());
+		offre.setPhoneResponsible(ofr.getPhoneResponsible());
+		
 		offre.setSkills(ofr.getSkills());
 		offre.setValidityDate(ofr.getValidityDate());
 		offre.setStatus("Validated");
@@ -238,6 +240,11 @@ public class OfferController {
 		offre.setRemuneration(ofr.getRemuneration());
 		offre.setRemunerationInfo(ofr.getRemunerationInfo());
 
+		offre.setFirstNameResponsible(ofr.getFirstNameResponsible());
+		offre.setLastNameResponsible(ofr.getLastNameResponsible());
+		offre.setEmailResponsible(ofr.getEmailResponsible());
+		offre.setPhoneResponsible(ofr.getPhoneResponsible()); 
+		
 		offre.setSkills(ofr.getSkills());
 		offre.setStartDate(ofr.getStartDate());
 		offre.setValidityDate(ofr.getValidityDate());
