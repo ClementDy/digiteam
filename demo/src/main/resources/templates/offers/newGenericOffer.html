@@ -171,14 +171,14 @@
 				<div class="form-group">
 					<label class="control-label col-md-2"> Nom :</label>
 					<div class="col-md-3">
-						<input type="text" th:field="${offer.lastNameResponsible}"
+						<input type="text" th:field="${offer.lastNameResponsible}" th:value="${offer.lastNameResponsible}"
 							class="form-control" placeholder="Nom" required>
 					</div>
 
 					<div class="form-group">
 						<label class="control-label col-md-2"> Pr&eacute;nom :</label>
 						<div class="col-md-3">
-							<input type="text" th:field="${offer.firstNameResponsible}"
+							<input type="text" th:field="${offer.firstNameResponsible}" th:value="${offer.firstNameResponsible}" 
 								class="form-control" placeholder="Pr&eacute;nom" required>
 						</div>
 					</div>
@@ -191,7 +191,7 @@
 				<div class="form-group">
 					<label class="control-label col-md-2"> Mail :</label>
 					<div class="col-md-3">
-						<input th:field="${offer.emailResponsible}" type="email"
+						<input th:field="${offer.emailResponsible}" th:value="${offer.emailResponsible}" type="email"
 							class="form-control" placeholder="monadresse@exemple.com"
 							data-error="Saisissez un email au bon format. (exemple@domaine.fr)"
 							required>
@@ -202,7 +202,7 @@
 						<label class="control-label col-md-2">
 							T&eacute;l&eacute;phone :</label>
 						<div class="col-md-3">
-							<input th:field="${offer.phoneResponsible}" type="text"
+							<input th:field="${offer.phoneResponsible}" th:value="${offer.phoneResponsible}" type="text"
 								class="form-control col-md-3" placeholder="" required>
 						</div>
 					</div>

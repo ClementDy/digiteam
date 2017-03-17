@@ -69,8 +69,18 @@ public class OfferController {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 
-
+		
 		GenericOffer offer=new GenericOffer();
+		offer.setEmailResponsible(user.getEmail());
+		offer.setFirstNameResponsible(user.getFirstName());
+		offer.setLastNameResponsible(user.getLastName());
+		offer.setPhoneResponsible(user.getPhone());
+		
+		System.out.println(offer.getEmailResponsible());
+		System.out.println(offer.getFirstNameResponsible());
+		System.out.println(offer.getLastNameResponsible());
+		System.out.println(offer.getPhoneResponsible());
+		
 		model.addAttribute("user",user);
 		model.addAttribute("offer", offer);
 		Iterable<Mission> missions = missionService.findAll();
@@ -91,7 +101,7 @@ public class OfferController {
 
 		ofr.setStatus("Waiting");
 		model.addAttribute("offer",ofr);
-
+		
 
 		staffLille1Service.saveStaffLille1(user);
 		notificationService.sendNotificationNewOffer(ofr);
@@ -150,8 +160,12 @@ public class OfferController {
 		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 
 		StandardOffer offer=new StandardOffer();
+		offer.setEmailResponsible(user.getEmail());
+		offer.setFirstNameResponsible(user.getFirstName());
+		offer.setLastNameResponsible(user.getLastName());
+		offer.setPhoneResponsible(user.getPhone());
 		model.addAttribute("user",user);
-
+		model.addAttribute("responsibleemail",user.getEmail());
 		model.addAttribute("offer", offer);
 		Iterable<Mission> missions = missionService.findAll();
 		model.addAttribute("listMission", missions);
@@ -375,7 +389,7 @@ public class OfferController {
 		model.addAttribute("offer",offer);
 		Iterable<Mission> missions = missionService.findAll();
 		model.addAttribute("listMission", missions);
-
+		System.out.println("ici");
 		if(offer.getClass().getName().equals("glp.digiteam.entity.offer.GenericOffer")){
 
 			return new ModelAndView("offers/newGenericOffer");
