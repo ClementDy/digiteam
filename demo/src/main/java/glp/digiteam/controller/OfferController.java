@@ -142,10 +142,7 @@ public class OfferController {
 	public ModelAndView refuseGenericOffer(@ModelAttribute GenericOffer ofr,Model model,HttpSession session) throws MailException, MessagingException {
 		GenericOffer offre=(GenericOffer) offerService.findById(ofr.getId());
 
-		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 		offre.setStatus("Refused");
-
 		offre.setComment(ofr.getComment());
 
 		offerService.saveOffer(offre);
@@ -262,9 +259,6 @@ public class OfferController {
 
 		StandardOffer offre=(StandardOffer) offerService.findById(ofr.getId());
 
-		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
-
 		offre.setStatus("Refused");
 
 		offre.setComment(ofr.getComment());
@@ -275,55 +269,36 @@ public class OfferController {
 
 	}
 
-
-
 	@RequestMapping(value = "/consult_candidatures", method = RequestMethod.GET)
-	public String consult(Model model,HttpSession session) {
-
-		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
-
+	public String consult_candidatures(Model model, HttpSession session,
+			@RequestParam(value="name", required=false, defaultValue="") String name,
+			@RequestParam(value="formation", required=false, defaultValue="") String formation,
+			@RequestParam(value="mission", required=false, defaultValue="") String mission) {
+		
+		StaffLille1 staffLille1 = (StaffLille1)session.getAttribute("staffLille1");
+		StaffLille1 user = staffLille1Service.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
-		Mission mission = new Mission();
-		model.addAttribute("mission", mission);
+		
 		Iterable<Mission> missions = missionService.findAll();
 		model.addAttribute("listMission", missions);
-
-		List<Student> listCandidatures = studentService.getAllCandidature();
+		
+		List<Student> listCandidatures;
+		if (name.isEmpty() && mission.isEmpty() && formation.isEmpty()) {
+			listCandidatures = studentService.getAllCandidature();
+		}
+		else {
+			listCandidatures = studentService.findWithParameter(name, formation, mission);
+		}
 		model.addAttribute("listCandidature", listCandidatures);
+		model.addAttribute("size", listCandidatures.size());
+
+		model.addAttribute("name", name);
+		model.addAttribute("formation", formation);
+		model.addAttribute("mission", mission);
+		
 		return "consult_candidatures";
 	}
-
-	@RequestMapping(value = "/consult_candidatures", method = RequestMethod.POST)
-	public String consultCandidatures(
-			@RequestParam(value="name", required=true, defaultValue="") String name,
-			@RequestParam(value="formation", required=true,defaultValue="") String formation,
-			@RequestParam(value="mission", required=true,defaultValue="") String mission,
-			Model model, HttpSession session) {
-		
-		Iterable<Mission> missions = missionService.findAll();
-		model.addAttribute("listMission", missions);
-		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
-		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
-		model.addAttribute("user",user);
-
-		
-		
-		if(name.isEmpty() && mission.isEmpty() && formation.isEmpty()){
-			List<Student> listCandidatures = studentService.getAllCandidature();
-			model.addAttribute("listCandidature", listCandidatures);
-			model.addAttribute("size", listCandidatures.size());
-			return "consult_candidatures";
-		}else{
-			List<Student> listCandidatures = studentService.findWithParameter(name,formation,mission);
-			model.addAttribute("listCandidature", listCandidatures);
-			model.addAttribute("size", listCandidatures.size());
-			return "consult_candidatures";
-		
-		}
-
-	}
-
+	
 	@RequestMapping(value="/consult_offers", method=RequestMethod.GET)
 	public String consult_offers(Model model, HttpSession session,
 			@RequestParam(value="libelle", required=false, defaultValue="") String libelle,

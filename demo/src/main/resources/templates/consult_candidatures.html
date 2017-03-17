@@ -25,38 +25,38 @@
 		<div class="searchPart">
 			<div id="searchTitle">Recherche de candidature(s)</div>
 			<br />
-			<form class="navbar-form" method="post" role="search">
+			<form class="navbar-form" method="get" role="search">
 
 				<div class="row">
 
 					<div class="col-md-4 ">
 						<div class="input-group">
-							<span class="input-group-addon">Pr&eacute;nom Nom / nip</span> <input
-								type="text" class="form-control" name="name" id="name"
-								>
+							<span class="input-group-addon">Pr&eacute;nom Nom / nip</span>
+							<input type="text" class="form-control" name="name" id="name"
+							th:value="${name}">
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="input-group">
-							<span class="input-group-addon">Formation</span> <input
-								type="text" class="form-control" name="formation" id="formation"
-								>
+							<span class="input-group-addon">Formation</span>
+							<input type="text" class="form-control" name="formation" id="formation"
+							th:value="${formation}">
 						</div>
 					</div>
 					<div class="col-md-4 ">
 						<div class="input-group">
-							<span class="input-group-addon">Missions</span> <select size="1"
-						 class="form-control" id="allMissions" name="mission">
-						<option>  </option>
-						<option th:each="missionl : ${listMission}"
-							th:value="${missionl.id}" th:text="${missionl.title}"></option>
-					</select>
-							
+							<span class="input-group-addon">Missions</span>
+							<select size="1" class="form-control" id="allMissions" name="mission">
+							<option></option>
+							<option th:each="missionl : ${listMission}"
+							th:value="${missionl.id}" th:text="${missionl.title}"
+							th:selected="${missionl.id} eq ${mission}"></option>
+							</select>
 						</div>
 					</div>
 				</div>
 				
-					
+				
 				
 				<br />
 				<div class="row">
@@ -94,7 +94,7 @@
 
 						<p class="text">
 							<b>Formation : </b> <span
-								th:text="${student.trainings[__${0}__].name}">&nbsp;<span
+								th:text="${student.trainings[__${0}__].name}"></span>&nbsp;<span
 								th:text="${student.trainings[__${0}__].date}"></span>
 						</p>
 
@@ -103,7 +103,7 @@
 						</p>
 
 						<p class=" text centered-text">
-							<a th:href="@{profil(nip=${student.nip})}" class="btn btn-info"
+							<a th:href="@{profil(nip=${student.nip},name=${name},formation=${formation},mission=${mission},return)}" class="btn btn-info"
 								role="button"> <span class="glyphicon glyphicon-search"></span>
 								Voir le profil complet
 							</a>
@@ -118,4 +118,3 @@
 </body>
 
 </html>
-

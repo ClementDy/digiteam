@@ -19,6 +19,13 @@
 <body onload="activeNav('candidatures')">
 	<div  th:include="headerStaffLille1::headerStaffLille1"></div>
 	<div class="container containerProfil">
+	
+		<div th:if="${param.return}" style="padding-top:12px">
+			<a class="btn btn-lille1" th:href="@{/consult_candidatures(name=${param.name[0]},formation=${param.formation[0]},mission=${param.mission[0]})}">
+			<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+			</a>
+		</div>
+
 		<div class="tab-pane">
 			<h4 class="titreFormulaire">Informations personnelles</h4>
 
