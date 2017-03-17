@@ -39,23 +39,23 @@
 						<p>En tant qu'&eacute;tudiant vous avez acc&egrave;s &agrave;
 							plusieurs fonctionnalit&eacute;s.</p>
 						<p>
-							Vous pouvez commencer ou modifier(cela entra&icirc;nera une
-							d&eacute;publication de la candidature) votre candidature en
+							Vous pouvez commencer une nouvelle candidature ou la modifier (cela entra&icirc;nera sa
+							d&eacute;publication). Ces fonctionnalités sont accessibles en
 							cliquant sur <img src="/img/candidatures.png"> dans
 							l'onglet du menu ci-dessus. Pour d&eacute;publier votre
 							candidature, cliquez sur <img src="/img/depublier.png"> ci
 							dessous. Pour voir les informations de votre profil , vous pouvez
 							cliquer sur <img src="/img/profilcand.png"> dans l'onglet
-							comportant votre nom et pr&eacute;nom ci-dessus &agrave; droite
+							comportant votre nom et pr&eacute;nom ci-dessus &agrave; droite.
 
 						</p>
 						<p>
-							Vous pouvez &eacute;galement les consulter les offres et faire
+							Vous pouvez &eacute;galement consulter les offres et faire
 							des recherches en cliquant sur <img
 								src="/img/boutonconsulteroffres.png"> du menu ci-dessus.
 							Si vous voulez plus de d&eacute;tails sur ces offres, vous pouvez
 							cliquer sur <a class="btn btn-success" aria-label="Left Align">
-								<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+								<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a> afin d'afficher l'offre complète.
 						</p>
 
 
@@ -93,20 +93,22 @@
 					<table class="table table-responsive">
 						<thead>
 							<tr>
-								<td><strong>N° de l'offre</strong></td>
+								<td><strong>Date de cr&eacute;ation</strong></td>
 								<td><strong>Mission</strong></td>
 								<td><strong>Responsable</strong></td>
+								<td><strong>Date d'expiration</strong></td>
 								<td></td>
 							</tr>
 
 						</thead>
 
 						<tr th:each="abstractOffer : ${abstractOffers}">
-							<td><label th:text="${abstractOffer.id}"></label></td>
+							<td><label th:text="${{abstractOffer.creationDate}}"></label></td>
 							<td th:text="${abstractOffer.title}"></td>
 
 							<td><span th:text="${abstractOffer.firstNameResponsible}"></span><span></span>
-								<span th:text="${abstractOffer.lastNameResponsible}"></span>
+								<span th:text="${abstractOffer.lastNameResponsible}"></span></td>
+							<td><label th:text="${{abstractOffer.validityDate}}"></label></td>
 							<td><a class="btn btn-success" aria-label="Left Align"
 								th:href="@{/offer(id=${abstractOffer.id})}"> <span
 									class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
