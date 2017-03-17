@@ -34,7 +34,7 @@
 				th:if="${student.civilite}==1">Madame</label> 
 				<label th:text="${student.lastName}" id="lastName"></label> <label th:text="${student.firstName}" id="firstName"></label> <br> 
 				NIP : <label th:text="${student.nip}" id="nip"></label> <br> 
-				Email : <label th:text="${student.email}" id="email"></label> <br> 
+				<A class="aProfil" th:attr="HREF='mailto:'+${student.email}"><label th:text="${student.email}" id="email"></label></A><br> 
 				Nationalité : <label th:text="${student.nationality}" id="nationality"></label> <br>
 				T&eacute;l&eacute;phone : <label th:text="${student.phone}" id="phone"></label> <br> 
 			
@@ -51,11 +51,7 @@
 				<br>
 			</div>
 			
-				<style>
-					#acv {
-						color:#ae2573;				
-				}
-				</style>
+				
 			
 			<h4 class="titreFormulaire">Adresse</h4>
 			<div class="row" style="text-align:center">
@@ -446,6 +442,11 @@ display:block;
 	color: #337ab7;
 }
 
+#acv {
+			color:#ae2573;	
+			font-weight: bold;			
+}
+				
 dispoProfil, .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control
 	{
 	background: white;

@@ -111,7 +111,9 @@ body{
 a {
 	color: white;
 }
-
+.aProfil{
+	color: #337ab7;
+}
 .left {
 	text-align: left;
 }
