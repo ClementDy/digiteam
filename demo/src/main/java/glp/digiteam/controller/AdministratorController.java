@@ -84,24 +84,19 @@ public class AdministratorController {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");		
 		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
+
+		Iterable<Student> students=studentRepository.findAll();
+		for(Student student:students){
+			SimpleMailMessage mail= new SimpleMailMessage();
+			mail.setTo(student.getEmail());
+			mail.setSubject("Nouvelle année scolaire, mettez votre profil à jour");
+			mail.setText("Bonjour "+student.getFirstName()+", veuillez actualiser votre candidature sur le site : http://172.28.2.17:8585 ou celle-ci sera dépubliée");
+			javaMailSender.send(mail);
+		}
 		return "administrator/nextYear";
+
 	}
 
-	@RequestMapping(value = "/nextYear", method = RequestMethod.POST)
-	public ModelAndView nextYears(Model model,HttpSession session) {
-		/*StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");		
-		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
-
-		Iterable<StaffLille1> gestionnaires = staffLille1Service.findAll();
-		Iterable<ServiceEntity> services = serviceService.findAll();
-		model.addAttribute("gestionnaires",gestionnaires);
-
-		StaffLille1 gestionnaire=new StaffLille1();
-		model.addAttribute("newModerator",gestionnaire);
-		model.addAttribute("service",services);
-		model.addAttribute("user",user);*/
-		return new ModelAndView("redirect:gestionReferent");
-	}
 
 	@RequestMapping(value = "/gestionReferent", method = RequestMethod.POST)
 	public String gestionReferent(
@@ -212,16 +207,4 @@ public class AdministratorController {
 		return new ModelAndView("redirect:gestionReferent");
 	}
 
-	@RequestMapping(value = "/newYear", method = RequestMethod.GET)
-	public void newYear() {
-
-		Iterable<Student> students=studentRepository.findAll();
-		for(Student student:students){
-			SimpleMailMessage mail= new SimpleMailMessage();
-			mail.setTo(student.getEmail());
-			mail.setSubject("Nouvelle année scolaire, mettez votre profil à jour");
-			mail.setText("Bonjour "+student.getFirstName()+", veuillez actualiser votre candidature sur le site : http://172.28.2.17:8585 ou celle-ci sera dépubliée");
-			javaMailSender.send(mail);
-		}
-	}
 }
