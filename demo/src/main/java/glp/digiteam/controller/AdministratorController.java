@@ -70,6 +70,30 @@ public class AdministratorController {
 
 		return "administrator/gestionReferent";
 	}
+	
+	@RequestMapping(value = "/nextYear", method = RequestMethod.GET)
+	public String nextYear(Model model,HttpSession session) {
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");		
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
+		model.addAttribute("user",user);
+		return "administrator/nextYear";
+	}
+	
+	@RequestMapping(value = "/nextYear", method = RequestMethod.POST)
+	public ModelAndView nextYears(Model model,HttpSession session) {
+		/*StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");		
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
+
+		Iterable<StaffLille1> gestionnaires = staffLille1Service.findAll();
+		Iterable<ServiceEntity> services = serviceService.findAll();
+		model.addAttribute("gestionnaires",gestionnaires);
+
+		StaffLille1 gestionnaire=new StaffLille1();
+		model.addAttribute("newModerator",gestionnaire);
+		model.addAttribute("service",services);
+		model.addAttribute("user",user);*/
+		return new ModelAndView("redirect:gestionReferent");
+	}
 
 	@RequestMapping(value = "/gestionReferent", method = RequestMethod.POST)
 	public String gestionReferent(

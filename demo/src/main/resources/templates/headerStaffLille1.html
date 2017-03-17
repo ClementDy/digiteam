@@ -38,7 +38,8 @@
 			
 						<!-- Onglets ADMINISTRATOR -->
 						<li id="gestionModerator" th:if="${user.class.name}!='glp.digiteam.entity.student.Student' and ${user.isAdministrator}==true"><a th:href="@{/gestionModerator}">Gestion des mod&eacute;rateurs</a></li>
-					
+						<li id="nextYear" th:if="${user.class.name}!='glp.digiteam.entity.student.Student'and ${user.isAdministrator}==true"><a th:href="@{/nextYear}">Passage à l'année scolaire suivante</a></li>
+						
 						<!-- Onglets MODERATOR -->
 						<li id="gestionOffers" th:if="${user.class.name}!='glp.digiteam.entity.student.Student' and ${user.isModerator}==true"><a th:href="@{/gestionOffers}">Gestion des offres</a></li>
 						<li id="gestionReferent" th:if="${user.class.name}!='glp.digiteam.entity.student.Student' and ${user.isModerator}==true"><a th:href="@{/gestionReferent}">Gestion des r&eacute;f&eacute;rents</a></li>

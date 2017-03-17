@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+
+<title></title>
+<script src="js/header.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/gestionUser.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body onload="activeNav('nextYear')">
+
+	<div th:include="headerStaffLille1::headerStaffLille1"></div>
+		<div class="container">
+  		<div class="jumbotron">
+	<p>Dans cet onglet, il est possible de gérer les candidatures des étudiants pour l'année scolaire suivante, pour cela il vous suffit de cliquer sur le boutton afin d'envoyer un email aux étudiants precedemment inscrits. 
+	Leur candidature seont alors en attente et ils devront de nouveau publier leur candidature dans les 30 jours sinon elle sera dépubliée<p>	
+	</p>
+	</div>
+	</div>
+		<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<button  class="btn btn-lille1">Passer à l'année scolaire suivante</button>
+			</div>
+		
+		
+		<style>
+		button {
+  
+			display: block;
+  			margin : auto;
+			}		
+		</style>
+			
+</body>
+</html>
