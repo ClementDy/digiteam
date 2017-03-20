@@ -1,8 +1,6 @@
 package glp.digiteam.controller;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -18,11 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import glp.digiteam.entity.offer.ServiceEntity;
 import glp.digiteam.entity.offer.StaffLille1;
-import glp.digiteam.entity.student.Mission;
 import glp.digiteam.entity.student.Student;
-import glp.digiteam.repository.StudentRepository;
 import glp.digiteam.services.ServiceService;
 import glp.digiteam.services.StaffLille1Service;
+import glp.digiteam.services.StudentService;
 
 
 @EnableAutoConfiguration
@@ -37,7 +34,7 @@ public class AdministratorController {
 	private StaffLille1Service staffLille1Service;
 
 	@Autowired
-	private StudentRepository studentRepository;
+	private StudentService studentService;
 
 	@Autowired
 	private JavaMailSender javaMailSender;
@@ -60,7 +57,6 @@ public class AdministratorController {
 
 		return "administrator/gestionModerator";
 	}
-
 
 	@RequestMapping(value = "/gestionReferent", method = RequestMethod.GET)
 	public String gestionReferent(Model model,HttpSession session) {
@@ -85,7 +81,7 @@ public class AdministratorController {
 		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
 
-		Iterable<Student> students=studentRepository.findPublishedCandidature();
+		Iterable<Student> students=studentService.findPublishedCandidature();
 		for(Student student:students){
 			SimpleMailMessage mail= new SimpleMailMessage();
 			mail.setTo(student.getEmail());
@@ -96,7 +92,6 @@ public class AdministratorController {
 		return "administrator/nextYear";
 
 	}
-
 
 	@RequestMapping(value = "/gestionReferent", method = RequestMethod.POST)
 	public String gestionReferent(
@@ -124,7 +119,6 @@ public class AdministratorController {
 		return "administrator/gestionReferent";
 
 	}
-
 
 	@RequestMapping(value = "/homeStaffLille1", method = RequestMethod.GET)
 	public String getHomeStaffLille1(Model model,HttpSession session) {
@@ -206,5 +200,4 @@ public class AdministratorController {
 
 		return new ModelAndView("redirect:gestionReferent");
 	}
-
 }

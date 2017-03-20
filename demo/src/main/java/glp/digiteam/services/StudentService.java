@@ -121,6 +121,10 @@ public class StudentService {
 		return studentRepository.findWithName(splited[0]);
 	}
 
+	public List<Student> findPublishedCandidature() {
+		return studentRepository.findPublishedCandidature();
+	}
+	
 	public List<Student> findWithTraining(String formation) {
 		List<Student> allStudent = studentRepository.findPublishedCandidature();
 		List<Student> students = new ArrayList<>();
