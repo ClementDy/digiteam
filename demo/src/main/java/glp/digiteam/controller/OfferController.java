@@ -199,12 +199,16 @@ public class OfferController {
 	public String dispublish(Model model,@RequestParam(value = "", required = true) long id, HttpSession session) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
-
+		
+		AbstractOffer offer = offerService.findById(id);
+		if(offer != null && offer.getReferent()==user && offer.getStatus().equals("Validated")){
+			
 		model.addAttribute("user",user);
 		offerService.dispublish(id, user);
 
 		model.addAttribute("referent", user);
 
+		}
 		return "offers/offersHome";
 
 	}
@@ -213,11 +217,17 @@ public class OfferController {
 	public String removeOffer(Model model,@RequestParam(value = "", required = true) long id, HttpSession session) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
-		model.addAttribute("user",user);
-		offerService.removeOffer(id, user);
 
-		model.addAttribute("referent", user);
-
+		AbstractOffer offer = offerService.findById(id);
+		
+		if(offer != null && offer.getReferent()==user && offer.getStatus().equals("Refused")){
+			
+			model.addAttribute("user",user);
+			offerService.removeOffer(id, user);
+	
+			model.addAttribute("referent", user);
+			
+		}
 		return "offers/offersHome";
 
 	}
@@ -366,21 +376,24 @@ public class OfferController {
 		model.addAttribute("user",user);
 		
 		AbstractOffer offer = offerService.findById(id);
-		offer.setStatus("Waiting");
-		offer.setCreationDate(Calendar.getInstance().getTime());
-		offer.setValidityDate(null);
-		model.addAttribute("offer",offer);
-		Iterable<Mission> missions = missionService.findAll();
-		model.addAttribute("listMission", missions);
-		System.out.println("ici");
-		if(offer.getClass().getName().equals("glp.digiteam.entity.offer.GenericOffer")){
-
-			return new ModelAndView("offers/newGenericOffer");
-		}else {
-
-			return new ModelAndView("offers/newStandardOffer");
+		
+		if(offer != null && offer.getReferent()==user){
+			offer.setStatus("Waiting");
+			offer.setCreationDate(Calendar.getInstance().getTime());
+			offer.setValidityDate(null);
+			model.addAttribute("offer",offer);
+			Iterable<Mission> missions = missionService.findAll();
+			model.addAttribute("listMission", missions);
+			System.out.println("ici");
+			if(offer.getClass().getName().equals("glp.digiteam.entity.offer.GenericOffer")){
+	
+				return new ModelAndView("offers/newGenericOffer");
+			}else {
+	
+				return new ModelAndView("offers/newStandardOffer");
+			}
 		}
-
+		return new ModelAndView("offers/offersHome");
 	}
 	
 	@RequestMapping(value= "/modifyOffer",method=RequestMethod.GET)
@@ -391,18 +404,23 @@ public class OfferController {
 		model.addAttribute("user",user);
 		
 		AbstractOffer offer = offerService.findById(id);
-		offer.setStatus("Waiting");
-		offer.setCreationDate(Calendar.getInstance().getTime());
-		model.addAttribute("offer",offer);
-		Iterable<Mission> missions = missionService.findAll();
-		model.addAttribute("listMission", missions);
-
-		if(offer.getClass().getName().equals("glp.digiteam.entity.offer.GenericOffer")){
-			return new ModelAndView("offers/newGenericOffer");
-		}else {
-			return new ModelAndView("offers/newStandardOffer");
+		
+		if(offer != null && offer.getReferent()==user && offer.getStatus().equals("Refused") ){
+			
+			offer.setStatus("Waiting");
+			offer.setCreationDate(Calendar.getInstance().getTime());
+			model.addAttribute("offer",offer);
+			Iterable<Mission> missions = missionService.findAll();
+			model.addAttribute("listMission", missions);
+	
+			if(offer.getClass().getName().equals("glp.digiteam.entity.offer.GenericOffer")){
+				return new ModelAndView("offers/newGenericOffer");
+			}else {
+				return new ModelAndView("offers/newStandardOffer");
+			}
 		}
-
+		
+		return new ModelAndView("offers/offersHome");
 	}
 
 	@RequestMapping(value= "/manageOffer",method=RequestMethod.GET)
