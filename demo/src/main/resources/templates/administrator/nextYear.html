@@ -9,25 +9,46 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/gestionUser.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 </head>
 
 <body onload="activeNav('nextYear')">
-
+	
 	<div th:include="headerStaffLille1::headerStaffLille1"></div>
-		<div class="container">
+		<div class = "container">
   		<div class="jumbotron">
 	<p>Dans cet onglet, il est possible de gérer les candidatures des étudiants pour l'année scolaire suivante, pour cela il vous suffit de cliquer sur le bouton afin d'envoyer un email aux étudiants precedemment inscrits. 
-	Leurs candidatures seront alors en attente et ils devront de nouveau publier leurs candidatures dans les 30 jours sinon elles seront dépubliées<p>	
-	</p>
+	Leurs candidatures seront alors en attente et ils devront de nouveau publier leurs candidatures dans les 30 jours sinon elles seront dépubliées</p>
+
 	</div>
 	</div>
-		<div class="col-md-4"></div>
-			<div class="col-md-4">
-				<button data-th-action="@{/newYear}" class="btn btn-lille1">Passer à l'année scolaire suivante</button>
-			</div>				
+	<div style="text-align:center">
+	<button  type="button" class="btn btn-lille1" data-toggle="modal" data-target="#myModal">Passer à la nouvelle année</button>
+	</div>
+		
+		
+	
+	
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Etes-vous certain ?</h4>
+					</div>
+					<div class="modal-body">
+						<a class="btn btn-lille1" th:href="@{/nextYearProcess}">Oui</a>
+						<a class="btn btn-lille1" th:href="@{/nextYear}">Non</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+						
+			
+	
+
 </body>
 </html>

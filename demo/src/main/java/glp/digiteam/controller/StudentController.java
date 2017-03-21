@@ -65,6 +65,8 @@ public class StudentController {
 	
 	@Value("${IPCV}")
 	String IPCV;
+	
+	
 
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public String profile(Model model, HttpSession session) {

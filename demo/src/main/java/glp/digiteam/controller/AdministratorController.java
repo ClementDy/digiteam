@@ -113,18 +113,31 @@ public class AdministratorController {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");		
 		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
-
-		Iterable<Student> students=studentService.findPublishedCandidature();
-		for(Student student:students){
-			SimpleMailMessage mail= new SimpleMailMessage();
-			mail.setTo(student.getEmail());
-			mail.setSubject("Nouvelle année scolaire, mettez votre profil à jour");
-			mail.setText("Bonjour "+student.getFirstName()+", veuillez actualiser votre candidature sur le site : http://172.28.2.17:8585 ou celle-ci sera dépubliée");
-			javaMailSender.send(mail);
-		}
 		return "administrator/nextYear";
 
 	}
+	
+	
+	
+	@RequestMapping(value = "/nextYearProcess", method = RequestMethod.GET)
+	public String nextYearProcess(Model model,HttpSession session) throws InterruptedException {
+		System.out.println("Je suis dans le next year process");
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");		
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
+		model.addAttribute("user",user);
+	Iterable<Student> students=studentService.findPublishedCandidature();
+	for(Student student:students){
+		System.out.println("Liste étudiante recherche");
+		SimpleMailMessage mail= new SimpleMailMessage();
+		mail.setTo(student.getEmail());
+		mail.setSubject("Nouvelle année scolaire, mettez votre profil à jour");
+		mail.setText("Bonjour "+student.getFirstName()+", veuillez actualiser votre candidature sur le site : http://172.28.2.17:8585 ou celle-ci sera dépubliée");
+		//javaMailSender.send(mail);
+	}
+	
+		return "administrator/nextYear";
+	}
+	
 
 	@RequestMapping(value = "/gestionReferent", method = RequestMethod.POST)
 	public String gestionReferent(
