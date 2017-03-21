@@ -62,6 +62,8 @@ public class AuthenticationController {
 	private StaffLille1Service staffLille1Service;
 
 	boolean notGoodNip = false;
+	
+	
 
 	@RequestMapping(value = "/authentication", method = RequestMethod.GET)
 	public ModelAndView authenficationStudent(Model model, final ServletRequest servletRequest,

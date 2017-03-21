@@ -43,6 +43,17 @@ function activeNav(id) {
 		$('#consult').removeClass("active");
 	}
 	
+	else if(id =='nextYear'){
+		$('#nextYear').addClass("active");
+		$('#gestionOffers').removeClass("active");
+		$('#consult_offers').removeClass("active");
+		$('#offers').removeClass("active");
+		$('#candidatures').removeClass("active");
+		$('#gestionReferent').removeClass("active");
+		$('#gestionModerator').removeClass("active");
+		$('#consult').removeClass("active");
+	}
+	
 	else if(id=='contract'){
 		$('#contract').addClass("active");
 	}
