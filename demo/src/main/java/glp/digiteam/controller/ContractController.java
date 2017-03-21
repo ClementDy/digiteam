@@ -99,6 +99,7 @@ public class ContractController {
 			}
 			
 			session.setAttribute("student_contract", student.getNip());
+			
 			Contract contract = new Contract();
 			if(type==1){
 				contract.setType("Vacation");

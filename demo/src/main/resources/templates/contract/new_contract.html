@@ -25,6 +25,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script src="js/inputs.js"></script>
+
 </head>
 
 
@@ -92,14 +93,12 @@
 			<div class="titreOffre">
 				<h4>Contrats de d'Etudiant</h4>
 			</div>
-			
+			<br>
 			<div class="table-responsive">
-				<table th:if="${!student.contract.empty}"
-					class="table table-striped table-bordered table-hover"
-					align="center">
+				<table class="table table-striped table-bordered table-hover" align="center"> 
 					<thead>
 						<tr>
-							<th>Emplyer / Service</th>
+							<th>Employeur / Service</th>
 							<th>Période</th>
 							<th>Nombre d'heures total</th>
 							<th>Mission</th>
@@ -133,6 +132,7 @@
 							<td><span th:text="${contract.missions}"></span></td>
 
 						</tr>
+						
 					</tbody>
 				</table>
 			</div>
@@ -146,7 +146,7 @@
 			
 			<br /> <br />
 			<div class="titreOffre">
-				<h4>Information sur la mission</h4>
+				<h4>Informations sur la mission</h4>
 			</div>
 			<br />
 
@@ -227,12 +227,12 @@
 			<div class="row">
 				<div class="form-group">
 					<label class="control-label col-md-12"> Imputation
-						bud&eacute;taire *</label>
+						budg&eacute;taire *</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-inline col-md-12">
-					<label>Centre de cout </label> <input
+					<label>Centre de coût </label> <input
 						th:field="${contract.costCenter}" class="col-md-6 form-control" required>
 				</div>
 			</div>
@@ -253,7 +253,7 @@
 			<br />
 			<div class="row">
 				<div class="form-group">
-					<label class="col-md-12">Resonsable de l'organisation du
+					<label class="col-md-12">Responsable de l'organisation du
 						travail * </label>
 				</div>
 			</div>
@@ -279,8 +279,6 @@
 		<br>
 
 	</div>
-
-	<br>
 
 
 </body>

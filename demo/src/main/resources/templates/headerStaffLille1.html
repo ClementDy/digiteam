@@ -56,11 +56,7 @@
 							
 							<span><span th:text="${user.lastName}"></span><span> </span><span  th:text="${user.firstName}"></span><span> </span><span class="glyphicon glyphicon-user"></span></span>
 							</a><ul class="dropdown-menu">
-							
-								<li><a href="#">Param&egrave;tres</a></li>
-								<li role="separator" class="divider"></li>
 								<li th:if="${user.class.name}=='glp.digiteam.entity.student.Student'"><a th:href="@{/profile}">Mon Profil</a></li>
-								<li role="separator" class="divider"></li>
 								<li><a th:href="@{/deconnexion}">D&eacute;connexion</a></li>
 							</ul></li>
 					</ul>
