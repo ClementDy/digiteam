@@ -139,6 +139,18 @@ public class AdministratorController {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");		
 		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
+	
+	
+	
+		return "administrator/nextYear";
+	}
+	
+	@RequestMapping(value = "/nextYearMailProcess", method = RequestMethod.GET)
+	public String nextYearMailProcess(Model model,HttpSession session) throws InterruptedException {
+		System.out.println("Je suis dans le next year mail process");
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");		
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
+		model.addAttribute("user",user);
 	Iterable<Student> students=studentService.findPublishedCandidature();
 	for(Student student:students){
 		System.out.println("Liste étudiante recherche");
@@ -146,15 +158,13 @@ public class AdministratorController {
 		mail.setTo(student.getEmail());
 		mail.setSubject("Nouvelle année scolaire, mettez votre profil à jour");
 		mail.setText("Bonjour "+student.getFirstName()+",\n\nVeuillez actualiser votre candidature sur le site : http://172.28.2.17:8585 ou celle-ci sera dépubliée."
-				+ "\n\nCordialement,\n\nL'équipe Digiteam.\n\nCeci est un message automatique, merci de ne pas y répondre.\n"
-				+ "Pour ne plus recevoir ces notifications, veuillez vous désinscrire de l'abonnement par mail sur le site : http://172.28.2.17:8585");
+				+ "\n\nCordialement,\n\nL'équipe Digiteam.\n\nCeci est un message automatique, merci de ne pas y répondre.\n");
 		//javaMailSender.send(mail);
 	}
 	
 		return "administrator/nextYear";
 	}
 	
-
 	@RequestMapping(value = "/gestionReferent", method = RequestMethod.POST)
 	public String gestionReferent(
 			@RequestParam(value="service", required=true,defaultValue="") String service,

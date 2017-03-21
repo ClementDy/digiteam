@@ -2,6 +2,8 @@ package glp.digiteam.controller;
 
 
 import java.io.IOException;
+import java.util.Calendar;
+
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -98,13 +100,18 @@ public class StudentController {
 		}
 
 		Student student = (Student) session.getAttribute("student");
-		
+	//	Student user = (Student) session.getAttribute("student");
 		if (studentService.getStudentByNip(student.getNip()) != null) {
-			model.addAttribute("student", (studentService.getStudentByNip(student.getNip())));
-			model.addAttribute("user", (studentService.getStudentByNip(student.getNip())));
+			student=studentService.getStudentByNip(student.getNip());
+			
+			model.addAttribute("student",student);
+			model.addAttribute("user", student);
 			try {
 				if (action.equals("unpublish")) {
+					System.out.println(student.getPhone());
 					studentService.unpublishProfil(student);
+					model.addAttribute("student", student);
+					model.addAttribute("user", student);
 				}
 			} catch (Exception e) {
 
@@ -160,6 +167,7 @@ public class StudentController {
 		return new ModelAndView("candidature::tab(activeTab='intro', error='false', saved='false')");
 	}
 
+	
 	@RequestMapping(value = "/candidature", method = RequestMethod.POST)
 	public ModelAndView addEtudiant(@ModelAttribute Student std, BindingResult bindingResult,
 			@RequestParam("file") MultipartFile file, @RequestParam(value = "action", required = true) String action,
@@ -167,6 +175,7 @@ public class StudentController {
 			RedirectAttributes redirectAttributes, Model model, Errors e, HttpSession session) {
 
 		Student student = (Student) session.getAttribute("student");
+		Student user = (Student) session.getAttribute("student");
 		if (action.equals("Enregistrer") || action.equals("Publier")) {
 
 			if (action.equals("Enregistrer")) {
@@ -182,6 +191,9 @@ public class StudentController {
 					Iterable<String> errorTabs = saveValidator.getErrorTabs(bindingResult);
 					model.addAttribute("errorTabs", errorTabs);
 
+					model.addAttribute("student", std);
+					model.addAttribute("user", student);
+					
 					return new ModelAndView(
 							"candidature::tab("
 									+ "activeTab='" + saveValidator.getFirstErrorTab(bindingResult) + "'"
@@ -194,14 +206,14 @@ public class StudentController {
 			if (action.equals("Publier")) {
 				PublishProfileValidator publishValidator = new PublishProfileValidator();
 				publishValidator.validate(std, bindingResult);
-
 				if (bindingResult.hasErrors()) {
 					Iterable<Mission> missions = missionService.findAll();
 					model.addAttribute("listMission", missions);
 
 					Iterable<String> errorTabs = publishValidator.getErrorTabs(bindingResult);
 					model.addAttribute("errorTabs", errorTabs);
-
+					model.addAttribute("student", std);
+					model.addAttribute("user", student);
 					return new ModelAndView(
 							"candidature::tab("
 									+ "activeTab='" + publishValidator.getFirstErrorTab(bindingResult) + "'"
@@ -209,8 +221,9 @@ public class StudentController {
 									+ ", saved='false'"
 									+ ")");
 				}
+			
+				
 			}
-
 			Student realStudent;
 
 			if (studentService.getStudentByNip(student.getNip()) != null) {
@@ -242,12 +255,10 @@ public class StudentController {
 				}
 
 			}
-
 			std.setNip(student.getNip());
 			if(!file.getOriginalFilename().equals("")){
 				std.setCv(file.getOriginalFilename());
 			}
-
 
 			if (!file.isEmpty()) {
 				storageService.store(file, student.getNip());
@@ -255,12 +266,12 @@ public class StudentController {
 						"You successfully uploaded " + file.getOriginalFilename() + "!");
 			}
 
-
 			if (action.equals("Publier")) {
-
+				std.setPublicationDate(Calendar.getInstance().getTime());
 				std.setStatut("published");
 				model.addAttribute("student", std);
 				model.addAttribute("user", student);
+				
 				studentService.saveStudentProfile(std);
 				return new ModelAndView("redirect:home");
 
@@ -338,7 +349,6 @@ public class StudentController {
 		}
 		in.close();*/
 		session.invalidate();
-
 
 
 		return new ModelAndView("redirect:https://sso-cas.univ-lille1.fr/logout?service="+urlredirect);

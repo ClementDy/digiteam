@@ -31,6 +31,7 @@ public class Student {
 	private String cv;
 	private String statut;
 	private int emailSubscribe;
+	private Date publicationDate;
 
 	@Lob
 	@Type(type = "org.hibernate.type.TextType")
@@ -246,7 +247,17 @@ public class Student {
 	}
 
 	public void setContract(List<Contract> contract) {
-		contract = contract;
+		this.contract = contract;
+	}
+
+	
+	
+	public Date getPublicationDate() {
+		return publicationDate;
+	}
+
+	public void setPublicationDate(Date publicationDate) {
+		this.publicationDate = publicationDate;
 	}
 
 	@Override
