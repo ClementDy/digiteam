@@ -86,7 +86,7 @@ public class AdministratorController {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 
-		
+
 		int offrePublished=0;
 		offrePublished=offerService.getNbOfferPublished();
 		int offreRefused=offerService.getNbOfferRefused();
@@ -105,12 +105,12 @@ public class AdministratorController {
 		model.addAttribute("offreRefused",offreRefused);
 		model.addAttribute("offreWaiting",offreWaiting);
 		model.addAttribute("offrePassed",offrePassed);
-		
+
 		model.addAttribute("user",user);
 
 		return "administrator/statistics";
 	}
-	
+
 	@RequestMapping(value = "/nextYear", method = RequestMethod.GET)
 	public String nextYear(Model model,HttpSession session) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");		
@@ -122,8 +122,10 @@ public class AdministratorController {
 			SimpleMailMessage mail= new SimpleMailMessage();
 			mail.setTo(student.getEmail());
 			mail.setSubject("Nouvelle année scolaire, mettez votre profil à jour");
-			mail.setText("Bonjour "+student.getFirstName()+", veuillez actualiser votre candidature sur le site : http://172.28.2.17:8585 ou celle-ci sera dépubliée");
-			//javaMailSender.send(mail);
+			mail.setText("Bonjour "+student.getFirstName()+",\n\nVeuillez actualiser votre candidature sur le site : http://172.28.2.17:8585 ou celle-ci sera dépubliée."
+					+ "\n\nCordialement,\n\nL'équipe Digiteam.\n\nCeci est un message automatique, merci de ne pas y répondre.\n"
+					+ "Pour ne plus recevoir ces notifications, veuillez vous désinscrire de l'abonnement par mail sur le site : http://172.28.2.17:8585");
+			javaMailSender.send(mail);
 		}
 		return "administrator/nextYear";
 
