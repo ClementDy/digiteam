@@ -1,6 +1,9 @@
 package glp.digiteam.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -102,7 +105,7 @@ public class AdministratorController {
 		int nbContrats=contractService.getNbContrats();
 		int nbReferents=staffLille1Service.getNbReferents();
 		int nbModerators=staffLille1Service.getNbModerators();
-		
+
 		model.addAttribute("nbReferents",nbReferents);
 		model.addAttribute("nbModerators",nbModerators);
 		model.addAttribute("nbContrats",nbContrats);
@@ -130,41 +133,51 @@ public class AdministratorController {
 		return "administrator/nextYear";
 
 	}
-	
-	
-	
+
+
+
 	@RequestMapping(value = "/nextYearProcess", method = RequestMethod.GET)
 	public String nextYearProcess(Model model,HttpSession session) throws InterruptedException {
 		System.out.println("Je suis dans le next year process");
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");		
 		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
-	
-	
-	
+		Date today = Calendar.getInstance().getTime();
+		Iterable<Student> students=studentService.findPublishedCandidature();
+		for(Student student:students){
+			Long nbreJours =today.getTime() - student.getPublicationDate().getTime();
+			nbreJours =  (nbreJours / (1000 * 60 * 60 * 24) + 1);
+				if(nbreJours>30) {
+					System.out.println("********************** "+nbreJours);
+					//student.setStatut("register");
+				}
+		}
+
+
+
 		return "administrator/nextYear";
 	}
-	
+
 	@RequestMapping(value = "/nextYearMailProcess", method = RequestMethod.GET)
 	public String nextYearMailProcess(Model model,HttpSession session) throws InterruptedException {
 		System.out.println("Je suis dans le next year mail process");
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");		
 		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 		model.addAttribute("user",user);
-	Iterable<Student> students=studentService.findPublishedCandidature();
-	for(Student student:students){
-		System.out.println("Liste étudiante recherche");
-		SimpleMailMessage mail= new SimpleMailMessage();
-		mail.setTo(student.getEmail());
-		mail.setSubject("Nouvelle année scolaire, mettez votre profil à jour");
-		mail.setText("Bonjour "+student.getFirstName()+",\n\nVeuillez actualiser votre candidature sur le site : http://172.28.2.17:8585 ou celle-ci sera dépubliée."
-				+ "\n\nCordialement,\n\nL'équipe Digiteam.\n\nCeci est un message automatique, merci de ne pas y répondre.\n");
-		//javaMailSender.send(mail);
-	}
-	
+		Iterable<Student> students=studentService.findPublishedCandidature();
+		for(Student student:students){
+			System.out.println("Liste étudiante recherche");
+			SimpleMailMessage mail= new SimpleMailMessage();
+			mail.setTo(student.getEmail());
+			mail.setSubject("Nouvelle année scolaire, mettez votre profil à jour");
+			mail.setText("Bonjour "+student.getFirstName()+",\n\nVeuillez actualiser votre candidature sur le site : http://172.28.2.17:8585 ou celle-ci sera dépubliée."
+					+ "\n\nCordialement,\n\nL'équipe Digiteam.\n\nCeci est un message automatique, merci de ne pas y répondre.\n");
+			//javaMailSender.send(mail);
+		}
+
 		return "administrator/nextYear";
 	}
-	
+
 	@RequestMapping(value = "/gestionReferent", method = RequestMethod.POST)
 	public String gestionReferent(
 			@RequestParam(value="service", required=true,defaultValue="") String service,
