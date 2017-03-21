@@ -37,7 +37,7 @@
 						<li id="contract" th:if="${user.class.name}!='glp.digiteam.entity.student.Student' and ${user.isReferent}==true"><a th:href="@{/homeContract}" >Gérer mes contrats</a></li>	
 			
 						<!-- Onglets ADMINISTRATOR -->
-						<li id="gestionModerator" th:if="${user.class.name}!='glp.digiteam.entity.student.Student' and ${user.isAdministrator}==true"><a th:href="@{/gestionModerator}">Gérer lses mod&eacute;rateurs</a></li>
+						<li id="gestionModerator" th:if="${user.class.name}!='glp.digiteam.entity.student.Student' and ${user.isAdministrator}==true"><a th:href="@{/gestionModerator}">Gérer les mod&eacute;rateurs</a></li>
 						<li id="nextYear" th:if="${user.class.name}!='glp.digiteam.entity.student.Student'and ${user.isAdministrator}==true"><a th:href="@{/nextYear}">Passer à l'année scolaire suivante</a></li>
 						<li id="stats" th:if="${user.class.name}!='glp.digiteam.entity.student.Student'and ${user.isAdministrator}==true"><a th:href="@{/stats}">Voir les statistiques</a></li>
 						

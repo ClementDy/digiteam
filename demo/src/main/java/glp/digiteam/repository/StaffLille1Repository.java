@@ -18,4 +18,7 @@ public interface StaffLille1Repository extends CrudRepository<StaffLille1, Strin
 	@Query("select s from StaffLille1 s where (s.service.code=:service)")
 	List<StaffLille1> findByService(@Param("service") String service);
 
+	@Query("select count(s) from StaffLille1 s ")
+	int nbLille1();
+
 }

@@ -22,6 +22,10 @@ public class StudentService {
 	public Student saveStudentProfile(Student student) {
 		return studentRepository.save(student);
 	}
+	
+	public int nbStudent() {
+		return studentRepository.nbStudent();
+	}
 
 	public Student getStudentByNip(Integer nip) {
 		if (studentRepository.findByNip(nip) != null) {

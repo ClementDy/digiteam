@@ -20,18 +20,39 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-  <script src="http://cdn.oesmith.co.uk/morris-0.4.1.min.js"></script>
-<script type="text/javascript" language="javascript" src="js/jquery.flot.js"></script>
-<script type="text/javascript" language="javascript" src="js/jquery.flot.pie.js"></script>
-      
-      
+<script src="http://cdn.oesmith.co.uk/morris-0.4.1.min.js"></script>
+<script type="text/javascript" language="javascript"
+	src="js/jquery.flot.js"></script>
+<script type="text/javascript" language="javascript"
+	src="js/jquery.flot.pie.js"></script>
+
+
 <style type="text/css">
-body { font-family: Verdana, Arial, sans-serif; font-size: 12px; }
-#placeholder { width: 250px; height: 150px; }
-.legend table, .legend > div { height: 82px !important; opacity: 1 !important; left: 170px; top: 10px; width: 116px !important; }
-.legend table { border: 1px solid #555; padding: 5px; }
+body {
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 12px;
+}
+
+#placeholder {
+	width: 250px;
+	height: 150px;
+}
+
+.legend table, .legend>div {
+	height: 82px !important;
+	opacity: 1 !important;
+	left: 170px;
+	top: 10px;
+	width: 116px !important;
+}
+
+.legend table {
+	border: 1px solid #555;
+	padding: 5px;
+}
 </style>
 
 </head>
@@ -49,23 +70,46 @@ body { font-family: Verdana, Arial, sans-serif; font-size: 12px; }
 			</div>
 		</div>
 		<div class="row">
-			<div id="donut-example"></div>
+
+			<div class="col-md-3">
+				<div id="donut-example"></div>
+
+			</div>
+
+
+			<div class=row>
+
+				<div class="col-md-3 col-md-offset-3">
+					<div id="placeholder"></div>
+				</div>
+			</div>
 		</div>
-		
-		<div class=row>
-		<h1>2</h1>
-			<div id="placeholder"></div>
+			<div class=row>
+
+				<div class="col-md-3">
+					<div id="placeholder2"></div>
+				</div>
+			</div>
 		</div>
 	</div>
 
+	<style>
+#donut-example { .labelG { text-align:left;
+	
+}
+
+.containerWhite {
+	text-align: left;
+}
+</style>
 </body>
 <script type="text/javascript">
 Morris.Donut({
 	  element: 'donut-example',
 	  data: [
-	    {label: "Offres publiées", value: 20},
-	    {label: "Offres refusées", value: 30},
-	    {label: "Total offres", value: 50}
+	    {label: "Utilisateurs", value: [[${nbUser}]]},
+	    {label: "Etudiants", value: [[${nbEtudiant}]]},
+	    {label: "Personnel Lille 1", value: [[${nbLille1}]]}
 	  ]
 	});
 	
@@ -84,10 +128,23 @@ Morris.Donut({
         	    }
         	});
         });
+        $(document).ready(function () {
+        	$.plot($("#placeholder2"), data, {
+        	    series: {
+        	        pie: {
+        	            show: true
+        	        }
+        	    },
+        	    legend: {
+        	        labelBoxBorderColor: "none"
+        	    }
+        	});
+        });
         var data = [
-                    { label: "Lol",  data: 40, color: "#4572A7"},
-                    { label: "Firefox",  data: 30, color: "#AA4643"},
-                    { label: "Chrome",  data: 30, color: "#89A54E"},
+                    { label: "En attente ("+[[${offreWaiting}]]+")",  data:[[${offreWaiting}]], color: "#4572A7"},
+                    { label: "Acceptée ("+[[${offrePubliees}]]+")",  data: [[${offrePubliees}]], color: "#AA4643"},
+                    { label: "Refusée ("+[[${offreRefused}]]+")",  data: [[${offreRefused}]], color: "#89A54E"},
+                    { label: "Passée ("+[[${offrePassed}]]+")",  data: [[${offrePassed}]], color: "yellow"},
                 ];
 </script>
 </html>

@@ -29,4 +29,8 @@ public class StaffLille1Service {
 	public List<StaffLille1> findByService(String service){
 		return staffLille1Repository.findByService(service);
 	}
+	
+	public int nbLille1(){
+		return staffLille1Repository.nbLille1();
+	}
 }

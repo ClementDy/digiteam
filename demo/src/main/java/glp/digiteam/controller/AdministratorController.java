@@ -17,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import glp.digiteam.entity.offer.ServiceEntity;
 import glp.digiteam.entity.offer.StaffLille1;
 import glp.digiteam.entity.student.Student;
+import glp.digiteam.repository.OfferRepository;
+import glp.digiteam.services.OfferService;
 import glp.digiteam.services.ServiceService;
 import glp.digiteam.services.StaffLille1Service;
 import glp.digiteam.services.StudentService;
@@ -29,6 +31,10 @@ public class AdministratorController {
 
 	@Autowired 
 	private ServiceService serviceService;
+
+
+	@Autowired 
+	private OfferService offerService;
 
 	@Autowired
 	private StaffLille1Service staffLille1Service;
@@ -80,6 +86,22 @@ public class AdministratorController {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
 		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
 
+		
+		int offrePublished=0;
+		offrePublished=offerService.getNbOfferPublished();
+		int offreRefused=offerService.getNbOfferRefused();
+		int offreWaiting=offerService.getNbOfferWaiting();
+		int offrePassed=offerService.getNbOfferPassed();
+		int nbEtudiant=studentService.nbStudent();
+		int nbLille1=staffLille1Service.nbLille1();
+
+		model.addAttribute("nbUser",nbEtudiant+nbLille1);
+		model.addAttribute("nbLille1",nbLille1);
+		model.addAttribute("nbEtudiant",nbEtudiant);
+		model.addAttribute("offrePubliees",offrePublished);
+		model.addAttribute("offreRefused",offreRefused);
+		model.addAttribute("offreWaiting",offreWaiting);
+		model.addAttribute("offrePassed",offrePassed);
 		
 		model.addAttribute("user",user);
 

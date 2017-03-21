@@ -33,6 +33,22 @@ public class OfferService {
 		return offerRepository.findLastOffers(new PageRequest(offset, limit));
 	}
 	
+	public int getNbOfferPublished(){
+		return offerRepository.getNbOffersPublished();
+	}
+	
+	public int getNbOfferRefused(){
+		return offerRepository.getNbOffersRefused();
+	}
+	
+	public int getNbOfferWaiting(){
+		return offerRepository.getNbOffersAttente();
+	}
+	
+	public int getNbOfferPassed(){
+		return offerRepository.getNbOffersPassed();
+	}
+	
 	public AbstractOffer saveOffer(AbstractOffer offer){
 		return offerRepository.save(offer);
 	}
