@@ -137,10 +137,7 @@ public class AuthenticationController {
 		} 
 		
 
-		/*if (attributes.get("nip").equals("11302480")) {
-
-			
-		}*/
+		
 		
 	}
 

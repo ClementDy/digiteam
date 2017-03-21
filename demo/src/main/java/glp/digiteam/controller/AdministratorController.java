@@ -26,6 +26,8 @@ import glp.digiteam.services.OfferService;
 import glp.digiteam.services.ServiceService;
 import glp.digiteam.services.StaffLille1Service;
 import glp.digiteam.services.StudentService;
+import glp.digiteam.webServices.TrainingWebService;
+import glp.digiteam.webServices.TrainingWebServiceService;
 
 
 @EnableAutoConfiguration
@@ -50,6 +52,9 @@ public class AdministratorController {
 
 	@Autowired
 	private JavaMailSender javaMailSender;
+	
+	@Autowired
+	private TrainingWebServiceService trainingLDAPService;
 
 
 	@RequestMapping(value = "/gestionModerator", method = RequestMethod.GET)
@@ -144,13 +149,29 @@ public class AdministratorController {
 		model.addAttribute("user",user);
 		Date today = Calendar.getInstance().getTime();
 		Iterable<Student> students=studentService.findPublishedCandidature();
+		
 		for(Student student:students){
+		//	TrainingWebService trainingLDAP = trainingLDAPService.getTrainingLDAP(2018, student.getNip());
 			Long nbreJours =today.getTime() - student.getPublicationDate().getTime();
 			nbreJours =  (nbreJours / (1000 * 60 * 60 * 24) + 1);
-				if(nbreJours>30) {
-					System.out.println("********************** "+nbreJours);
-					//student.setStatut("register");
+		
+				if(nbreJours>30){
+					/*for (int i = student.getTrainings().size(); i >=0; i--) {
+						if(i==0){
+							student.getTrainings().get(0).setDate(trainingLDAP.getIns_ANNEE());
+							student.getTrainings().get(0).setName(trainingLDAP.getIns_LIBDIPLOME());
+							student.getTrainings().get(0).setPlace("Lille");
+						}else{
+						student.getTrainings().get(i).setDate(student.getTrainings().get(i-1).getDate());
+						student.getTrainings().get(i).setName(student.getTrainings().get(i-1).getName());
+						student.getTrainings().get(i).setPlace(student.getTrainings().get(i-1).getPlace());
+						}
+					}*/
+					
+					student.setStatut("register");
+					studentService.saveStudentProfile(studentService.getStudentByNip(student.getNip()));
 				}
+				
 		}
 
 
