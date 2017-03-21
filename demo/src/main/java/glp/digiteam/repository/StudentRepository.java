@@ -28,4 +28,8 @@ public interface StudentRepository extends CrudRepository<Student, Integer> {
 	
 	@Query("select count(s) from Student s")
     int nbStudent();
+	
+	
+	@Query("select count(s) from Student s where s.statut='published'")
+    int nbStudentPublished();
 }

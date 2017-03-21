@@ -41,6 +41,15 @@ body {
 	height: 150px;
 }
 
+#placeholder2 {
+	width: 250px;
+	height: 150px;
+}
+
+#placeholder3 {
+	width: 250px;
+	height: 150px;
+}
 .legend table, .legend>div {
 	height: 82px !important;
 	opacity: 1 !important;
@@ -80,28 +89,17 @@ body {
 			<div class=row>
 
 				<div class="col-md-3 col-md-offset-3">
+					<label>Offre(s)</label>
 					<div id="placeholder"></div>
+					<br>
+					<label>Candidature(s)</label>
+					<div id="placeholder2"></div>	
+					<br>
 				</div>
 			</div>
-		</div>
-			<div class=row>
 
-				<div class="col-md-3">
-					<div id="placeholder2"></div>
-				</div>
-			</div>
 		</div>
 	</div>
-
-	<style>
-#donut-example { .labelG { text-align:left;
-	
-}
-
-.containerWhite {
-	text-align: left;
-}
-</style>
 </body>
 <script type="text/javascript">
 Morris.Donut({
@@ -127,9 +125,8 @@ Morris.Donut({
         	        labelBoxBorderColor: "none"
         	    }
         	});
-        });
-        $(document).ready(function () {
-        	$.plot($("#placeholder2"), data, {
+
+        	$.plot($("#placeholder2"), data2, {
         	    series: {
         	        pie: {
         	            show: true
@@ -139,12 +136,19 @@ Morris.Donut({
         	        labelBoxBorderColor: "none"
         	    }
         	});
+        
         });
         var data = [
                     { label: "En attente ("+[[${offreWaiting}]]+")",  data:[[${offreWaiting}]], color: "#4572A7"},
-                    { label: "Acceptée ("+[[${offrePubliees}]]+")",  data: [[${offrePubliees}]], color: "#AA4643"},
-                    { label: "Refusée ("+[[${offreRefused}]]+")",  data: [[${offreRefused}]], color: "#89A54E"},
-                    { label: "Passée ("+[[${offrePassed}]]+")",  data: [[${offrePassed}]], color: "yellow"},
+                    { label: "Acceptée ("+[[${offrePubliees}]]+")",  data: [[${offrePubliees}]], color: "#89A54E"},
+                    { label: "Refusée ("+[[${offreRefused}]]+")",  data: [[${offreRefused}]], color: "#AA4643"},
+                    { label: "Passée ("+[[${offrePassed}]]+")",  data: [[${offrePassed}]], color: "#e09a4f"},
                 ];
+        
+        var data2 = [
+                    { label: "Publiées ("+[[${nbStudentPublished}]]+")",  data:[[${nbStudentPublished}]], color: "#89A54E"},
+                    { label: "Non publiées ("+[[${nbStudentUnpublished}]]+")",  data: [[${nbStudentUnpublished}]], color: "#e09a4f"}
+                ];
+
 </script>
 </html>

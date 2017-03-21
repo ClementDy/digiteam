@@ -94,7 +94,10 @@ public class AdministratorController {
 		int offrePassed=offerService.getNbOfferPassed();
 		int nbEtudiant=studentService.nbStudent();
 		int nbLille1=staffLille1Service.nbLille1();
+		int nbStudentPublished=studentService.nbStudentPublished();
 
+		model.addAttribute("nbStudentUnpublished",nbEtudiant-nbStudentPublished);
+		model.addAttribute("nbStudentPublished",nbStudentPublished);
 		model.addAttribute("nbUser",nbEtudiant+nbLille1);
 		model.addAttribute("nbLille1",nbLille1);
 		model.addAttribute("nbEtudiant",nbEtudiant);
@@ -120,7 +123,7 @@ public class AdministratorController {
 			mail.setTo(student.getEmail());
 			mail.setSubject("Nouvelle année scolaire, mettez votre profil à jour");
 			mail.setText("Bonjour "+student.getFirstName()+", veuillez actualiser votre candidature sur le site : http://172.28.2.17:8585 ou celle-ci sera dépubliée");
-			javaMailSender.send(mail);
+			//javaMailSender.send(mail);
 		}
 		return "administrator/nextYear";
 

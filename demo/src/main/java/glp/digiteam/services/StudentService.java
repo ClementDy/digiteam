@@ -26,7 +26,10 @@ public class StudentService {
 	public int nbStudent() {
 		return studentRepository.nbStudent();
 	}
-
+	
+	public int nbStudentPublished() {
+		return studentRepository.nbStudentPublished();
+	}
 	public Student getStudentByNip(Integer nip) {
 		if (studentRepository.findByNip(nip) != null) {
 			return studentRepository.findByNip(nip);
