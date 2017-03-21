@@ -27,4 +27,7 @@ public class ContractService {
 		contractRepository.save( contract);
 	}
 	
+	public int getNbContrats(){
+		return contractRepository.getNbContrats();
+	}
 }

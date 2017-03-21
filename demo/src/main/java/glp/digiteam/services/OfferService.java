@@ -37,6 +37,10 @@ public class OfferService {
 		return offerRepository.getNbOffersPublished();
 	}
 	
+	public int getNbOffers(){
+		return offerRepository.getNbOffers();
+	}
+	
 	public int getNbOfferRefused(){
 		return offerRepository.getNbOffersRefused();
 	}

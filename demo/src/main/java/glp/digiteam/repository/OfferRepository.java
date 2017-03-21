@@ -43,11 +43,14 @@ public interface OfferRepository extends CrudRepository<AbstractOffer, String>{
 	@Query(" select count(o) from AbstractOffer o where o.status = 'Refused'")
 	int getNbOffersRefused();
 	
-	@Query(" select count(o) from AbstractOffer o where o.status = 'Passed'")
+	@Query(" select count(o) from AbstractOffer o where o.status = 'Expired'")
 	int getNbOffersPassed();
 	
 	@Query(" select count(o) from AbstractOffer o where o.status = 'Waiting'")
 	int getNbOffersAttente();
+	
+	@Query(" select count(o) from AbstractOffer o")
+	int getNbOffers();
 	
 	AbstractOffer findById(long id);
 }

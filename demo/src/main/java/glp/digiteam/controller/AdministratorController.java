@@ -18,6 +18,7 @@ import glp.digiteam.entity.offer.ServiceEntity;
 import glp.digiteam.entity.offer.StaffLille1;
 import glp.digiteam.entity.student.Student;
 import glp.digiteam.repository.OfferRepository;
+import glp.digiteam.services.ContractService;
 import glp.digiteam.services.OfferService;
 import glp.digiteam.services.ServiceService;
 import glp.digiteam.services.StaffLille1Service;
@@ -32,6 +33,8 @@ public class AdministratorController {
 	@Autowired 
 	private ServiceService serviceService;
 
+	@Autowired 
+	private ContractService contractService;
 
 	@Autowired 
 	private OfferService offerService;
@@ -95,7 +98,15 @@ public class AdministratorController {
 		int nbEtudiant=studentService.nbStudent();
 		int nbLille1=staffLille1Service.nbLille1();
 		int nbStudentPublished=studentService.nbStudentPublished();
-
+		int nbOffres=offerService.getNbOffers();
+		int nbContrats=contractService.getNbContrats();
+		int nbReferents=staffLille1Service.getNbReferents();
+		int nbModerators=staffLille1Service.getNbModerators();
+		
+		model.addAttribute("nbReferents",nbReferents);
+		model.addAttribute("nbModerators",nbModerators);
+		model.addAttribute("nbContrats",nbContrats);
+		model.addAttribute("nbOffres",nbOffres);
 		model.addAttribute("nbStudentUnpublished",nbEtudiant-nbStudentPublished);
 		model.addAttribute("nbStudentPublished",nbStudentPublished);
 		model.addAttribute("nbUser",nbEtudiant+nbLille1);

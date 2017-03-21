@@ -33,18 +33,20 @@
 						
 						<li id="consult_offers"><a th:href="@{/consult_offers}">Consulter les offres</a></li>
 						<li id="consult" th:if="${user.class.name}!='glp.digiteam.entity.student.Student'"><a th:href="@{/consult_candidatures}">Consulter les candidatures</a></li>
-												<li id="offers" th:if="${user.class.name}!='glp.digiteam.entity.student.Student' and ${user.isReferent}==true"><a th:href="@{/offers}" >Gérer mes offres</a></li>	
+						<li id="gestionOffers" th:if="${user.class.name}!='glp.digiteam.entity.student.Student' and ${user.isModerator}==true"><a th:href="@{/gestionOffers}">Gérer des offres</a></li>
+						<li id="offers" th:if="${user.class.name}!='glp.digiteam.entity.student.Student' and ${user.isReferent}==true"><a th:href="@{/offers}" >Gérer mes offres</a></li>	
 						<li id="contract" th:if="${user.class.name}!='glp.digiteam.entity.student.Student' and ${user.isReferent}==true"><a th:href="@{/homeContract}" >Gérer mes contrats</a></li>	
 			
 						<!-- Onglets ADMINISTRATOR -->
 						<li id="gestionModerator" th:if="${user.class.name}!='glp.digiteam.entity.student.Student' and ${user.isAdministrator}==true"><a th:href="@{/gestionModerator}">Gérer les mod&eacute;rateurs</a></li>
+						<li id="gestionReferent" th:if="${user.class.name}!='glp.digiteam.entity.student.Student' and ${user.isModerator}==true"><a th:href="@{/gestionReferent}">Gérer les r&eacute;f&eacute;rents</a></li>
+						
+						
 						<li id="nextYear" th:if="${user.class.name}!='glp.digiteam.entity.student.Student'and ${user.isAdministrator}==true"><a th:href="@{/nextYear}">Passer à l'année scolaire suivante</a></li>
 						<li id="stats" th:if="${user.class.name}!='glp.digiteam.entity.student.Student'and ${user.isAdministrator}==true"><a th:href="@{/stats}">Voir les statistiques</a></li>
 						
 						<!-- Onglets MODERATOR -->
-						<li id="gestionOffers" th:if="${user.class.name}!='glp.digiteam.entity.student.Student' and ${user.isModerator}==true"><a th:href="@{/gestionOffers}">Gérer des offres</a></li>
-						<li id="gestionReferent" th:if="${user.class.name}!='glp.digiteam.entity.student.Student' and ${user.isModerator}==true"><a th:href="@{/gestionReferent}">Gérer les r&eacute;f&eacute;rents</a></li>
-						
+					
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">

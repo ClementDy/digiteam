@@ -33,4 +33,12 @@ public class StaffLille1Service {
 	public int nbLille1(){
 		return staffLille1Repository.nbLille1();
 	}
+	
+	public int getNbReferents(){
+		return staffLille1Repository.getNbReferents();
+	}
+	
+	public int getNbModerators(){
+		return staffLille1Repository.getNbModerator();
+	}
 }

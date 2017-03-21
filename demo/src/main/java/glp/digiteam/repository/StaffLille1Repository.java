@@ -21,4 +21,11 @@ public interface StaffLille1Repository extends CrudRepository<StaffLille1, Strin
 	@Query("select count(s) from StaffLille1 s ")
 	int nbLille1();
 
+	@Query("select count(s) from StaffLille1 s where s.isReferent=1")
+	int getNbReferents();
+
+	
+	@Query("select count(s) from StaffLille1 s where s.isModerator=1")
+	int getNbModerator();
+
 }

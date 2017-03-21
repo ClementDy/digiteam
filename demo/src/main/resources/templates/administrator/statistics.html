@@ -40,7 +40,10 @@ body {
 	width: 250px;
 	height: 150px;
 }
-
+.stats{
+	text-align:left;
+	font-size:18px;
+}
 #placeholder2 {
 	width: 250px;
 	height: 150px;
@@ -50,6 +53,7 @@ body {
 	width: 250px;
 	height: 150px;
 }
+
 .legend table, .legend>div {
 	height: 82px !important;
 	opacity: 1 !important;
@@ -81,6 +85,7 @@ body {
 		<div class="row">
 
 			<div class="col-md-3">
+				<label>Utilisateur(s)</label>
 				<div id="donut-example"></div>
 
 			</div>
@@ -91,13 +96,28 @@ body {
 				<div class="col-md-3 col-md-offset-3">
 					<label>Offre(s)</label>
 					<div id="placeholder"></div>
-					<br>
-					<label>Candidature(s)</label>
-					<div id="placeholder2"></div>	
+					<br> <label>Candidature(s)</label>
+					<div id="placeholder2"></div>
 					<br>
 				</div>
 			</div>
 
+		</div>
+	
+		<div class="row">
+
+			<div class="col-md-12">
+				<h4 class="titreFormulaire">Autres statistiques</h4>
+			</div>
+		</div>
+		<div class="stats">
+			<hp>Nombre d'offres créées sur l'application : <label
+				th:text="${nbOffres}"></label>
+			</p>
+			<p>
+				Nombre de contrats réalisés : <label th:text="${nbContrats}"></label>
+			</p>
+			<p>Au sein de l'application, il y a <label th:text="${nbReferents}"></label> référents et <label th:text="${nbModerators}"></label> gestionnaires.
 		</div>
 	</div>
 </body>
