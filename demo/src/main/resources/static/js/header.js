@@ -49,4 +49,13 @@ function activeNav(id) {
 	else if(id=='accueil'){
 		$('#accueil').addClass("active");
 	}
+	else if(id=='stats'){
+		$('#stats').addClass("active");
+		$('#consult_offers').removeClass("active");
+		$('#offers').removeClass("active");
+		$('#candidatures').removeClass("active");
+		$('#gestionReferent').removeClass("active");
+		$('#gestionModerator').removeClass("active");
+		$('#consult').removeClass("active");
+	}
 }

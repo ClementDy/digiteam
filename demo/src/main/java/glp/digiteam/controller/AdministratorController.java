@@ -75,6 +75,17 @@ public class AdministratorController {
 		return "administrator/gestionReferent";
 	}
 
+	@RequestMapping(value = "/stats", method = RequestMethod.GET)
+	public String stats(Model model,HttpSession session) {
+		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");
+		StaffLille1 user=staffLille1Service.findByEmail(staffLille1.getEmail());
+
+		
+		model.addAttribute("user",user);
+
+		return "administrator/statistics";
+	}
+	
 	@RequestMapping(value = "/nextYear", method = RequestMethod.GET)
 	public String nextYear(Model model,HttpSession session) {
 		StaffLille1 staffLille1=(StaffLille1)session.getAttribute("staffLille1");		
