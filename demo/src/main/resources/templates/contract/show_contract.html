@@ -36,25 +36,9 @@
 	<div class="container containerOffer">
 
 		<div>
-			<h3>Saisie d'un contrat</h3>
+			<h3>Contrat <span th:text="${contract.type}"> n° <span th:text="${contract.id}"></span><</span></h3>
 		</div>
 		<br /> <br />
-
-
-
-
-		<form accept-charset="UTF-8" th:action="@{/newContract}"
-			name="formstandard" th:object="${contract}" method="post"
-			enctype="multipart/form-data">
-			<div class="row">
-				<div class="col-md-4">
-					<div class="input-group">
-						<span class="input-group-addon">Type de contrat</span> <input
-							type="text" class="form-control" th:field="${contract.type}"
-							th:value="${contract.type}"></input>
-					</div>
-				</div>
-			</div>
 
 			<div class="titreOffre">
 				<h4>Informations de l'&eacute;tudiant</h4>
@@ -64,27 +48,27 @@
 
 			<div class="row">
 				<div class="col-md-3">
-					<label>Nom : </label><span th:text="${student.lastName}"></span>
+					<label>Nom : </label><span th:text="${contract.student.lastName}"></span>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-3">
-					<label>Pr&eacute;nom : </label><span th:text="${student.firstName}"></span>
+					<label>Pr&eacute;nom : </label><span th:text="${contract.student.firstName}"></span>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-3">
-					<label>NIP : </label><span th:text="${student.nip}"></span>
+					<label>NIP : </label><span th:text="${contract.student.nip}"></span>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-3">
 					<label> Nationalit&eacute; : </label><span
-						th:text="${student.nationality}"></span>
+						th:text="${contract.student.nationality}"></span>
 				</div>
-				<div class=" col-md-8" th:if="${student.nationality!='FRANCAISE'}">
+				<div class=" col-md-8" th:if="${contract.student.nationality!='FRANCAISE'}">
 					<label> Titre de s&eacute;jour :</label> <span
-						th:text="${{student.dateVisa}}"></span>
+						th:text="${{contract.student.dateVisa}}"></span>
 				</div>
 			</div>
 			<br />
@@ -94,7 +78,7 @@
 			</div>
 			
 			<div class="table-responsive">
-				<table th:if="${!student.contract.empty}"
+				<table th:if="${!contract.student.contract.empty}"
 					class="table table-striped table-bordered table-hover"
 					align="center">
 					<thead>
@@ -106,31 +90,31 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="contract : ${student.contract}"
-							th:if="${contract.status}==true">
-							<td>Lille 1 - <span th:text="${contract.referent.service.libelle}"></span>
+						<tr th:each="ct : ${contract.student.contract}"
+							th:if="${ct.status}==true">
+							<td>Lille 1 - <span th:text="${ct.referent.service.libelle}"></span>
 							</td>
 
-							<td>Du <span th:text="${{contract.startDate}}"></span> Au <span
-								th:text="${{contract.endDate}}"></span>
+							<td>Du <span th:text="${{ct.startDate}}"></span> Au <span
+								th:text="${{ct.endDate}}"></span>
 							</td>
 
-							<td><span th:text="${contract.hours}"></span></td>
+							<td><span th:text="${ct.hours}"></span></td>
 
-							<td><span th:text="${contract.mission}"></span></td>
+							<td><span th:text="${ct.mission}"></span></td>
 
 						</tr>
-						<tr th:each="contract : ${student.externalContracts}" th:if="${!#strings.isEmpty(contract.employer)}">
-							<td><span th:text="${contract.employer}"></span>
+						<tr th:each="ct : ${contract.student.externalContracts}" th:if="${!#strings.isEmpty(ct.employer)}">
+							<td><span th:text="${ct.employer}"></span>
 							</td>
 
-							<td>Du <span th:text="${{contract.startDate}}"></span> Au <span
-								th:text="${{contract.endDate}}"></span>
+							<td>Du <span th:text="${{ct.startDate}}"></span> Au <span
+								th:text="${{ct.endDate}}"></span>
 							</td>
 
-							<td><span th:text="${contract.hours}"></span></td>
+							<td><span th:text="${ct.hours}"></span></td>
 
-							<td><span th:text="${contract.missions}"></span></td>
+							<td><span th:text="${ct.missions}"></span></td>
 
 						</tr>
 					</tbody>
@@ -139,7 +123,7 @@
 			
 			<div class="row">
 				<div class="col-md-12">
-					<span> Nombre d'heures total travaillées : </span> <b><span th:text="${nbHours}"></span> heures </b>
+					<label> Nombre d'heures total travaillées : </label><span th:text="${nbHours}"></span> heures
 				</div>
 			</div>
 			
@@ -158,8 +142,7 @@
 			<div class="row">
 				<div class="form-group">
 					<div class="col-md-6">
-						<input type="text" th:value="${user.service.libelle}"
-							class="form-control" readonly="readonly" required>
+						<input type="text" th:value="${user.service.libelle}" class="form-control" readonly="readonly" required>
 					</div>
 				</div>
 			</div>
@@ -167,19 +150,17 @@
 			<div class="row">
 				<div class="form-group col-md-12">
 					<label>D&eacute;tails de la mission * </label>
-					<textarea th:field="${contract.mission}" class="form-control"
-						rows="5" required></textarea>
+					<textarea th:text="${contract.mission}" class="form-control" rows="5" readonly="readonly" required></textarea>
 				</div>
 			</div>
 
 			<div class="row">
-				<div class="form-inline">
-					<label> Nombre d'heures effectives :</label>
-					<input class="form-control" type="number" th:field="${contract.hours}" required>
-				</div> 
-					
+				<div class="form-inline ">
+					<label>Nombre d'heures effectives :</label> <input
+						class=" form-control" type="number" th:value="${contract.hours}" readonly="readonly" required>
+				</div>
 			</div>
-			<br />
+			<br>
 
 			<div class="row">
 				<div class="form-group">
@@ -190,7 +171,7 @@
 
 			<div class="row">
 				<div class="col-md-2">
-					<input class="form-control" th:field="${contract.rate}" required>
+					<input class="form-control" th:value="${contract.rate}" readonly="readonly" required>
 				</div>
 			</div>
 			<br>
@@ -200,28 +181,21 @@
 						interventions *</label>
 				</div>
 			</div>
-			
 
 			<div class="row">
-				<div class="input-daterange" id="datepicker">
+			
 					<article class="col-md-3">
 						<div class="input-group">
-							<span class="input-group-addon" id="sizing-addon3"> Du</span> <input
-								th:field="${contract.startDate}" type="text"
-								class="form-control" placeholder="jj/mm/aaaa" name="start"
-								readonly="readonly" style="cursor: text; background: white;"
-								required>
+							<span class="input-group-addon"> Du</span> <input
+								class="form-control" style="background: white;" th:value="${contract.startDate}" readonly="readonly">
 						</div>
 					</article>
 					<article class="col-md-3">
 						<div class="input-group">
-							<span class="input-group-addon" id="sizing-addon3">Au</span> <input
-								th:field="${contract.endDate}" type="text" class="form-control"
-								placeholder="jj/mm/aaaa" name="end" readonly="readonly"
-								style="cursor: text; background: white;" required>
+							<span class="input-group-addon">Au</span> <input class="form-control" style="background: white;"
+								th:value="${contract.endDate}" readonly="readonly">
 						</div>
 					</article>
-				</div>
 			</div>
 			<br>
 			<div class="row">
@@ -233,21 +207,21 @@
 			<div class="row">
 				<div class="form-inline col-md-12">
 					<label>Centre de cout </label> <input
-						th:field="${contract.costCenter}" class="col-md-6 form-control" required>
+						th:value="${contract.costCenter}" class="col-md-6 form-control" readonly="readonly" required>
 				</div>
 			</div>
 			<br>
 			<div class="row">
 				<div class="form-inline col-md-12">
 					<label>Domaine fonctionnel </label> <input
-						th:field="${contract.domaineFonctionel}" class="col-md-6 form-control" required>
+						th:value="${contract.domaineFonctionel}" class="col-md-6 form-control" readonly="readonly" required>
 				</div>
 			</div>
 			<br>
 			<div class="row">
 				<div class="form-inline col-md-12">
 					<label>Convention eOtp </label> <input
-						th:field="${contract.convention_eOTP}" class="col-md-6 form-control" required>
+						th:value="${contract.convention_eOTP}" class="col-md-6 form-control" readonly="readonly" required>
 				</div>
 			</div>
 			<br />
@@ -257,24 +231,13 @@
 						travail * </label>
 				</div>
 			</div>
-			
+
 			<div class="row">
 				<div class="col-md-5">
-					<input class="form-control" th:field="${contract.responsable}"
+					<input class="form-control" th:value="${contract.responsable}" readonly="readonly" 
 						required>
 				</div>
 			</div>
-
-			<br> <br>
-			<div class="row save">
-				<article class="col-md-12 col-sm-12">
-					<input name="action" type="submit" class="btn btn-lille1"
-						value="Enregistrer">
-
-
-				</article>
-			</div>
-		</form>
 
 		<br>
 

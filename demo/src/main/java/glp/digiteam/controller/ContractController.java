@@ -132,7 +132,7 @@ public class ContractController {
 	}
 	
 	@RequestMapping(value = "/validateContract", method = RequestMethod.GET)
-	public ModelAndView consultCandidatures(Model model, HttpSession session,
+	public ModelAndView validateContract(Model model, HttpSession session,
 			@RequestParam(value = "id", required = true, defaultValue = "") Long id) {
 		StaffLille1 staffLille1 = (StaffLille1) session.getAttribute("staffLille1");
 
@@ -146,5 +146,42 @@ public class ContractController {
 		}
 		
 		return new ModelAndView("homeStaffLille1");
+	}
+	
+	@RequestMapping(value = "/showContract", method = RequestMethod.GET)
+	public String showContract(Model model, HttpSession session,
+		@RequestParam(value = "id", required = true, defaultValue = "") Long id) {
+		StaffLille1 staffLille1 = (StaffLille1) session.getAttribute("staffLille1");
+
+		StaffLille1 user = staffLille1Service.findByEmail(staffLille1.getEmail());
+		model.addAttribute("user", user);
+		Contract contract = contractService.getContractByID(id);
+		
+		
+		if (user.isReferent == true && contract!=null && contract.getReferent()==user) {
+			model.addAttribute("contract",contract);
+			
+			Student student = contract.getStudent();
+			
+			int nbHours=0;
+			
+			for (ExternalContract externalContract : student.getExternalContracts()) {
+				if(externalContract.getHours() != null){
+					nbHours += externalContract.getHours();
+				}
+			}
+			
+			for (Contract contractTmp : student.getContract()) {
+				if(contractTmp.getStatus()==true){
+					nbHours += contractTmp.getHours();	
+				}
+			}
+			
+			model.addAttribute("nbHours", nbHours);
+			
+			return "contract/show_contract";
+		}
+		
+		return "homeStaffLille1";
 	}
 }
