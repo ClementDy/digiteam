@@ -134,7 +134,9 @@ public class AdministratorController {
 		SimpleMailMessage mail= new SimpleMailMessage();
 		mail.setTo(student.getEmail());
 		mail.setSubject("Nouvelle année scolaire, mettez votre profil à jour");
-		mail.setText("Bonjour "+student.getFirstName()+", veuillez actualiser votre candidature sur le site : http://172.28.2.17:8585 ou celle-ci sera dépubliée");
+		mail.setText("Bonjour "+student.getFirstName()+",\n\nVeuillez actualiser votre candidature sur le site : http://172.28.2.17:8585 ou celle-ci sera dépubliée."
+				+ "\n\nCordialement,\n\nL'équipe Digiteam.\n\nCeci est un message automatique, merci de ne pas y répondre.\n"
+				+ "Pour ne plus recevoir ces notifications, veuillez vous désinscrire de l'abonnement par mail sur le site : http://172.28.2.17:8585");
 		//javaMailSender.send(mail);
 	}
 	
