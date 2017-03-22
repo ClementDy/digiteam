@@ -193,7 +193,7 @@ public class AdministratorController {
 			mail.setSubject("Nouvelle année scolaire, mettez votre profil à jour");
 			mail.setText("Bonjour "+student.getFirstName()+",\n\nVeuillez actualiser votre candidature sur le site : http://172.28.2.17:8585 ou celle-ci sera dépubliée."
 					+ "\n\nCordialement,\n\nL'équipe Digiteam.\n\nCeci est un message automatique, merci de ne pas y répondre.\n");
-			//javaMailSender.send(mail);
+			javaMailSender.send(mail);
 		}
 
 		return "administrator/nextYear";

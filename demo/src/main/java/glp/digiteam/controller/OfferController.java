@@ -148,7 +148,7 @@ public class OfferController {
 
 		offre.setStatus("Refused");
 		offre.setComment(ofr.getComment());
-
+		offre.setModerationDate(new java.util.Date());
 		offerService.saveOffer(offre);
 
 		notificationService.sendNotificationRefuseOffer(offre, offre.getReferent());
@@ -274,7 +274,7 @@ public class OfferController {
 		StandardOffer offre=(StandardOffer) offerService.findById(ofr.getId());
 
 		offre.setStatus("Refused");
-
+		offre.setModerationDate(new java.util.Date());
 		offre.setComment(ofr.getComment());
 
 		offerService.saveOffer(offre);
