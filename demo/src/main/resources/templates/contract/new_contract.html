@@ -180,19 +180,29 @@
 					
 			</div>
 			<br />
-
 			<div class="row">
-				<div class="form-group">
-					<label class="col-md-4">Taux horaire brut de
-						r&eacute;mun&eacute;ration * </label>
-				</div>
+						<div th:if="${contract.type=='Etudiant'}" class="input-group col-md-5">
+							<span class="input-group-addon">Taux horaire brut de r&eacute;mun&eacute;ration * </span>
+								<select th:field="${contract.rate}" size="1" class="form-control" name="type" id="type">
+									<option value="Taux 1 - SMIC horaire (9,67 €)">Taux 1 - SMIC horaire (9,67 €)</option>
+									<option value="Taux 2 - 11€ / heure">Taux 2 - 11€ / heure</option>
+									<option value="Taux 3 - 14€ / heure">Taux 3 - 14€ / heure</option>
+									<option value="Taux 4 - 14.51€ / heure">Taux 4 - 14.51€ / heure</option>
+									<option value="Taux 5 - 19.34€ / heure">Taux 5 - 19.34€ / heure</option>
+								</select>
+						</div>
+						<div th:if="${contract.type=='Vacation'}" class="input-group col-md-5">
+							<span class="input-group-addon">Taux horaire brut de r&eacute;mun&eacute;ration * </span>
+								<select th:field="${contract.rate}" size="1" class="form-control" name="type" id="type">
+									<option value="Taux 1 - SMIC horaire (9,67 €)">Taux 1 - SMIC horaire (9,67 €)</option>
+									<option value="Taux 2 - 11€ / heure">Taux 2 - 19.34€ / heure</option>
+									<option value="Taux 3 - 14€ / heure">Taux 3 - 29.01€ / heure</option>
+									<option value="Taux 4 - 14.51€ / heure">Taux 4 - 40.91€ / heure</option>
+								</select>
+						</div>
 			</div>
+			
 
-			<div class="row">
-				<div class="col-md-2">
-					<input class="form-control" th:field="${contract.rate}" required>
-				</div>
-			</div>
 			<br>
 			<div class="row">
 				<div class="form-group">

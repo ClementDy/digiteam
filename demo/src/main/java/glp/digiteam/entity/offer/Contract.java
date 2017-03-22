@@ -38,7 +38,7 @@ public class Contract {
 	
 	private int hours;
 
-	private double rate;
+	private String rate;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date startDate;
@@ -111,11 +111,11 @@ public class Contract {
 		this.hours = hours;
 	}
 
-	public double getRate() {
+	public String getRate() {
 		return rate;
 	}
 
-	public void setRate(double rate) {
+	public void setRate(String rate) {
 		this.rate = rate;
 	}
 
