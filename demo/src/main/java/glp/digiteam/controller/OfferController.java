@@ -1,8 +1,6 @@
 package glp.digiteam.controller;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -20,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 import glp.digiteam.entity.offer.AbstractOffer;
 import glp.digiteam.entity.offer.GenericOffer;
 import glp.digiteam.entity.offer.StaffLille1;

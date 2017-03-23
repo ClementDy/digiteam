@@ -175,7 +175,6 @@ public class StudentController {
 			RedirectAttributes redirectAttributes, Model model, Errors e, HttpSession session) {
 
 		Student student = (Student) session.getAttribute("student");
-		Student user = (Student) session.getAttribute("student");
 		if (action.equals("Enregistrer") || action.equals("Publier")) {
 
 			if (action.equals("Enregistrer")) {

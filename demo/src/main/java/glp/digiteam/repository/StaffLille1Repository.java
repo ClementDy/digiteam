@@ -7,7 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import glp.digiteam.entity.offer.StaffLille1;
-import glp.digiteam.entity.student.Mission;
 
 public interface StaffLille1Repository extends CrudRepository<StaffLille1, String>{
 

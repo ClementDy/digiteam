@@ -75,7 +75,7 @@ public class AuthenticationController {
 
 		Map<String, Object> attributes = principal.getAttributes();
 
-		Iterator attributeNames = attributes.keySet().iterator();
+		Iterator<String> attributeNames = attributes.keySet().iterator();
 
 		
 		while (attributeNames.hasNext()) {
@@ -86,7 +86,7 @@ public class AuthenticationController {
 	            
 		}
 		
-		/// *
+		
 				List<ServiceWebService> services = servicewebsrviceservice.getServicesWS();
 
 				for (ServiceWebService serviceWebService : services) {
@@ -94,8 +94,8 @@ public class AuthenticationController {
 					serviceservice.saveService(servicentity);
 				}
 
-				// */
-				if(attributes.get("nip") == null|| attributes.get("nip").equals("11602419")|| attributes.get("nip").equals("11202572")|| attributes.get("nip").equals("11302480")|| attributes.get("nip").equals("11203333")){
+				
+				if(attributes.get("nip") == null){
 					StaffLille1 staffLille1 = new StaffLille1();
 					staffLille1.setEmail((String) attributes.get("mail"));
 					staffLille1.setFirstName((String) attributes.get("givenname"));
@@ -118,11 +118,7 @@ public class AuthenticationController {
 			TrainingWebService trainingLDAP = trainingLDAPService.getTrainingLDAP(2017, student.getNip());
 
 			student.setCivilite(studentLDAP.getEtu_civilite());
-			/*
-			 * student.setFirstName(studentLDAP.getEtu_prenom());
-			 * student.setLastName(studentLDAP.getEtu_nom());
-			 * student.setEmail(studentLDAP.getEtu_email());
-			 */
+			
 			student.setNationality(studentLDAP.getEtu_libnationalite());
 			student.getTrainings().get(0).setDate(trainingLDAP.getIns_ANNEE());
 			student.getTrainings().get(0).setName(trainingLDAP.getIns_LIBDIPLOME());

@@ -16,7 +16,7 @@ import glp.digiteam.entity.student.Student;
 public class PublishProfileValidator implements Validator {
 
 	@Override
-	public boolean supports(Class clazz) {
+	public boolean supports(Class<?> clazz) {
 		return Student.class.equals(clazz);
 	}
 

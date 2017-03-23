@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,17 +18,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 import glp.digiteam.entity.offer.ServiceEntity;
 import glp.digiteam.entity.offer.StaffLille1;
 import glp.digiteam.entity.student.Student;
-import glp.digiteam.repository.OfferRepository;
 import glp.digiteam.services.ContractService;
 import glp.digiteam.services.OfferService;
 import glp.digiteam.services.ServiceService;
 import glp.digiteam.services.StaffLille1Service;
 import glp.digiteam.services.StudentService;
-import glp.digiteam.webServices.TrainingWebService;
-import glp.digiteam.webServices.TrainingWebServiceService;
 
 
 @EnableAutoConfiguration
@@ -53,8 +52,6 @@ public class AdministratorController {
 	@Autowired
 	private JavaMailSender javaMailSender;
 	
-	@Autowired
-	private TrainingWebServiceService trainingLDAPService;
 
 
 	@RequestMapping(value = "/gestionModerator", method = RequestMethod.GET)
